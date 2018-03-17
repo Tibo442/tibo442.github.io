@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Flat is Justice! - wedding screen generator</title>
+        <meta name="theme-color" content="#082E6B"/>
+        <meta name=viewport content="width=device-width, initial-scale=1">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="Flat is Justice - wedding screen generator">
+        <meta name="twitter:description" content="Make HD wedding screens">
+        <meta name="twitter:image" content="http://flatisjustice.moe/pics/wedgen.png">
+        <style type="text/css">
+            input[type="number"] {
+                width:75px;
+            }
+            canvas {
+                margin: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        Romanization for ship names: <input type="checkbox" id="romanized" onchange="makeSelect();" onclick="makeSelect();"><br>
+        Ship: <select id="ships" autofocus name="Ship" disabled></select><br>
+        <br>
+        Original img: <input type="checkbox" id="original" onchange="update();" onclick="update();"><br>
+
+        <b>Generated img:</b><br>
+        <canvas id="graph" width="786" height="435" style="border:1px solid black;"></canvas><br>
+
+        <script type="text/javascript">
+            var canvas = document.getElementById("graph");
+            var parser = new DOMParser();
+            var data = {};
+
+            function update() {
+                var original = !!document.getElementById('original').checked;
+                var context = canvas.getContext("2d");
+                var img = new Image();
+
+                let e = document.getElementById("ships");
+                let id = e.options[e.selectedIndex].value;
+                let fleetdbship = data.neddb.filter((x) => x.id == id)[0];
+                let shipmastergraph = data.api_start2.api_mst_shipgraph.filter((x) => x.api_id == id)[0];
+                console.log(id, fleetdbship, shipmastergraph)
+
+                img.onload = function() {
+                    canvas.height = img.height;
+                    canvas.width = img.width;
+                    context.drawImage(img, 0, 0);
+                    img.onload = function() {
+                        let scale = 1.7475;
+                        let cgscale = original ? 1.7475 : 1;
+                        context.drawImage(img, 400 - (shipmastergraph.api_weda[0] + shipmastergraph.api_wedb[0] / 2) * scale, 10 - shipmastergraph.api_weda[1] * scale, img.width * cgscale, img.height * cgscale);
+                        img.onload = function() {
+                            context.drawImage(img, 320, 270);
+                        }
+                        img.src = "pics/ring.png";
+                    }
+                    img.src = `ship${original ? "img" : "s"}/${shipmastergraph.api_filename}.png`;
+                }
+                img.src = "pics/room.png";
+            }
+            function get(url, name) {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+                        if (xmlhttp.status == 200) {
+                            data[name] = xmlhttp.responseText;
+                            if(data.neddb && data.ships && data.ship_affix && data.api_start2) {
+                                data.ships = JSON.parse(data.ships);
+                                data.ship_affix = JSON.parse(data.ship_affix);
+                                data.api_start2 = JSON.parse(data.api_start2);
+
+                                data.neddb = data.neddb.split("\n").map( function(x) {
+                                    try { 
+                                        let ship = JSON.parse(x); 
+                                        ship.api_name = data.api_start2.api_mst_ship.filter((x) => x.api_id === ship.id)[0].api_name;
+                                        ship.tlName = shipName(ship.api_name); 
+                                        return ship; 
+                                    } catch (e) { return false; }
+                                }).filter( function(x) {return x;});
+
+                                makeSelect();
+                            }
+                       }
+                    }
+                };
+                xmlhttp.open("GET", url, true);
+                xmlhttp.send();
+            }
+
+            function makeSelect() {
+                let select = document.getElementById('ships');
+                select.innerHTML = "";
+                let romanized = !!document.getElementById('romanized').checked;
+                data.neddb = data.neddb.sort((a, b) => (romanized) ? a.tlName.localeCompare(b.tlName) : a.api_name.localeCompare(b.api_name));
+                let index = 0;
+                for(let ship of data.neddb) {
+                    let opt = document.createElement('option');
+                    opt.value = ship.id;
+                    if(romanized)
+                        opt.innerHTML = ship.tlName;
+                    else
+                        opt.innerHTML = ship.api_name;
+                    select.appendChild(opt);
+                    if(ship.tlName === "Asashio Kai Ni")
+                        select.selectedIndex = index;
+                    index++;
+                }
+                console.log(data);
+                select.disabled = false;
+                select.onchange = update;
+                update();
+            }
+
+            // https://github.com/KC3Kai/KC3Kai/blob/master/src/library/modules/Meta.js#L188
+            function shipName(jpName, suffixKey = "suffixes", prefixKey = "prefixes"){
+                // If full string matched, no combination needed
+                if(typeof data.ships[jpName] !== "undefined"){
+                    return data.ships[jpName];
+                }
+                var root = jpName,
+                    combinedPrefixes = [],
+                    prefixesMap = data.ship_affix[prefixKey] || {},
+                    prefixesList = Object.keys(prefixesMap),
+                    combinedSuffixes = [],
+                    suffixesMap = data.ship_affix[suffixKey] || {},
+                    suffixesList = Object.keys(suffixesMap),
+                    occurs = [],
+                    replaced = false;
+                /**********************************************
+                // To combine the translations of root name and prefix/suffix,
+                // the regular expression will read which one comes first,
+                // which mean the prefixes and suffixes in the ship name.
+                // and then, the root string will be chopped to remove the affixes,
+                // the matched one, added to the combination stack (FILO)
+                // removing from the replacement table in order to prevent infinite loop.
+                // if there's no match, it'll instantly stop and return the actual value.
+                ***********************************************/
+                if(prefixesList.length > 0){
+                    while( !!(occurs = (new RegExp("^("+prefixesList.join("|")+").+$","i")).exec(root)) ){
+                        root = root.replace(new RegExp("^"+occurs[1],"i"), "");
+                        if(prefixesMap[occurs[1]].slice(-1) === "$"){
+                            combinedSuffixes.unshift(prefixesMap[occurs[1]].slice(0, -1));
+                        } else {
+                            combinedPrefixes.unshift(prefixesMap[occurs[1]]);
+                        }
+                        prefixesList.splice(prefixesList.indexOf(occurs[1]), 1);
+                        replaced = true;
+                    }
+                }
+                if(suffixesList.length > 0){
+                    while( !!(occurs = (new RegExp(".+("+suffixesList.join("|")+")$","i")).exec(root)) ){
+                        root = root.replace(new RegExp(occurs[1]+"$","i"), "");
+                        if(suffixesMap[occurs[1]].slice(0, 1) === "^"){
+                            combinedPrefixes.unshift(suffixesMap[occurs[1]].slice(1));
+                        } else {
+                            combinedSuffixes.unshift(suffixesMap[occurs[1]]);
+                        }
+                        suffixesList.splice(suffixesList.indexOf(occurs[1]), 1);
+                        replaced = true;
+                    }
+                }
+                if(replaced){
+                    // Put combined name into cache
+                    return [
+                        (combinedPrefixes.length > 0 ? combinedPrefixes.join("") : "") ,
+                        (data.ships[root] || root) ,
+                        (combinedSuffixes.length > 0 ? combinedSuffixes.join("") : "")
+                    ].join("");
+                }
+                return root;
+            }
+            get("https://raw.githubusercontent.com/TeamFleet/WhoCallsTheFleet-DB/master/db/ships.nedb", "neddb");
+            get("https://raw.githubusercontent.com/KC3Kai/kc3-translations/master/data/en/ships.json", "ships");
+            get("https://raw.githubusercontent.com/KC3Kai/kc3-translations/master/data/en/ship_affix.json", "ship_affix");
+            get("http://flatisjustice.moe/api_start2", "api_start2");
+        </script>
+    </body>
+</html>
