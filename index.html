@@ -6,8 +6,8 @@
         <meta name=viewport content="width=device-width, initial-scale=1">
         <meta name="twitter:card" content="summary">
         <meta name="twitter:title" content="Flat is Justice">
-        <meta name="twitter:description" content="KC Tools: open servers, damage suffering, exp prog">
-        <meta name="twitter:image" content="http://flatisjustice.moe/grills/0.png">
+        <meta name="twitter:creator" content="@FlatIsNice">
+        <meta name="twitter:description" content="KC Tools: open servers, damage suffering, exp prog, wedding generator">
         <meta name="keywords" content="flat,chest,small,anime,justice,kancolle,tools,calc">
         <meta name="author" content="Tibi">
         <meta name="google-site-verification" content="1LKLCucyeDTQcM854X-oWD4yXndozpVgXdFI5q5FyE4" />
@@ -55,16 +55,6 @@
             height:100%;
             overflow:hidden;
         }
-        #gril {
-            height: auto; width: auto;
-            max-width: 30%;
-            max-height: 300%;
-            position: absolute;
-            right:0px;
-            bottom: 0px;
-            margin:auto;
-            pointer-events: none;
-        }
         </style>
     </head>
     <body>
@@ -72,27 +62,13 @@
             KanColle Tools: <br>
             <a href="/open_kc_servers" target="">Open servers</a><br>
             <a href="/dmgsuffer" target="">Damage suffering</a><br>
-            <a href="/xpcalc" target="">Experience progress calc</a><br><br>
-            Not so wow tools:<br>
+            <a href="/xpcalc" target="">Experience progress calc</a><br>
+            <a href="/weddinggen" target="">HD wedding generator</a><br>
+            <br>Not so wow tools:<br>
             <a href="/oaswcalc" target="">OASW lvl calc</a><br>
             <a href="/lbasrangemapmaker" target="">LBAS map range maker</a><br>
         </div>
         <div id="maintext">Flat is Justice</div>
-        <img id="gril" alt="gril" src="grills/0.png">
-        <div id="contact">If you have suggestions/bugs/good pics/questsions/etc, you can contact me on <a href="https://twitter.com/FlatIsNice">Twitter @FlatIsNice</a>, on Discord @Tibi#2251 or via e-mail <a href="mailto:tibo@flatisjustice.moe" target="">tibo@flatisjustice.moe</a></div>
-        <script type="text/javascript">
-            var amountOfImages = 20;
-            var imageId = Math.floor(Math.random() * amountOfImages);
-            document.getElementById('gril').src="grills/" + imageId + ".png"
-            setInterval(function() {
-                var newId = Math.floor(Math.random() * amountOfImages);
-                while(newId === imageId)
-                    newId = Math.floor(Math.random() * amountOfImages);
-                newId = (imageId + 1) % amountOfImages;
-                console.log(imageId + " -> " + newId)
-                imageId = newId;
-                document.getElementById('gril').src="grills/" + imageId + ".png"
-            }, 5000);
-        </script>
+        <div id="contact">If you have suggestions/bugs/questsions/etc, you can contact me on <a href="https://twitter.com/FlatIsNice">Twitter @FlatIsNice</a>, on Discord @Tibi#2251 or via e-mail <a href="mailto:tibo@flatisjustice.moe" target="">tibo@flatisjustice.moe</a></div>
     </body>
 </html>
