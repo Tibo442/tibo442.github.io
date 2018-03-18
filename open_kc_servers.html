@@ -23,6 +23,7 @@
         
         td {
             height: 25px;
+            margin: 5px;
         }
         
         #lastupdate {
@@ -30,39 +31,49 @@
         }
         </style>
         <script type="text/javascript">
-          var en_names=["Yokosuka Naval District", "Kure Naval District", "Sasebo Naval District", "Maizuru Naval District", "Ominato Guard District", "Truk Anchorage", "Lingga Anchorage", "Rabaul Naval Base", "Shortland Anchorage", "Buin Naval Base", "Tawi-Tawi Anchorage", "Palau Anchorage", "Brunei Anchorage", "Hitokappu Bay Anchorage", "Paramushir Anchorage", "Sukumo Bay Anchorage", "Kanoya Airfield", "Iwagawa Airfield", "Saiki Bay Anchorage", "Hashirajima Anchorage"];
-          // var github_url = "https://github.com/Tibo442/tibo442.github.io/blame/master/get_worldinfo.json";
-          var data = {};
-          function onLoad() {
-            // var lastUpdate = document.createElement("div");
-            // lastUpdate.innerHTML = 'Last updated: ' + data.date + '<br><a href=' + github_url + '>Past \u00bb</a>';
-            // lastUpdate.id = "lastupdate";
-            
-            let tableA = document.createElement("table"), tableB = document.createElement("table");
-            var topRow = document.createElement("tr");
-            topRow.innerHTML = "<th>ID</th><th>Server name (JP)</th><th>Server name (EN)</th><th>% Full</th>";
-            tableA.append(topRow);
-            tableB.append(topRow.cloneNode(true));
-            for(var i = 0; i < data.get_worldinfo/*.api_data.api_world_info*/.length; i++) {
-                var server = data.get_worldinfo/*.api_data.api_world_info*/[i];
-                console.log(server);
-                var bg = server.api_entry ? "92d177" : "d17b77";
-                var entry = document.createElement("tr");
-                entry.innerHTML = '<td>' + server.api_id + "</td><td>" + server.api_name +"</td><td>" + en_names[i] + "</td><td>" + server.api_rate+ "</td>";
-                entry.setAttribute("style", 'background-color: #' + bg);
-                // entry.setAttribute("onClick", "window.open('" + github_url + "#L" + ((server.api_id * 7) - 3) + "-L" + ((server.api_id * 7) + 3) + "');");
-                if (i % 2 == 0)
-                  tableA.append(entry);
-                else
-                  tableB.append(entry);
-                }
-            // document.body.append(lastUpdate);
-            document.body.append(tableA);
-            document.body.append(tableB);
-          }
-          var self = this;
-          
-          function get(url, name) {
+            var en_names=["Yokosuka Naval District", "Kure Naval District", "Sasebo Naval District", "Maizuru Naval District", "Ominato Guard District", "Truk Anchorage", "Lingga Anchorage", "Rabaul Naval Base", "Shortland Anchorage", "Buin Naval Base", "Tawi-Tawi Anchorage", "Palau Anchorage", "Brunei Anchorage", "Hitokappu Bay Anchorage", "Paramushir Anchorage", "Sukumo Bay Anchorage", "Kanoya Airfield", "Iwagawa Airfield", "Saiki Bay Anchorage", "Hashirajima Anchorage"];
+            var cn_names=["横须贺镇守府", "吴镇守府", "佐世保镇守府", "舞鹤镇守府", "大凑警备府", "特鲁克泊地", "林加泊地", "拉包尔基地", "肖特兰泊地", "布因基地", "塔威泊地", "帕劳泊地", "文莱泊地", "单冠湾泊地", "幌筵泊地", "宿毛湾泊地", "鹿屋基地", "岩川基地", "佐伯湾泊地", "柱岛泊地"];
+            // var github_url = "https://github.com/Tibo442/tibo442.github.io/blame/master/get_worldinfo.json";
+            var data = {};
+            function onLoad() {
+              // var lastUpdate = document.createElement("div");
+              // lastUpdate.innerHTML = 'Last updated: ' + data.date + '<br><a href=' + github_url + '>Past \u00bb</a>';
+              // lastUpdate.id = "lastupdate";
+              document.getElementById("table").innerHTML = "";
+              let tableA = document.createElement("table"), tableB = document.createElement("table");
+              var topRow = document.createElement("tr");
+              var tlnames = en_names;
+              var lang = window.location.hash.substring(1) || "en";
+              document.getElementById(lang).checked = true;
+              if(lang === "cn") {
+                  topRow.innerHTML = "<th>ID</th><th>Server name (JP)</th><th>Server name (CN)</th><th>% Full</th>";
+                  tlnames = cn_names;
+              } else {
+                  topRow.innerHTML = "<th>ID</th><th>Server name (JP)</th><th>Server name (EN)</th><th>% Full</th>";
+                  tlnames = en_names;
+              }
+              tableA.append(topRow);
+              tableB.append(topRow.cloneNode(true));
+              for(var i = 0; i < data.get_worldinfo/*.api_data.api_world_info*/.length; i++) {
+                  var server = data.get_worldinfo/*.api_data.api_world_info*/[i];
+                  console.log(server);
+                  var bg = server.api_entry ? "92d177" : "d17b77";
+                  var entry = document.createElement("tr");
+                  entry.innerHTML = '<td>' + server.api_id + "</td><td>" + server.api_name +"</td><td>" + tlnames[i] + "</td><td>" + server.api_rate+ "</td>";
+                  entry.setAttribute("style", 'background-color: #' + bg);
+                  // entry.setAttribute("onClick", "window.open('" + github_url + "#L" + ((server.api_id * 7) - 3) + "-L" + ((server.api_id * 7) + 3) + "');");
+                  if (i % 2 == 0)
+                    tableA.append(entry);
+                  else
+                    tableB.append(entry);
+                  }
+              // document.body.append(lastUpdate);
+              document.getElementById("table").append(tableA);
+              document.getElementById("table").append(tableB);
+            }
+            var self = this;
+              
+            function get(url, name) {
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function() {
                     if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
@@ -79,12 +90,19 @@
                 xmlhttp.send();
             }
 
-        
+            function changeLang(clicked) {
+                window.location.hash = "#" + clicked.value;
+                onLoad();
+            }
+
             //get("http://flatisjustice.moe/get_worldinfo_update.txt?nocache=" + new Date(), "date");
             get("https://tsundb.kc3.moe/api/kc_servers", "get_worldinfo");
 
         </script>
     </head>
     <body>
+      <input type="radio" name="lang" value="en" id="en" onchange="changeLang(this);" onclick="changeLang();"><b>EN</b>
+      <input type="radio" name="lang" value="cn" id="cn" onchange="changeLang(this);" onclick="changeLang();"><b>CN</b><br>
+      <div id="table"></div>
     </body>
 </html>
