@@ -299,7 +299,7 @@
 
                     for(let posdmg in firstAttackDMGs) {
                         let ch = firstAttackDMGs[posdmg], afterhp = data.currhp - posdmg;
-                        let stage = calculatePostCap(atk, afterhp, calculateDamagesDone(atk, afterhp, armor, data.currhp > 0.25 * data.maxhp && !data.abyssal));
+                        let stage = calculatePostCap(atk, afterhp, armor, calculateDamagesDone(atk, afterhp, armor, data.currhp > 0.25 * data.maxhp && !data.abyssal));
                         stage.mindmg = parseInt(stage.mindmg, 10) + parseInt(posdmg, 10);
                         stage.maxdmg = parseInt(stage.maxdmg, 10) + parseInt(posdmg, 10);
                         merge(stages, stage, ch/sum);
@@ -309,7 +309,7 @@
                     return calculatePostCap(atk, data.currhp, armor);
                 }
             }
-            function calculatePostCap(atk, currenthp, armor, dmgsDealth = calculateDamagesDone(atk, currenthp, armor = armor)) {
+            function calculatePostCap(atk, currenthp, armor, dmgsDealth = calculateDamagesDone(atk, currenthp, armor)) {
                 let sum = 0;
                 for(let posdmg in dmgsDealth)
                     sum += dmgsDealth[posdmg];
