@@ -15,15 +15,19 @@
             canvas {
                 margin: 5px;
             }
+            a, a.clicked {
+                color: blue;
+            }
         </style>
     </head>
     <body>
         <b>Attack info</b><br>
-        Cap (fill in 0 when atk = postcap): <input type="number" id="cap" min="0" max="999" onchange="update();" onclick="update();" value=0 step=10><br>
+        Softcap (fill in 0 when atk = postcap) <a href="http://kancolle.wikia.com/wiki/Combat/Damage_Calculation#Attack_Power_Cap" title="Eg: 180 for day/300 for night/150 other">[?]</a>: <input type="number" id="cap" min="0" max="999" onchange="update();" onclick="update();" value=0 step=10><br>
         <div id="postcapdata">
-            Take engagement into account: <input type="checkbox" id="engage" onchange="update();" onclick="update();"><br>
-            ^ Saiun: <input type="checkbox" id="saiun" onchange="update();" onclick="update();"><br>
-            Post-Cap multiplier: <input type="number" id="postcapdmg" min="0" max="10" onchange="update();" onclick="update();" value=1.0 step=0.1><br>
+            Take random engagement into account: <input type="checkbox" id="engage" onchange="update();" onclick="update();"><br>
+            ^ Saiun (exclude Red-T): <input type="checkbox" id="saiun" onchange="update();" onclick="update();"><br>
+            Pre-Cap multiplier <a href="http://kancolle.wikia.com/wiki/Combat/Damage_Calculation#Pre-Cap_Modifiers" title="Eg: Formation, Health, Engagement, Night Cutin modifiers">[?]</a>: <input type="number" id="precapdmg" min="0" max="10" onchange="update();" onclick="update();" value=1.0 step=0.1><br>
+            Post-Cap multiplier <a href="http://kancolle.wikia.com/wiki/Combat/Damage_Calculation#Pre-Cap_Modifiers" title="Eg: Art spot, Critical, Contact, AP shell modifiers">[?]</a>: <input type="number" id="postcapdmg" min="0" max="10" onchange="update();" onclick="update();" value=1.0 step=0.1><br>
         </div>
         Apply attack twice (like DA/TCI): <input type="checkbox" id="double" onchange="update();" onclick="update();"><br>
         <br>
@@ -50,7 +54,7 @@
         <div id="exatk-txt"></div>
         <br><br>
         <i>Formulas used:<br> </i>
-        <i>- engagement: </i><code>precapatk = atk * engagement</code> where <code>engagement = x1.2 (15%) x1 (45%) x0.8 (30%) x0.6 (10%)</code> with saiun: <code>engagement = x1.2 (15%) x1 (45%) x0.8 (40%)</code><br>
+        <i>- engagement/precap: </i><code>precapatk = atk * (engagement) * precap</code> where <code>engagement = x1.2 (15%) x1 (45%) x0.8 (30%) x0.6 (10%)</code> with saiun: <code>engagement = x1.2 (15%) x1 (45%) x0.8 (40%)</code><br>
         <i>- cap: </i><code>postcapatk = floor(<span style="color:red">floor(</span>(precapatk > cap) ? cap + sqrt(precapatk - cap) : precapatk<span style="color:red">)</span> * postcapmultiplier)</code><br>
         <i>- damage: </i><code>dmg = floor(attack - (0.7 * armor + 0.6 * rng.nextInt(armor)))</code><br>
         <i>- scratch: </i><code>if(dmg < 1) -> dmg = floor(0.06 * currentHP + 0.08 * rng.nextInt(currentHP))</code><br>
@@ -72,6 +76,7 @@
                     graphmax: parseFloat(document.getElementById('graphmax').value) + 1,
                     cap: parseFloat(document.getElementById('cap').value),
                     postcapdmg: parseFloat(document.getElementById('postcapdmg').value),
+                    precapdmg: parseFloat(document.getElementById('precapdmg').value),
                     abyssal: !!document.getElementById('abyssal').checked,
                     saiun: !!document.getElementById('saiun').checked,
                     double: !!document.getElementById('double').checked,
@@ -263,11 +268,11 @@
                         engagements = [[1, 1]];
                     let capdmg = (uncapped) => Math.floor(uncapped > data.cap ? data.cap + Math.sqrt(uncapped - data.cap) : uncapped);
                     for(let eng of engagements) {
-                        let stage = calculateFromPostCapATK(Math.floor(capdmg(eng[0] * atk) * data.postcapdmg, armor));
+                        let stage = calculateFromPostCapATK(Math.floor(capdmg(eng[0] * data.precapdmg * atk) * data.postcapdmg), armor);
                         merge(stages, stage, eng[1]);
                     }
                 } else 
-                    stages = calculateFromPostCapATK(atk, armor);
+                    stages = calculateFromPostCapATK(Math.floor(atk * data.precapdmg), armor);
                 return stages;
             }
             function merge(stages, stage, weight) {
@@ -283,7 +288,7 @@
             function calculateFromPostCapATK(atk, armor) {
                 if(data.double) {
                     let firstAttackDMGs = calculateDamagesDone(atk, data.currhp, armor);
-                    // console.debug("First ATK", calculateDamagesDone(atk, currhp));
+                    // console.debug("First ATK", firstAttackDMGs);
 
                     let stages = {
                         "sunk" : 0,
