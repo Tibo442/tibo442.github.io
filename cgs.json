@@ -176,7 +176,7 @@
                 "weda" : [0, 0],
                 "wedb" : [0, 0]
             }, {
-                "name" : "Fall / Mackerel",
+                "name" : "Mackerel",
                 "url" : "Akebono_Fall",
                 "weda" : [184, 320],
                 "wedb" : [128, 120]
@@ -440,7 +440,7 @@
                 "weda" : [168, 32],
                 "wedb" : [88, 112]
             }, {
-                "name" : "Happi/Fall",
+                "name" : "Happi",
                 "url" : "Fusou_Happi",
                 "weda" : [172, 16],
                 "wedb" : [112, 124]
@@ -500,7 +500,6 @@
                 "wedb" : [84, 128]
             }
         ]
-        // TILL HERE OK
     }, {
         "name" : "皐月",
         "cgs" : [{
