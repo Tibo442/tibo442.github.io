@@ -79,13 +79,13 @@
             }, {
                 "name" : "Fall",
                 "url" : "Fubuki_Fall",
-                "weda" : [234, 80],
-                "wedb" : [133, 125]
+                "weda" : [84, 48],
+                "wedb" : [96, 112]
             }, {
                 "name" : "Fall 改二",
                 "url" : "Fubuki_k2_Fall",
-                "weda" : [96, 120],
-                "wedb" : [136, 136]
+                "weda" : [84, 64],
+                "wedb" : [96, 112]
             }
         ]
     }, {
@@ -168,74 +168,104 @@
             }, {
                 "name" : "End Of Year 2014",
                 "url" : "Akebono_EndOfYear14",
-                "weda" : [128, 124],
-                "wedb" : [108, 128]
+                "weda" : [0, 0],
+                "wedb" : [0, 0]
             }, {
                 "name" : "Summer 2015",
                 "url" : "Akebono_Summer15",
-                "weda" : [128, 124],
-                "wedb" : [108, 128]
+                "weda" : [0, 0],
+                "wedb" : [0, 0]
             }, {
                 "name" : "Fall / Mackerel",
                 "url" : "Akebono_Fall",
-                "weda" : [144, 130],
-                "wedb" : [153, 168]
+                "weda" : [184, 320],
+                "wedb" : [128, 120]
             }, {
                 "name" : "End Of Year 2015",
                 "url" : "Akebono_EndOfYear15",
-                "weda" : [128, 124],
-                "wedb" : [108, 128]
+                "weda" : [200, 56],
+                "wedb" : [92, 128]
             }, {
                 "name" : "Akebono_Valentine",
                 "url" : "Akebono_Valentine",
-                "weda" : [128, 124],
-                "wedb" : [108, 128]
+                "weda" : [92, 48],
+                "wedb" : [136, 120]
             }, {
                 "name" : "Rainy",
                 "url" : "Akebono_Rainy",
-                "weda" : [128, 124],
-                "wedb" : [108, 128]
+                "weda" : [0, 0],
+                "wedb" : [0, 0]
             }, {
                 "name" : "Summer",
                 "url" : "Akebono_Summer",
-                "weda" : [128, 124],
-                "wedb" : [108, 128]
+                "weda" : [176, -8],
+                "wedb" : [132, 112]
             }, {
-                "name" : "Fall / Oyakodon",
+                "name" : "Oyakodon",
                 "url" : "Akebono_Oyakodon",
-                "weda" : [144, 130],
-                "wedb" : [153, 168]
+                "weda" : [0, 0],
+                "wedb" : [0, 0]
             }
         ]
     }, {
         "name" : "潮",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "xqjemfzdbjox",
-                "weda" : [106, 116],
-                "wedb" : [134, 145]
-            }, {
-                "name" : "改",
-                "url" : "dpqjexkcixhw",
+                "url" : "Ushio",
                 "weda" : [106, 116],
                 "wedb" : [134, 145]
             }, {
                 "name" : "改二",
-                "url" : "fsgwccpesgfh",
+                "url" : "Ushio_k2",
                 "weda" : [176, 48],
                 "wedb" : [128, 128]
+            }, {
+                "name" : "Summer",
+                "url" : "Ushio_Summer",
+                "weda" : [48, 24],
+                "wedb" : [128, 128]
+            }, {
+                "name" : "Summer 改二",
+                "url" : "Ushio_k2_Summer",
+                "weda" : [48, 40],
+                "wedb" : [128, 116]
+            }, {
+                "name" : "Saury",
+                "url" : "Ushio_Saury",
+                "weda" : [132, 32],
+                "wedb" : [104, 128]
+            }, {
+                "name" : "Saury 改二",
+                "url" : "Ushio_k2_Saury",
+                "weda" : [132, 44],
+                "wedb" : [104, 136]
+            }, {
+                "name" : "New Year",
+                "url" : "Ushio_NewYear",
+                "weda" : [24, 32],
+                "wedb" : [112, 136]
+            }, {
+                "name" : "New Year 改二",
+                "url" : "Ushio_k2_NewYear",
+                "weda" : [104, 40],
+                "wedb" : [124, 140]
+            }, {
+                "name" : "Hinamatsuri",
+                "url" : "Ushio_Hinamatsuri",
+                "weda" : [0, 0],
+                "wedb" : [0, 0]
+            }, {
+                "name" : "Hinamatsuri 改二",
+                "url" : "Ushio_k2_Hinamatsuri",
+                "weda" : [0, 0],
+                "wedb" : [0, 0]
             }
         ]
     }, {
         "name" : "陽炎",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "nkvvrszimkre",
-                "weda" : [221, 65],
-                "wedb" : [145, 147]
-            }, {
-                "name" : "改",
-                "url" : "ffyychaekjsj",
+                "url" : "Kagerou",
                 "weda" : [221, 65],
                 "wedb" : [145, 147]
             }
@@ -244,12 +274,17 @@
         "name" : "不知火",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "louolngpmrwj",
+                "url" : "Shiranui",
                 "weda" : [242, 38],
                 "wedb" : [163, 119]
             }, {
-                "name" : "改",
-                "url" : "algyyokhbnwz",
+                "name" : "Autumn Casual",
+                "url" : "Shiranui_Fall",
+                "weda" : [48, -8],
+                "wedb" : [84, 120]
+            }, {
+                "name" : "Eve of Battle 2018",
+                "url" : "Shiranui_EoB",
                 "weda" : [242, 38],
                 "wedb" : [163, 119]
             }
@@ -258,12 +293,7 @@
         "name" : "黒潮",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "ihengpjwmfrt",
-                "weda" : [143, 51],
-                "wedb" : [155, 130]
-            }, {
-                "name" : "改",
-                "url" : "qsnkljxqtrgb",
+                "url" : "Kuroshio",
                 "weda" : [143, 51],
                 "wedb" : [155, 130]
             }
@@ -272,12 +302,12 @@
         "name" : "雪風",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "pueufyccujmd",
+                "url" : "Yukikaze",
                 "weda" : [176, 84],
                 "wedb" : [163, 156]
             }, {
-                "name" : "改",
-                "url" : "avfbkpphumso",
+                "name" : "Eve of Battle 2018",
+                "url" : "Yukikaze_EoB",
                 "weda" : [176, 84],
                 "wedb" : [163, 156]
             }
@@ -286,69 +316,79 @@
         "name" : "長良",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "debsnofmttkx",
+                "url" : "Nagara",
                 "weda" : [133, 19],
                 "wedb" : [132, 132]
             }, {
                 "name" : "改",
-                "url" : "jmpkkzqwgxtc",
+                "url" : "Nagara_k",
                 "weda" : [102, 0],
                 "wedb" : [134, 130]
+            }, {
+                "name" : "Yukata",
+                "url" : "Nagara_Yukata",
+                "weda" : [124, 48],
+                "wedb" : [128, 120]
             }
         ]
     }, {
         "name" : "五十鈴",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "tcqsalkhzurk",
+                "url" : "Isuzu",
                 "weda" : [230, 25],
                 "wedb" : [144, 145]
             }, {
                 "name" : "改二",
-                "url" : "nnkmuxqyewyk",
+                "url" : "Isuzu_k2",
                 "weda" : [133, 0],
                 "wedb" : [134, 133]
             }, {
-                "name" : "改",
-                "url" : "espxbipsjiyt",
-                "weda" : [230, 25],
-                "wedb" : [144, 145]
+                "name" : "Summer",
+                "url" : "Isuzu_Summer",
+                "weda" : [92, 0],
+                "wedb" : [84, 112]
             }
         ]
     }, {
         "name" : "由良",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "shjlydqjdfcl",
-                "weda" : [134, 35],
-                "wedb" : [114, 137]
-            }, {
-                "name" : "改",
-                "url" : "xtqbjysffsvx",
+                "url" : "Yura",
                 "weda" : [134, 35],
                 "wedb" : [114, 137]
             }, {
                 "name" : "改二",
-                "url" : "rwectccrwkub",
+                "url" : "Yura_k2",
                 "weda" : [188, -12],
                 "wedb" : [84, 116]
+            }, {
+                "name" : "Yukata",
+                "url" : "Yura_Yukata",
+                "weda" : [128, 4],
+                "wedb" : [88, 112]
+            }, {
+                "name" : "Yukata 改二",
+                "url" : "Yura_k2_Yukata",
+                "weda" : [128, 4],
+                "wedb" : [80, 112]
             }
         ]
     }, {
         "name" : "大井",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "yomyfjkhndny",
+                "url" : "Ooi",
                 "weda" : [138, 150],
                 "wedb" : [92, 108]
             }, {
                 "name" : "改",
-                "url" : "gonohkjynpmb",
+                "url" : "Ooi_k",
                 "weda" : [138, 150],
                 "wedb" : [92, 108]
             }, {
                 "name" : "改二",
-                "url" : "khtgrpfyurcm",
+                "url" : "Ooi_k2",
                 "weda" : [151, 144],
                 "wedb" : [94, 114]
             }
@@ -357,17 +397,17 @@
         "name" : "北上",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "oxqlrctsmegi",
+                "url" : "Kitakami",
                 "weda" : [196, 124],
                 "wedb" : [97, 112]
             }, {
                 "name" : "改",
-                "url" : "jdqefjcpslli",
+                "url" : "Kitakami_k",
                 "weda" : [196, 124],
                 "wedb" : [97, 112]
             }, {
                 "name" : "改二",
-                "url" : "cqtlanpwihpj",
+                "url" : "Kitakami_k2",
                 "weda" : [199, 318],
                 "wedb" : [98, 107]
             }
@@ -376,55 +416,101 @@
         "name" : "扶桑",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "ubntuiyurxwk",
+                "url" : "Fusou",
                 "weda" : [417, 131],
                 "wedb" : [99, 106]
             }, {
                 "name" : "改",
-                "url" : "mnkjkgammeds",
+                "url" : "Fusou_k",
                 "weda" : [291, 124],
                 "wedb" : [98, 109]
             }, {
                 "name" : "改二",
-                "url" : "gmnsxwkdssmj",
+                "url" : "Fusou_k2",
                 "weda" : [232, 32],
                 "wedb" : [120, 112]
+            }, {
+                "name" : "New Year",
+                "url" : "Fusou_NewYear",
+                "weda" : [52, -8],
+                "wedb" : [116, 120]
+            }, {
+                "name" : "Summer",
+                "url" : "Fusou_Summer",
+                "weda" : [168, 32],
+                "wedb" : [88, 112]
+            }, {
+                "name" : "Happi/Fall",
+                "url" : "Fusou_Happi",
+                "weda" : [172, 16],
+                "wedb" : [112, 124]
+            }, {
+                "name" : "Rainy",
+                "url" : "Fusou_Rainy",
+                "weda" : [0, 0],
+                "wedb" : [0, 0]
+            }, {
+                "name" : "Rainy 改二",
+                "url" : "Fusou_k2_Rainy",
+                "weda" : [0, 0],
+                "wedb" : [0, 0]
+            }, {
+                "name" : "Zuiun",
+                "url" : "Fusou_Zuiun",
+                "weda" : [56, 20],
+                "wedb" : [76, 124]
             }
         ]
     }, {
         "name" : "山城",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "dyurkaeenkdh",
+                "url" : "Yamashiro",
                 "weda" : [352, 95],
                 "wedb" : [107, 109]
             }, {
                 "name" : "改",
-                "url" : "bnbdxfioqxtt",
+                "url" : "Yamashiro_k",
                 "weda" : [293, 49],
                 "wedb" : [113, 125]
             }, {
                 "name" : "改二",
-                "url" : "xjsgvmgfleuu",
+                "url" : "Yamashiro_k2",
                 "weda" : [320, 64],
                 "wedb" : [128, 112]
+            }, {
+                "name" : "New Year",
+                "url" : "Yamashiro_NewYear",
+                "weda" : [112, -8],
+                "wedb" : [108, 128]
+            }, {
+                "name" : "Summer",
+                "url" : "Yamashiro_Summer",
+                "weda" : [256, 16],
+                "wedb" : [104, 120]
+            }, {
+                "name" : "Oyakodon",
+                "url" : "Yamashiro_Oyakodon",
+                "weda" : [0, 0],
+                "wedb" : [0, 0]
+            }, {
+                "name" : "Zuiun",
+                "url" : "Yamashiro_Zuiun",
+                "weda" : [80, 8],
+                "wedb" : [84, 128]
             }
         ]
+        // TILL HERE OK
     }, {
         "name" : "皐月",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "qvmfwjitflgw",
-                "weda" : [311, 31],
-                "wedb" : [142, 155]
-            }, {
-                "name" : "改",
-                "url" : "ttcofyyswaum",
+                "url" : "Satsuki",
                 "weda" : [311, 31],
                 "wedb" : [142, 155]
             }, {
                 "name" : "改二",
-                "url" : "uhbkffblgplp",
+                "url" : "Satsuki_k2",
                 "weda" : [256, -8],
                 "wedb" : [108, 112]
             }
@@ -433,17 +519,12 @@
         "name" : "文月",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "pjkwpxniwgge",
-                "weda" : [139, 149],
-                "wedb" : [140, 143]
-            }, {
-                "name" : "改",
-                "url" : "ysgtnamukxoi",
+                "url" : "Fumizuki",
                 "weda" : [139, 149],
                 "wedb" : [140, 143]
             }, {
                 "name" : "改二",
-                "url" : "ewtmrxzqvupm",
+                "url" : "Fumizuki_k2",
                 "weda" : [180, -12],
                 "wedb" : [100, 124]
             }
@@ -452,12 +533,7 @@
         "name" : "菊月",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "jatvhskutlck",
-                "weda" : [171, 41],
-                "wedb" : [141, 157]
-            }, {
-                "name" : "改",
-                "url" : "zrrxemjrtmql",
+                "url" : "Kikuzuki",
                 "weda" : [171, 41],
                 "wedb" : [141, 157]
             }
@@ -466,12 +542,7 @@
         "name" : "望月",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "isiuepygxdzq",
-                "weda" : [250, 18],
-                "wedb" : [134, 157]
-            }, {
-                "name" : "改",
-                "url" : "aufduiatycow",
+                "url" : "Mochizuki",
                 "weda" : [250, 18],
                 "wedb" : [134, 157]
             }
@@ -480,12 +551,7 @@
         "name" : "初雪",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "pxogwcltgjkn",
-                "weda" : [144, 83],
-                "wedb" : [122, 124]
-            }, {
-                "name" : "改",
-                "url" : "sejqtlkfjwkc",
+                "url" : "Hatsuyuki",
                 "weda" : [144, 83],
                 "wedb" : [122, 124]
             }
@@ -494,36 +560,36 @@
         "name" : "叢雲",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "hpfcwdqxgyvl",
-                "weda" : [411, 147],
-                "wedb" : [122, 117]
-            }, {
-                "name" : "改",
-                "url" : "rmcvsljwdyur",
+                "url" : "Murakumo",
                 "weda" : [411, 147],
                 "wedb" : [122, 117]
             }, {
                 "name" : "改二",
-                "url" : "ugxgvgtjsxud",
+                "url" : "Murakumo_k2",
                 "weda" : [120, 112],
                 "wedb" : [120, 104]
+            }, {
+                "name" : "Valentine",
+                "url" : "Murakumo_Valentine",
+                "weda" : [256, 72],
+                "wedb" : [144, 112]
+            }, {
+                "name" : "Valentine 改二",
+                "url" : "Murakumo_k2_Valentine",
+                "weda" : [256, 72],
+                "wedb" : [144, 112]
             }
         ]
     }, {
         "name" : "暁",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "mtvkfikepcfr",
-                "weda" : [246, 69],
-                "wedb" : [142, 144]
-            }, {
-                "name" : "改",
-                "url" : "slzosqvxjxus",
+                "url" : "Akatsuki",
                 "weda" : [246, 69],
                 "wedb" : [142, 144]
             }, {
                 "name" : "改二",
-                "url" : "gzerqivthcrd",
+                "url" : "Akatsuki_k2",
                 "weda" : [128, 0],
                 "wedb" : [128, 128]
             }
@@ -532,64 +598,59 @@
         "name" : "響",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "nfzmalhtwved",
+                "url" : "Hibiki",
                 "weda" : [172, 70],
                 "wedb" : [146, 145]
             }, {
                 "name" : "Верный",
-                "url" : "gmqsmiszmftf",
+                "url" : "Hibiki_k2",
                 "weda" : [155, 11],
                 "wedb" : [147, 162]
             }, {
-                "name" : "改",
-                "url" : "wpaqzeclspdr",
-                "weda" : [172, 70],
-                "wedb" : [146, 145]
+                "name" : "Sanma",
+                "url" : "Hibiki_Sanma",
+                "weda" : [172, -8],
+                "wedb" : [88, 140]
             }
         ]
     }, {
         "name" : "雷",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "aejfywpsegbv",
+                "url" : "Ikazuchi",
                 "weda" : [188, 44],
                 "wedb" : [131, 145]
             }, {
-                "name" : "改",
-                "url" : "eathbqlrqvda",
-                "weda" : [188, 44],
-                "wedb" : [131, 145]
+                "name" : "Yukata",
+                "url" : "Ikazuchi_Yukata",
+                "weda" : [132, 48],
+                "wedb" : [132, 104]
             }
         ]
     }, {
         "name" : "電",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "uuilouoffjoj",
+                "url" : "Inazuma",
                 "weda" : [152, 47],
                 "wedb" : [171, 153]
             }, {
                 "name" : "改",
-                "url" : "bqvrrfdcuvdr",
-                "weda" : [152, 47],
-                "wedb" : [171, 153]
+                "url" : "Inazuma_Yukata",
+                "weda" : [124, 0],
+                "wedb" : [132, 112]
             }
         ]
     }, {
         "name" : "初春",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "nlobofyxzvku",
-                "weda" : [218, 123],
-                "wedb" : [131, 133]
-            }, {
-                "name" : "改",
-                "url" : "tedevipdbvdr",
+                "url" : "Hatsuharu",
                 "weda" : [218, 123],
                 "wedb" : [131, 133]
             }, {
                 "name" : "改二",
-                "url" : "xoiprnaxqxbj",
+                "url" : "Hatsuharu_k2",
                 "weda" : [256, 104],
                 "wedb" : [112, 88]
             }
@@ -598,26 +659,21 @@
         "name" : "子日",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "zgerairddhko",
+                "url" : "Nenohi",
                 "weda" : [128, 189],
                 "wedb" : [132, 127]
             }, {
-                "name" : "改",
-                "url" : "nkrmsykdohgo",
-                "weda" : [128, 189],
-                "wedb" : [132, 127]
+                "name" : "New Year",
+                "url" : "Nenohi_NewYear",
+                "weda" : [182, 0],
+                "wedb" : [92, 112]
             }
         ]
     }, {
         "name" : "若葉",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "ihuijkvksqky",
-                "weda" : [153, 136],
-                "wedb" : [124, 151]
-            }, {
-                "name" : "改",
-                "url" : "tkcwrodgemlj",
+                "url" : "Wakaba",
                 "weda" : [153, 136],
                 "wedb" : [124, 151]
             }
@@ -626,17 +682,12 @@
         "name" : "初霜",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "qngptlxhrwhj",
-                "weda" : [304, 85],
-                "wedb" : [148, 151]
-            }, {
-                "name" : "改",
-                "url" : "woutqrqtdzqi",
+                "url" : "Hatsushimo",
                 "weda" : [304, 85],
                 "wedb" : [148, 151]
             }, {
                 "name" : "改二",
-                "url" : "ufgydlyjdaxb",
+                "url" : "Hatsushimo_k2",
                 "weda" : [128, 96],
                 "wedb" : [160, 128]
             }
@@ -645,83 +696,154 @@
         "name" : "白露",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "ahztpphnuvco",
+                "url" : "Shiratsuyu",
                 "weda" : [283, 140],
                 "wedb" : [129, 137]
             }, {
                 "name" : "改",
-                "url" : "xcbmsjqrostq",
+                "url" : "Shiratsuyu_k",
                 "weda" : [164, 18],
                 "wedb" : [129, 138]
+            }, {
+                "name" : "Summer 改",
+                "url" : "Shiratsuyu_k_Summer",
+                "weda" : [84, 16],
+                "wedb" : [136, 112]
+            }, {
+                "name" : "Mobile",
+                "url" : "Shiratsuyu_Mobile",
+                "weda" : [112, 0],
+                "wedb" : [80, 124]
+            }, {
+                "name" : "Yukata",
+                "url" : "Shiratsuyu_Yukata",
+                "weda" : [144, 32],
+                "wedb" : [82, 112]
+            }, {
+                "name" : "Autumn Casual",
+                "url" : "Shiratsuyu_Autumn_Casual",
+                "weda" : [84, 16],
+                "wedb" : [136, 112]
             }
         ]
+        // TILL HERE OK
     }, {
         "name" : "時雨",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "kclrmkyzpnpc",
+                "url" : "Shigure",
                 "weda" : [120, 107],
                 "wedb" : [130, 146]
             }, {
                 "name" : "改二",
-                "url" : "ogkwigciybxf",
+                "url" : "Shigure_k",
                 "weda" : [122, 84],
                 "wedb" : [137, 140]
             }, {
-                "name" : "改",
-                "url" : "wmskekfmgdio",
-                "weda" : [120, 107],
-                "wedb" : [130, 146]
+                "name" : "Xmas 改二",
+                "url" : "Shigure_k2_Xmas",
+                "weda" : [192, 40],
+                "wedb" : [104, 96]
+            }, {
+                "name" : "Valentine 改二",
+                "url" : "Shigure_k2_Valentine",
+                "weda" : [80, 12],
+                "wedb" : [152, 128]
+            }, {
+                "name" : "Summer 改二",
+                "url" : "Shigure_k2_Summer",
+                "weda" : [88, 24],
+                "wedb" : [112, 112]
+            }, {
+                "name" : "White Day 2016 改二",
+                "url" : "Shigure_k2_White_Day",
+                "weda" : [0, 0],
+                "wedb" : [0, 0]
+            }, {
+                "name" : "Saury 改二",
+                "url" : "Shigure_k2_Saury",
+                "weda" : [108, 24],
+                "wedb" : [104, 112]
+            }, {
+                "name" : "Fall 2017 Event 改二",
+                "url" : "Shigure_k2_Fall_2017_Event",
+                "weda" : [140, 8],
+                "wedb" : [88, 132]
             }
         ]
     }, {
         "name" : "村雨",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "fhaelooubkbi",
+                "url" : "Murasame",
                 "weda" : [135, 63],
                 "wedb" : [118, 143]
             }, {
                 "name" : "改",
-                "url" : "wvnchfzhekfo",
+                "url" : "Murasame_k",
                 "weda" : [91, 40],
                 "wedb" : [123, 133]
             }, {
                 "name" : "改二",
-                "url" : "cppixsrylduw",
+                "url" : "Murasame_k2",
                 "weda" : [186, -4],
                 "wedb" : [76, 136]
+            }, {
+                "name" : "Rainy 改",
+                "url" : "Murasame_k_Rainy",
+                "weda" : [0, 0],
+                "wedb" : [0, 0]
+            }, {
+                "name" : "Summer 改",
+                "url" : "Murasame_k_Summer",
+                "weda" : [84, 16],
+                "wedb" : [136, 112]
+            }, {
+                "name" : "Saury",
+                "url" : "Murasame_Saury",
+                "weda" : [160, 100],
+                "wedb" : [118, 100]
             }
         ]
     }, {
         "name" : "夕立",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "pnpixtolsebg",
+                "url" : "Yuudachi",
                 "weda" : [106, 98],
                 "wedb" : [110, 135]
             }, {
                 "name" : "改二",
-                "url" : "lngqiqvigduj",
+                "url" : "Yuudachi_k2",
                 "weda" : [148, 6],
                 "wedb" : [115, 133]
             }, {
-                "name" : "改",
-                "url" : "wpsyznjwvlmd",
-                "weda" : [106, 98],
-                "wedb" : [110, 135]
+                "name" : "New Year 改二",
+                "url" : "Yuudachi_k2_NewYear",
+                "weda" : [192, 216],
+                "wedb" : [136, 128]
+            }, {
+                "name" : "Summer 改二",
+                "url" : "Yuudachi_k2_Summer",
+                "weda" : [112, 48],
+                "wedb" : [112, 88]
+            }, {
+                "name" : "Rainy 改二",
+                "url" : "Yuudachi_k2_Rainy",
+                "weda" : [0, 0],
+                "wedb" : [0, 0]
+            }, {
+                "name" : "Oyakodon 改二",
+                "url" : "Yuudachi_k2_Oyakodon",
+                "weda" : [0, 0],
+                "wedb" : [0, 0]
             }
         ]
     }, {
         "name" : "五月雨",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "tyjrubumfpxy",
-                "weda" : [236, 29],
-                "wedb" : [122, 147]
-            }, {
-                "name" : "改",
-                "url" : "ofneitwqroxe",
+                "url" : "Samidare",
                 "weda" : [236, 29],
                 "wedb" : [122, 147]
             }
@@ -730,12 +852,7 @@
         "name" : "涼風",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "qaryaychpubb",
-                "weda" : [196, 41],
-                "wedb" : [118, 141]
-            }, {
-                "name" : "改",
-                "url" : "jukighzxmudn",
+                "url" : "Suzukaze",
                 "weda" : [196, 41],
                 "wedb" : [118, 141]
             }
@@ -744,36 +861,31 @@
         "name" : "霰",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "oiknslickotp",
+                "url" : "Arare",
                 "weda" : [198, 100],
                 "wedb" : [145, 141]
             }, {
-                "name" : "改",
-                "url" : "oxttbkywusfp",
-                "weda" : [198, 100],
-                "wedb" : [145, 141]
+                "name" : "Xmas",
+                "url" : "Arare_Xmas",
+                "weda" : [48, -8],
+                "wedb" : [98, 128]
             }
         ]
     }, {
         "name" : "霞",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "qukusrsftcgy",
-                "weda" : [67, 102],
-                "wedb" : [154, 165]
-            }, {
-                "name" : "改",
-                "url" : "ohpnwjgzfesg",
+                "url" : "Kasumi",
                 "weda" : [67, 102],
                 "wedb" : [154, 165]
             }, {
                 "name" : "改二",
-                "url" : "mqlroxfnufpz",
+                "url" : "Kasumi_k2",
                 "weda" : [200, -8],
                 "wedb" : [100, 112]
             }, {
                 "name" : "改二乙",
-                "url" : "vxrvwfxhlbag",
+                "url" : "Kasumi_k2b",
                 "weda" : [200, -8],
                 "wedb" : [100, 112]
             }
@@ -782,154 +894,159 @@
         "name" : "島風",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "uffgxggsrtti",
+                "url" : "Shimakaze",
                 "weda" : [129, 159],
                 "wedb" : [119, 117]
             }, {
-                "name" : "改",
-                "url" : "cjhtlviffiwb",
-                "weda" : [129, 159],
-                "wedb" : [119, 117]
+                "name" : "Eve of Battle 2018",
+                "url" : "Shimakaze_EoB",
+                "weda" : [160, 172],
+                "wedb" : [100, 128]
             }
         ]
     }, {
         "name" : "天龍",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "vswgjojfoqdc",
+                "url" : "Tenryuu",
                 "weda" : [90, 150],
                 "wedb" : [134, 141]
             }, {
-                "name" : "改",
-                "url" : "wjcrloeyiyxw",
-                "weda" : [90, 150],
-                "wedb" : [134, 141]
+                "name" : "Summer",
+                "url" : "Tenryuu_Summer",
+                "weda" : [212, 44],
+                "wedb" : [112, 84]
             }
         ]
     }, {
         "name" : "龍田",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "qvqlfmytkmor",
-                "weda" : [299, 198],
-                "wedb" : [121, 125]
-            }, {
-                "name" : "改",
-                "url" : "chmytqkkilrv",
+                "url" : "Tatsuta",
                 "weda" : [299, 198],
                 "wedb" : [121, 125]
             }, {
                 "name" : "改二",
-                "url" : "usewjvwytald",
+                "url" : "Tatsuta_k2",
                 "weda" : [236, 16],
                 "wedb" : [80, 112]
+            }, {
+                "name" : "Summer",
+                "url" : "Tatsuta_Summer",
+                "weda" : [160, 24],
+                "wedb" : [120, 104]
             }
         ]
     }, {
         "name" : "名取",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "bqwjdltjktls",
+                "url" : "Natori",
                 "weda" : [258, 59],
                 "wedb" : [135, 141]
             }, {
                 "name" : "改",
-                "url" : "aqgjvutybsbk",
+                "url" : "Natori_k",
                 "weda" : [119, 0],
                 "wedb" : [132, 140]
+            }, {
+                "name" : "Yukata",
+                "url" : "Natori_Yukata",
+                "weda" : [144, -8],
+                "wedb" : [132, 112]
             }
         ]
     }, {
         "name" : "川内",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "nehcyhpiviue",
+                "url" : "Sendai",
                 "weda" : [236, 68],
                 "wedb" : [111, 119]
             }, {
                 "name" : "改二",
-                "url" : "qpnrcirsvqcr",
+                "url" : "Sendai_k2",
                 "weda" : [152, 0],
                 "wedb" : [112, 104]
             }, {
-                "name" : "改",
-                "url" : "zhixojcwijfj",
-                "weda" : [236, 68],
-                "wedb" : [111, 119]
+                "name" : "Autumn Casual",
+                "url" : "Sendai_Autumn_Casual",
+                "weda" : [84, -8],
+                "wedb" : [100, 120]
             }
         ]
     }, {
         "name" : "神通",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "icmlpbiditqy",
+                "url" : "Jintsuu",
                 "weda" : [208, 74],
                 "wedb" : [103, 119]
             }, {
                 "name" : "改二",
-                "url" : "xyqotgpmnjih",
+                "url" : "Jintsuu_k2",
                 "weda" : [160, 24],
                 "wedb" : [112, 104]
             }, {
-                "name" : "改",
-                "url" : "ncijtxixkghu",
-                "weda" : [208, 74],
-                "wedb" : [103, 119]
+                "name" : "Yukata 改二",
+                "url" : "Jintsuu_k2_Yukata",
+                "weda" : [56, 8],
+                "wedb" : [144, 128]
             }
         ]
     }, {
         "name" : "那珂",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "vopfxipptsrt",
+                "url" : "Naka",
                 "weda" : [186, 73],
                 "wedb" : [92, 109]
             }, {
                 "name" : "改二",
-                "url" : "lvjcqqulbluo",
+                "url" : "Naka_k2",
                 "weda" : [152, 41],
                 "wedb" : [109, 122]
             }, {
-                "name" : "改",
-                "url" : "vxkcklmfevkk",
-                "weda" : [186, 73],
-                "wedb" : [92, 109]
+                "name" : "Xmas",
+                "url" : "Naka_Xmas",
+                "weda" : [143, 65],
+                "wedb" : [94, 117]
+            }, {
+                "name" : "Xmas 改二",
+                "url" : "Naka_k2_Xmas",
+                "weda" : [288, 48],
+                "wedb" : [104, 80]
             }
         ]
     }, {
         "name" : "古鷹",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "sfbwblstvfmw",
-                "weda" : [197, 40],
-                "wedb" : [131, 143]
-            }, {
-                "name" : "改",
-                "url" : "iolnrzaovbhn",
+                "url" : "Furutaka",
                 "weda" : [197, 40],
                 "wedb" : [131, 143]
             }, {
                 "name" : "改二",
-                "url" : "vqdgxtrgintc",
+                "url" : "Furutaka_k2",
                 "weda" : [208, -8],
                 "wedb" : [96, 104]
+            }, {
+                "name" : "Yukata",
+                "url" : "Furutaka_Yukata",
+                "weda" : [64, -4],
+                "wedb" : [100, 112]
             }
         ]
     }, {
         "name" : "加古",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "vkmjguonqcsg",
-                "weda" : [191, 70],
-                "wedb" : [140, 136]
-            }, {
-                "name" : "改",
-                "url" : "qsmurjkprhku",
+                "url" : "Kako",
                 "weda" : [191, 70],
                 "wedb" : [140, 136]
             }, {
                 "name" : "改二",
-                "url" : "riiwaegupstv",
+                "url" : "Kako_k2",
                 "weda" : [256, 36],
                 "wedb" : [128, 96]
             }
@@ -938,12 +1055,7 @@
         "name" : "青葉",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "bhyiqjjifflp",
-                "weda" : [219, 53],
-                "wedb" : [153, 162]
-            }, {
-                "name" : "改",
-                "url" : "udkkmzgsimgq",
+                "url" : "Aoba",
                 "weda" : [219, 53],
                 "wedb" : [153, 162]
             }
@@ -952,17 +1064,12 @@
         "name" : "妙高",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "grppcbegkphv",
-                "weda" : [164, 24],
-                "wedb" : [94, 93]
-            }, {
-                "name" : "改",
-                "url" : "fcydxtnwtaon",
+                "url" : "Myoukou",
                 "weda" : [164, 24],
                 "wedb" : [94, 93]
             }, {
                 "name" : "改二",
-                "url" : "kadfixosusrf",
+                "url" : "Myoukou_k2",
                 "weda" : [192, 0],
                 "wedb" : [128, 112]
             }
@@ -971,69 +1078,49 @@
         "name" : "那智",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "wnkageqzigwd",
+                "url" : "Nachi",
                 "weda" : [98, 48],
                 "wedb" : [110, 108]
             }, {
                 "name" : "改二",
-                "url" : "bpegnatlfibc",
+                "url" : "Nachi_k2",
                 "weda" : [320, 8],
                 "wedb" : [128, 120]
-            }, {
-                "name" : "改",
-                "url" : "nvftqenyroyu",
-                "weda" : [98, 48],
-                "wedb" : [110, 108]
             }
         ]
     }, {
         "name" : "足柄",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "opprvckvhrkv",
+                "url" : "Ashigara",
                 "weda" : [200, 63],
                 "wedb" : [93, 103]
             }, {
                 "name" : "改二",
-                "url" : "bxbyaifmqdxk",
+                "url" : "Ashigara_k2",
                 "weda" : [288, 0],
                 "wedb" : [144, 112]
-            }, {
-                "name" : "改",
-                "url" : "bekjyovmrmfd",
-                "weda" : [200, 63],
-                "wedb" : [93, 103]
             }
         ]
     }, {
         "name" : "羽黒",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "lvfswfzywnql",
+                "url" : "Haguro",
                 "weda" : [149, 40],
                 "wedb" : [106, 114]
             }, {
                 "name" : "改二",
-                "url" : "ecwgnneuzbcv",
+                "url" : "Haguro_k2",
                 "weda" : [224, 0],
                 "wedb" : [144, 144]
-            }, {
-                "name" : "改",
-                "url" : "uilfcyypnbwm",
-                "weda" : [149, 40],
-                "wedb" : [106, 114]
             }
         ]
     }, {
         "name" : "高雄",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "eqpvjbnbjlhy",
-                "weda" : [178, 36],
-                "wedb" : [100, 117]
-            }, {
-                "name" : "改",
-                "url" : "ghgphbvmzjrx",
+                "url" : "Takao",
                 "weda" : [178, 36],
                 "wedb" : [100, 117]
             }
@@ -1042,12 +1129,7 @@
         "name" : "愛宕",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "aqpnbsizhjij",
-                "weda" : [178, 36],
-                "wedb" : [104, 118]
-            }, {
-                "name" : "改",
-                "url" : "gbkqnzirjyid",
+                "url" : "Atago",
                 "weda" : [178, 36],
                 "wedb" : [104, 118]
             }
@@ -1056,17 +1138,12 @@
         "name" : "摩耶",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "gpshoozxgutk",
-                "weda" : [104, 92],
-                "wedb" : [145, 147]
-            }, {
-                "name" : "改",
-                "url" : "ajhdojqfykfu",
+                "url" : "Maya",
                 "weda" : [104, 92],
                 "wedb" : [145, 147]
             }, {
                 "name" : "改二",
-                "url" : "xljtrrmemnon",
+                "url" : "Maya_k2",
                 "weda" : [200, 16],
                 "wedb" : [160, 152]
             }
@@ -1075,17 +1152,12 @@
         "name" : "鳥海",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "qmmdyeprdqsu",
-                "weda" : [266, 111],
-                "wedb" : [126, 128]
-            }, {
-                "name" : "改",
-                "url" : "nsgytjsjbfdp",
+                "url" : "Choukai",
                 "weda" : [266, 111],
                 "wedb" : [126, 128]
             }, {
                 "name" : "改二",
-                "url" : "jcrdsdpsjcgj",
+                "url" : "Choukai_k2",
                 "weda" : [288, -4],
                 "wedb" : [144, 120]
             }
@@ -1094,33 +1166,48 @@
         "name" : "最上",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "lcmobkdeizph",
+                "url" : "Mogami",
                 "weda" : [162, 161],
                 "wedb" : [109, 94]
             }, {
                 "name" : "改",
-                "url" : "ethdbrvnuznc",
+                "url" : "Mogami_k",
                 "weda" : [198, 158],
                 "wedb" : [109, 97]
+            }, {
+                "name" : "Rainy",
+                "url" : "Mogami_Rainy",
+                "weda" : [0, 0],
+                "wedb" : [0, 0]
+            }, {
+                "name" : "Summer",
+                "url" : "Mogami_Summer",
+                "weda" : [136, -12],
+                "wedb" : [84, 100]
+            }, {
+                "name" : "Eve of Battle",
+                "url" : "Mogami_EoB",
+                "weda" : [192, 76],
+                "wedb" : [84, 104]
             }
         ]
     }, {
         "name" : "利根",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "kmcllyhenjnk",
+                "url" : "Tone",
                 "weda" : [137, 95],
                 "wedb" : [94, 106]
             }, {
                 "name" : "改二",
-                "url" : "rjggwwmmppth",
+                "url" : "Tone_k2",
                 "weda" : [216, 48],
                 "wedb" : [128, 112]
             }, {
-                "name" : "改",
-                "url" : "fkatobgcyygb",
-                "weda" : [137, 95],
-                "wedb" : [94, 106]
+                "name" : "Xmas 改二",
+                "url" : "Tone_k2_Xmas",
+                "weda" : [156, 12],
+                "wedb" : [100, 124]
             }
         ]
     }, {
