@@ -1,0 +1,3652 @@
+{
+    "1" : {
+        "name" : "睦月",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "snohitatusbk",
+                "weda" : [112, 108],
+                "wedb" : [145, 153]
+            }, {
+                "name" : "改",
+                "url" : "pvomxydmldoi",
+                "weda" : [112, 108],
+                "wedb" : [145, 153]
+            }, {
+                "name" : "改二",
+                "url" : "idhoawqrgkqh",
+                "weda" : [96, 24],
+                "wedb" : [128, 120]
+            }
+        ]
+    },
+    "2" : {
+        "name" : "如月",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "wujywbyjntbp",
+                "weda" : [106, 63],
+                "wedb" : [139, 114]
+            }, {
+                "name" : "改",
+                "url" : "lwlmcwxyvcyz",
+                "weda" : [106, 63],
+                "wedb" : [139, 114]
+            }, {
+                "name" : "改二",
+                "url" : "ygqdfllpkbee",
+                "weda" : [176, 4],
+                "wedb" : [144, 128]
+            }
+        ]
+    },
+    "6" : {
+        "name" : "長月",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "kksiqffpclxh",
+                "weda" : [134, 91],
+                "wedb" : [134, 153]
+            }, {
+                "name" : "改",
+                "url" : "wrxtfahvtyqi",
+                "weda" : [134, 91],
+                "wedb" : [134, 153]
+            }
+        ]
+    },
+    "7" : {
+        "name" : "三日月",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "ujhxqqlcorxv",
+                "weda" : [151, 41],
+                "wedb" : [142, 149]
+            }, {
+                "name" : "改",
+                "url" : "sxrrihbkdkjl",
+                "weda" : [151, 41],
+                "wedb" : [142, 149]
+            }
+        ]
+    },
+    "9" : {
+        "name" : "吹雪",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "gyckjmemgqoe",
+                "weda" : [234, 80],
+                "wedb" : [133, 125]
+            }, {
+                "name" : "改",
+                "url" : "dufziinsornt",
+                "weda" : [234, 80],
+                "wedb" : [133, 125]
+            }, {
+                "name" : "改二",
+                "url" : "rtkekdbkqrkg",
+                "weda" : [96, 120],
+                "wedb" : [136, 136]
+            }
+        ]
+    },
+    "10" : {
+        "name" : "白雪",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "xqnkdultpvaf",
+                "weda" : [221, 49],
+                "wedb" : [125, 134]
+            }, {
+                "name" : "改",
+                "url" : "kkpwecgmftci",
+                "weda" : [221, 49],
+                "wedb" : [125, 134]
+            }
+        ]
+    },
+    "11" : {
+        "name" : "深雪",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "cdidanqovcfr",
+                "weda" : [120, 60],
+                "wedb" : [136, 136]
+            }, {
+                "name" : "改",
+                "url" : "zlshfpystoqp",
+                "weda" : [120, 60],
+                "wedb" : [136, 136]
+            }
+        ]
+    },
+    "12" : {
+        "name" : "磯波",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "ljesxnctkmmf",
+                "weda" : [219, 58],
+                "wedb" : [133, 126]
+            }, {
+                "name" : "改",
+                "url" : "olkahitypycq",
+                "weda" : [219, 58],
+                "wedb" : [133, 126]
+            }
+        ]
+    },
+    "13" : {
+        "name" : "綾波",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "icpexclhwthr",
+                "weda" : [146, 52],
+                "wedb" : [140, 130]
+            }, {
+                "name" : "改二",
+                "url" : "tiqezicxwpry",
+                "weda" : [152, 64],
+                "wedb" : [144, 128]
+            }, {
+                "name" : "改",
+                "url" : "sgpilzypnejy",
+                "weda" : [146, 52],
+                "wedb" : [140, 130]
+            }
+        ]
+    },
+    "14" : {
+        "name" : "敷波",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "gcbiuhgmgjbm",
+                "weda" : [152, 46],
+                "wedb" : [134, 136]
+            }, {
+                "name" : "改",
+                "url" : "epjlpvhwcjvw",
+                "weda" : [152, 46],
+                "wedb" : [134, 136]
+            }
+        ]
+    },
+    "15" : {
+        "name" : "曙",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "fwptxiocqkyd",
+                "weda" : [144, 130],
+                "wedb" : [153, 168]
+            }, {
+                "name" : "改",
+                "url" : "wnocckxgfmnh",
+                "weda" : [128, 124],
+                "wedb" : [108, 128]
+            }
+        ]
+    },
+    "16" : {
+        "name" : "潮",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "xqjemfzdbjox",
+                "weda" : [106, 116],
+                "wedb" : [134, 145]
+            }, {
+                "name" : "改",
+                "url" : "dpqjexkcixhw",
+                "weda" : [106, 116],
+                "wedb" : [134, 145]
+            }, {
+                "name" : "改二",
+                "url" : "fsgwccpesgfh",
+                "weda" : [176, 48],
+                "wedb" : [128, 128]
+            }
+        ]
+    },
+    "17" : {
+        "name" : "陽炎",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "nkvvrszimkre",
+                "weda" : [221, 65],
+                "wedb" : [145, 147]
+            }, {
+                "name" : "改",
+                "url" : "ffyychaekjsj",
+                "weda" : [221, 65],
+                "wedb" : [145, 147]
+            }
+        ]
+    },
+    "18" : {
+        "name" : "不知火",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "louolngpmrwj",
+                "weda" : [242, 38],
+                "wedb" : [163, 119]
+            }, {
+                "name" : "改",
+                "url" : "algyyokhbnwz",
+                "weda" : [242, 38],
+                "wedb" : [163, 119]
+            }
+        ]
+    },
+    "19" : {
+        "name" : "黒潮",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "ihengpjwmfrt",
+                "weda" : [143, 51],
+                "wedb" : [155, 130]
+            }, {
+                "name" : "改",
+                "url" : "qsnkljxqtrgb",
+                "weda" : [143, 51],
+                "wedb" : [155, 130]
+            }
+        ]
+    },
+    "20" : {
+        "name" : "雪風",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "pueufyccujmd",
+                "weda" : [176, 84],
+                "wedb" : [163, 156]
+            }, {
+                "name" : "改",
+                "url" : "avfbkpphumso",
+                "weda" : [176, 84],
+                "wedb" : [163, 156]
+            }
+        ]
+    },
+    "21" : {
+        "name" : "長良",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "debsnofmttkx",
+                "weda" : [133, 19],
+                "wedb" : [132, 132]
+            }, {
+                "name" : "改",
+                "url" : "jmpkkzqwgxtc",
+                "weda" : [102, 0],
+                "wedb" : [134, 130]
+            }
+        ]
+    },
+    "22" : {
+        "name" : "五十鈴",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "tcqsalkhzurk",
+                "weda" : [230, 25],
+                "wedb" : [144, 145]
+            }, {
+                "name" : "改二",
+                "url" : "nnkmuxqyewyk",
+                "weda" : [133, 0],
+                "wedb" : [134, 133]
+            }, {
+                "name" : "改",
+                "url" : "espxbipsjiyt",
+                "weda" : [230, 25],
+                "wedb" : [144, 145]
+            }
+        ]
+    },
+    "23" : {
+        "name" : "由良",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "shjlydqjdfcl",
+                "weda" : [134, 35],
+                "wedb" : [114, 137]
+            }, {
+                "name" : "改",
+                "url" : "xtqbjysffsvx",
+                "weda" : [134, 35],
+                "wedb" : [114, 137]
+            }, {
+                "name" : "改二",
+                "url" : "rwectccrwkub",
+                "weda" : [188, -12],
+                "wedb" : [84, 116]
+            }
+        ]
+    },
+    "24" : {
+        "name" : "大井",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "yomyfjkhndny",
+                "weda" : [138, 150],
+                "wedb" : [92, 108]
+            }, {
+                "name" : "改",
+                "url" : "gonohkjynpmb",
+                "weda" : [138, 150],
+                "wedb" : [92, 108]
+            }, {
+                "name" : "改二",
+                "url" : "khtgrpfyurcm",
+                "weda" : [151, 144],
+                "wedb" : [94, 114]
+            }
+        ]
+    },
+    "25" : {
+        "name" : "北上",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "oxqlrctsmegi",
+                "weda" : [196, 124],
+                "wedb" : [97, 112]
+            }, {
+                "name" : "改",
+                "url" : "jdqefjcpslli",
+                "weda" : [196, 124],
+                "wedb" : [97, 112]
+            }, {
+                "name" : "改二",
+                "url" : "cqtlanpwihpj",
+                "weda" : [199, 318],
+                "wedb" : [98, 107]
+            }
+        ]
+    },
+    "26" : {
+        "name" : "扶桑",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "ubntuiyurxwk",
+                "weda" : [417, 131],
+                "wedb" : [99, 106]
+            }, {
+                "name" : "改",
+                "url" : "mnkjkgammeds",
+                "weda" : [291, 124],
+                "wedb" : [98, 109]
+            }, {
+                "name" : "改二",
+                "url" : "gmnsxwkdssmj",
+                "weda" : [232, 32],
+                "wedb" : [120, 112]
+            }
+        ]
+    },
+    "27" : {
+        "name" : "山城",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "dyurkaeenkdh",
+                "weda" : [352, 95],
+                "wedb" : [107, 109]
+            }, {
+                "name" : "改",
+                "url" : "bnbdxfioqxtt",
+                "weda" : [293, 49],
+                "wedb" : [113, 125]
+            }, {
+                "name" : "改二",
+                "url" : "xjsgvmgfleuu",
+                "weda" : [320, 64],
+                "wedb" : [128, 112]
+            }
+        ]
+    },
+    "28" : {
+        "name" : "皐月",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "qvmfwjitflgw",
+                "weda" : [311, 31],
+                "wedb" : [142, 155]
+            }, {
+                "name" : "改",
+                "url" : "ttcofyyswaum",
+                "weda" : [311, 31],
+                "wedb" : [142, 155]
+            }, {
+                "name" : "改二",
+                "url" : "uhbkffblgplp",
+                "weda" : [256, -8],
+                "wedb" : [108, 112]
+            }
+        ]
+    },
+    "29" : {
+        "name" : "文月",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "pjkwpxniwgge",
+                "weda" : [139, 149],
+                "wedb" : [140, 143]
+            }, {
+                "name" : "改",
+                "url" : "ysgtnamukxoi",
+                "weda" : [139, 149],
+                "wedb" : [140, 143]
+            }, {
+                "name" : "改二",
+                "url" : "ewtmrxzqvupm",
+                "weda" : [180, -12],
+                "wedb" : [100, 124]
+            }
+        ]
+    },
+    "30" : {
+        "name" : "菊月",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "jatvhskutlck",
+                "weda" : [171, 41],
+                "wedb" : [141, 157]
+            }, {
+                "name" : "改",
+                "url" : "zrrxemjrtmql",
+                "weda" : [171, 41],
+                "wedb" : [141, 157]
+            }
+        ]
+    },
+    "31" : {
+        "name" : "望月",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "isiuepygxdzq",
+                "weda" : [250, 18],
+                "wedb" : [134, 157]
+            }, {
+                "name" : "改",
+                "url" : "aufduiatycow",
+                "weda" : [250, 18],
+                "wedb" : [134, 157]
+            }
+        ]
+    },
+    "32" : {
+        "name" : "初雪",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "pxogwcltgjkn",
+                "weda" : [144, 83],
+                "wedb" : [122, 124]
+            }, {
+                "name" : "改",
+                "url" : "sejqtlkfjwkc",
+                "weda" : [144, 83],
+                "wedb" : [122, 124]
+            }
+        ]
+    },
+    "33" : {
+        "name" : "叢雲",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "hpfcwdqxgyvl",
+                "weda" : [411, 147],
+                "wedb" : [122, 117]
+            }, {
+                "name" : "改",
+                "url" : "rmcvsljwdyur",
+                "weda" : [411, 147],
+                "wedb" : [122, 117]
+            }, {
+                "name" : "改二",
+                "url" : "ugxgvgtjsxud",
+                "weda" : [120, 112],
+                "wedb" : [120, 104]
+            }
+        ]
+    },
+    "34" : {
+        "name" : "暁",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "mtvkfikepcfr",
+                "weda" : [246, 69],
+                "wedb" : [142, 144]
+            }, {
+                "name" : "改",
+                "url" : "slzosqvxjxus",
+                "weda" : [246, 69],
+                "wedb" : [142, 144]
+            }, {
+                "name" : "改二",
+                "url" : "gzerqivthcrd",
+                "weda" : [128, 0],
+                "wedb" : [128, 128]
+            }
+        ]
+    },
+    "35" : {
+        "name" : "響",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "nfzmalhtwved",
+                "weda" : [172, 70],
+                "wedb" : [146, 145]
+            }, {
+                "name" : "Верный",
+                "url" : "gmqsmiszmftf",
+                "weda" : [155, 11],
+                "wedb" : [147, 162]
+            }, {
+                "name" : "改",
+                "url" : "wpaqzeclspdr",
+                "weda" : [172, 70],
+                "wedb" : [146, 145]
+            }
+        ]
+    },
+    "36" : {
+        "name" : "雷",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "aejfywpsegbv",
+                "weda" : [188, 44],
+                "wedb" : [131, 145]
+            }, {
+                "name" : "改",
+                "url" : "eathbqlrqvda",
+                "weda" : [188, 44],
+                "wedb" : [131, 145]
+            }
+        ]
+    },
+    "37" : {
+        "name" : "電",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "uuilouoffjoj",
+                "weda" : [152, 47],
+                "wedb" : [171, 153]
+            }, {
+                "name" : "改",
+                "url" : "bqvrrfdcuvdr",
+                "weda" : [152, 47],
+                "wedb" : [171, 153]
+            }
+        ]
+    },
+    "38" : {
+        "name" : "初春",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "nlobofyxzvku",
+                "weda" : [218, 123],
+                "wedb" : [131, 133]
+            }, {
+                "name" : "改",
+                "url" : "tedevipdbvdr",
+                "weda" : [218, 123],
+                "wedb" : [131, 133]
+            }, {
+                "name" : "改二",
+                "url" : "xoiprnaxqxbj",
+                "weda" : [256, 104],
+                "wedb" : [112, 88]
+            }
+        ]
+    },
+    "39" : {
+        "name" : "子日",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "zgerairddhko",
+                "weda" : [128, 189],
+                "wedb" : [132, 127]
+            }, {
+                "name" : "改",
+                "url" : "nkrmsykdohgo",
+                "weda" : [128, 189],
+                "wedb" : [132, 127]
+            }
+        ]
+    },
+    "40" : {
+        "name" : "若葉",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "ihuijkvksqky",
+                "weda" : [153, 136],
+                "wedb" : [124, 151]
+            }, {
+                "name" : "改",
+                "url" : "tkcwrodgemlj",
+                "weda" : [153, 136],
+                "wedb" : [124, 151]
+            }
+        ]
+    },
+    "41" : {
+        "name" : "初霜",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "qngptlxhrwhj",
+                "weda" : [304, 85],
+                "wedb" : [148, 151]
+            }, {
+                "name" : "改",
+                "url" : "woutqrqtdzqi",
+                "weda" : [304, 85],
+                "wedb" : [148, 151]
+            }, {
+                "name" : "改二",
+                "url" : "ufgydlyjdaxb",
+                "weda" : [128, 96],
+                "wedb" : [160, 128]
+            }
+        ]
+    },
+    "42" : {
+        "name" : "白露",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "ahztpphnuvco",
+                "weda" : [283, 140],
+                "wedb" : [129, 137]
+            }, {
+                "name" : "改",
+                "url" : "xcbmsjqrostq",
+                "weda" : [164, 18],
+                "wedb" : [129, 138]
+            }
+        ]
+    },
+    "43" : {
+        "name" : "時雨",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "kclrmkyzpnpc",
+                "weda" : [120, 107],
+                "wedb" : [130, 146]
+            }, {
+                "name" : "改二",
+                "url" : "ogkwigciybxf",
+                "weda" : [122, 84],
+                "wedb" : [137, 140]
+            }, {
+                "name" : "改",
+                "url" : "wmskekfmgdio",
+                "weda" : [120, 107],
+                "wedb" : [130, 146]
+            }
+        ]
+    },
+    "44" : {
+        "name" : "村雨",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "fhaelooubkbi",
+                "weda" : [135, 63],
+                "wedb" : [118, 143]
+            }, {
+                "name" : "改",
+                "url" : "wvnchfzhekfo",
+                "weda" : [91, 40],
+                "wedb" : [123, 133]
+            }, {
+                "name" : "改二",
+                "url" : "cppixsrylduw",
+                "weda" : [186, -4],
+                "wedb" : [76, 136]
+            }
+        ]
+    },
+    "45" : {
+        "name" : "夕立",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "pnpixtolsebg",
+                "weda" : [106, 98],
+                "wedb" : [110, 135]
+            }, {
+                "name" : "改二",
+                "url" : "lngqiqvigduj",
+                "weda" : [148, 6],
+                "wedb" : [115, 133]
+            }, {
+                "name" : "改",
+                "url" : "wpsyznjwvlmd",
+                "weda" : [106, 98],
+                "wedb" : [110, 135]
+            }
+        ]
+    },
+    "46" : {
+        "name" : "五月雨",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "tyjrubumfpxy",
+                "weda" : [236, 29],
+                "wedb" : [122, 147]
+            }, {
+                "name" : "改",
+                "url" : "ofneitwqroxe",
+                "weda" : [236, 29],
+                "wedb" : [122, 147]
+            }
+        ]
+    },
+    "47" : {
+        "name" : "涼風",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "qaryaychpubb",
+                "weda" : [196, 41],
+                "wedb" : [118, 141]
+            }, {
+                "name" : "改",
+                "url" : "jukighzxmudn",
+                "weda" : [196, 41],
+                "wedb" : [118, 141]
+            }
+        ]
+    },
+    "48" : {
+        "name" : "霰",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "oiknslickotp",
+                "weda" : [198, 100],
+                "wedb" : [145, 141]
+            }, {
+                "name" : "改",
+                "url" : "oxttbkywusfp",
+                "weda" : [198, 100],
+                "wedb" : [145, 141]
+            }
+        ]
+    },
+    "49" : {
+        "name" : "霞",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "qukusrsftcgy",
+                "weda" : [67, 102],
+                "wedb" : [154, 165]
+            }, {
+                "name" : "改",
+                "url" : "ohpnwjgzfesg",
+                "weda" : [67, 102],
+                "wedb" : [154, 165]
+            }, {
+                "name" : "改二",
+                "url" : "mqlroxfnufpz",
+                "weda" : [200, -8],
+                "wedb" : [100, 112]
+            }, {
+                "name" : "改二乙",
+                "url" : "vxrvwfxhlbag",
+                "weda" : [200, -8],
+                "wedb" : [100, 112]
+            }
+        ]
+    },
+    "50" : {
+        "name" : "島風",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "uffgxggsrtti",
+                "weda" : [129, 159],
+                "wedb" : [119, 117]
+            }, {
+                "name" : "改",
+                "url" : "cjhtlviffiwb",
+                "weda" : [129, 159],
+                "wedb" : [119, 117]
+            }
+        ]
+    },
+    "51" : {
+        "name" : "天龍",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "vswgjojfoqdc",
+                "weda" : [90, 150],
+                "wedb" : [134, 141]
+            }, {
+                "name" : "改",
+                "url" : "wjcrloeyiyxw",
+                "weda" : [90, 150],
+                "wedb" : [134, 141]
+            }
+        ]
+    },
+    "52" : {
+        "name" : "龍田",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "qvqlfmytkmor",
+                "weda" : [299, 198],
+                "wedb" : [121, 125]
+            }, {
+                "name" : "改",
+                "url" : "chmytqkkilrv",
+                "weda" : [299, 198],
+                "wedb" : [121, 125]
+            }, {
+                "name" : "改二",
+                "url" : "usewjvwytald",
+                "weda" : [236, 16],
+                "wedb" : [80, 112]
+            }
+        ]
+    },
+    "53" : {
+        "name" : "名取",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "bqwjdltjktls",
+                "weda" : [258, 59],
+                "wedb" : [135, 141]
+            }, {
+                "name" : "改",
+                "url" : "aqgjvutybsbk",
+                "weda" : [119, 0],
+                "wedb" : [132, 140]
+            }
+        ]
+    },
+    "54" : {
+        "name" : "川内",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "nehcyhpiviue",
+                "weda" : [236, 68],
+                "wedb" : [111, 119]
+            }, {
+                "name" : "改二",
+                "url" : "qpnrcirsvqcr",
+                "weda" : [152, 0],
+                "wedb" : [112, 104]
+            }, {
+                "name" : "改",
+                "url" : "zhixojcwijfj",
+                "weda" : [236, 68],
+                "wedb" : [111, 119]
+            }
+        ]
+    },
+    "55" : {
+        "name" : "神通",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "icmlpbiditqy",
+                "weda" : [208, 74],
+                "wedb" : [103, 119]
+            }, {
+                "name" : "改二",
+                "url" : "xyqotgpmnjih",
+                "weda" : [160, 24],
+                "wedb" : [112, 104]
+            }, {
+                "name" : "改",
+                "url" : "ncijtxixkghu",
+                "weda" : [208, 74],
+                "wedb" : [103, 119]
+            }
+        ]
+    },
+    "56" : {
+        "name" : "那珂",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "vopfxipptsrt",
+                "weda" : [186, 73],
+                "wedb" : [92, 109]
+            }, {
+                "name" : "改二",
+                "url" : "lvjcqqulbluo",
+                "weda" : [152, 41],
+                "wedb" : [109, 122]
+            }, {
+                "name" : "改",
+                "url" : "vxkcklmfevkk",
+                "weda" : [186, 73],
+                "wedb" : [92, 109]
+            }
+        ]
+    },
+    "59" : {
+        "name" : "古鷹",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "sfbwblstvfmw",
+                "weda" : [197, 40],
+                "wedb" : [131, 143]
+            }, {
+                "name" : "改",
+                "url" : "iolnrzaovbhn",
+                "weda" : [197, 40],
+                "wedb" : [131, 143]
+            }, {
+                "name" : "改二",
+                "url" : "vqdgxtrgintc",
+                "weda" : [208, -8],
+                "wedb" : [96, 104]
+            }
+        ]
+    },
+    "60" : {
+        "name" : "加古",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "vkmjguonqcsg",
+                "weda" : [191, 70],
+                "wedb" : [140, 136]
+            }, {
+                "name" : "改",
+                "url" : "qsmurjkprhku",
+                "weda" : [191, 70],
+                "wedb" : [140, 136]
+            }, {
+                "name" : "改二",
+                "url" : "riiwaegupstv",
+                "weda" : [256, 36],
+                "wedb" : [128, 96]
+            }
+        ]
+    },
+    "61" : {
+        "name" : "青葉",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "bhyiqjjifflp",
+                "weda" : [219, 53],
+                "wedb" : [153, 162]
+            }, {
+                "name" : "改",
+                "url" : "udkkmzgsimgq",
+                "weda" : [219, 53],
+                "wedb" : [153, 162]
+            }
+        ]
+    },
+    "62" : {
+        "name" : "妙高",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "grppcbegkphv",
+                "weda" : [164, 24],
+                "wedb" : [94, 93]
+            }, {
+                "name" : "改",
+                "url" : "fcydxtnwtaon",
+                "weda" : [164, 24],
+                "wedb" : [94, 93]
+            }, {
+                "name" : "改二",
+                "url" : "kadfixosusrf",
+                "weda" : [192, 0],
+                "wedb" : [128, 112]
+            }
+        ]
+    },
+    "63" : {
+        "name" : "那智",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "wnkageqzigwd",
+                "weda" : [98, 48],
+                "wedb" : [110, 108]
+            }, {
+                "name" : "改二",
+                "url" : "bpegnatlfibc",
+                "weda" : [320, 8],
+                "wedb" : [128, 120]
+            }, {
+                "name" : "改",
+                "url" : "nvftqenyroyu",
+                "weda" : [98, 48],
+                "wedb" : [110, 108]
+            }
+        ]
+    },
+    "64" : {
+        "name" : "足柄",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "opprvckvhrkv",
+                "weda" : [200, 63],
+                "wedb" : [93, 103]
+            }, {
+                "name" : "改二",
+                "url" : "bxbyaifmqdxk",
+                "weda" : [288, 0],
+                "wedb" : [144, 112]
+            }, {
+                "name" : "改",
+                "url" : "bekjyovmrmfd",
+                "weda" : [200, 63],
+                "wedb" : [93, 103]
+            }
+        ]
+    },
+    "65" : {
+        "name" : "羽黒",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "lvfswfzywnql",
+                "weda" : [149, 40],
+                "wedb" : [106, 114]
+            }, {
+                "name" : "改二",
+                "url" : "ecwgnneuzbcv",
+                "weda" : [224, 0],
+                "wedb" : [144, 144]
+            }, {
+                "name" : "改",
+                "url" : "uilfcyypnbwm",
+                "weda" : [149, 40],
+                "wedb" : [106, 114]
+            }
+        ]
+    },
+    "66" : {
+        "name" : "高雄",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "eqpvjbnbjlhy",
+                "weda" : [178, 36],
+                "wedb" : [100, 117]
+            }, {
+                "name" : "改",
+                "url" : "ghgphbvmzjrx",
+                "weda" : [178, 36],
+                "wedb" : [100, 117]
+            }
+        ]
+    },
+    "67" : {
+        "name" : "愛宕",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "aqpnbsizhjij",
+                "weda" : [178, 36],
+                "wedb" : [104, 118]
+            }, {
+                "name" : "改",
+                "url" : "gbkqnzirjyid",
+                "weda" : [178, 36],
+                "wedb" : [104, 118]
+            }
+        ]
+    },
+    "68" : {
+        "name" : "摩耶",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "gpshoozxgutk",
+                "weda" : [104, 92],
+                "wedb" : [145, 147]
+            }, {
+                "name" : "改",
+                "url" : "ajhdojqfykfu",
+                "weda" : [104, 92],
+                "wedb" : [145, 147]
+            }, {
+                "name" : "改二",
+                "url" : "xljtrrmemnon",
+                "weda" : [200, 16],
+                "wedb" : [160, 152]
+            }
+        ]
+    },
+    "69" : {
+        "name" : "鳥海",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "qmmdyeprdqsu",
+                "weda" : [266, 111],
+                "wedb" : [126, 128]
+            }, {
+                "name" : "改",
+                "url" : "nsgytjsjbfdp",
+                "weda" : [266, 111],
+                "wedb" : [126, 128]
+            }, {
+                "name" : "改二",
+                "url" : "jcrdsdpsjcgj",
+                "weda" : [288, -4],
+                "wedb" : [144, 120]
+            }
+        ]
+    },
+    "70" : {
+        "name" : "最上",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "lcmobkdeizph",
+                "weda" : [162, 161],
+                "wedb" : [109, 94]
+            }, {
+                "name" : "改",
+                "url" : "ethdbrvnuznc",
+                "weda" : [198, 158],
+                "wedb" : [109, 97]
+            }
+        ]
+    },
+    "71" : {
+        "name" : "利根",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "kmcllyhenjnk",
+                "weda" : [137, 95],
+                "wedb" : [94, 106]
+            }, {
+                "name" : "改二",
+                "url" : "rjggwwmmppth",
+                "weda" : [216, 48],
+                "wedb" : [128, 112]
+            }, {
+                "name" : "改",
+                "url" : "fkatobgcyygb",
+                "weda" : [137, 95],
+                "wedb" : [94, 106]
+            }
+        ]
+    },
+    "72" : {
+        "name" : "筑摩",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "gcqjowlpkbde",
+                "weda" : [155, 62],
+                "wedb" : [86, 94]
+            }, {
+                "name" : "改二",
+                "url" : "ilnimhfcivpt",
+                "weda" : [184, 0],
+                "wedb" : [112, 112]
+            }, {
+                "name" : "改",
+                "url" : "paqnehcojygu",
+                "weda" : [155, 62],
+                "wedb" : [86, 94]
+            }
+        ]
+    },
+    "74" : {
+        "name" : "祥鳳",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "qihrkkfwekpo",
+                "weda" : [85, 154],
+                "wedb" : [97, 117]
+            }, {
+                "name" : "改",
+                "url" : "numjsnomjspr",
+                "weda" : [272, -8],
+                "wedb" : [116, 124]
+            }
+        ]
+    },
+    "75" : {
+        "name" : "飛鷹",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "sdiauxhgyfkj",
+                "weda" : [211, 40],
+                "wedb" : [109, 119]
+            }, {
+                "name" : "改",
+                "url" : "yiwwnppitqpf",
+                "weda" : [212, 48],
+                "wedb" : [112, 104]
+            }
+        ]
+    },
+    "76" : {
+        "name" : "龍驤",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "iyondwbusgym",
+                "weda" : [245, 51],
+                "wedb" : [111, 134]
+            }, {
+                "name" : "改二",
+                "url" : "mslkutojcolj",
+                "weda" : [160, 8],
+                "wedb" : [144, 96]
+            }, {
+                "name" : "改",
+                "url" : "wvcpwlwuxwhq",
+                "weda" : [296, -16],
+                "wedb" : [104, 80]
+            }
+        ]
+    },
+    "77" : {
+        "name" : "伊勢",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "skgpomqtcedb",
+                "weda" : [253, 59],
+                "wedb" : [101, 100]
+            }, {
+                "name" : "改",
+                "url" : "guwzhmxxnwol",
+                "weda" : [253, 59],
+                "wedb" : [101, 100]
+            }
+        ]
+    },
+    "78" : {
+        "name" : "金剛",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "oygjwmgvcdyv",
+                "weda" : [174, 51],
+                "wedb" : [99, 130]
+            }, {
+                "name" : "改二",
+                "url" : "wugwvdccggcp",
+                "weda" : [125, 35],
+                "wedb" : [98, 104]
+            }, {
+                "name" : "改",
+                "url" : "fxypdctjnicq",
+                "weda" : [174, 51],
+                "wedb" : [99, 130]
+            }
+        ]
+    },
+    "79" : {
+        "name" : "榛名",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "vzgrqylbwegp",
+                "weda" : [75, 76],
+                "wedb" : [136, 140]
+            }, {
+                "name" : "改二",
+                "url" : "ilxltdgucgbg",
+                "weda" : [160, -8],
+                "wedb" : [160, 112]
+            }, {
+                "name" : "改",
+                "url" : "nolhhoujolpc",
+                "weda" : [75, 76],
+                "wedb" : [136, 140]
+            }
+        ]
+    },
+    "80" : {
+        "name" : "長門",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "jnxoytktolbb",
+                "weda" : [240, 60],
+                "wedb" : [90, 96]
+            }, {
+                "name" : "改",
+                "url" : "szgthkexanxl",
+                "weda" : [240, 60],
+                "wedb" : [90, 96]
+            }, {
+                "name" : "改二",
+                "url" : "kjmmeaxfbmhx",
+                "weda" : [300, 4],
+                "wedb" : [76, 96]
+            }
+        ]
+    },
+    "81" : {
+        "name" : "陸奥",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "jkjqeleyhbus",
+                "weda" : [235, 62],
+                "wedb" : [108, 108]
+            }, {
+                "name" : "改",
+                "url" : "hujriolkmhzy",
+                "weda" : [235, 62],
+                "wedb" : [108, 108]
+            }
+        ]
+    },
+    "83" : {
+        "name" : "赤城",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "uswetrxvttms",
+                "weda" : [198, 65],
+                "wedb" : [95, 100]
+            }, {
+                "name" : "改",
+                "url" : "gtmwrbaniaud",
+                "weda" : [198, 65],
+                "wedb" : [95, 100]
+            }
+        ]
+    },
+    "84" : {
+        "name" : "加賀",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "oeimwwkynzlt",
+                "weda" : [325, 131],
+                "wedb" : [93, 107]
+            }, {
+                "name" : "改",
+                "url" : "uuqdlbtrkmvk",
+                "weda" : [325, 131],
+                "wedb" : [93, 107]
+            }
+        ]
+    },
+    "85" : {
+        "name" : "霧島",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "icwowutxbvgh",
+                "weda" : [134, 4],
+                "wedb" : [127, 148]
+            }, {
+                "name" : "改二",
+                "url" : "kspwuqsyhipy",
+                "weda" : [264, 16],
+                "wedb" : [112, 104]
+            }, {
+                "name" : "改",
+                "url" : "kexwyrcqjxfs",
+                "weda" : [134, 4],
+                "wedb" : [127, 148]
+            }
+        ]
+    },
+    "86" : {
+        "name" : "比叡",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "bxzhnjffdppv",
+                "weda" : [233, 33],
+                "wedb" : [104, 122]
+            }, {
+                "name" : "改二",
+                "url" : "mhpalcnpxmgz",
+                "weda" : [333, 60],
+                "wedb" : [108, 120]
+            }, {
+                "name" : "改",
+                "url" : "iatmdvvwlngq",
+                "weda" : [233, 33],
+                "wedb" : [104, 122]
+            }
+        ]
+    },
+    "87" : {
+        "name" : "日向",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "cfqmhviykuup",
+                "weda" : [234, 106],
+                "wedb" : [94, 109]
+            }, {
+                "name" : "改",
+                "url" : "jprpbvbeillv",
+                "weda" : [232, 59],
+                "wedb" : [96, 107]
+            }
+        ]
+    },
+    "89" : {
+        "name" : "鳳翔",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "bwgbubdrhvfg",
+                "weda" : [294, 167],
+                "wedb" : [90, 100]
+            }, {
+                "name" : "改",
+                "url" : "xjotoxrgwfrj",
+                "weda" : [294, 167],
+                "wedb" : [90, 100]
+            }
+        ]
+    },
+    "90" : {
+        "name" : "蒼龍",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "nppdykjbwmkx",
+                "weda" : [231, 75],
+                "wedb" : [94, 105]
+            }, {
+                "name" : "改二",
+                "url" : "mwlzgwdjlpxx",
+                "weda" : [336, 240],
+                "wedb" : [104, 96]
+            }, {
+                "name" : "改",
+                "url" : "mxohelwcpocv",
+                "weda" : [231, 75],
+                "wedb" : [94, 105]
+            }
+        ]
+    },
+    "91" : {
+        "name" : "飛龍",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "gobumojesgfi",
+                "weda" : [292, 182],
+                "wedb" : [94, 98]
+            }, {
+                "name" : "改二",
+                "url" : "gbxvfsrqbyxg",
+                "weda" : [320, 272],
+                "wedb" : [128, 128]
+            }, {
+                "name" : "改",
+                "url" : "kftqxfempust",
+                "weda" : [292, 182],
+                "wedb" : [94, 98]
+            }
+        ]
+    },
+    "92" : {
+        "name" : "隼鷹",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "ltdlvothcqnr",
+                "weda" : [253, 54],
+                "wedb" : [83, 120]
+            }, {
+                "name" : "改",
+                "url" : "pwokyefpmqwi",
+                "weda" : [253, 54],
+                "wedb" : [83, 120]
+            }, {
+                "name" : "改二",
+                "url" : "yyyfqcpumpxj",
+                "weda" : [176, 64],
+                "wedb" : [128, 104]
+            }
+        ]
+    },
+    "93" : {
+        "name" : "朧",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "jqexjuembtvh",
+                "weda" : [112, -12],
+                "wedb" : [80, 120]
+            }, {
+                "name" : "改",
+                "url" : "sbdfpooechyn",
+                "weda" : [112, -12],
+                "wedb" : [80, 120]
+            }
+        ]
+    },
+    "94" : {
+        "name" : "漣",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "lnarycubyzrr",
+                "weda" : [134, 84],
+                "wedb" : [123, 134]
+            }, {
+                "name" : "改",
+                "url" : "xfxhmadcxfdq",
+                "weda" : [220, 96],
+                "wedb" : [112, 112]
+            }
+        ]
+    },
+    "95" : {
+        "name" : "朝潮",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "eeyrwdehbixg",
+                "weda" : [320, 71],
+                "wedb" : [143, 174]
+            }, {
+                "name" : "改",
+                "url" : "xbbfxeemifpv",
+                "weda" : [320, 71],
+                "wedb" : [143, 174]
+            }, {
+                "name" : "改二",
+                "url" : "grmdtyheocuc",
+                "weda" : [140, -4],
+                "wedb" : [92, 112]
+            }, {
+                "name" : "改二丁",
+                "url" : "schftfqkstxa",
+                "weda" : [128, -4],
+                "wedb" : [92, 112]
+            }
+        ]
+    },
+    "96" : {
+        "name" : "大潮",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "svcuufdqcqmy",
+                "weda" : [139, 67],
+                "wedb" : [135, 138]
+            }, {
+                "name" : "改二",
+                "url" : "jqqkmitxodgw",
+                "weda" : [124, 16],
+                "wedb" : [108, 120]
+            }, {
+                "name" : "改",
+                "url" : "ngcxxfxovpmn",
+                "weda" : [139, 67],
+                "wedb" : [135, 138]
+            }
+        ]
+    },
+    "97" : {
+        "name" : "満潮",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "fhpgicaysllm",
+                "weda" : [186, 22],
+                "wedb" : [155, 167]
+            }, {
+                "name" : "改",
+                "url" : "eypcwtnjgoyb",
+                "weda" : [186, 22],
+                "wedb" : [155, 167]
+            }, {
+                "name" : "改二",
+                "url" : "nhulrhmihxop",
+                "weda" : [124, -12],
+                "wedb" : [72, 124]
+            }
+        ]
+    },
+    "98" : {
+        "name" : "荒潮",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "vksjkggcuvik",
+                "weda" : [154, 14],
+                "wedb" : [109, 137]
+            }, {
+                "name" : "改",
+                "url" : "pmjnkqodgjpo",
+                "weda" : [154, 14],
+                "wedb" : [109, 137]
+            }, {
+                "name" : "改二",
+                "url" : "hrkuspdmjtmd",
+                "weda" : [188, -12],
+                "wedb" : [84, 120]
+            }
+        ]
+    },
+    "99" : {
+        "name" : "球磨",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "zrmviexnupjy",
+                "weda" : [175, 108],
+                "wedb" : [121, 129]
+            }, {
+                "name" : "改",
+                "url" : "mbgjkzlvemui",
+                "weda" : [175, 108],
+                "wedb" : [121, 129]
+            }
+        ]
+    },
+    "100" : {
+        "name" : "多摩",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "jiftwdxqwtin",
+                "weda" : [209, 48],
+                "wedb" : [118, 131]
+            }, {
+                "name" : "改",
+                "url" : "cxhxktltjtbg",
+                "weda" : [209, 48],
+                "wedb" : [118, 131]
+            }, {
+                "name" : "改二",
+                "url" : "pcmipikyqfxe",
+                "weda" : [192, 44],
+                "wedb" : [72, 124]
+            }
+        ]
+    },
+    "101" : {
+        "name" : "木曾",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "veulocbvzaqy",
+                "weda" : [218, 86],
+                "wedb" : [103, 121]
+            }, {
+                "name" : "改二",
+                "url" : "gpfqngdreebe",
+                "weda" : [224, 63],
+                "wedb" : [104, 110]
+            }, {
+                "name" : "改",
+                "url" : "gjyqwffsmfgw",
+                "weda" : [218, 86],
+                "wedb" : [103, 121]
+            }
+        ]
+    },
+    "102" : {
+        "name" : "千歳",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "dkmxevqgbxmr",
+                "weda" : [217, 36],
+                "wedb" : [110, 118]
+            }, {
+                "name" : "改",
+                "url" : "wvkpfygaipjq",
+                "weda" : [217, 36],
+                "wedb" : [110, 118]
+            }, {
+                "name" : "甲",
+                "url" : "ttkeodhvrmog",
+                "weda" : [217, 36],
+                "wedb" : [110, 118]
+            }, {
+                "name" : "航",
+                "url" : "wlvvcpnulyer",
+                "weda" : [238, 65],
+                "wedb" : [110, 116]
+            }, {
+                "name" : "航改",
+                "url" : "ufcqfujavyyg",
+                "weda" : [238, 65],
+                "wedb" : [110, 116]
+            }, {
+                "name" : "航改二",
+                "url" : "kavryopoywwx",
+                "weda" : [248, 67],
+                "wedb" : [113, 120]
+            }
+        ]
+    },
+    "103" : {
+        "name" : "千代田",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "cayfwlehtvgj",
+                "weda" : [199, 48],
+                "wedb" : [95, 110]
+            }, {
+                "name" : "改",
+                "url" : "tsfbgfyeqxhg",
+                "weda" : [225, 80],
+                "wedb" : [95, 111]
+            }, {
+                "name" : "甲",
+                "url" : "agybvcshxbpm",
+                "weda" : [225, 80],
+                "wedb" : [95, 111]
+            }, {
+                "name" : "航",
+                "url" : "rsmzverhwskc",
+                "weda" : [335, 95],
+                "wedb" : [97, 110]
+            }, {
+                "name" : "航改",
+                "url" : "hgitzuyaysvw",
+                "weda" : [335, 95],
+                "wedb" : [97, 110]
+            }, {
+                "name" : "航改二",
+                "url" : "jhefpwucyxiq",
+                "weda" : [298, 101],
+                "wedb" : [102, 111]
+            }
+        ]
+    },
+    "110" : {
+        "name" : "翔鶴",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "pdricqoovxfe",
+                "weda" : [195, 66],
+                "wedb" : [106, 123]
+            }, {
+                "name" : "改",
+                "url" : "vcftaofxkvgk",
+                "weda" : [195, 66],
+                "wedb" : [106, 123]
+            }, {
+                "name" : "改二",
+                "url" : "hpxsthymxmki",
+                "weda" : [224, -8],
+                "wedb" : [104, 104]
+            }, {
+                "name" : "改二甲",
+                "url" : "ekuxnovhattm",
+                "weda" : [224, -8],
+                "wedb" : [104, 104]
+            }
+        ]
+    },
+    "111" : {
+        "name" : "瑞鶴",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "suivtkpjnmpt",
+                "weda" : [210, 64],
+                "wedb" : [103, 126]
+            }, {
+                "name" : "改",
+                "url" : "ihwgeegenykh",
+                "weda" : [210, 64],
+                "wedb" : [103, 126]
+            }, {
+                "name" : "改二",
+                "url" : "giytrybpknos",
+                "weda" : [152, -4],
+                "wedb" : [116, 112]
+            }, {
+                "name" : "改二甲",
+                "url" : "qgrxbhuvtrbf",
+                "weda" : [152, -4],
+                "wedb" : [116, 112]
+            }
+        ]
+    },
+    "113" : {
+        "name" : "鬼怒",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "rgribyhrzjjl",
+                "weda" : [130, 73],
+                "wedb" : [143, 148]
+            }, {
+                "name" : "改",
+                "url" : "ikwmknqjpvkg",
+                "weda" : [130, 73],
+                "wedb" : [143, 148]
+            }, {
+                "name" : "改二",
+                "url" : "glyidgppuqgp",
+                "weda" : [84, -4],
+                "wedb" : [104, 104]
+            }
+        ]
+    },
+    "114" : {
+        "name" : "阿武隈",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "sgwumdfgzais",
+                "weda" : [255, 55],
+                "wedb" : [130, 142]
+            }, {
+                "name" : "改二",
+                "url" : "qjkjyqhsvcpx",
+                "weda" : [144, 24],
+                "wedb" : [100, 92]
+            }, {
+                "name" : "改",
+                "url" : "uuxoixtoemiv",
+                "weda" : [255, 55],
+                "wedb" : [130, 142]
+            }
+        ]
+    },
+    "115" : {
+        "name" : "夕張",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "hieimxbtcqrt",
+                "weda" : [217, 83],
+                "wedb" : [106, 131]
+            }, {
+                "name" : "改",
+                "url" : "hfhcjjdyqyzn",
+                "weda" : [217, 83],
+                "wedb" : [106, 131]
+            }
+        ]
+    },
+    "116" : {
+        "name" : "瑞鳳",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "ktexichqewel",
+                "weda" : [173, 43],
+                "wedb" : [123, 151]
+            }, {
+                "name" : "改",
+                "url" : "xmzltsferzto",
+                "weda" : [173, 43],
+                "wedb" : [123, 151]
+            }, {
+                "name" : "改二",
+                "url" : "nhjogdwxmuyo",
+                "weda" : [192, 0],
+                "wedb" : [84, 136]
+            }, {
+                "name" : "改二乙",
+                "url" : "heurfaqfuvok",
+                "weda" : [192, 0],
+                "wedb" : [84, 136]
+            }
+        ]
+    },
+    "120" : {
+        "name" : "三隈",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "oqqerytyeisg",
+                "weda" : [258, 139],
+                "wedb" : [83, 106]
+            }, {
+                "name" : "改",
+                "url" : "yyvxfxdusxlx",
+                "weda" : [258, 139],
+                "wedb" : [83, 106]
+            }
+        ]
+    },
+    "122" : {
+        "name" : "舞風",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "emjpbjscgcvf",
+                "weda" : [140, 43],
+                "wedb" : [136, 139]
+            }, {
+                "name" : "改",
+                "url" : "ssvrjquubpim",
+                "weda" : [140, 43],
+                "wedb" : [136, 139]
+            }
+        ]
+    },
+    "123" : {
+        "name" : "衣笠",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "tyumrhcigliq",
+                "weda" : [188, 95],
+                "wedb" : [115, 124]
+            }, {
+                "name" : "改二",
+                "url" : "ykrokmtrnaqw",
+                "weda" : [124, 126],
+                "wedb" : [117, 128]
+            }, {
+                "name" : "改",
+                "url" : "qgkmjgfbanxl",
+                "weda" : [188, 95],
+                "wedb" : [115, 124]
+            }
+        ]
+    },
+    "124" : {
+        "name" : "鈴谷",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "lvmlqrzbobpe",
+                "weda" : [168, 40],
+                "wedb" : [128, 129]
+            }, {
+                "name" : "改",
+                "url" : "oyjqdsswurhl",
+                "weda" : [213, 37],
+                "wedb" : [119, 137]
+            }, {
+                "name" : "改二",
+                "url" : "zkiopeqgwlog",
+                "weda" : [212, -8],
+                "wedb" : [92, 100]
+            }, {
+                "name" : "航改二",
+                "url" : "kkloilykwado",
+                "weda" : [160, -8],
+                "wedb" : [92, 100]
+            }
+        ]
+    },
+    "125" : {
+        "name" : "熊野",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "mlzpthwviwnf",
+                "weda" : [166, 56],
+                "wedb" : [122, 134]
+            }, {
+                "name" : "改",
+                "url" : "pcdygwofwfib",
+                "weda" : [163, 105],
+                "wedb" : [116, 125]
+            }, {
+                "name" : "改二",
+                "url" : "babicartxhcm",
+                "weda" : [124, -4],
+                "wedb" : [104, 116]
+            }, {
+                "name" : "航改二",
+                "url" : "oqjojspqklln",
+                "weda" : [112, -4],
+                "wedb" : [104, 116]
+            }
+        ]
+    },
+    "126" : {
+        "name" : "伊168",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "wmzbyvhflrhy",
+                "weda" : [248, 175],
+                "wedb" : [142, 162]
+            }, {
+                "name" : "改",
+                "url" : "dyfnguymthbd",
+                "weda" : [248, 175],
+                "wedb" : [142, 162]
+            }
+        ]
+    },
+    "127" : {
+        "name" : "伊58",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "fqbwbmmdcjby",
+                "weda" : [265, 94],
+                "wedb" : [125, 143]
+            }, {
+                "name" : "改",
+                "url" : "hosmgvuzyjlw",
+                "weda" : [265, 94],
+                "wedb" : [125, 143]
+            }
+        ]
+    },
+    "128" : {
+        "name" : "伊8",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "zoaptkoerfpv",
+                "weda" : [161, 79],
+                "wedb" : [139, 131]
+            }, {
+                "name" : "改",
+                "url" : "fggcskrfkpnr",
+                "weda" : [161, 79],
+                "wedb" : [139, 131]
+            }
+        ]
+    },
+    "131" : {
+        "name" : "大和",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "liqjxscjkogx",
+                "weda" : [223, 93],
+                "wedb" : [101, 96]
+            }, {
+                "name" : "改",
+                "url" : "drdaipjrohfl",
+                "weda" : [223, 93],
+                "wedb" : [101, 96]
+            }
+        ]
+    },
+    "132" : {
+        "name" : "秋雲",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "khxsxmiuccsf",
+                "weda" : [174, 138],
+                "wedb" : [144, 143]
+            }, {
+                "name" : "改",
+                "url" : "ijhrnvnbqkmj",
+                "weda" : [174, 138],
+                "wedb" : [144, 143]
+            }
+        ]
+    },
+    "133" : {
+        "name" : "夕雲",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "jtfihmyrvmiw",
+                "weda" : [271, 47],
+                "wedb" : [125, 145]
+            }, {
+                "name" : "改",
+                "url" : "bbgkikxppksy",
+                "weda" : [271, 47],
+                "wedb" : [125, 145]
+            }
+        ]
+    },
+    "134" : {
+        "name" : "巻雲",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "piobwloefpcz",
+                "weda" : [149, 93],
+                "wedb" : [129, 131]
+            }, {
+                "name" : "改",
+                "url" : "gekgxdsvrliq",
+                "weda" : [149, 93],
+                "wedb" : [129, 131]
+            }
+        ]
+    },
+    "135" : {
+        "name" : "長波",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "xwvykvklvvqk",
+                "weda" : [169, 33],
+                "wedb" : [117, 137]
+            }, {
+                "name" : "改",
+                "url" : "lovstgcfspwr",
+                "weda" : [169, 33],
+                "wedb" : [117, 137]
+            }, {
+                "name" : "改二",
+                "url" : "tdextuaybvpj",
+                "weda" : [208, 52],
+                "wedb" : [64, 108]
+            }
+        ]
+    },
+    "137" : {
+        "name" : "阿賀野",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "ljzijyhhgrnx",
+                "weda" : [289, 62],
+                "wedb" : [119, 124]
+            }, {
+                "name" : "改",
+                "url" : "cmpqwemjahur",
+                "weda" : [290, 60],
+                "wedb" : [118, 126]
+            }
+        ]
+    },
+    "138" : {
+        "name" : "能代",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "lpiecumljbyp",
+                "weda" : [87, 80],
+                "wedb" : [122, 129]
+            }, {
+                "name" : "改",
+                "url" : "hvnqlrdovfqe",
+                "weda" : [87, 80],
+                "wedb" : [122, 129]
+            }
+        ]
+    },
+    "139" : {
+        "name" : "矢矧",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "hmivswfdmdem",
+                "weda" : [209, 64],
+                "wedb" : [119, 127]
+            }, {
+                "name" : "改",
+                "url" : "acajrnrqxplq",
+                "weda" : [209, 64],
+                "wedb" : [119, 127]
+            }
+        ]
+    },
+    "140" : {
+        "name" : "酒匂",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "vrtbgpzuepqx",
+                "weda" : [256, 32],
+                "wedb" : [112, 112]
+            }, {
+                "name" : "改",
+                "url" : "kbdewgsfrkra",
+                "weda" : [256, 32],
+                "wedb" : [112, 112]
+            }
+        ]
+    },
+    "143" : {
+        "name" : "武蔵",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "ilxnmfogntbo",
+                "weda" : [250, 80],
+                "wedb" : [87, 96]
+            }, {
+                "name" : "改",
+                "url" : "eqgvmdsvjerq",
+                "weda" : [250, 80],
+                "wedb" : [87, 96]
+            }, {
+                "name" : "改二",
+                "url" : "gkjmztrtsbmk",
+                "weda" : [384, 88],
+                "wedb" : [80, 116]
+            }
+        ]
+    },
+    "153" : {
+        "name" : "大鳳",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "ysidnchjxvfc",
+                "weda" : [240, 4],
+                "wedb" : [140, 132]
+            }, {
+                "name" : "改",
+                "url" : "vsnkqdgtcjbs",
+                "weda" : [240, 4],
+                "wedb" : [140, 132]
+            }
+        ]
+    },
+    "154" : {
+        "name" : "香取",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "jtyqmhgstese",
+                "weda" : [128, 24],
+                "wedb" : [144, 104]
+            }, {
+                "name" : "改",
+                "url" : "kexcbmpnmmwv",
+                "weda" : [128, 24],
+                "wedb" : [144, 104]
+            }
+        ]
+    },
+    "155" : {
+        "name" : "伊401",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "hmiwrqvijwvv",
+                "weda" : [170, 8],
+                "wedb" : [114, 123]
+            }, {
+                "name" : "改",
+                "url" : "tuvoqtqrddem",
+                "weda" : [170, 8],
+                "wedb" : [114, 123]
+            }
+        ]
+    },
+    "161" : {
+        "name" : "あきつ丸",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "nvnwjedsdgcl",
+                "weda" : [22, 0],
+                "wedb" : [130, 126]
+            }, {
+                "name" : "改",
+                "url" : "vxryfhvytcig",
+                "weda" : [126, 93],
+                "wedb" : [145, 136]
+            }
+        ]
+    },
+    "162" : {
+        "name" : "神威",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "jqvoyyolpqgv",
+                "weda" : [144, 8],
+                "wedb" : [92, 108]
+            }, {
+                "name" : "改",
+                "url" : "tuzyehskgaup",
+                "weda" : [184, 6],
+                "wedb" : [92, 107]
+            }, {
+                "name" : "改母",
+                "url" : "mxltvkpyuklh",
+                "weda" : [94, -16],
+                "wedb" : [92, 108]
+            }
+        ]
+    },
+    "163" : {
+        "name" : "まるゆ",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "joaeulumcgbh",
+                "weda" : [48, 0],
+                "wedb" : [148, 139]
+            }, {
+                "name" : "改",
+                "url" : "nrdgjqcgecmg",
+                "weda" : [48, 0],
+                "wedb" : [148, 139]
+            }
+        ]
+    },
+    "164" : {
+        "name" : "弥生",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "jnvcrrgmtvwl",
+                "weda" : [167, 76],
+                "wedb" : [119, 125]
+            }, {
+                "name" : "改",
+                "url" : "ozjrctjajnpx",
+                "weda" : [167, 76],
+                "wedb" : [119, 125]
+            }
+        ]
+    },
+    "165" : {
+        "name" : "卯月",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "gjtvekieqatn",
+                "weda" : [149, 72],
+                "wedb" : [174, 160]
+            }, {
+                "name" : "改",
+                "url" : "xwjlobdutrwv",
+                "weda" : [146, 100],
+                "wedb" : [119, 120]
+            }
+        ]
+    },
+    "167" : {
+        "name" : "磯風",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "bctrxdxrugqp",
+                "weda" : [208, 0],
+                "wedb" : [112, 112]
+            }, {
+                "name" : "改",
+                "url" : "dyupugfxshtd",
+                "weda" : [208, 0],
+                "wedb" : [112, 112]
+            }, {
+                "name" : "乙改",
+                "url" : "olingctmvbpw",
+                "weda" : [304, 24],
+                "wedb" : [74, 124]
+            }
+        ]
+    },
+    "168" : {
+        "name" : "浦風",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "cmupwurocdpn",
+                "weda" : [160, 32],
+                "wedb" : [144, 144]
+            }, {
+                "name" : "改",
+                "url" : "exedxncqauws",
+                "weda" : [160, 32],
+                "wedb" : [144, 144]
+            }
+        ]
+    },
+    "169" : {
+        "name" : "谷風",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "gsrzkautnghc",
+                "weda" : [144, -16],
+                "wedb" : [144, 128]
+            }, {
+                "name" : "改",
+                "url" : "jdyqtxzmsyng",
+                "weda" : [144, -16],
+                "wedb" : [144, 128]
+            }
+        ]
+    },
+    "170" : {
+        "name" : "浜風",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "rubtymuqfeuq",
+                "weda" : [176, 56],
+                "wedb" : [112, 112]
+            }, {
+                "name" : "改",
+                "url" : "ojkgkujsenly",
+                "weda" : [176, 56],
+                "wedb" : [112, 112]
+            }, {
+                "name" : "乙改",
+                "url" : "xflykwfogqjb",
+                "weda" : [180, 44],
+                "wedb" : [82, 112]
+            }
+        ]
+    },
+    "171" : {
+        "name" : "Bismarck",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "ntmjjittqkcj",
+                "weda" : [344, 112],
+                "wedb" : [112, 112]
+            }, {
+                "name" : "改",
+                "url" : "frkfpymtydmg",
+                "weda" : [344, 112],
+                "wedb" : [112, 112]
+            }, {
+                "name" : " zwei",
+                "url" : "etxdlqnvwqtx",
+                "weda" : [344, 112],
+                "wedb" : [112, 112]
+            }, {
+                "name" : " drei",
+                "url" : "twvnkvqgyiru",
+                "weda" : [304, 16],
+                "wedb" : [128, 112]
+            }
+        ]
+    },
+    "174" : {
+        "name" : "Z1",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "pvhdtbuddjhb",
+                "weda" : [168, 24],
+                "wedb" : [112, 112]
+            }, {
+                "name" : " zwei",
+                "url" : "qgkjswznylty",
+                "weda" : [168, 24],
+                "wedb" : [112, 112]
+            }, {
+                "name" : "改",
+                "url" : "vbuxfozqoemo",
+                "weda" : [168, 24],
+                "wedb" : [112, 112]
+            }
+        ]
+    },
+    "175" : {
+        "name" : "Z3",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "rxzrrkjqvyqy",
+                "weda" : [168, 24],
+                "wedb" : [112, 112]
+            }, {
+                "name" : " zwei",
+                "url" : "utmejyqmcvbk",
+                "weda" : [168, 24],
+                "wedb" : [112, 112]
+            }, {
+                "name" : "改",
+                "url" : "vksfcnchqurh",
+                "weda" : [168, 24],
+                "wedb" : [112, 112]
+            }
+        ]
+    },
+    "176" : {
+        "name" : "Prinz Eugen",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "shcsmfegtxhf",
+                "weda" : [296, 24],
+                "wedb" : [128, 112]
+            }, {
+                "name" : "改",
+                "url" : "cmmiahpwdamx",
+                "weda" : [296, 24],
+                "wedb" : [128, 112]
+            }
+        ]
+    },
+    "181" : {
+        "name" : "天津風",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "fdpybckruodj",
+                "weda" : [144, 8],
+                "wedb" : [144, 144]
+            }, {
+                "name" : "改",
+                "url" : "cpcycglgelxd",
+                "weda" : [144, 28],
+                "wedb" : [144, 164]
+            }
+        ]
+    },
+    "182" : {
+        "name" : "明石",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "kynputhclcdl",
+                "weda" : [224, 72],
+                "wedb" : [128, 128]
+            }, {
+                "name" : "改",
+                "url" : "scobmrrdbmsw",
+                "weda" : [240, 0],
+                "wedb" : [144, 128]
+            }
+        ]
+    },
+    "183" : {
+        "name" : "大淀",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "uockopeurqdf",
+                "weda" : [288, 40],
+                "wedb" : [112, 112]
+            }, {
+                "name" : "改",
+                "url" : "gixbrtnuabge",
+                "weda" : [200, 40],
+                "wedb" : [128, 104]
+            }
+        ]
+    },
+    "184" : {
+        "name" : "大鯨",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "xumujwygrmby",
+                "weda" : [80, 24],
+                "wedb" : [144, 144]
+            }, {
+                "name" : "龍鳳",
+                "url" : "bfsrsnqivpms",
+                "weda" : [208, 8],
+                "wedb" : [160, 144]
+            }, {
+                "name" : "龍鳳改",
+                "url" : "rjtnzguullvo",
+                "weda" : [208, 8],
+                "wedb" : [160, 144]
+            }
+        ]
+    },
+    "186" : {
+        "name" : "時津風",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "dljghewzktat",
+                "weda" : [0, 0],
+                "wedb" : [128, 120]
+            }, {
+                "name" : "改",
+                "url" : "svglgiwjfyxn",
+                "weda" : [0, 0],
+                "wedb" : [128, 120]
+            }
+        ]
+    },
+    "190" : {
+        "name" : "初風",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "rwqqgmxpdwbu",
+                "weda" : [205, 80],
+                "wedb" : [113, 118]
+            }, {
+                "name" : "改",
+                "url" : "ukwcjqlolezy",
+                "weda" : [205, 80],
+                "wedb" : [113, 118]
+            }
+        ]
+    },
+    "191" : {
+        "name" : "伊19",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "jdsszkolhitg",
+                "weda" : [157, 22],
+                "wedb" : [119, 134]
+            }, {
+                "name" : "改",
+                "url" : "jwrlielrnfpr",
+                "weda" : [157, 22],
+                "wedb" : [119, 134]
+            }
+        ]
+    },
+    "331" : {
+        "name" : "天城",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "gmlbignzjwmq",
+                "weda" : [160, 24],
+                "wedb" : [112, 112]
+            }, {
+                "name" : "改",
+                "url" : "zgscfjpbxnir",
+                "weda" : [160, 24],
+                "wedb" : [112, 128]
+            }
+        ]
+    },
+    "332" : {
+        "name" : "葛城",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "fgyvwqymkekn",
+                "weda" : [147, 79],
+                "wedb" : [125, 127]
+            }, {
+                "name" : "改",
+                "url" : "bohmlbbvqtfs",
+                "weda" : [211, 69],
+                "wedb" : [137, 123]
+            }
+        ]
+    },
+    "404" : {
+        "name" : "雲龍",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "xgoisifuerjd",
+                "weda" : [184, 24],
+                "wedb" : [120, 120]
+            }, {
+                "name" : "改",
+                "url" : "rqsbaiaqlunp",
+                "weda" : [192, 64],
+                "wedb" : [112, 104]
+            }
+        ]
+    },
+    "405" : {
+        "name" : "春雨",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "cispmgxqaedk",
+                "weda" : [80, 0],
+                "wedb" : [128, 112]
+            }, {
+                "name" : "Base",
+                "url" : "dbtrdgatxdpl",
+                "weda" : [160, 96],
+                "wedb" : [104, 96]
+            }
+        ]
+    },
+    "409" : {
+        "name" : "早霜",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "uvfgjekdjlcw",
+                "weda" : [212, 64],
+                "wedb" : [120, 104]
+            }, {
+                "name" : "Base",
+                "url" : "kgwxvcnblfjb",
+                "weda" : [212, 64],
+                "wedb" : [120, 104]
+            }
+        ]
+    },
+    "410" : {
+        "name" : "清霜",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "xomrbwrvjwfv",
+                "weda" : [256, 48],
+                "wedb" : [120, 112]
+            }, {
+                "name" : "Base",
+                "url" : "gdbwncyaopob",
+                "weda" : [256, 48],
+                "wedb" : [120, 112]
+            }
+        ]
+    },
+    "413" : {
+        "name" : "朝雲",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "vdieczinfgce",
+                "weda" : [256, 16],
+                "wedb" : [120, 112]
+            }, {
+                "name" : "Base",
+                "url" : "xjtxwkwwfdze",
+                "weda" : [256, 16],
+                "wedb" : [120, 112]
+            }
+        ]
+    },
+    "414" : {
+        "name" : "山雲",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "pyfdxrfqwldn",
+                "weda" : [112, 88],
+                "wedb" : [112, 128]
+            }, {
+                "name" : "Base",
+                "url" : "xthvimkarzgq",
+                "weda" : [112, 88],
+                "wedb" : [112, 128]
+            }
+        ]
+    },
+    "415" : {
+        "name" : "野分",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "qegrehgswrpg",
+                "weda" : [128, -8],
+                "wedb" : [120, 112]
+            }, {
+                "name" : "Base",
+                "url" : "skmmrmdljugc",
+                "weda" : [128, -8],
+                "wedb" : [120, 112]
+            }
+        ]
+    },
+    "421" : {
+        "name" : "秋月",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "tubwmcjwtlqx",
+                "weda" : [184, 24],
+                "wedb" : [112, 112]
+            }, {
+                "name" : "Base",
+                "url" : "wkvdcpaogfii",
+                "weda" : [184, 24],
+                "wedb" : [112, 112]
+            }
+        ]
+    },
+    "422" : {
+        "name" : "照月",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "urpnkwaneqfb",
+                "weda" : [160, -8],
+                "wedb" : [136, 112]
+            }, {
+                "name" : "Base",
+                "url" : "fvcfdjvmxlko",
+                "weda" : [160, -8],
+                "wedb" : [136, 112]
+            }
+        ]
+    },
+    "423" : {
+        "name" : "初月",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "wwuwxxrkzxex",
+                "weda" : [204, 0],
+                "wedb" : [92, 120]
+            }, {
+                "name" : "Base",
+                "url" : "uscckqoguchc",
+                "weda" : [204, 0],
+                "wedb" : [92, 120]
+            }
+        ]
+    },
+    "424" : {
+        "name" : "高波",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "ydsbnsiogwij",
+                "weda" : [72, 20],
+                "wedb" : [136, 120]
+            }, {
+                "name" : "Base",
+                "url" : "hvxoppojkyge",
+                "weda" : [80, 32],
+                "wedb" : [136, 134]
+            }
+        ]
+    },
+    "425" : {
+        "name" : "朝霜",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "jozbiyweyksl",
+                "weda" : [256, 36],
+                "wedb" : [128, 128]
+            }, {
+                "name" : "Base",
+                "url" : "cdsgjcufyxlz",
+                "weda" : [256, 36],
+                "wedb" : [128, 128]
+            }
+        ]
+    },
+    "431" : {
+        "name" : "U-511",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "dfrmfmjvschh",
+                "weda" : [144, 40],
+                "wedb" : [144, 136]
+            }, {
+                "name" : "Base",
+                "url" : "ksvosfducgbe",
+                "weda" : [144, 40],
+                "wedb" : [144, 136]
+            }, {
+                "name" : "呂500",
+                "url" : "wnibjvejengh",
+                "weda" : [144, -12],
+                "wedb" : [128, 112]
+            }
+        ]
+    },
+    "432" : {
+        "name" : "Graf Zeppelin",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "uljlkucfqqcc",
+                "weda" : [282, 16],
+                "wedb" : [100, 88]
+            }, {
+                "name" : "Base",
+                "url" : "tepoqqczfonx",
+                "weda" : [282, 16],
+                "wedb" : [100, 88]
+            }
+        ]
+    },
+    "433" : {
+        "name" : "Saratoga",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "qtuuhjmqmvfh",
+                "weda" : [236, 100],
+                "wedb" : [88, 96]
+            }, {
+                "name" : "改",
+                "url" : "wmebertagnxm",
+                "weda" : [236, 100],
+                "wedb" : [88, 96]
+            }, {
+                "name" : " Mk.II",
+                "url" : "rhhklxaodsld",
+                "weda" : [208, 24],
+                "wedb" : [92, 124]
+            }, {
+                "name" : " Mk.II Mod.2",
+                "url" : "ambyahmkpxlz",
+                "weda" : [208, 24],
+                "wedb" : [92, 124]
+            }
+        ]
+    },
+    "439" : {
+        "name" : "Warspite",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "bwsoozmjkbde",
+                "weda" : [304, 12],
+                "wedb" : [96, 112]
+            }, {
+                "name" : "Base",
+                "url" : "lnltescodihe",
+                "weda" : [304, 12],
+                "wedb" : [96, 112]
+            }
+        ]
+    },
+    "440" : {
+        "name" : "Iowa",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "nwntjkczdexl",
+                "weda" : [304, 80],
+                "wedb" : [80, 96]
+            }, {
+                "name" : "Base",
+                "url" : "tgknyzwyexxt",
+                "weda" : [304, 80],
+                "wedb" : [80, 96]
+            }
+        ]
+    },
+    "441" : {
+        "name" : "Littorio",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "hkhkiqkleprp",
+                "weda" : [230, 9],
+                "wedb" : [118, 121]
+            }, {
+                "name" : "Italia",
+                "url" : "feyfhhruhjse",
+                "weda" : [230, 9],
+                "wedb" : [118, 121]
+            }
+        ]
+    },
+    "442" : {
+        "name" : "Roma",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "gyywcqqfnjkc",
+                "weda" : [264, 0],
+                "wedb" : [131, 120]
+            }, {
+                "name" : "改",
+                "url" : "yfpnftpuwkrx",
+                "weda" : [290, 0],
+                "wedb" : [130, 120]
+            }
+        ]
+    },
+    "443" : {
+        "name" : "Libeccio",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "rgfuelwdntub",
+                "weda" : [88, 32],
+                "wedb" : [112, 112]
+            }, {
+                "name" : "Base",
+                "url" : "nsutzbtifaji",
+                "weda" : [88, 32],
+                "wedb" : [112, 112]
+            }
+        ]
+    },
+    "444" : {
+        "name" : "Aquila",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "ywgeborrihwb",
+                "weda" : [140, 0],
+                "wedb" : [108, 128]
+            }, {
+                "name" : "Base",
+                "url" : "beymvxmvhoct",
+                "weda" : [140, 0],
+                "wedb" : [108, 128]
+            }
+        ]
+    },
+    "445" : {
+        "name" : "秋津洲",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "oswtwcbzgbfm",
+                "weda" : [127, 87],
+                "wedb" : [141, 121]
+            }, {
+                "name" : "改",
+                "url" : "wwqmolrsxfvz",
+                "weda" : [127, 87],
+                "wedb" : [141, 121]
+            }
+        ]
+    },
+    "448" : {
+        "name" : "Zara",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "waviopoxryme",
+                "weda" : [196, -8],
+                "wedb" : [128, 112]
+            }, {
+                "name" : "Base",
+                "url" : "spmuptretooz",
+                "weda" : [196, -8],
+                "wedb" : [128, 112]
+            }, {
+                "name" : " due",
+                "url" : "jprnkicueltw",
+                "weda" : [288, 4],
+                "wedb" : [92, 104]
+            }
+        ]
+    },
+    "449" : {
+        "name" : "Pola",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "btfmqyxunhkj",
+                "weda" : [112, 0],
+                "wedb" : [96, 124]
+            }, {
+                "name" : "Base",
+                "url" : "zbwwxnwyxhps",
+                "weda" : [112, 0],
+                "wedb" : [96, 124]
+            }
+        ]
+    },
+    "451" : {
+        "name" : "瑞穂",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "ycgllqsxwdgy",
+                "weda" : [256, 40],
+                "wedb" : [120, 120]
+            }, {
+                "name" : "Base",
+                "url" : "zqwwomufsbpq",
+                "weda" : [256, 40],
+                "wedb" : [120, 120]
+            }
+        ]
+    },
+    "452" : {
+        "name" : "沖波",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "higuuqsbfkvb",
+                "weda" : [48, 32],
+                "wedb" : [112, 128]
+            }, {
+                "name" : "Base",
+                "url" : "xxnlcxflgfji",
+                "weda" : [48, 32],
+                "wedb" : [112, 128]
+            }
+        ]
+    },
+    "453" : {
+        "name" : "風雲",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "gykqxdkfpzih",
+                "weda" : [244, 16],
+                "wedb" : [120, 112]
+            }, {
+                "name" : "Base",
+                "url" : "xooelfidumnp",
+                "weda" : [244, 16],
+                "wedb" : [120, 112]
+            }
+        ]
+    },
+    "454" : {
+        "name" : "嵐",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "stvkbeqhwmmj",
+                "weda" : [170, 16],
+                "wedb" : [112, 104]
+            }, {
+                "name" : "Base",
+                "url" : "nguivbnbevwd",
+                "weda" : [170, 16],
+                "wedb" : [112, 104]
+            }
+        ]
+    },
+    "455" : {
+        "name" : "萩風",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "vbqucvbohcex",
+                "weda" : [112, 24],
+                "wedb" : [96, 104]
+            }, {
+                "name" : "Base",
+                "url" : "xxbsgzxwjqxh",
+                "weda" : [112, 24],
+                "wedb" : [96, 104]
+            }
+        ]
+    },
+    "456" : {
+        "name" : "親潮",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "fkrtllluordb",
+                "weda" : [100, -8],
+                "wedb" : [92, 96]
+            }, {
+                "name" : "Base",
+                "url" : "dvcslbfkmdsy",
+                "weda" : [100, -8],
+                "wedb" : [92, 96]
+            }
+        ]
+    },
+    "457" : {
+        "name" : "山風",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "qfyztscquxza",
+                "weda" : [172, 32],
+                "wedb" : [100, 120]
+            }, {
+                "name" : "Base",
+                "url" : "tvieoobotato",
+                "weda" : [172, 32],
+                "wedb" : [100, 120]
+            }
+        ]
+    },
+    "458" : {
+        "name" : "海風",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "djszrxlnhbuv",
+                "weda" : [120, 12],
+                "wedb" : [128, 112]
+            }, {
+                "name" : "Base",
+                "url" : "rnmsjjndxlgj",
+                "weda" : [120, 12],
+                "wedb" : [128, 112]
+            }
+        ]
+    },
+    "459" : {
+        "name" : "江風",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "litugbpkilsf",
+                "weda" : [200, -4],
+                "wedb" : [128, 120]
+            }, {
+                "name" : "Base",
+                "url" : "jdpiljspxgpz",
+                "weda" : [200, -4],
+                "wedb" : [128, 120]
+            }, {
+                "name" : "改二",
+                "url" : "rwrhhyeloenn",
+                "weda" : [236, 92],
+                "wedb" : [84, 112]
+            }
+        ]
+    },
+    "460" : {
+        "name" : "速吸",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "niuenzxpukjq",
+                "weda" : [136, -8],
+                "wedb" : [136, 128]
+            }, {
+                "name" : "Base",
+                "url" : "ajggcaaaocgh",
+                "weda" : [136, -8],
+                "wedb" : [136, 128]
+            }
+        ]
+    },
+    "465" : {
+        "name" : "鹿島",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "grgeljjshnfk",
+                "weda" : [172, 16],
+                "wedb" : [132, 104]
+            }, {
+                "name" : "Base",
+                "url" : "nwiyrjfnqvux",
+                "weda" : [172, 16],
+                "wedb" : [132, 104]
+            }
+        ]
+    },
+    "471" : {
+        "name" : "神風",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "xqqqhgvzjuae",
+                "weda" : [216, 32],
+                "wedb" : [76, 112]
+            }, {
+                "name" : "改",
+                "url" : "osxrcrtldvru",
+                "weda" : [216, 32],
+                "wedb" : [76, 112]
+            }
+        ]
+    },
+    "472" : {
+        "name" : "朝風",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "sfhznwdwstgj",
+                "weda" : [144, 0],
+                "wedb" : [88, 132]
+            }, {
+                "name" : "Base",
+                "url" : "fmsaumjkejlm",
+                "weda" : [144, 0],
+                "wedb" : [88, 132]
+            }
+        ]
+    },
+    "473" : {
+        "name" : "春風",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "ihdaromldkrr",
+                "weda" : [176, -4],
+                "wedb" : [96, 104]
+            }, {
+                "name" : "Base",
+                "url" : "gfogtnmgovlq",
+                "weda" : [176, -4],
+                "wedb" : [96, 104]
+            }
+        ]
+    },
+    "474" : {
+        "name" : "松風",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "bzigjflbyxbe",
+                "weda" : [172, -4],
+                "wedb" : [92, 112]
+            }, {
+                "name" : "Base",
+                "url" : "uesladlyqrru",
+                "weda" : [172, -4],
+                "wedb" : [92, 112]
+            }
+        ]
+    },
+    "475" : {
+        "name" : "旗風",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "ciugyosuqrdu",
+                "weda" : [84, 16],
+                "wedb" : [84, 120]
+            }, {
+                "name" : "Base",
+                "url" : "sbvnvwfihmrd",
+                "weda" : [84, 16],
+                "wedb" : [84, 120]
+            }
+        ]
+    },
+    "479" : {
+        "name" : "天霧",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "qdkwbvntcvpw",
+                "weda" : [184, 112],
+                "wedb" : [76, 120]
+            }, {
+                "name" : "Base",
+                "url" : "xvgcgmwruygk",
+                "weda" : [148, 104],
+                "wedb" : [80, 108]
+            }
+        ]
+    },
+    "480" : {
+        "name" : "狭霧",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "xvelofmpcaga",
+                "weda" : [136, 80],
+                "wedb" : [72, 116]
+            }, {
+                "name" : "Base",
+                "url" : "tbgbgvlvagls",
+                "weda" : [136, 80],
+                "wedb" : [72, 116]
+            }
+        ]
+    },
+    "481" : {
+        "name" : "水無月",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "mnqveismubcz",
+                "weda" : [80, 12],
+                "wedb" : [120, 112]
+            }, {
+                "name" : "Base",
+                "url" : "xzuthqfclfmp",
+                "weda" : [80, 12],
+                "wedb" : [120, 112]
+            }
+        ]
+    },
+    "483" : {
+        "name" : "伊26",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "whdxgwhsflxf",
+                "weda" : [172, 32],
+                "wedb" : [100, 112]
+            }, {
+                "name" : "Base",
+                "url" : "qrubiqfijtfp",
+                "weda" : [172, 32],
+                "wedb" : [100, 112]
+            }
+        ]
+    },
+    "484" : {
+        "name" : "浜波",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "zvjbcleziwsc",
+                "weda" : [86, 4],
+                "wedb" : [92, 120]
+            }, {
+                "name" : "改",
+                "url" : "pqazkbtewvvy",
+                "weda" : [86, 4],
+                "wedb" : [92, 120]
+            }
+        ]
+    },
+    "485" : {
+        "name" : "藤波",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "kbnitqplofhm",
+                "weda" : [88, 32],
+                "wedb" : [84, 112]
+            }, {
+                "name" : "Base",
+                "url" : "hskuxickjvmq",
+                "weda" : [88, 32],
+                "wedb" : [84, 112]
+            }
+        ]
+    },
+    "486" : {
+        "name" : "浦波",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "uvihthcdkhof",
+                "weda" : [144, 32],
+                "wedb" : [112, 112]
+            }, {
+                "name" : "Base",
+                "url" : "qhphdxqmvzbq",
+                "weda" : [144, 32],
+                "wedb" : [112, 112]
+            }
+        ]
+    },
+    "491" : {
+        "name" : "Commandant Teste",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "wgyatqtsrghn",
+                "weda" : [220, -4],
+                "wedb" : [92, 112]
+            }, {
+                "name" : "Base",
+                "url" : "ighfxhygboim",
+                "weda" : [220, -4],
+                "wedb" : [92, 112]
+            }
+        ]
+    },
+    "492" : {
+        "name" : "Richelieu",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "bvtpgrfoqzhq",
+                "weda" : [384, -8],
+                "wedb" : [84, 112]
+            }, {
+                "name" : "Base",
+                "url" : "mbuqrrnwsofd",
+                "weda" : [384, -8],
+                "wedb" : [84, 112]
+            }
+        ]
+    },
+    "493" : {
+        "name" : "伊400",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "lksmyghdkbsg",
+                "weda" : [128, -8],
+                "wedb" : [80, 116]
+            }, {
+                "name" : "改",
+                "url" : "dpcmmtepdfbn",
+                "weda" : [128, -8],
+                "wedb" : [80, 116]
+            }
+        ]
+    },
+    "494" : {
+        "name" : "伊13",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "hmjwmfpdcuur",
+                "weda" : [180, -4],
+                "wedb" : [80, 132]
+            }, {
+                "name" : "Base",
+                "url" : "sfficpxrcodd",
+                "weda" : [80, -4],
+                "wedb" : [80, 132]
+            }
+        ]
+    },
+    "495" : {
+        "name" : "伊14",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "fhcabilueqsn",
+                "weda" : [64, -4],
+                "wedb" : [84, 132]
+            }, {
+                "name" : "Base",
+                "url" : "umpejcgdjwrp",
+                "weda" : [64, -4],
+                "wedb" : [84, 132]
+            }
+        ]
+    },
+    "511" : {
+        "name" : "Гангут",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "cqcrtbwortoi",
+                "weda" : [304, 40],
+                "wedb" : [108, 124]
+            }, {
+                "name" : "Октябрьская революция",
+                "url" : "famtkxknboyg",
+                "weda" : [316, 40],
+                "wedb" : [108, 124]
+            }, {
+                "name" : " два",
+                "url" : "rnuehhgtsiay",
+                "weda" : [260, 4],
+                "wedb" : [76, 116]
+            }
+        ]
+    },
+    "515" : {
+        "name" : "Ark Royal",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "ncarbwthwrrx",
+                "weda" : [128, 0],
+                "wedb" : [80, 116]
+            }, {
+                "name" : "Base",
+                "url" : "ohxbfeywubre",
+                "weda" : [128, 0],
+                "wedb" : [80, 116]
+            }
+        ]
+    },
+    "516" : {
+        "name" : "Ташкент",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "jdnsunmrleho",
+                "weda" : [206, -4],
+                "wedb" : [102, 116]
+            }, {
+                "name" : "Base",
+                "url" : "etknsijfnuea",
+                "weda" : [206, -4],
+                "wedb" : [102, 116]
+            }
+        ]
+    },
+    "517" : {
+        "name" : "占守",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "vtnbtspwclng",
+                "weda" : [92, -12],
+                "wedb" : [100, 116]
+            }, {
+                "name" : "Base",
+                "url" : "mztdruitgisb",
+                "weda" : [92, -12],
+                "wedb" : [100, 116]
+            }
+        ]
+    },
+    "518" : {
+        "name" : "国後",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "qvjugtvdmppy",
+                "weda" : [120, -16],
+                "wedb" : [112, 112]
+            }, {
+                "name" : "Base",
+                "url" : "duclkhpiwzon",
+                "weda" : [120, -16],
+                "wedb" : [112, 112]
+            }
+        ]
+    },
+    "519" : {
+        "name" : "Jervis",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "ejdfsurhnkbu",
+                "weda" : [116, -8],
+                "wedb" : [84, 112]
+            }, {
+                "name" : "Base",
+                "url" : "ljtlhcbmaqcg",
+                "weda" : [116, -8],
+                "wedb" : [84, 112]
+            }
+        ]
+    },
+    "521" : {
+        "name" : "春日丸",
+        "cgs" : [{
+                "name" : "大鷹改",
+                "url" : "gjdwbkyoqrwv",
+                "weda" : [68, -16],
+                "wedb" : [80, 104]
+            }, {
+                "name" : "Base",
+                "url" : "ycfrigxehfwt",
+                "weda" : [68, -16],
+                "wedb" : [80, 104]
+            }, {
+                "name" : "大鷹",
+                "url" : "gvryjheydxtt",
+                "weda" : [68, -16],
+                "wedb" : [80, 104]
+            }, {
+                "name" : "大鷹改二",
+                "url" : "biuzgypssrhi",
+                "weda" : [68, -14],
+                "wedb" : [80, 104]
+            }
+        ]
+    },
+    "524" : {
+        "name" : "択捉",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "glvwrolqeexv",
+                "weda" : [144, 96],
+                "wedb" : [88, 112]
+            }, {
+                "name" : "Base",
+                "url" : "lupcrslexuxo",
+                "weda" : [72, 96],
+                "wedb" : [100, 112]
+            }
+        ]
+    },
+    "525" : {
+        "name" : "松輪",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "cggjgvkbrdby",
+                "weda" : [96, 100],
+                "wedb" : [80, 112]
+            }, {
+                "name" : "Base",
+                "url" : "hakcdulvmfej",
+                "weda" : [96, 100],
+                "wedb" : [80, 112]
+            }
+        ]
+    },
+    "531" : {
+        "name" : "佐渡",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "xtesmpinnnxy",
+                "weda" : [160, 92],
+                "wedb" : [80, 120]
+            }, {
+                "name" : "Base",
+                "url" : "sujriouphyti",
+                "weda" : [160, 92],
+                "wedb" : [80, 120]
+            }
+        ]
+    },
+    "532" : {
+        "name" : "涼月",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "scgnesxelopp",
+                "weda" : [164, 0],
+                "wedb" : [88, 104]
+            }, {
+                "name" : "改",
+                "url" : "yjgylyotzuwn",
+                "weda" : [200, 0],
+                "wedb" : [88, 104]
+            }
+        ]
+    },
+    "535" : {
+        "name" : "Luigi Torelli",
+        "cgs" : [{
+                "name" : "伊504",
+                "url" : "eqlthgcwdqqe",
+                "weda" : [96, -4],
+                "wedb" : [100, 120]
+            }, {
+                "name" : "Base",
+                "url" : "umofiwwigpjx",
+                "weda" : [96, -4],
+                "wedb" : [100, 120]
+            }, {
+                "name" : "UIT-25",
+                "url" : "jisyljtqgqcj",
+                "weda" : [116, -4],
+                "wedb" : [108, 120]
+            }, {
+                "name" : "改",
+                "url" : "drbcfdxjgwgx",
+                "weda" : [96, -4],
+                "wedb" : [100, 120]
+            }
+        ]
+    },
+    "540" : {
+        "name" : "対馬",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "soujslbigbak",
+                "weda" : [40, 84],
+                "wedb" : [88, 120]
+            }, {
+                "name" : "Base",
+                "url" : "mgofelnbpslm",
+                "weda" : [40, 84],
+                "wedb" : [88, 120]
+            }
+        ]
+    },
+    "544" : {
+        "name" : "Gambier Bay",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "hhffnryhkveu",
+                "weda" : [208, -4],
+                "wedb" : [88, 112]
+            }, {
+                "name" : "Base",
+                "url" : "nrqxieqrvqsh",
+                "weda" : [208, -4],
+                "wedb" : [88, 112]
+            }
+        ]
+    },
+    "549" : {
+        "name" : "Intrepid",
+        "cgs" : [{
+                "name" : "改",
+                "url" : "oieohletkdmg",
+                "weda" : [226, 104],
+                "wedb" : [84, 108]
+            }, {
+                "name" : "Base",
+                "url" : "pwipskreiclu",
+                "weda" : [226, 104],
+                "wedb" : [84, 108]
+            }
+        ]
+    },
+    "551" : {
+        "name" : "日振",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "vpnpmgxoibfa",
+                "weda" : [92, 88],
+                "wedb" : [68, 112]
+            }, {
+                "name" : "改",
+                "url" : "mnlyjfsjqitd",
+                "weda" : [92, 88],
+                "wedb" : [68, 112]
+            }
+        ]
+    },
+    "552" : {
+        "name" : "大東",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "jzjtuwefxhut",
+                "weda" : [120, 72],
+                "wedb" : [92, 116]
+            }, {
+                "name" : "改",
+                "url" : "syoduvrmxdbf",
+                "weda" : [120, 72],
+                "wedb" : [92, 116]
+            }
+        ]
+    }
+}
