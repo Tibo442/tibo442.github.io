@@ -2,38 +2,43 @@
         "name" : "睦月",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "snohitatusbk",
-                "weda" : [112, 108],
-                "wedb" : [145, 153]
-            }, {
-                "name" : "改",
-                "url" : "pvomxydmldoi",
+                "url" : "Mutsuki",
                 "weda" : [112, 108],
                 "wedb" : [145, 153]
             }, {
                 "name" : "改二",
-                "url" : "idhoawqrgkqh",
+                "url" : "Mutsuki_k2",
                 "weda" : [96, 24],
                 "wedb" : [128, 120]
+            }, {
+                "name" : "Valentine",
+                "url" : "Mutsuki_Valentine",
+                "weda" : [112, -8],
+                "wedb" : [136, 136]
             }
         ]
     }, {
         "name" : "如月",
         "cgs" : [{
                 "name" : "Base",
-                "url" : "wujywbyjntbp",
-                "weda" : [106, 63],
-                "wedb" : [139, 114]
-            }, {
-                "name" : "改",
-                "url" : "lwlmcwxyvcyz",
+                "url" : "Kisaragi",
                 "weda" : [106, 63],
                 "wedb" : [139, 114]
             }, {
                 "name" : "改二",
-                "url" : "ygqdfllpkbee",
+                "url" : "Kisaragi_k2",
                 "weda" : [176, 4],
                 "wedb" : [144, 128]
+            }, {
+                "name" : "Valentine",
+                "url" : "Kisaragi_Valentine",
+                "weda" : [128, -8],
+                "wedb" : [136, 136]
+            }, {
+                "name" : "Setsubun",
+                "url" : "Kisaragi_Setsubun",
+                "weda" : [106, 63],
+                "wedb" : [139, 114]
             }
         ]
     }, {
