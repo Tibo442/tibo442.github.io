@@ -3389,8 +3389,8 @@
             }, {
                 "name" : "Summer",
                 "url" : "Libeccio_Summer",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [200, 24],
+                "wedb" : [112, 104]
             }, {
                 "name" : "Yukata",
                 "url" : "Libeccio_Yukata",
