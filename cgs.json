@@ -168,13 +168,13 @@
             }, {
                 "name" : "End Of Year 2014",
                 "url" : "Akebono_EndOfYear14",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [224, 48],
+                "wedb" : [128, 104]
             }, {
                 "name" : "Summer 2015",
                 "url" : "Akebono_Summer15",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [176, -8],
+                "wedb" : [132, 112]
             }, {
                 "name" : "Mackerel",
                 "url" : "Akebono_Fall",
@@ -193,8 +193,8 @@
             }, {
                 "name" : "Rainy",
                 "url" : "Akebono_Rainy",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [152, 80],
+                "wedb" : [88, 92]
             }, {
                 "name" : "Summer",
                 "url" : "Akebono_Summer",
@@ -203,8 +203,8 @@
             }, {
                 "name" : "Oyakodon",
                 "url" : "Akebono_Oyakodon",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [132, 4],
+                "wedb" : [96, 128]
             }
         ]
     }, {
@@ -252,13 +252,13 @@
             }, {
                 "name" : "Hinamatsuri",
                 "url" : "Ushio_Hinamatsuri",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [52, 4],
+                "wedb" : [112, 120]
             }, {
                 "name" : "Hinamatsuri 改二",
                 "url" : "Ushio_k2_Hinamatsuri",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [44, 28],
+                "wedb" : [108, 124]
             }
         ]
     }, {
@@ -447,13 +447,13 @@
             }, {
                 "name" : "Rainy",
                 "url" : "Fusou_Rainy",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [300, 64],
+                "wedb" : [72, 116]
             }, {
                 "name" : "Rainy 改二",
                 "url" : "Fusou_k2_Rainy",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [300, 64],
+                "wedb" : [72, 116]
             }, {
                 "name" : "Zuiun",
                 "url" : "Fusou_Zuiun",
@@ -491,8 +491,8 @@
             }, {
                 "name" : "Oyakodon",
                 "url" : "Yamashiro_Oyakodon",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [288, 16],
+                "wedb" : [96, 116]
             }, {
                 "name" : "Zuiun",
                 "url" : "Yamashiro_Zuiun",
@@ -711,8 +711,8 @@
             }, {
                 "name" : "Mobile",
                 "url" : "Shiratsuyu_Mobile",
-                "weda" : [112, 0],
-                "wedb" : [80, 124]
+                "weda" : [48, 20],
+                "wedb" : [92, 108]
             }, {
                 "name" : "Yukata",
                 "url" : "Shiratsuyu_Yukata",
@@ -755,8 +755,8 @@
             }, {
                 "name" : "White Day 2016 改二",
                 "url" : "Shigure_k2_White_Day",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [68, 16],
+                "wedb" : [100, 132]
             }, {
                 "name" : "Saury 改二",
                 "url" : "Shigure_k2_Saury",
@@ -789,8 +789,8 @@
             }, {
                 "name" : "Rainy 改",
                 "url" : "Murasame_k_Rainy",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [88, 4],
+                "wedb" : [136, 120]
             }, {
                 "name" : "Summer 改",
                 "url" : "Murasame_k_Summer",
@@ -828,13 +828,13 @@
             }, {
                 "name" : "Rainy 改二",
                 "url" : "Yuudachi_k2_Rainy",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [168, 4],
+                "wedb" : [112, 112]
             }, {
                 "name" : "Oyakodon 改二",
                 "url" : "Yuudachi_k2_Oyakodon",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [134, 35],
+                "wedb" : [114, 137]
             }
         ]
     }, {
@@ -1175,8 +1175,8 @@
             }, {
                 "name" : "Rainy",
                 "url" : "Mogami_Rainy",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [132, 76],
+                "wedb" : [80, 104]
             }, {
                 "name" : "Summer",
                 "url" : "Mogami_Summer",
@@ -1242,8 +1242,8 @@
             }, {
                 "name" : "Rainy",
                 "url" : "Shouhou_Rainy",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [168, 64],
+                "wedb" : [128, 112]
             }
         ]
     }, {
@@ -1290,8 +1290,8 @@
             }, {
                 "name" : "White Day 改二",
                 "url" : "Ryuujou_k2_White_Day",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [92, -8],
+                "wedb" : [112, 112]
             }
         ]
     }, {
@@ -1333,13 +1333,13 @@
             }, {
                 "name" : "Shopping",
                 "url" : "Kongou_Shopping",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [112, 0],
+                "wedb" : [104, 128]
             }, {
                 "name" : "Shopping 改二",
                 "url" : "Kongou_k2_Shopping",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [112, 0],
+                "wedb" : [104, 128]
             }, {
                 "name" : "Eve of Battle 2018",
                 "url" : "Kongou_EoB",
@@ -1367,8 +1367,8 @@
             }, {
                 "name" : "Spring 改二",
                 "url" : "Haruna_k2_Spring",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [104, -4],
+                "wedb" : [96, 112]
             }, {
                 "name" : "Eve of Battle 2018",
                 "url" : "Haruna_EoB",
@@ -1424,8 +1424,8 @@
             }, {
                 "name" : "Oyakodon",
                 "url" : "Akagi_Oyakodon",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [132, -8],
+                "wedb" : [96, 96]
             }
         ]
     }, {
@@ -1601,6 +1601,11 @@
                 "url" : "Sazanami_k",
                 "weda" : [220, 96],
                 "wedb" : [112, 112]
+            }, {
+                "name" : "Rainy",
+                "url" : "Sazanami_Rainy",
+                "weda" : [168, -16],
+                "wedb" : [92, 120]
             }
         ]
     }, {
@@ -1776,8 +1781,8 @@
             }, {
                 "name" : "Rainy",
                 "url" : "Chitose_Rainy",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [96, -4],
+                "wedb" : [76, 108]
             }
         ]
     }, {
@@ -1815,8 +1820,8 @@
             }, {
                 "name" : "Rainy",
                 "url" : "Chiyoda_Rainy",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [108, 80],
+                "wedb" : [100, 96]
             }
         ]
     }, {
@@ -1925,8 +1930,8 @@
             }, {
                 "name" : "Rainy",
                 "url" : "Yuubari_Rainy",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [220, 8],
+                "wedb" : [84, 104]
             }
         ]
     }, {
@@ -1978,8 +1983,8 @@
             }, {
                 "name" : "Summer 16",
                 "url" : "Mikuma_Summer",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [136, 112],
+                "wedb" : [112, 112]
             }, {
                 "name" : "Summer 17",
                 "url" : "Mikuma_Summer17",
@@ -2180,8 +2185,8 @@
             }, {
                 "name" : "Oyakodon",
                 "url" : "Akigumo_Oyakodon",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [180, -4],
+                "wedb" : [96, 104]
             }, {
                 "name" : "Autumn_Casual",
                 "url" : "Akigumo_Autumn_Casual",
@@ -2219,8 +2224,8 @@
             }, {
                 "name" : "Spring (Anniversary)",
                 "url" : "Yuugumo_Spring",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [108, 20],
+                "wedb" : [84, 100]
             }, {
                 "name" : "Happi",
                 "url" : "Yuugumo_Happi",
@@ -2257,8 +2262,8 @@
             }, {
                 "name" : "Spring 3rd Anni",
                 "url" : "Naganami_Spring",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [116, 36],
+                "wedb" : [116, 104]
             }, {
                 "name" : "Yukata",
                 "url" : "Naganami_Yukata",
@@ -2267,8 +2272,8 @@
             }, {
                 "name" : "Spring 4th Anni",
                 "url" : "Naganami_Spring_2017",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [128, 36],
+                "wedb" : [116, 100]
             }, {
                 "name" : "Rice",
                 "url" : "Naganami_Rice",
@@ -2455,18 +2460,18 @@
             {
                 "name" : "Rainy",
                 "url" : "Kamoi_Rainy",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [100, 128],
+                "wedb" : [88, 104]
             }, {
                 "name" : "Rainy 改",
                 "url" : "Kamoi_k_Rainy",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [100, 128],
+                "wedb" : [88, 104]
             }, {
                 "name" : "Rainy 改母",
                 "url" : "Kamoi_kbo_Rainy",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [100, 128],
+                "wedb" : [88, 104]
             }, 
             
             {
@@ -2665,8 +2670,8 @@
             }, {
                 "name" : "Oktoberfest",
                 "url" : "Z1_Oktoberfest",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [140, -8],
+                "wedb" : [136, 112]
             }, {
                 "name" : "Summer",
                 "url" : "Z1_Summer",
@@ -2751,13 +2756,13 @@
             {
                 "name" : "Summer 改",
                 "url" : "Akashi_k_Summer",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [240, 0],
+                "wedb" : [144, 128]
             }, {
                 "name" : "White Day 改",
                 "url" : "Akashi_k_WhiteDay",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [96, -8],
+                "wedb" : [102, 88]
             }, 
             
             {
@@ -2836,8 +2841,8 @@
             }, {
                 "name" : "White Day 改",
                 "url" : "Ooyodo_k_WhiteDay",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [72, -8],
+                "wedb" : [104, 92]
             }, {
                 "name" : "Summer",
                 "url" : "Ooyodo_Summer",
@@ -2846,8 +2851,8 @@
             }, {
                 "name" : "Summer 改",
                 "url" : "Ooyodo_k_Summer",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [128, 4],
+                "wedb" : [100, 116]
             }, {
                 "name" : "Summer 2017 改",
                 "url" : "Ooyodo_k_Summer17",
@@ -2961,8 +2966,8 @@
             }, {
                 "name" : "Shopping",
                 "url" : "Amagi_Shopping",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [60, -4],
+                "wedb" : [84, 104]
             }
         ]
     }, {
@@ -3018,8 +3023,8 @@
             }, {
                 "name" : "Spring 改",
                 "url" : "Harusame_k_Spring",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [80, 0],
+                "wedb" : [128, 112]
             }
         ]
     }, {
@@ -3032,8 +3037,8 @@
             }, {
                 "name" : "Rainy",
                 "url" : "Hayashimo_Rainy",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [136, 40],
+                "wedb" : [92, 112]
             }, {
                 "name" : "Eve of Battle 2018",
                 "url" : "Hayashimo_EoB",
@@ -3056,8 +3061,8 @@
             }, {
                 "name" : "Rainy",
                 "url" : "Kiyoshimo_Rainy",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [156, 28],
+                "wedb" : [102, 112]
             }, {
                 "name" : "Base",
                 "url" : "Kiyoshimo_EoB",
@@ -3174,8 +3179,8 @@
             }, {
                 "name" : "Rainy",
                 "url" : "Takanami_Rainy",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [160, 72],
+                "wedb" : [136, 112]
             }, {
                 "name" : "Valentine",
                 "url" : "Takanami_Valentine",
@@ -3365,8 +3370,8 @@
             }, {
                 "name" : "Oyakodon",
                 "url" : "Roma_Oyakodon",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [104, -4],
+                "wedb" : [96, 104]
             }
         ]
     }, {
@@ -3427,8 +3432,8 @@
             }, {
                 "name" : "Oyakodon",
                 "url" : "Akitsushima_Oyakodon",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [172, 0],
+                "wedb" : [92, 112]
             }, {
                 "name" : "New Year 2017",
                 "url" : "Akitsushima_NewYear17",
@@ -3465,8 +3470,8 @@
             }, {
                 "name" : "Shopping Wine",
                 "url" : "Pola_WineShopping",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [76, -8],
+                "wedb" : [100, 132]
             }
         ]
     }, {
@@ -3509,8 +3514,8 @@
             }, {
                 "name" : "Rainy",
                 "url" : "Mizuho_Rainy",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [256, 92],
+                "wedb" : [112, 112]
             }, {
                 "name" : "Summer",
                 "url" : "Mizuho_Summer",
@@ -3519,8 +3524,8 @@
             }, {
                 "name" : "Oyakodon",
                 "url" : "Mizuho_Oyakodon",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [192, -4],
+                "wedb" : [86, 112]
             }, {
                 "name" : "Xmas",
                 "url" : "Mizuho_Xmas",
@@ -3618,8 +3623,8 @@
             }, {
                 "name" : "Hinamatsuri",
                 "url" : "Yamakaze_Hinamatsuri",
-                "weda" : [0, 0],
-                "wedb" : [0, 0]
+                "weda" : [160, 12],
+                "wedb" : [92, 116]
             }
         ]
     }, {
