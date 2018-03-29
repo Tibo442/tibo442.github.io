@@ -19,7 +19,7 @@
     </head>
     <body>
         Romanization for ship names: <input type="checkbox" id="romanized" onchange="makeSelect();" onclick="makeSelect();"><br>
-        Ship: <select id="ships" autofocus name="Ship" disabled></select><br>
+        Ship: <select id="ships" autofocus name="Ship" disabled></select><select id="cgs" autofocus name="CG" disabled></select><br>
         <br>
         Original img: <input type="checkbox" id="original" onchange="update();" onclick="update();"><br>
 
@@ -36,11 +36,11 @@
                 var context = canvas.getContext("2d");
                 var img = new Image();
 
-                let e = document.getElementById("ships");
-                let id = e.options[e.selectedIndex].value;
-                let fleetdbship = data.neddb.filter((x) => x.id == id)[0];
-                let shipmastergraph = data.api_start2.api_mst_shipgraph.filter((x) => x.api_id == id)[0];
-                console.log(id, fleetdbship, shipmastergraph)
+                let e = document.getElementById("cgs");
+                let cg = JSON.parse(e.options[e.selectedIndex].value);
+                console.log(cg);
+                if(cg.weda[0] == 0 && cg.weda[1] == 0 && cg.wedb[0] == 0 && cg.wedb[1] == 0)
+                    alert("Missing correct api_start2 data to display this seasonal correctly")
 
                 img.onload = function() {
                     canvas.height = img.height;
@@ -49,13 +49,13 @@
                     img.onload = function() {
                         let scale = 1.7475;
                         let cgscale = original ? 1.7475 : 1;
-                        context.drawImage(img, 400 - (shipmastergraph.api_weda[0] + shipmastergraph.api_wedb[0] / 2) * scale, 10 - shipmastergraph.api_weda[1] * scale, img.width * cgscale, img.height * cgscale);
+                        context.drawImage(img, 400 - (cg.weda[0] + cg.wedb[0] / 2) * scale, 10 - cg.weda[1] * scale, img.width * cgscale, img.height * cgscale);
                         img.onload = function() {
                             context.drawImage(img, 320, 270);
                         }
                         img.src = "pics/ring.png";
                     }
-                    img.src = `ship${original ? "img" : "s"}/${shipmastergraph.api_filename}.png`;
+                    img.src = `${original ? "cgs" : "hd_cgs"}/${cg.url}.png`;
                 }
                 img.src = "pics/room.png";
             }
@@ -65,19 +65,10 @@
                     if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
                         if (xmlhttp.status == 200) {
                             data[name] = xmlhttp.responseText;
-                            if(data.neddb && data.ships && data.ship_affix && data.api_start2) {
+                            if(data.cgs && data.ship_affix && data.ships) {
+                                data.cgs = JSON.parse(data.cgs);
                                 data.ships = JSON.parse(data.ships);
                                 data.ship_affix = JSON.parse(data.ship_affix);
-                                data.api_start2 = JSON.parse(data.api_start2);
-
-                                data.neddb = data.neddb.split("\n").map( function(x) {
-                                    try { 
-                                        let ship = JSON.parse(x); 
-                                        ship.api_name = data.api_start2.api_mst_ship.filter((x) => x.api_id === ship.id)[0].api_name;
-                                        ship.tlName = shipName(ship.api_name); 
-                                        return ship; 
-                                    } catch (e) { return false; }
-                                }).filter( function(x) {return x;});
 
                                 makeSelect();
                             }
@@ -89,20 +80,53 @@
             }
 
             function makeSelect() {
+                for(ship of data.cgs) {
+                    ship.tlName = shipName(ship.name);
+                    for(cg of ship.cgs) {
+                        cg.tlName = shipName(" " + cg.name).trim();
+                    }
+                }
+
                 let select = document.getElementById('ships');
                 select.innerHTML = "";
                 let romanized = !!document.getElementById('romanized').checked;
-                data.neddb = data.neddb.sort((a, b) => (romanized) ? a.tlName.localeCompare(b.tlName) : a.api_name.localeCompare(b.api_name));
+                data.cgs = data.cgs.sort((a, b) => (romanized) ? a.tlName.localeCompare(b.tlName) : a.name.localeCompare(b.name));
                 let index = 0;
-                for(let ship of data.neddb) {
+                for(ship of data.cgs) {
                     let opt = document.createElement('option');
-                    opt.value = ship.id;
+                    opt.value = JSON.stringify(ship.cgs);
                     if(romanized)
                         opt.innerHTML = ship.tlName;
                     else
-                        opt.innerHTML = ship.api_name;
+                        opt.innerHTML = ship.name;
                     select.appendChild(opt);
-                    if(ship.tlName === "Asashio Kai Ni")
+                    if(ship.tlName === "Asashio")
+                        select.selectedIndex = index;
+                    index++;
+                }
+                console.log(data);
+                select.disabled = false;
+                select.onchange = makeSecondSelect;
+                makeSecondSelect();
+            }
+
+            function makeSecondSelect() {
+                let select = document.getElementById('cgs');
+                select.innerHTML = "";
+                let romanized = !!document.getElementById('romanized').checked;
+                let e = document.getElementById("ships");
+                let cgs = JSON.parse(e.options[e.selectedIndex].value);
+
+                let index = 0;
+                for(cg of cgs) {
+                    let opt = document.createElement('option');
+                    opt.value = JSON.stringify(cg);
+                    if(romanized)
+                        opt.innerHTML = cg.tlName;
+                    else
+                        opt.innerHTML = cg.name;
+                    select.appendChild(opt);
+                    if(cg.tlName === "Kai Ni")
                         select.selectedIndex = index;
                     index++;
                 }
@@ -111,7 +135,6 @@
                 select.onchange = update;
                 update();
             }
-
             // https://github.com/KC3Kai/KC3Kai/blob/master/src/library/modules/Meta.js#L188
             function shipName(jpName, suffixKey = "suffixes", prefixKey = "prefixes"){
                 // If full string matched, no combination needed
@@ -170,10 +193,9 @@
                 }
                 return root;
             }
-            get("https://raw.githubusercontent.com/TeamFleet/WhoCallsTheFleet-DB/master/db/ships.nedb", "neddb");
+            get("cgs.json", "cgs");
             get("https://raw.githubusercontent.com/KC3Kai/kc3-translations/master/data/en/ships.json", "ships");
             get("https://raw.githubusercontent.com/KC3Kai/kc3-translations/master/data/en/ship_affix.json", "ship_affix");
-            get("http://flatisjustice.moe/api_start2", "api_start2");
         </script>
     </body>
 </html>
