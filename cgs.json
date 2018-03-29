@@ -77,12 +77,12 @@
                 "weda" : [96, 120],
                 "wedb" : [136, 136]
             }, {
-                "name" : "Fall",
+                "name" : "Happi",
                 "url" : "Fubuki_Fall",
                 "weda" : [84, 48],
                 "wedb" : [96, 112]
             }, {
-                "name" : "Fall 改二",
+                "name" : "Happi 改二",
                 "url" : "Fubuki_k2_Fall",
                 "weda" : [84, 64],
                 "wedb" : [96, 112]
@@ -114,7 +114,7 @@
                 "weda" : [219, 58],
                 "wedb" : [133, 126]
             }, {
-                "name" : "Big Sight",
+                "name" : "Naval Review",
                 "url" : "Isonami_Big_Sight",
                 "weda" : [60, -8],
                 "wedb" : [88, 116]
@@ -1478,7 +1478,7 @@
                 "weda" : [232, 59],
                 "wedb" : [96, 107]
             }, {
-                "name" : "Zuiun",
+                "name" : "Zuiun 改",
                 "url" : "Hyuuga_k_Zuiun",
                 "weda" : [232, 59],
                 "wedb" : [96, 107]
@@ -2790,12 +2790,12 @@
             }, 
             
             {
-                "name" : "Summer 2017",
+                "name" : "Zuiun 2017",
                 "url" : "Akashi_Summer17",
                 "weda" : [156, -12],
                 "wedb" : [92, 112]
             }, {
-                "name" : "Summer 2017 改",
+                "name" : "Zuiun 2017 改",
                 "url" : "Akashi_k_Summer17",
                 "weda" : [236, -12],
                 "wedb" : [92, 112]
@@ -2854,7 +2854,7 @@
                 "weda" : [128, 4],
                 "wedb" : [100, 116]
             }, {
-                "name" : "Summer 2017 改",
+                "name" : "Summer Zuiun 2017 改",
                 "url" : "Ooyodo_k_Summer17",
                 "weda" : [236, 4],
                 "wedb" : [80, 108]
@@ -3021,7 +3021,7 @@
                 "weda" : [128, 0],
                 "wedb" : [108, 128]
             }, {
-                "name" : "Spring 改",
+                "name" : "Anniversary 改",
                 "url" : "Harusame_k_Spring",
                 "weda" : [80, 0],
                 "wedb" : [128, 112]
@@ -3064,7 +3064,7 @@
                 "weda" : [156, 28],
                 "wedb" : [102, 112]
             }, {
-                "name" : "Base",
+                "name" : "Eve of Battle 2018",
                 "url" : "Kiyoshimo_EoB",
                 "weda" : [256, 48],
                 "wedb" : [120, 112]
@@ -3880,7 +3880,7 @@
                 "weda" : [104, 48],
                 "wedb" : [88, 112]
             }, {
-                "name" : "Sanma - Navel Review",
+                "name" : "Naval Review",
                 "url" : "Uranami_Sanma",
                 "weda" : [44, -12],
                 "wedb" : [104, 112]

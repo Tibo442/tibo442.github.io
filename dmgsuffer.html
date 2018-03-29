@@ -30,6 +30,7 @@
             Post-Cap multiplier <a target="_blank" href="http://kancolle.wikia.com/wiki/Combat/Damage_Calculation#Pre-Cap_Modifiers" title="Eg: Art spot, Contact, AP shell modifiers&#013;NOTE: Critical hit is post flooring, hence why it's in a seperate option">[?]</a>: <input type="number" id="postcapdmg" min="0" max="10" onchange="update();" onclick="update();" value=1.0 step=0.1><br>
             Critical: <input type="checkbox" id="critical" onchange="update();" onclick="update();"><br>
         </div>
+        Ammo remaining: <input type="number" id="ammorem" min="0" max="100" step="20" onchange="update();" onclick="update();" value=100>%<br>
         Apply attack twice (like DA/TCI): <input type="checkbox" id="double" onchange="update();" onclick="update();"><br>
         <br>
         <b>Target info</b><br>
@@ -57,7 +58,8 @@
         <i>Formulas used:<br> </i>
         <i>- engagement/precap: </i><code>precapatk = atk * (engagement) * precap</code> where <code>engagement = x1.2 (15%) x1 (45%) x0.8 (30%) x0.6 (10%)</code> with saiun: <code>engagement = x1.2 (15%) x1 (45%) x0.8 (40%)</code><br>
         <i>- cap: </i><code>postcapatk = floor(<span style="color:red">floor(</span>(precapatk > cap) ? cap + sqrt(precapatk - cap) : precapatk<span style="color:red">)</span> * criticalmodifier) * postcapmultiplier</code><br>
-        <i>- damage: </i><code>dmg = floor(attack - (0.7 * armor + 0.6 * rng.nextInt(armor)))</code><br>
+        <i>- damage: </i><code>dmg = floor((attack - (0.7 * armor + 0.6 * rng.nextInt(armor))) * ammomultiplier)</code><br>
+        <i>- ammomultiplier: </i><code>min(1.0, 2 * ammorem)</code><br>
         <i>- scratch: </i><code>if(dmg < 1) -> dmg = floor(0.06 * currentHP + 0.08 * rng.nextInt(currentHP))</code><br>
         <i>- overkill protection: </i><code>if(dmg >= currentHP) -> dmg = floor(0.5 * currentHP + 0.3 * rng.nextInt(currentHP))</code><br>
         <i>where </i><code>nextInt</code><i> returns uniformly, 0 inclusive up to argument exclusive</i><br>
@@ -76,6 +78,7 @@
                     graphmin: parseFloat(document.getElementById('graphmin').value),
                     graphmax: parseFloat(document.getElementById('graphmax').value) + 1,
                     cap: parseFloat(document.getElementById('cap').value),
+                    ammorem: parseFloat(document.getElementById('ammorem').value),
                     postcapdmg: parseFloat(document.getElementById('postcapdmg').value),
                     precapdmg: parseFloat(document.getElementById('precapdmg').value),
                     abyssal: !!document.getElementById('abyssal').checked,
@@ -351,8 +354,9 @@
             }
             function calculateDamagesDone(atk, currenthp, armor, overkillprot = currenthp > 0.25 * data.maxhp && !data.abyssal) {
                 let dmgsDealth = {};
+                let ammomult = Math.min(1.0, 2.0 * (data.ammorem / 100));
                 for(let arm = 0; arm < armor; arm++) {
-                    let dmg = Math.floor(atk - (0.7 * armor + arm * 0.6));
+                    let dmg = Math.floor((atk - (0.7 * armor + arm * 0.6)) * ammomult);
 
                     if(dmg >= currenthp && overkillprot) { // Overkill protection
                         let possibledmg = [];
