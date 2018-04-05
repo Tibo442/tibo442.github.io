@@ -34,7 +34,7 @@
             var canvas = document.getElementById("graph");
             var parser = new DOMParser();
             var data = {};
-            var bubbles = [], activeBubbles = [];
+            var bubbles = [], activeBubbles = [], currentcg = {};
 
             function update() {
                 var original = !!document.getElementById('original').checked;
@@ -44,10 +44,12 @@
                 let cg = JSON.parse(e.options[e.selectedIndex].value);
                 console.log(cg);
                 if(cg.weda[0] == 0 && cg.weda[1] == 0 && cg.wedb[0] == 0 && cg.wedb[1] == 0)
-                    alert("Missing correct api_start2 data to display this seasonal correctly")
+                    alert("Missing correct api_start2 data to display this seasonal correctly");
+                currentcg = cg;
 
                 var roomImg = new Image();
                 roomImg.onload = function() {
+                    if(currentcg !== cg) return;
                     canvas.height = roomImg.height;
                     canvas.width = roomImg.width;
                     context.drawImage(roomImg, 0, 0);
@@ -57,10 +59,10 @@
                       y: 0,
                       image: roomImg,
                     });
-                    layer.add(bg);
 
                     var cgimg = new Image();
                     cgimg.onload = function() {
+                        if(currentcg !== cg) return;
                         let scale = 1.7475;
                         let cgscale = original ? 1.7475 : 1;
                         let x =  400 - (cg.weda[0] + cg.wedb[0] / 2) * scale, y = 10 - cg.weda[1] * scale
@@ -71,21 +73,28 @@
                           x: x,
                           y: y,
                           image: cgimg,
+                          width: w,
+                          height: h
                         });
-                        layer.add(shipcg);
 
                         var ringimg = new Image();
                         ringimg.onload = function() {
+                            if(currentcg !== cg) return;
                             context.drawImage(ringimg, 320, 270);
 
                             var ring = new Konva.Image({
                               x: 320,
                               y: 270,
-                              image: ringimg,
+                              image: ringimg
                             });
+
+                            layer.clear();
+                            layer.add(bg);
+                            layer.add(shipcg);
                             layer.add(ring);
+                            stage.clear();
                             stage.add(layer);
-                            startTween();
+                            stage.add(bubbleLayer);
                         }
                         ringimg.src = "pics/ring.png";
                     }
@@ -227,39 +236,19 @@
                 }
                 return root;
             }
-            var stage = new Konva.Stage({
-              container: 'ani',
-              width: 800,
-              height: 480
-            });
 
-            var layer = new Konva.Layer();
 
-            get("cgs.json?v=3", "cgs");
-            get("https://raw.githubusercontent.com/KC3Kai/kc3-translations/master/data/en/ships.json", "ships");
-            get("https://raw.githubusercontent.com/KC3Kai/kc3-translations/master/data/en/ship_affix.json", "ship_affix");
-
-            var bubblesLoaded = 0;
-            for(let i = 1; i <= 11; i++) {
-                let img = new Image();
-                img.onload = function() {
-                    bubbles[i-1] = img;
-                    bubblesLoaded++;
-                }
-                img.src = "pics/bubble/" + i + ".png";
-            }
             let startTween = function() {
                 if(bubblesLoaded !== 11) return setTimeout(startTween, 500);
-                var layer = new Konva.Layer();
+                bubbleLayer.clear();
                 for(let i = 0; i < 8; i++) {
                     let bubble = bubbles[Math.floor(Math.random() * bubbles.length)];
-                    layer.add(createTween(new Konva.Image({
+                    bubbleLayer.add(createTween(new Konva.Image({
                         image: bubble,
                         width: bubble.width,
                         height: bubble.height
                     })));
                 }
-                stage.add(layer);
             }
             let createTween = function(bubble) {
                 let bubbleImg = bubbles[Math.floor(Math.random() * bubbles.length)];
@@ -275,27 +264,48 @@
                     let tween = new Konva.Tween({
                         node: bubble,
                         duration: 1,
-                        opacity: 1
+                        opacity: 1,
+                        onFinish: () => {
+                            let tween2 = new Konva.Tween({
+                                node: bubble,
+                                duration: 1,
+                                opacity: 0,
+                                onFinish: () => createTween(bubble)
+                            });
+
+                            tween2.play();
+                        }
                     });
 
-                    setTimeout(() => {
-                        let tween2 = new Konva.Tween({
-                            node: bubble,
-                            duration: 1,
-                            opacity: 0
-                        });
-
-                        setTimeout(() => {
-                            createTween(bubble);
-                        }, 1000);
-                        tween2.play();
-
-                    }, 1000);
                     tween.play();
-
                 }, Math.random() * 2000);
                 return bubble;
             }
+            var stage = new Konva.Stage({
+              container: 'ani',
+              width: 800,
+              height: 480
+            });
+
+            var layer = new Konva.Layer();
+            var bubbleLayer = new Konva.Layer();
+            stage.add(layer);
+            stage.add(bubbleLayer);
+
+            get("cgs.json?v=3", "cgs");
+            get("https://raw.githubusercontent.com/KC3Kai/kc3-translations/master/data/en/ships.json", "ships");
+            get("https://raw.githubusercontent.com/KC3Kai/kc3-translations/master/data/en/ship_affix.json", "ship_affix");
+
+            var bubblesLoaded = 0;
+            for(let i = 1; i <= 11; i++) {
+                let img = new Image();
+                img.onload = function() {
+                    bubbles[i-1] = img;
+                    bubblesLoaded++;
+                }
+                img.src = "pics/bubble/" + i + ".png";
+            }
+            startTween();
         </script>
     </body>
 </html>
