@@ -109,9 +109,6 @@
                     usearmor: !!document.getElementById('usearmor').checked
                 }
 
-                rawdata = JSON.parse(JSON.stringify(data));
-                data.graphmax += 1;
-                data.critical = data.critical ? 1.5 : 1.0;
 
                 if(prevdata != null && (prevdata.maxhp != data.maxhp || data.currhp  > data.maxhp)) {
                     data.currhp += data.maxhp - (prevdata.maxhp || data.maxhp);
@@ -120,6 +117,10 @@
                     document.getElementById('currhp').max = data.maxhp;
                 }
 
+                rawdata = JSON.parse(JSON.stringify(data));
+                data.graphmax += 1;
+                data.critical = data.critical ? 1.5 : 1.0;
+                
                 document.getElementById('postcapdata').style = data.cap <= 0 ? "display:none" : "display:block";
                 document.getElementById('saiun').disabled = !data.engage;
 
