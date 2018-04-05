@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
     <head>
+        <script src="https://cdn.rawgit.com/konvajs/konva/2.0.2/konva.min.js"></script>
         <title>Flat is Justice! - wedding screen generator</title>
         <meta name="theme-color" content="#082E6B"/>
         <meta name=viewport content="width=device-width, initial-scale=1">
@@ -24,17 +25,20 @@
         Original img: <input type="checkbox" id="original" onchange="update();" onclick="update();"><br>
 
         <b>Generated img:</b><br>
-        <canvas id="graph" width="786" height="435" style="border:1px solid black;"></canvas><br>
+        <canvas id="graph" width="800" height="480" style="border:1px solid black;"></canvas><br>
+
+        <b>Animated:</b><br>
+        <div id="ani" style="border:1px solid black;width:800px;height:480px;margin:5px"></div><br>
 
         <script type="text/javascript">
             var canvas = document.getElementById("graph");
             var parser = new DOMParser();
             var data = {};
+            var bubbles = [], activeBubbles = [];
 
             function update() {
                 var original = !!document.getElementById('original').checked;
                 var context = canvas.getContext("2d");
-                var img = new Image();
 
                 let e = document.getElementById("cgs");
                 let cg = JSON.parse(e.options[e.selectedIndex].value);
@@ -42,22 +46,52 @@
                 if(cg.weda[0] == 0 && cg.weda[1] == 0 && cg.wedb[0] == 0 && cg.wedb[1] == 0)
                     alert("Missing correct api_start2 data to display this seasonal correctly")
 
-                img.onload = function() {
-                    canvas.height = img.height;
-                    canvas.width = img.width;
-                    context.drawImage(img, 0, 0);
-                    img.onload = function() {
+                var roomImg = new Image();
+                roomImg.onload = function() {
+                    canvas.height = roomImg.height;
+                    canvas.width = roomImg.width;
+                    context.drawImage(roomImg, 0, 0);
+
+                    var bg = new Konva.Image({
+                      x: 0,
+                      y: 0,
+                      image: roomImg,
+                    });
+                    layer.add(bg);
+
+                    var cgimg = new Image();
+                    cgimg.onload = function() {
                         let scale = 1.7475;
                         let cgscale = original ? 1.7475 : 1;
-                        context.drawImage(img, 400 - (cg.weda[0] + cg.wedb[0] / 2) * scale, 10 - cg.weda[1] * scale, img.width * cgscale, img.height * cgscale);
-                        img.onload = function() {
-                            context.drawImage(img, 320, 270);
+                        let x =  400 - (cg.weda[0] + cg.wedb[0] / 2) * scale, y = 10 - cg.weda[1] * scale
+                            w = cgimg.width * cgscale, h = cgimg.height * cgscale;
+                        context.drawImage(cgimg, x, y, w, h);
+
+                        var shipcg = new Konva.Image({
+                          x: x,
+                          y: y,
+                          image: cgimg,
+                        });
+                        layer.add(shipcg);
+
+                        var ringimg = new Image();
+                        ringimg.onload = function() {
+                            context.drawImage(ringimg, 320, 270);
+
+                            var ring = new Konva.Image({
+                              x: 320,
+                              y: 270,
+                              image: ringimg,
+                            });
+                            layer.add(ring);
+                            stage.add(layer);
+                            startTween();
                         }
-                        img.src = "pics/ring.png";
+                        ringimg.src = "pics/ring.png";
                     }
-                    img.src = `${original ? "cgs" : "hd_cgs"}/${cg.url}.png`;
+                    cgimg.src = `${original ? "cgs" : "hd_cgs"}/${cg.url}.png`;
                 }
-                img.src = "pics/room.png";
+                roomImg.src = "pics/room.png";
             }
             function get(url, name) {
                 var xmlhttp = new XMLHttpRequest();
@@ -193,9 +227,75 @@
                 }
                 return root;
             }
+            var stage = new Konva.Stage({
+              container: 'ani',
+              width: 800,
+              height: 480
+            });
+
+            var layer = new Konva.Layer();
+
             get("cgs.json?v=3", "cgs");
             get("https://raw.githubusercontent.com/KC3Kai/kc3-translations/master/data/en/ships.json", "ships");
             get("https://raw.githubusercontent.com/KC3Kai/kc3-translations/master/data/en/ship_affix.json", "ship_affix");
+
+            var bubblesLoaded = 0;
+            for(let i = 1; i <= 11; i++) {
+                let img = new Image();
+                img.onload = function() {
+                    bubbles[i-1] = img;
+                    bubblesLoaded++;
+                }
+                img.src = "pics/bubble/" + i + ".png";
+            }
+            let startTween = function() {
+                if(bubblesLoaded !== 11) return setTimeout(startTween, 500);
+                var layer = new Konva.Layer();
+                for(let i = 0; i < 8; i++) {
+                    let bubble = bubbles[Math.floor(Math.random() * bubbles.length)];
+                    layer.add(createTween(new Konva.Image({
+                        image: bubble,
+                        width: bubble.width,
+                        height: bubble.height
+                    })));
+                }
+                stage.add(layer);
+            }
+            let createTween = function(bubble) {
+                let bubbleImg = bubbles[Math.floor(Math.random() * bubbles.length)];
+                bubble.setImage(bubbleImg);
+                bubble.width(bubbleImg.width);
+                bubble.height(bubbleImg.height);
+                bubble.opacity(0);
+                bubble.setAbsolutePosition({
+                    x: Math.floor(Math.random() * 800), 
+                    y: Math.floor(Math.random() * 480)
+                });
+                setTimeout(() => {
+                    let tween = new Konva.Tween({
+                        node: bubble,
+                        duration: 1,
+                        opacity: 1
+                    });
+
+                    setTimeout(() => {
+                        let tween2 = new Konva.Tween({
+                            node: bubble,
+                            duration: 1,
+                            opacity: 0
+                        });
+
+                        setTimeout(() => {
+                            createTween(bubble);
+                        }, 1000);
+                        tween2.play();
+
+                    }, 1000);
+                    tween.play();
+
+                }, Math.random() * 2000);
+                return bubble;
+            }
         </script>
     </body>
 </html>
