@@ -801,6 +801,16 @@
                 "url" : "Murasame_Saury",
                 "weda" : [160, 100],
                 "wedb" : [118, 100]
+            }, {
+                "name" : "Spring",
+                "url" : "Murasame_Spring",
+                "weda" : [82, -8],
+                "wedb" : [76, 128]
+            }, {
+                "name" : "Spring 改二",
+                "url" : "Murasame_k2_Spring",
+                "weda" : [82, -8],
+                "wedb" : [76, 128]
             }
         ]
     }, {
@@ -862,6 +872,11 @@
                 "url" : "Arare",
                 "weda" : [198, 100],
                 "wedb" : [145, 141]
+            }, {
+                "name" : "改二",
+                "url" : "Arare_k2",
+                "weda" : [124, -8],
+                "wedb" : [84, 124]
             }, {
                 "name" : "Xmas",
                 "url" : "Arare_Xmas",
@@ -2524,6 +2539,11 @@
                 "url" : "Yayoi_Valentine",
                 "weda" : [92, 0],
                 "wedb" : [104, 112]
+            }, {
+                "name" : "Spring",
+                "url" : "Yayoi_Spring",
+                "weda" : [90, -8],
+                "wedb" : [88, 112]
             }
         ]
     }, {
