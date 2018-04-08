@@ -105,9 +105,15 @@
                         }
                     }
                     tl: if(status.isInsideHourlies) {
+                        line = line.replace("| ", "|")
                         if(line.indexOf("|") == 0) {
-                            let currentLine = line.substring(2).split(" = ")[0];
+                            let currentLine = line.substring(1).split(" = ")[0];
                             let scenario = currentLine.substring(0, 2) + ":00";
+                            if(tlData[scenario] == undefined)
+                                if(tlData[scenario + "Kai"] != undefined)
+                                    scenario = scenario + "Kai";
+                                else if(tlData[scenario + "Kai2"] != undefined)
+                                    scenario = scenario + "Kai2";
 
                             line = handleArgs(line, " " + currentLine, scenario, [currentLine.substring(2)], tlData);
                         }
