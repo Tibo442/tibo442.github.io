@@ -48,7 +48,7 @@
                             let scenario = status.data.scenario;
                             scenario = scenario.replace(/\(Kai .+\)/, "").trim();
                             delete status.data.scenario;
-                            tlData[scenario + status.data.audio.replace(shipName, "").split("-")[0]] = status.data;
+                            tlData[scenario + status.data.audio.replace(shipName, "").split("-")[0].replace(/ /g, "").replace("Ni", "2")] = status.data;
                             continue;
                         } 
                         console.log(line);
@@ -79,6 +79,7 @@
 
                 for(let line of splitW) {
                     if(line.indexOf("}}") >= 0) status.isInsideQuotes = false;
+                    if(line.indexOf("}}") >= 0) status.isInsideHourlies = false;
                     tl: if(status.isInsideQuotes) {
                         if(line.indexOf("|") == 0) {
                             let currentLine = line.substring(1).split(" = ")[0];
@@ -102,10 +103,18 @@
 
                             line = handleArgs(line, currentLine, scenario, args, tlData);
                         }
+                    }
+                    tl: if(status.isInsideHourlies) {
+                        if(line.indexOf("|") == 0) {
+                            let currentLine = line.substring(2).split(" = ")[0];
+                            let scenario = currentLine.substring(0, 2) + ":00";
 
+                            line = handleArgs(line, " " + currentLine, scenario, [currentLine.substring(2)], tlData);
+                        }
                     }
                     reconstruction += line + "\n";
                     if(line.indexOf("{{ShipQuotes") == 0) status.isInsideQuotes = true;
+                    if(line.indexOf("{{Shiphourly") == 0) status.isInsideHourlies = true;
                 }
 
                 document.getElementById("output").value = reconstruction;
@@ -113,9 +122,9 @@
     		}
 
             function handleArgs(oriline, currentLine, scenario, args, tlData) {
-                let data = tlData[scenario];
+                let data = tlData[scenario.trim()];
 
-                if(args.length == 0) {
+                if(args.length == 0 || args[0] == "JP") {
                     if(data == undefined) {
                         console.error(scenario, " is undefined");
                         return oriline;
@@ -124,7 +133,7 @@
                 };
                 if(args[0] == "Note")
                     return oriline;
-                if(args[0] == "En") {
+                if(args[0] == "En" || args[0] == "EN") {
                     if(data == undefined) {
                         console.error(scenario, " is undefined");
                         return oriline;
