@@ -38,21 +38,23 @@
 
                 let status = {};
                 for(let line of splitE) {
-                    if(line.indexOf("{{ShipquoteHeader}}") == 0) status.isInsideQuotes = true;
+                    if(line.indexOf("{{ShipquoteHeader") == 0) status.isInsideQuotes = true;
                     else if(line.indexOf("<references/>") >= 0) status.isInsideQuotes = false;
                     else if(line.indexOf("{{ShipquoteKai") == 0) {
                         delete status.currentLine;
                         status.data = {};
-                    } else if(line.indexOf("}}") == 0) {
-                        let scenario = status.data.scenario;
-                        scenario = scenario.replace(/\(Kai .+\)/, "").trim();
-                        delete status.data.scenario;
-                        tlData[scenario + status.data.audio.replace(shipName, "").split("-")[0]] = status.data;
                     } else if(status.isInsideQuotes) {
+                        if(line.indexOf("}}") == 0) {
+                            let scenario = status.data.scenario;
+                            scenario = scenario.replace(/\(Kai .+\)/, "").trim();
+                            delete status.data.scenario;
+                            tlData[scenario + status.data.audio.replace(shipName, "").split("-")[0]] = status.data;
+                            continue;
+                        } 
                         console.log(line);
                         if(line.indexOf("|") == 0) {
-                            status.currentLine = line.substring(1).split(" = ")[0];
-                            line = line.split(" = ")[1];
+                            status.currentLine = line.substring(1).split(" =")[0].trim();
+                            line = line.split(" =")[1].trim();
                             console.log("CL", status.currentLine);
                         } else if(status.currentLine) {
                             status.data[status.currentLine] += "<br>";
