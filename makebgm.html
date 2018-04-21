@@ -12,6 +12,13 @@
                 width: 600px;
                 height: 200px;
             }
+            table > tr > th, table > tr > td, table > * > tr > th, table > * > tr > td {
+                border: 1px #aaa solid;
+                padding: 0.2em
+            }
+            table {
+                width: 700px;
+            }
         </style>
     </head>
     <body>
@@ -24,156 +31,157 @@
         <br>
         <br>
         Output: <br>
-        <textarea id="output"></textarea>
+        <table><tbody id="table"></tbody></table><br>
+        <textarea id="output"></textarea><br>
 
     	<script type="text/javascript">
             var bgmidmap = {
                 "-171": "Summer 2016 Event Main Operation: Normal Node BGM", // LBAS = 70
                 "0"  : "No BGM",
 
-                "1"  : "砲雷撃戦、始め！<br>''Commence Gun & Torpedo Battle!''",
-                "2"  : "夜戦<br>''Night Battle''",
-                "3"  : "全艦娘、突撃！<br>''All Shipgirls, Attack!''",
-                "4"  : "二水戦の航跡<br>''Wake of the Second Torpedo Squadron''",
-                "5"  : "次発装填、再突入！<br>''Next Round Loaded, Re-engage!''",
-                "6"  : "我、敵機動部隊ト交戦ス<br>''Battle the Enemy Task Force!''",
-                "7"  : "海上護衛戦<br>''Maritime Escort Warfare''",
-                "8"  : "索敵機、発艦始め！<br>''Scout Planes, Take Off!''",
-                "9"  : "敵艦隊、見ゆ！<br>''Enemy Fleet, Spotted!''",
-                "10" : "暁の水平線に (インストver)<br>''At Dawn's Horizon (instrumental)''",
-                "11" : "第五戦隊の出撃<br>''Sortie of the Fifth Squad''",
-                "12" : "飛龍の反撃<br>''Hiryū's counterattack''",
-                "13" : "華の二水戦<br>''The Splendid 2nd Torpedo Squadron''",
+                "1"  : "砲雷撃戦、始め！<br><i>Commence Gun & Torpedo Battle!</i>",
+                "2"  : "夜戦<br><i>Night Battle</i>",
+                "3"  : "全艦娘、突撃！<br><i>All Shipgirls, Attack!</i>",
+                "4"  : "二水戦の航跡<br><i>Wake of the Second Torpedo Squadron</i>",
+                "5"  : "次発装填、再突入！<br><i>Next Round Loaded, Re-engage!</i>",
+                "6"  : "我、敵機動部隊ト交戦ス<br><i>Battle the Enemy Task Force!</i>",
+                "7"  : "海上護衛戦<br><i>Maritime Escort Warfare</i>",
+                "8"  : "索敵機、発艦始め！<br><i>Scout Planes, Take Off!</i>",
+                "9"  : "敵艦隊、見ゆ！<br><i>Enemy Fleet, Spotted!</i>",
+                "10" : "暁の水平線に (インストver)<br><i>At Dawn's Horizon (instrumental)</i>",
+                "11" : "第五戦隊の出撃<br><i>Sortie of the Fifth Squad</i>",
+                "12" : "飛龍の反撃<br><i>Hiryū's counterattack</i>",
+                "13" : "華の二水戦<br><i>The Splendid 2nd Torpedo Squadron</i>",
 
-                "14" : "海原へ<br>''Into the Ocean''",
-                "15" : "強襲！空母機動部隊<br>''Assault! Aircraft Carrier Task Force''",
-                "16" : "MI作戦<br>''Operation MI''",
-                "17" : "シズメシズメ<br>''Sink Sink''",
-                // "18" : "作戦発動<br>''Commence Operation''",
+                "14" : "海原へ<br><i>Into the Ocean</i>",
+                "15" : "強襲！空母機動部隊<br><i>Assault! Aircraft Carrier Task Force</i>",
+                "16" : "MI作戦<br><i>Operation MI</i>",
+                "17" : "シズメシズメ<br><i>Sink Sink</i>",
+                // "18" : "作戦発動<br><i>Commence Operation</i>",
 
-                "19" : "士魂の護り<br>''Protection of the Warrior Spirit''",
-                "20" : "眼下の伊号<br>''The I-Class Below Us''",
+                "19" : "士魂の護り<br><i>Protection of the Warrior Spirit</i>",
+                "20" : "眼下の伊号<br><i>The I-Class Below Us</i>",
 
-                "21" : "敵大型超弩級戦艦を叩け！<br>''Assault the Enemy's Super Dreadnought!''",
-                "22" : "決戦！鉄底海峡を抜けて<br>''Decisive Battle! Escape from Ironbottom Sound!''",
+                "21" : "敵大型超弩級戦艦を叩け！<br><i>Assault the Enemy's Super Dreadnought!</i>",
+                "22" : "決戦！鉄底海峡を抜けて<br><i>Decisive Battle! Escape from Ironbottom Sound!</i>",
 
-                "23" : "冬の抜錨！<br>''Sallying Forth in Winter!''",
+                "23" : "冬の抜錨！<br><i>Sallying Forth in Winter!</i>",
                 // "24" : "Savior of Song",
 
-                "25" : "秋月の空<br>''Sky of the Autumn Moon''",
-                "26" : "防空駆逐艦、参戦！<br>''Anti-air destroyer, engage!''",
-                "27" : "連合艦隊の出撃<br>''Combined Fleet's Sortie''",
-                "28" : "艦隊決戦<br>''Fleet decisive battle''",
+                "25" : "秋月の空<br><i>Sky of the Autumn Moon</i>",
+                "26" : "防空駆逐艦、参戦！<br><i>Anti-air destroyer, engage!</i>",
+                "27" : "連合艦隊の出撃<br><i>Combined Fleet's Sortie</i>",
+                "28" : "艦隊決戦<br><i>Fleet decisive battle</i>",
 
-                "29" : "冬の艦隊<br>''Winter Fleet''",
+                "29" : "冬の艦隊<br><i>Winter Fleet</i>",
 
-                "30" : "特型駆逐艦<br>''Special-type Destroyer''",
-                "31" : "吹雪、出撃す<br>''Fubuki, Sortieing!''",
-                "32" : "吹雪 (A)<br>''Fubuki (Anime ED)''",
-                "33" : "吹雪 (B)<br>''Fubuki (Anime ED)''",
-                "34" : "海色（みいろ） (A)<br>''Miiro (Anime OP)''",
-                "35" : "海色（みいろ） (B)<br>''Miiro (Anime OP)''",
-                "36" : "海色（みいろ） (C)<br>''Miiro (Anime OP)''",
+                "30" : "特型駆逐艦<br><i>Special-type Destroyer</i>",
+                "31" : "吹雪、出撃す<br><i>Fubuki, Sortieing!</i>",
+                "32" : "吹雪 (A)<br><i>Fubuki (Anime ED)</i>",
+                "33" : "吹雪 (B)<br><i>Fubuki (Anime ED)</i>",
+                "34" : "海色（みいろ） (A)<br><i>Miiro (Anime OP)</i>",
+                "35" : "海色（みいろ） (B)<br><i>Miiro (Anime OP)</i>",
+                "36" : "海色（みいろ） (C)<br><i>Miiro (Anime OP)</i>",
 
-                "37" : "新編「海上護衛隊」抜錨！<br>''New Maritime Escort Fleet, setting sail!''",
+                "37" : "新編「海上護衛隊」抜錨！<br><i>New Maritime Escort Fleet, setting sail!</i>",
 
-                "38" : "睦月型駆逐艦の戦い<br>''Battle of Mutsuki-Class Destroyers''",
-                "39" : "連合艦隊、西へ<br>''Combined Fleet, Westward''",
-                "40" : "深海への誘い<br>''Invitation to the Abyss''",
-                "41" : "モドレナイノ<br>''No Going Back''",
-                // "??" : "敵地侵入<br>''Invading Enemy Territory''",
-                // "??" : "第三十駆逐隊、抜錨準備！<br>''30th Destroyer Division, prepare to sortie!''",
+                "38" : "睦月型駆逐艦の戦い<br><i>Battle of Mutsuki-Class Destroyers</i>",
+                "39" : "連合艦隊、西へ<br><i>Combined Fleet, Westward</i>",
+                "40" : "深海への誘い<br><i>Invitation to the Abyss</i>",
+                "41" : "モドレナイノ<br><i>No Going Back</i>",
+                // "??" : "敵地侵入<br><i>Invading Enemy Territory</i>",
+                // "??" : "第三十駆逐隊、抜錨準備！<br><i>30th Destroyer Division, prepare to sortie!</i>",
 
-                "44" : "加賀岬<br>''Cape Kaga''",
+                "44" : "加賀岬<br><i>Cape Kaga</i>",
 
-                "45" : "艦隊の再集結<br>''Regathering of the Fleet''",
-                "46" : "出撃！第八艦隊<br>''Sortie! 8th Division''",
-                "47" : "艦隊、ソロモン海へ！<br>''Fleet, toward the Solomon Sea!''",
-                "48" : "深海水上打撃部隊<br>''Abyssal Surface Task Force''",
-                "49" : "アイアンボトムサウンド<br>''Ironbottom Sound''",
-                "50" : "激突！夜間砲撃戦！<br>''Clash! Exchanging Fire at Night!''",
+                "45" : "艦隊の再集結<br><i>Regathering of the Fleet</i>",
+                "46" : "出撃！第八艦隊<br><i>Sortie! 8th Division</i>",
+                "47" : "艦隊、ソロモン海へ！<br><i>Fleet, toward the Solomon Sea!</i>",
+                "48" : "深海水上打撃部隊<br><i>Abyssal Surface Task Force</i>",
+                "49" : "アイアンボトムサウンド<br><i>Ironbottom Sound</i>",
+                "50" : "激突！夜間砲撃戦！<br><i>Clash! Exchanging Fire at Night!</i>",
 
-                //"51" : "鎮守府秋刀魚祭り<br>''Mackerel Pike Festival''",
-                "51" : "艦隊集結<br>''Fleet Gathering''",
-                "52" : "海上輸送作戦<br>''Marine Transport Operation''",
-                "53" : "水雷戦隊の反撃<br>''The Torpedo Squadron's Counterattack''",
-                "54" : "水雷戦隊の反撃<br>''The Torpedo Squadron's Counterattack (debuff)''",
-                "55" : "待ち伏せの夜戦<br>''Night Battle Ambush''",
-                "56" : "待ち伏せの夜戦<br>''Night Battle Ambush (debuff)''",
+                //"51" : "鎮守府秋刀魚祭り<br><i>Mackerel Pike Festival</i>",
+                "51" : "艦隊集結<br><i>Fleet Gathering</i>",
+                "52" : "海上輸送作戦<br><i>Marine Transport Operation</i>",
+                "53" : "水雷戦隊の反撃<br><i>The Torpedo Squadron's Counterattack</i>",
+                "54" : "水雷戦隊の反撃<br><i>The Torpedo Squadron's Counterattack (debuff)</i>",
+                "55" : "待ち伏せの夜戦<br><i>Night Battle Ambush</i>",
+                "56" : "待ち伏せの夜戦<br><i>Night Battle Ambush (debuff)</i>",
 
                 "57" : "Winter 2016 Event Main Operation Map Screen BGM",
                 "58" : "Winter 2016 Event Main Operation Normal Node BGM",
                 "59" : "Winter 2016 Event Boss Node BGM",
                 "60" : "Winter 2016 Event Extra Operation Normal Node BGM",
 
-                "61" : "戦場海域<br>''Battlewaters''",
-                "62" : "水底から<br>''From Bottom of the Water''",
+                "61" : "戦場海域<br><i>Battlewaters</i>",
+                "62" : "水底から<br><i>From Bottom of the Water</i>",
                 "63" : "Spring 2016 Event Battle E-4: Normal Node BGM",
                 "64" : "Spring 2016 Event Battle E-6 and E-7: Normal Node BGM",
                 "65" : "Spring 2016 Event Main Operation Map Screen BGM",
                 "66" : "Spring 2016 Event Extra Operation Map Screen BGM",
                 "67" : "Spring 2016  Event Main Operation Second Main Boss Node BGM",
-                "68" : "波濤を超えて<br>''Beyond the Surging Sea''",
+                "68" : "波濤を超えて<br><i>Beyond the Surging Sea</i>",
 
                 // "69" : "Summer 2016 Event Map Screen BGM",
                 "70" : "Summer 2016 Event Main Operation Normal Node BGM",
-                "71" : "水着の出撃<br>''Mizugi no Shutsugeki''",
+                "71" : "水着の出撃<br><i>Mizugi no Shutsugeki</i>",
                 "72" : "Summer 2016 Event E-2 and E-3 Boss Node BGM",
-                "73" : "戦争を忌むもの<br>''Those Who Detest War''",
-                "74" : "基地航空隊<br>''Land Base Air Corps''",
+                "73" : "戦争を忌むもの<br><i>Those Who Detest War</i>",
+                "74" : "基地航空隊<br><i>Land Base Air Corps</i>",
 
-                "75" : "海鷲の翼<br>''Wings of Sea Eagles''",
+                "75" : "海鷲の翼<br><i>Wings of Sea Eagles</i>",
 
-                "76" : "鎮守府秋刀魚祭り改<br>''Mackerel Pike Festival Kai''",
-                "77" : "艦娘音頭<br>''The Shipgirl Festival Dance''",
+                "76" : "鎮守府秋刀魚祭り改<br><i>Mackerel Pike Festival Kai</i>",
+                "77" : "艦娘音頭<br><i>The Shipgirl Festival Dance</i>",
 
                 // "??" : "Fall 2016 Event Main Operation: Map Screen BGM",
-                // "??" : "発令！ 艦隊作戦第三法<br>''Proclamation! Fleet Strategy Plan #3''",
+                // "??" : "発令！ 艦隊作戦第三法<br><i>Proclamation! Fleet Strategy Plan #3</i>",
                 "80" : "Summer 2016 Event Main Operation: Normal Node BGM",
                 "81" : "Fall 2016 Event Main Operation: Boss Node BGM",
-                "82" : "渚を越えて<br>''Beyond the Shore''",
+                "82" : "渚を越えて<br><i>Beyond the Shore</i>",
 
-                "83" : "聖夜の母港<br>''Home Port on Christmas Eve''",
-                "84" : "師走の鎮守府<br>''December at the Naval Base''",
-                "85" : "迎春の鎮守府<br>''New Years at the Naval Base''",
+                "83" : "聖夜の母港<br><i>Home Port on Christmas Eve</i>",
+                "84" : "師走の鎮守府<br><i>December at the Naval Base</i>",
+                "85" : "迎春の鎮守府<br><i>New Years at the Naval Base</i>",
 
                 // "86" : "Winter 2017 Event: Map Screen BGM",
                 "87" : "Winter 2017 Event: Normal Node BGM",
                 "88" : "Winter 2017 Event: Boss Node BGM",
-                "89" : "偵察戦力緊急展開<br>''Scout Force Emergency Deployment''",
+                "89" : "偵察戦力緊急展開<br><i>Scout Force Emergency Deployment</i>",
 
-                "90" : "北東方面艦隊の集結<br>''Gathering of the Northeastern Fleet''",
-                "91" : "第五艦隊の奮戦<br>''Hard Fight of the Fifth Fleet''",
-                "92" : "北方艦隊決戦<br>''Decisive Northen Naval Battle''",
-                "93" : "士魂の反撃<br>''Counterattack of the Warrior Spirit''",
+                "90" : "北東方面艦隊の集結<br><i>Gathering of the Northeastern Fleet</i>",
+                "91" : "第五艦隊の奮戦<br><i>Hard Fight of the Fifth Fleet</i>",
+                "92" : "北方艦隊決戦<br><i>Decisive Northen Naval Battle</i>",
+                "93" : "士魂の反撃<br><i>Counterattack of the Warrior Spirit</i>",
 
-                "94" : "連合艦隊旗艦<br>''Combined Fleet Flagship''",
+                "94" : "連合艦隊旗艦<br><i>Combined Fleet Flagship</i>",
 
                 "95" : "Summer 2017 Event Main Operation: Map Screen BGM",
                 "96" : "Summer 2017 Event E-2 and E-3: Normal Battle BGM",
                 "97" : "Summer 2017 Event E-2 and E-3: Boss Battle BGM",
                 "98" : "Summer 2017 Event E-4: Normal Battle BGM",
                 "99" : "Summer 2017 Event E-4, E-5 and E-6: Boss Battle BGM",
-                "100": "西方再打通！欧州救援作戦 最終海域 ボス戦<br>''Western revival! European relief strategy final battle boss fight''",
+                "100": "西方再打通！欧州救援作戦 最終海域 ボス戦<br><i>Western revival! European relief strategy final battle b</i>s fight''",
 
-                "101": "月夜海<br>''Moonlit Sea''",
-                "102": "鎮守府秋刀魚祭り改二<br>''Naval Base Saury Festival Kai Ni''",
+                "101": "月夜海<br><i>Moonlit Sea</i>",
+                "102": "鎮守府秋刀魚祭り改二<br><i>Naval Base Saury Festival Kai Ni</i>",
 
-                "103": "捷号決戦前夜<br>''Operation Sho-go's Eve''",
-                "104": "捷一号作戦<br>''Operation Sho-ichi-go''",
-                "105": "激戦！遊撃部隊<br>''Intense Battle! Strike Force''",
-                "106": "海峡へ<br>''To the Strait''",
-                "107": "西村艦隊の戦い<br>''Battles of the Nishimura Fleet''",
+                "103": "捷号決戦前夜<br><i>Operation Sho-go's Eve</i>",
+                "104": "捷一号作戦<br><i>Operation Sho-ichi-go</i>",
+                "105": "激戦！遊撃部隊<br><i>Intense Battle! Strike Force</i>",
+                "106": "海峡へ<br><i>To the Strait</i>",
+                "107": "西村艦隊の戦い<br><i>Battles of the Nishimura Fleet</i>",
 
-                "108": "祈り<br>''Prayer''",
+                "108": "祈り<br><i>Prayer</i>",
 
-                "109": "出擊前夜<br>''Eve of Sortie''",
+                "109": "出擊前夜<br><i>Eve of Sortie</i>",
                 "110": "Winter 2018 Event Main Operation: Normal Battle BGM",
-                "111": "シブヤン海海戦<br>''Battle of the Sibuyan Sea''",
-                "112": "多号作戦改<br>''Operation Ta-gō Kai''",
-                "113": "友軍艦隊！反撃開始<br>''Friend Fleet! Begin Counterattack''",
-                "114": "鶴墜ちる海<br>''The Sea Where the Crane Falls''",
-                "115": "暁の水平線に勝利を！<br>''Victory over the Dawn Horizon''!"
+                "111": "シブヤン海海戦<br><i>Battle of the Sibuyan Sea</i>",
+                "112": "多号作戦改<br><i>Operation Ta-gō Kai</i>",
+                "113": "友軍艦隊！反撃開始<br><i>Friend Fleet! Begin Counterattack</i>",
+                "114": "鶴墜ちる海<br><i>The Sea Where the Crane Falls</i>",
+                "115": "暁の水平線に勝利を！<br><i>Victory over the Dawn Horizon</i>!"
             }
     		function update() {
                 let bgm = JSON.parse(document.getElementById("mstmapbgm").value);
@@ -202,9 +210,19 @@
 !Boss Node (Night Battle)
 !Notes
 `
+                let htmlstr = `<tr style="display: table-row;">
+<th>Map
+</th><th>Overworld${lbas ? `
+</th><th>Enemy's Land-Base Air Raids` : ``}
+</th><th>Normal Node (Day Battle)
+</th><th>Normal Node (Night Battle)
+</th><th>Boss Node (Day Battle)
+</th><th>Boss Node (Night Battle)
+</th></tr>`
                 for(let mapnum = 1; mapnum < status.length; mapnum++) {
                     let mapdata = status[mapnum];
                     str += `|-\n!${mapid > 10 ? "E" : mapid}-${mapnum}\n`
+                    htmlstr += `<tr style="display: table-row;"><th>${mapid > 10 ? "E" : mapid}-${mapnum}</th>`
                     for(let bgm = 0; bgm < mapdata.length; bgm++) {
                         let bgmid = mapdata[bgm];
                         console.log(mapnum, bgm, bgmid, mapdata)
@@ -246,12 +264,16 @@
                         if(rowspan + colspan > 2)
                             spans = spans.trim() + "|"
 
-                        str += `|${spans}${bgmidmap[bgmid] || `BGM id: ${bgmid}`}\n`
+                        str += `|${spans}${(bgmidmap[bgmid] || `BGM id: ${bgmid}`).replace("<i>", "''").replace("</i>", "''")}\n`
+
+                        htmlstr += `<td ${spans}>${bgmidmap[bgmid] || `BGM id: ${bgmid}`}</td>`
                     }
                     str += `|\n`;
+                    htmlstr += `</tr>`;
                 }
                 str += `|}`
                 document.getElementById("output").value = str;
+                document.getElementById("table").innerHTML = htmlstr;
                 console.log(str)
     		}
 
@@ -293,6 +315,25 @@
                 return rowspan;
             }
 
+
+            function get(url, name) {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+                        if (xmlhttp.status == 200) {
+                            document.getElementById("mstmapbgm").value = xmlhttp.responseText;
+                            let highestmapnum = JSON.parse(xmlhttp.responseText).reduce((a, b) => Math.max(a, b.api_maparea_id), 0);
+                            document.getElementById("mapid").value = highestmapnum;
+                            document.getElementById("lbas").checked = highestmapnum > 10;
+                            update();
+                       }
+                    }
+                };
+                xmlhttp.open("GET", url, true);
+                xmlhttp.send();
+            }
+
+            get("https://raw.githubusercontent.com/Tibo442/api_start2/master/parsed/api_mst_mapbgm.json", "api_mst_mapbgm");
     	</script>
     </body>
 </html>
