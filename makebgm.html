@@ -9,7 +9,7 @@
         		display: inline-block;
         	}
             textarea {
-                width: 600px;
+                width: 700px;
                 height: 200px;
             }
             table > tr > th, table > tr > td, table > * > tr > th, table > * > tr > td {
@@ -17,13 +17,13 @@
                 padding: 0.2em
             }
             table {
-                width: 700px;
+                max-width: 700px;
             }
         </style>
     </head>
     <body>
         <div>
-            api_mst_mapbgm <a href="https://github.com/Tibo442/api_start2/blob/master/parsed/api_mst_mapbgm.json">[?]</a><br>
+            start2 OR api_mst_mapbgm <a href="https://github.com/Tibo442/api_start2/blob/master/parsed/api_mst_mapbgm.json">[?]</a><br>
             <textarea id="mstmapbgm" onchange="update()"></textarea><br>
             World ID: <input type="number" id="mapid" min="0" max="999" step="1" value="41" onchange="update();" onclick="update();">
             LBAS: <input type="checkbox" id="lbas" checked onchange="update();" onclick="update();"><br>
@@ -184,22 +184,31 @@
                 "115": "暁の水平線に勝利を！<br><i>Victory over the Dawn Horizon</i>!"
             }
     		function update() {
-                let bgm = JSON.parse(document.getElementById("mstmapbgm").value);
+                let input = JSON.parse(document.getElementById("mstmapbgm").value);
+                let bgm;
+                if(input.api_mst_mapbgm !== undefined)
+                    bgm = input.api_mst_mapbgm;
+                else 
+                    bgm = input;
                 let mapid = parseInt(document.getElementById("mapid").value, 10);
                 let lbas = !!document.getElementById("lbas").checked;
 
                 let status = [];
                 for(let map of bgm) {
                     if(map.api_maparea_id == mapid) {
-                        if(lbas)
-                            status[map.api_no] = [map.api_moving_bgm, -0xAB, ...map.api_map_bgm, ...map.api_boss_bgm];
-                        else
+                        if(lbas) {
+                            let currlbas = -0xAB;
+                            status[map.api_no] = [map.api_moving_bgm, currlbas, ...map.api_map_bgm, ...map.api_boss_bgm];
+                        } else
                             status[map.api_no] = [map.api_moving_bgm, ...map.api_map_bgm, ...map.api_boss_bgm];
                     }
                 }
+                let mapareaname = mapid;
+                if(input.api_mst_maparea != undefined) 
+                    mapareaname = mapid + " " + ((input.api_mst_maparea.filter((a) => a.api_id == mapid)[0] || {}).api_name || "X"); 
                 console.log(status);
                 let str = `{| class="mw-collapsible mw-collapsed wikitable" style="text-align:center;width:100%"
-!colspan="${lbas ? "8" : "7"}"|<h4 style="margin:0;text-align:left">World ${mapid}</h4>
+!colspan="${lbas ? "8" : "7"}"|<h4 style="margin:0;text-align:left">World ${mapareaname}</h4>
 |-
 !Map
 !Overworld${lbas ? `
@@ -211,6 +220,8 @@
 !Notes
 `
                 let htmlstr = `<tr style="display: table-row;">
+</th><th colspan="${lbas ? "7" : "6"}"><h4 style="margin:0;text-align:left">World ${mapareaname}</h4></tr>
+<tr style="display: table-row;">
 <th>Map
 </th><th>Overworld${lbas ? `
 </th><th>Enemy's Land-Base Air Raids` : ``}
