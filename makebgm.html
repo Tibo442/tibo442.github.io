@@ -1,0 +1,298 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Flat is Justice! - Update TL</title>
+        <meta name="theme-color" content="#082E6B"/>
+        <meta name=viewport content="width=device-width, initial-scale=1">
+        <style type="text/css">
+        	div {
+        		display: inline-block;
+        	}
+            textarea {
+                width: 600px;
+                height: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            api_mst_mapbgm <a href="https://github.com/Tibo442/api_start2/blob/master/parsed/api_mst_mapbgm.json">[?]</a><br>
+            <textarea id="mstmapbgm" onchange="update()"></textarea><br>
+            World ID: <input type="number" id="mapid" min="0" max="999" step="1" value="41" onchange="update();" onclick="update();">
+            LBAS: <input type="checkbox" id="lbas" checked onchange="update();" onclick="update();"><br>
+        </div>
+        <br>
+        <br>
+        Output: <br>
+        <textarea id="output"></textarea>
+
+    	<script type="text/javascript">
+            var bgmidmap = {
+                "-171": "Summer 2016 Event Main Operation: Normal Node BGM", // LBAS = 70
+                "0"  : "No BGM",
+
+                "1"  : "砲雷撃戦、始め！<br>''Commence Gun & Torpedo Battle!''",
+                "2"  : "夜戦<br>''Night Battle''",
+                "3"  : "全艦娘、突撃！<br>''All Shipgirls, Attack!''",
+                "4"  : "二水戦の航跡<br>''Wake of the Second Torpedo Squadron''",
+                "5"  : "次発装填、再突入！<br>''Next Round Loaded, Re-engage!''",
+                "6"  : "我、敵機動部隊ト交戦ス<br>''Battle the Enemy Task Force!''",
+                "7"  : "海上護衛戦<br>''Maritime Escort Warfare''",
+                "8"  : "索敵機、発艦始め！<br>''Scout Planes, Take Off!''",
+                "9"  : "敵艦隊、見ゆ！<br>''Enemy Fleet, Spotted!''",
+                "10" : "暁の水平線に (インストver)<br>''At Dawn's Horizon (instrumental)''",
+                "11" : "第五戦隊の出撃<br>''Sortie of the Fifth Squad''",
+                "12" : "飛龍の反撃<br>''Hiryū's counterattack''",
+                "13" : "華の二水戦<br>''The Splendid 2nd Torpedo Squadron''",
+
+                "14" : "海原へ<br>''Into the Ocean''",
+                "15" : "強襲！空母機動部隊<br>''Assault! Aircraft Carrier Task Force''",
+                "16" : "MI作戦<br>''Operation MI''",
+                "17" : "シズメシズメ<br>''Sink Sink''",
+                // "18" : "作戦発動<br>''Commence Operation''",
+
+                "19" : "士魂の護り<br>''Protection of the Warrior Spirit''",
+                "20" : "眼下の伊号<br>''The I-Class Below Us''",
+
+                "21" : "敵大型超弩級戦艦を叩け！<br>''Assault the Enemy's Super Dreadnought!''",
+                "22" : "決戦！鉄底海峡を抜けて<br>''Decisive Battle! Escape from Ironbottom Sound!''",
+
+                "23" : "冬の抜錨！<br>''Sallying Forth in Winter!''",
+                // "24" : "Savior of Song",
+
+                "25" : "秋月の空<br>''Sky of the Autumn Moon''",
+                "26" : "防空駆逐艦、参戦！<br>''Anti-air destroyer, engage!''",
+                "27" : "連合艦隊の出撃<br>''Combined Fleet's Sortie''",
+                "28" : "艦隊決戦<br>''Fleet decisive battle''",
+
+                "29" : "冬の艦隊<br>''Winter Fleet''",
+
+                "30" : "特型駆逐艦<br>''Special-type Destroyer''",
+                "31" : "吹雪、出撃す<br>''Fubuki, Sortieing!''",
+                "32" : "吹雪 (A)<br>''Fubuki (Anime ED)''",
+                "33" : "吹雪 (B)<br>''Fubuki (Anime ED)''",
+                "34" : "海色（みいろ） (A)<br>''Miiro (Anime OP)''",
+                "35" : "海色（みいろ） (B)<br>''Miiro (Anime OP)''",
+                "36" : "海色（みいろ） (C)<br>''Miiro (Anime OP)''",
+
+                "37" : "新編「海上護衛隊」抜錨！<br>''New Maritime Escort Fleet, setting sail!''",
+
+                "38" : "睦月型駆逐艦の戦い<br>''Battle of Mutsuki-Class Destroyers''",
+                "39" : "連合艦隊、西へ<br>''Combined Fleet, Westward''",
+                "40" : "深海への誘い<br>''Invitation to the Abyss''",
+                "41" : "モドレナイノ<br>''No Going Back''",
+                // "??" : "敵地侵入<br>''Invading Enemy Territory''",
+                // "??" : "第三十駆逐隊、抜錨準備！<br>''30th Destroyer Division, prepare to sortie!''",
+
+                "44" : "加賀岬<br>''Cape Kaga''",
+
+                "45" : "艦隊の再集結<br>''Regathering of the Fleet''",
+                "46" : "出撃！第八艦隊<br>''Sortie! 8th Division''",
+                "47" : "艦隊、ソロモン海へ！<br>''Fleet, toward the Solomon Sea!''",
+                "48" : "深海水上打撃部隊<br>''Abyssal Surface Task Force''",
+                "49" : "アイアンボトムサウンド<br>''Ironbottom Sound''",
+                "50" : "激突！夜間砲撃戦！<br>''Clash! Exchanging Fire at Night!''",
+
+                //"51" : "鎮守府秋刀魚祭り<br>''Mackerel Pike Festival''",
+                "51" : "艦隊集結<br>''Fleet Gathering''",
+                "52" : "海上輸送作戦<br>''Marine Transport Operation''",
+                "53" : "水雷戦隊の反撃<br>''The Torpedo Squadron's Counterattack''",
+                "54" : "水雷戦隊の反撃<br>''The Torpedo Squadron's Counterattack (debuff)''",
+                "55" : "待ち伏せの夜戦<br>''Night Battle Ambush''",
+                "56" : "待ち伏せの夜戦<br>''Night Battle Ambush (debuff)''",
+
+                "57" : "Winter 2016 Event Main Operation Map Screen BGM",
+                "58" : "Winter 2016 Event Main Operation Normal Node BGM",
+                "59" : "Winter 2016 Event Boss Node BGM",
+                "60" : "Winter 2016 Event Extra Operation Normal Node BGM",
+
+                "61" : "戦場海域<br>''Battlewaters''",
+                "62" : "水底から<br>''From Bottom of the Water''",
+                "63" : "Spring 2016 Event Battle E-4: Normal Node BGM",
+                "64" : "Spring 2016 Event Battle E-6 and E-7: Normal Node BGM",
+                "65" : "Spring 2016 Event Main Operation Map Screen BGM",
+                "66" : "Spring 2016 Event Extra Operation Map Screen BGM",
+                "67" : "Spring 2016  Event Main Operation Second Main Boss Node BGM",
+                "68" : "波濤を超えて<br>''Beyond the Surging Sea''",
+
+                // "69" : "Summer 2016 Event Map Screen BGM",
+                "70" : "Summer 2016 Event Main Operation Normal Node BGM",
+                "71" : "水着の出撃<br>''Mizugi no Shutsugeki''",
+                "72" : "Summer 2016 Event E-2 and E-3 Boss Node BGM",
+                "73" : "戦争を忌むもの<br>''Those Who Detest War''",
+                "74" : "基地航空隊<br>''Land Base Air Corps''",
+
+                "75" : "海鷲の翼<br>''Wings of Sea Eagles''",
+
+                "76" : "鎮守府秋刀魚祭り改<br>''Mackerel Pike Festival Kai''",
+                "77" : "艦娘音頭<br>''The Shipgirl Festival Dance''",
+
+                // "??" : "Fall 2016 Event Main Operation: Map Screen BGM",
+                // "??" : "発令！ 艦隊作戦第三法<br>''Proclamation! Fleet Strategy Plan #3''",
+                "80" : "Summer 2016 Event Main Operation: Normal Node BGM",
+                "81" : "Fall 2016 Event Main Operation: Boss Node BGM",
+                "82" : "渚を越えて<br>''Beyond the Shore''",
+
+                "83" : "聖夜の母港<br>''Home Port on Christmas Eve''",
+                "84" : "師走の鎮守府<br>''December at the Naval Base''",
+                "85" : "迎春の鎮守府<br>''New Years at the Naval Base''",
+
+                // "86" : "Winter 2017 Event: Map Screen BGM",
+                "87" : "Winter 2017 Event: Normal Node BGM",
+                "88" : "Winter 2017 Event: Boss Node BGM",
+                "89" : "偵察戦力緊急展開<br>''Scout Force Emergency Deployment''",
+
+                "90" : "北東方面艦隊の集結<br>''Gathering of the Northeastern Fleet''",
+                "91" : "第五艦隊の奮戦<br>''Hard Fight of the Fifth Fleet''",
+                "92" : "北方艦隊決戦<br>''Decisive Northen Naval Battle''",
+                "93" : "士魂の反撃<br>''Counterattack of the Warrior Spirit''",
+
+                "94" : "連合艦隊旗艦<br>''Combined Fleet Flagship''",
+
+                "95" : "Summer 2017 Event Main Operation: Map Screen BGM",
+                "96" : "Summer 2017 Event E-2 and E-3: Normal Battle BGM",
+                "97" : "Summer 2017 Event E-2 and E-3: Boss Battle BGM",
+                "98" : "Summer 2017 Event E-4: Normal Battle BGM",
+                "99" : "Summer 2017 Event E-4, E-5 and E-6: Boss Battle BGM",
+                "100": "西方再打通！欧州救援作戦 最終海域 ボス戦<br>''Western revival! European relief strategy final battle boss fight''",
+
+                "101": "月夜海<br>''Moonlit Sea''",
+                "102": "鎮守府秋刀魚祭り改二<br>''Naval Base Saury Festival Kai Ni''",
+
+                "103": "捷号決戦前夜<br>''Operation Sho-go's Eve''",
+                "104": "捷一号作戦<br>''Operation Sho-ichi-go''",
+                "105": "激戦！遊撃部隊<br>''Intense Battle! Strike Force''",
+                "106": "海峡へ<br>''To the Strait''",
+                "107": "西村艦隊の戦い<br>''Battles of the Nishimura Fleet''",
+
+                "108": "祈り<br>''Prayer''",
+
+                "109": "出擊前夜<br>''Eve of Sortie''",
+                "110": "Winter 2018 Event Main Operation: Normal Battle BGM",
+                "111": "シブヤン海海戦<br>''Battle of the Sibuyan Sea''",
+                "112": "多号作戦改<br>''Operation Ta-gō Kai''",
+                "113": "友軍艦隊！反撃開始<br>''Friend Fleet! Begin Counterattack''",
+                "114": "鶴墜ちる海<br>''The Sea Where the Crane Falls''",
+                "115": "暁の水平線に勝利を！<br>''Victory over the Dawn Horizon''!"
+            }
+    		function update() {
+                let bgm = JSON.parse(document.getElementById("mstmapbgm").value);
+                let mapid = parseInt(document.getElementById("mapid").value, 10);
+                let lbas = !!document.getElementById("lbas").checked;
+
+                let status = [];
+                for(let map of bgm) {
+                    if(map.api_maparea_id == mapid) {
+                        if(lbas)
+                            status[map.api_no] = [map.api_moving_bgm, -0xAB, ...map.api_map_bgm, ...map.api_boss_bgm];
+                        else
+                            status[map.api_no] = [map.api_moving_bgm, ...map.api_map_bgm, ...map.api_boss_bgm];
+                    }
+                }
+                console.log(status);
+                let str = `{| class="mw-collapsible mw-collapsed wikitable" style="text-align:center;width:100%"
+!colspan="${lbas ? "8" : "7"}"|<h4 style="margin:0;text-align:left">World ${mapid}</h4>
+|-
+!Map
+!Overworld${lbas ? `
+!Enemy's Land-Base Air Raids` : ``}
+!Normal Node (Day Battle)
+!Normal Node (Night Battle)
+!Boss Node (Day Battle)
+!Boss Node (Night Battle)
+!Notes
+`
+                for(let mapnum = 1; mapnum < status.length; mapnum++) {
+                    let mapdata = status[mapnum];
+                    str += `|-\n!${mapid > 10 ? "E" : mapid}-${mapnum}\n`
+                    for(let bgm = 0; bgm < mapdata.length; bgm++) {
+                        let bgmid = mapdata[bgm];
+                        console.log(mapnum, bgm, bgmid, mapdata)
+                        if(bgmid == -1) continue;
+
+                        let [rowspan, colspan] = getColls(status, bgm, mapnum, mapdata, bgmid);
+                        console.log(rowspan, colspan)
+
+                        for(let j = 0; j < colspan; j++) {
+                            mapdata[bgm + j] = -1;
+                            for(let i = 0; i < rowspan; i++)
+                                status[mapnum + i][bgm + j] = -1;
+                        }   
+                        /*colloop: while(bgm + colspan < mapdata.length) {
+                            for(let i = 0; i < rowspan; i++) {
+                                if(status[mapnum + i][bgm + colspan] != bgmid)
+                                    break colloop;
+                            }
+                            for(let i = 0; i < rowspan; i++)
+                                status[mapnum + i][bgm + colspan] = -1;
+                            mapdata[bgm + colspan] = -1;
+                            colspan++;
+                        }
+                        rowloop: while(mapnum + rowspan < status.length) {
+                            for(let i = 0; i < colspan; i++) {
+                                if(status[mapnum + rowspan][bgm + i] != bgmid)
+                                    break rowloop;
+                            }
+                            for(let i = 0; i < colspan; i++)
+                                status[mapnum + rowspan][bgm + i] = -1;
+                            rowspan++;
+                        }*/
+
+                        let spans = "";
+                        if(rowspan > 1)
+                            spans += `rowspan=${rowspan}`;
+                        if(colspan > 1)
+                            spans += " colspan=" + colspan;
+                        if(rowspan + colspan > 2)
+                            spans = spans.trim() + "|"
+
+                        str += `|${spans}${bgmidmap[bgmid] || `BGM id: ${bgmid}`}\n`
+                    }
+                    str += `|\n`;
+                }
+                str += `|}`
+                document.getElementById("output").value = str;
+                console.log(str)
+    		}
+
+            function getColls(...args) {
+
+                let colspanA = colloop(...args, 1);
+                let rowspanA = rowlop(...args, colspanA);
+                console.log("colrow", bgmidmap[args[4]], colspanA, rowspanA);
+
+                let rowspanB = rowlop(...args, 1);
+                let colspanB = colloop(...args, rowspanB);
+                console.log("rowcol", bgmidmap[args[4]], colspanB, rowspanB);
+
+                if(colspanA*rowspanA >= colspanB*rowspanB)
+                    return [rowspanA, colspanA];
+                else
+                    return [rowspanB, colspanB];
+            }
+            function colloop(status, bgm, mapnum, mapdata, bgmid, rowspan) {
+                var colspan = 1;
+                while(bgm + colspan < mapdata.length) {
+                    for(let i = 0; i < rowspan; i++) {
+                        if(status[mapnum + i][bgm + colspan] != bgmid)
+                            return colspan;
+                    }
+                    colspan++;
+                }
+                return colspan;
+            }
+            function rowlop(status, bgm, mapnum, mapdata, bgmid, colspan) {
+                var rowspan = 1;
+                while(mapnum + rowspan < status.length) {
+                    for(let i = 0; i < colspan; i++) {
+                        if(status[mapnum + rowspan][bgm + i] != bgmid)
+                            return rowspan;
+                    }
+                    rowspan++;
+                }
+                return rowspan;
+            }
+
+    	</script>
+    </body>
+</html>
