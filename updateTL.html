@@ -80,7 +80,7 @@
                 for(let line of splitW) {
                     if(line.indexOf("}}") >= 0) status.isInsideQuotes = false;
                     if(line.indexOf("}}") >= 0) status.isInsideHourlies = false;
-                    tl: if(status.isInsideQuotes) {
+                    if(status.isInsideQuotes) {
                         if(line.indexOf("|") == 0) {
                             let currentLine = line.substring(1).split(" = ")[0];
                             let args = currentLine.split("/");
@@ -104,7 +104,7 @@
                             line = handleArgs(line, currentLine, scenario, args, tlData);
                         }
                     }
-                    tl: if(status.isInsideHourlies) {
+                    if(status.isInsideHourlies) {
                         line = line.replace("| ", "|")
                         if(line.indexOf("|") == 0) {
                             let currentLine = line.substring(1).split(" = ")[0];
@@ -119,8 +119,8 @@
                         }
                     }
                     reconstruction += line + "\n";
-                    if(line.indexOf("{{ShipQuotes") == 0) status.isInsideQuotes = true;
-                    if(line.indexOf("{{Shiphourly") == 0) status.isInsideHourlies = true;
+                    if(line.indexOf("{{ShipQuotes") == 0 || line.indexOf("{{Ship/Quotes") == 0) status.isInsideQuotes = true;
+                    if(line.indexOf("{{Shiphourly") == 0 || line.indexOf("{{Ship/Hourly") == 0) status.isInsideHourlies = true;
                 }
 
                 document.getElementById("output").value = reconstruction;
