@@ -1331,6 +1331,11 @@
                 "url" : "Ise_EoB",
                 "weda" : [253, 59],
                 "wedb" : [101, 100]
+            }, {
+                "name" : "Zuiun 2018 改",
+                "url" : "Ise_k_Zuiun2018",
+                "weda" : [236, 8],
+                "wedb" : [80, 112]
             }
         ]
     }, {
@@ -2188,6 +2193,11 @@
                 "url" : "Yamato_k_EoB",
                 "weda" : [223, 93],
                 "wedb" : [101, 96]
+            }, {
+                "name" : "Spring",
+                "url" : "Yamato_Spring",
+                "weda" : [160, -4],
+                "wedb" : [88, 128]
             }
         ]
     }, {
@@ -2304,6 +2314,16 @@
                 "url" : "Naganami_k2_EoB",
                 "weda" : [208, 52],
                 "wedb" : [64, 108]
+            }, {
+                "name" : "Spring 5th Anni",
+                "url" : "Naganami_Spring_2018",
+                "weda" : [144, 28],
+                "wedb" : [88, 108]
+            }, {
+                "name" : "Spring 5th Anni 改二",
+                "url" : "Naganami_k2_Spring_2018",
+                "weda" : [128, 52],
+                "wedb" : [84, 108]
             }
         ]
     }, {
@@ -3800,6 +3820,11 @@
                 "url" : "Amagiri_AutumnCasual",
                 "weda" : [96, 0],
                 "wedb" : [84, 124]
+            }, {
+                "name" : "Spring",
+                "url" : "Amagiri_Spring",
+                "weda" : [122, -12],
+                "wedb" : [76, 112]
             }
         ]
     }, {
@@ -4144,6 +4169,11 @@
                 "url" : "Sado_Setsubun",
                 "weda" : [128, -8],
                 "wedb" : [96, 136]
+            }, {
+                "name" : "Zuiun",
+                "url" : "Sado_Zuiun",
+                "weda" : [200, 0],
+                "wedb" : [88, 116]
             }
         ]
     }, {
@@ -4196,6 +4226,11 @@
                 "url" : "Tsushima_NewYear",
                 "weda" : [36, -32],
                 "wedb" : [84, 128]
+            }, {
+                "name" : "Zuiun",
+                "url" : "Tsushima_Zuiun",
+                "weda" : [84, -16],
+                "wedb" : [92, 128]
             }
         ]
     }, {
@@ -4205,6 +4240,11 @@
                 "url" : "GambierBay",
                 "weda" : [208, -4],
                 "wedb" : [88, 112]
+            }, {
+                "name" : "Spring",
+                "url" : "GambierBay_Spring",
+                "weda" : [180, 4],
+                "wedb" : [68, 112]
             }
         ]
     }, {
