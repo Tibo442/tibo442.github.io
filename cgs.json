@@ -268,6 +268,11 @@
                 "url" : "Kagerou",
                 "weda" : [221, 65],
                 "wedb" : [145, 147]
+            }, {
+                "name" : "改二",
+                "url" : "Kagerou_k2",
+                "weda" : [136, 12],
+                "wedb" : [84, 112]
             }
         ]
     }, {
@@ -1324,8 +1329,8 @@
             }, {
                 "name" : "Zuiun 改",
                 "url" : "Ise_k_Zuiun",
-                "weda" : [232, 32],
-                "wedb" : [88, 108]
+                "weda" : [236, 8],
+                "wedb" : [80, 112]
             }, {
                 "name" : "Eve of Battle 2018",
                 "url" : "Ise_EoB",
@@ -2627,10 +2632,15 @@
                 "weda" : [160, 32],
                 "wedb" : [144, 144]
             }, {
-                "name" : "改",
+                "name" : "Yukata",
                 "url" : "Urakaze_Yukata",
                 "weda" : [184, 8],
                 "wedb" : [152, 144]
+            }, {
+                "name" : "丁改",
+                "url" : "Urakaze_dk",
+                "weda" : [208, 20],
+                "wedb" : [88, 124]
             }
         ]
     }, {
@@ -4277,6 +4287,20 @@
                 "url" : "Daitou",
                 "weda" : [120, 72],
                 "wedb" : [92, 116]
+            }
+        ]
+    }, {
+        "name" : "Samuel B.Roberts",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "SamuelBRoberts",
+                "weda" : [196, 4],
+                "wedb" : [76, 124]
+            }, {
+                "name" : "改",
+                "url" : "SamuelBRoberts_k",
+                "weda" : [196, 4],
+                "wedb" : [76, 124]
             }
         ]
     }
