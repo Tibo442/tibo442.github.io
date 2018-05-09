@@ -157,6 +157,11 @@
                 ${calculated.sunk ? ("Sunk: " + (calculated.sunk * 100).toFixed(2) + "%<br>") : ""}<br>
                 HP left: ${(calculated.minhp == calculated.maxhp) ? calculated.minhp : calculated.minhp + " ~ " + calculated.maxhp} 
                 (Damage: ${(calculated.mindmg == calculated.maxdmg) ? calculated.mindmg : calculated.mindmg + " ~ " + calculated.maxdmg})
+
+                ${calculated.overkill || calculated.scratch ? "<br><br>" : ""}
+                ${calculated.scratch ? ("Scratch: " + (calculated.scratch * 100).toFixed(2) + "%<br>") : ""}
+                ${calculated.overkill || calculated.scratch ? ("Normal: " + (calculated.normal * 100).toFixed(2) + "%<br>") : ""}
+                ${calculated.overkill ? ("Overkill: " + (calculated.overkill * 100).toFixed(2) + "%<br>") : ""}
                 `;
 
                 var bar = document.getElementById("bar");
@@ -306,7 +311,7 @@
                 return stages;
             }
             function merge(stages, stage, weight) {
-                for(let state of ["ok", "shouha", "chuuha", "taiha", "sunk"])
+                for(let state of ["ok", "shouha", "chuuha", "taiha", "sunk", "scratch", "normal", "overkill"])
                     stages[state] = (stages[state]||0) + (stage[state] * weight);
                 for(let hp in stage["hps"])
                     stages["hps"][hp] = (stages["hps"][hp]||0) + (stage["hps"][hp] * weight);
@@ -317,7 +322,7 @@
             }
             function calculateFromPostCapATK(atk, armor) {
                 if(data.double) {
-                    let firstAttackDMGs = calculateDamagesDone(atk, data.currhp, armor);
+                    let firstAttackDMGs = calculateDamagesDone(atk, data.currhp, armor).damages;
                     // console.debug("First ATK", firstAttackDMGs);
 
                     let stages = {
@@ -326,6 +331,9 @@
                         "chuuha" : 0,
                         "shouha" : 0,
                         "ok" : 0,
+                        "scratch" : 0,
+                        "normal" : 0,
+                        "overkill" : 0,
                         "hps" : []
                     };
                     let sum = 0;
@@ -344,8 +352,9 @@
                     return calculatePostCap(atk, data.currhp, armor);
                 }
             }
-            function calculatePostCap(atk, currenthp, armor, dmgsDealth = calculateDamagesDone(atk, currenthp, armor)) {
+            function calculatePostCap(atk, currenthp, armor, calculatedDamage = calculateDamagesDone(atk, currenthp, armor)) {
                 let sum = 0;
+                let dmgsDealth = calculatedDamage.damages;
                 for(let posdmg in dmgsDealth)
                     sum += dmgsDealth[posdmg];
                 let stages = {
@@ -354,6 +363,9 @@
                     "chuuha" : 0,
                     "shouha" : 0,
                     "ok" : 0,
+                    "overkill" : 0,
+                    "normal" : 0,
+                    "scratch" : 0,
                     "hps" : []
                 };
                 for(let posdmg in dmgsDealth) {
@@ -370,15 +382,24 @@
                         stages.shouha += ch/sum;
                     else
                         stages.ok += ch/sum;
+
                     for(let side of ["min", "max"]) {
                         stages[side + "hp"] = compare[side](stages[side + "hp"], afterhp < 0 ? 0 : afterhp);
                         stages[side + "dmg"] = compare[side](stages[side + "dmg"], posdmg);
                     }
                 }
+                stages.overkill += calculatedDamage.overkill / sum;
+                stages.normal += calculatedDamage.normal / sum;
+                stages.scratch += calculatedDamage.scratch / sum;
                 return stages;
             }
             function calculateDamagesDone(atk, currenthp, armor, overkillprot = currenthp > 0.25 * data.maxhp && !data.abyssal) {
-                let dmgsDealth = {};
+                let dmgtype = {
+                    "scratch" : 0,
+                    "normal" : 0,
+                    "overkill" : 0
+                };
+                let damages = {};
                 let ammomult = Math.min(1.0, 2.0 * (data.ammorem / 100));
                 for(let arm = 0; arm < armor; arm++) {
                     let dmg = Math.floor((atk - (0.7 * armor + arm * 0.6)) * ammomult);
@@ -388,18 +409,22 @@
                         for(let hpRoll = 0; hpRoll < currenthp; hpRoll++)
                             possibledmg.push(Math.floor(0.5 * currenthp + 0.3 * hpRoll));
                         for(let posdmg of possibledmg)
-                            dmgsDealth[posdmg] = (dmgsDealth[posdmg] || 0) + (1.0 / possibledmg.length);
+                            damages[posdmg] = (damages[posdmg] || 0) + (1.0 / possibledmg.length);
+                        dmgtype.overkill = (dmgtype.overkill || 0) + 1.0;
                     } else if(dmg < 1) { // Scratch
                         let possibledmg = [];
                         for(let hpRoll = 0; hpRoll < currenthp; hpRoll++)
                             possibledmg.push(Math.floor(0.06 * currenthp + 0.08 * hpRoll));
                         for(let posdmg of possibledmg)
-                            dmgsDealth[posdmg] = (dmgsDealth[posdmg] || 0) + (1.0 / possibledmg.length);
+                            damages[posdmg] = (damages[posdmg] || 0) + (1.0 / possibledmg.length);
+                        dmgtype.scratch = (dmgtype.scratch || 0) + 1.0;
                     } else {
-                        dmgsDealth[dmg] = (dmgsDealth[dmg] || 0) + 1.0;
+                        damages[dmg] = (damages[dmg] || 0) + 1.0;
+                        dmgtype.normal = (dmgtype.normal || 0) + 1.0;
                     }
                 }
-                return dmgsDealth;
+                dmgtype.damages = damages;
+                return dmgtype;
             }
             const compare = {
                 min: function(a, b) {
