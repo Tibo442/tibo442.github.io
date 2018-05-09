@@ -432,6 +432,7 @@
                     let r =  decodeURIComponent(window.location.hash.substring(1)).replace(/:/g,'":').replace(/,/g,',"');
                     let w = JSON.parse('{"' + r + '}');
                     restore(w);
+                    prevdata = null;
                 } catch (e) {
                     console.log(e);
                 }
