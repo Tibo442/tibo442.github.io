@@ -283,6 +283,11 @@
                 "weda" : [242, 38],
                 "wedb" : [163, 119]
             }, {
+                "name" : "改二",
+                "url" : "Shiranui_k2",
+                "weda" : [176, -12],
+                "wedb" : [76, 116]
+            }, {
                 "name" : "Autumn Casual",
                 "url" : "Shiranui_Fall",
                 "weda" : [48, -8],
@@ -3978,6 +3983,11 @@
                 "url" : "CTeste_Summer",
                 "weda" : [220, -4],
                 "wedb" : [92, 112]
+            }, {
+                "name" : "Zuiun",
+                "url" : "CTeste_Zuiun",
+                "weda" : [220, -4],
+                "wedb" : [92, 112]
             }
         ]
     }, {
@@ -4301,6 +4311,15 @@
                 "url" : "SamuelBRoberts_k",
                 "weda" : [196, 4],
                 "wedb" : [76, 124]
+            }
+        ]
+    }, {
+        "name" : "福江",
+        "cgs" : [{
+                "name" : "Base",
+                "url" : "Fukae",
+                "weda" : [216, 82],
+                "wedb" : [82, 136]
             }
         ]
     }
