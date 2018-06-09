@@ -34,7 +34,7 @@
                 canvas.width = 768*6;
                 canvas.height = 435*6;
                 let context = canvas.getContext("2d");
-                context.fillRect(0,0,canvas.width,canvas.height -1);
+                context.fillRect(0,0,canvas.width,canvas.height);
                 context.font = "30px Arial";
                 context.fillStyle = "rgba(128, 255, 0, 1)";
 
@@ -51,10 +51,11 @@
                                 drops[drop] += dropFile.itemdrops[world][node][rank][drop];
                             }
                 context.fillText("Data: poi-statistics, " + c + " reported battle drops", 768*5 + 13, 435*1 + 80);
-                context.fillText("お米 x " + drops[85], 768*5 + 13, 435*1 + 120);
-                context.fillText("梅干 x " + drops[86], 768*5 + 13, 435*1 + 155);
-                context.fillText("海苔 x " + drops[87], 768*5 + 13, 435*1 + 185);
-                context.fillText("お茶 x " + drops[88], 768*5 + 13, 435*1 + 220);
+                context.fillText("Dump timestamp: " + dropFile.ls, 768*5 + 13, 435*1 + 115)
+                context.fillText("お米 x " + drops[85], 768*5 + 13, 435*1 + 155);
+                context.fillText("梅干 x " + drops[86], 768*5 + 13, 435*1 + 185);
+                context.fillText("海苔 x " + drops[87], 768*5 + 13, 435*1 + 215);
+                context.fillText("お茶 x " + drops[88], 768*5 + 13, 435*1 + 245);
 
                 let files = ["01_01", "01_02", "01_03", "01_04", "01_05", "01_06", "02_01", "02_02", "02_03", "02_04", "02_05", "03_01", "03_02", "03_03", "03_04", "03_05", "04_01", "04_02", "04_03", "04_04", "04_05", "05_01", "05_02", "05_03", "05_04", "05_05", "06_01", "06_02", "06_03", "06_04", "06_05"]
 
@@ -82,36 +83,38 @@
                         
                         context.font = "10px Georgia";
                         
-                        let drewItem = false;
+                        let drewItem = 0;
                         for(let i = 88; i >= 85; i--) {
-                            let xOffset = i == 85 ? -23 : 0
-                            if(drewItem)
-                                xOffset -= 22;
+                            let xOffset = (!drewItem && i == 85) ? -23 : 0;
+                            xOffset -= 22 * drewItem;
+                            if(drewItem == 1 && i == 85)
+                                xOffset = -45;
                             let rank = "";
-                            if(dropFileSection[node]["A"] && dropFileSection[node]["A"][i + ""]) {
+                            if(shipFileSection[node] && dropFileSection[node]["A"] && dropFileSection[node]["A"][i + ""]) {
                                 rank = "A";
-                            } else if(dropFileSection[node]["S"] && dropFileSection[node]["S"][i + ""]) {
+                            } else if(shipFileSection[node] && dropFileSection[node]["S"] && dropFileSection[node]["S"][i + ""]) {
                                 rank = "S";
                             } else 
                                 continue;
 
-                            drawItem(i, x + xOffset, y + 5, rank);
-                            drewItem = true;
+                            
+                            setTimeout(() => drawItem(i, x + xOffset, y + 5, rank), drewItem * 100);
+                            drewItem++;
                         }
                         let shipsTracked = [517, 518, 524, 525, 531, 540, 551, 552, 565];
                         let shipDrops = 0;
                         for(let i of shipsTracked) {
                             let rank = "";
-                            if(shipFileSection[node]["A"] && shipFileSection[node]["A"][i + ""]) {
+                            if(shipFileSection[node] && shipFileSection[node]["A"] && shipFileSection[node]["A"][i + ""]) {
                                 rank = "A";
-                            } else if(shipFileSection[node]["S"] && shipFileSection[node]["S"][i + ""]) {
+                            } else if(shipFileSection[node] && shipFileSection[node]["S"] && shipFileSection[node]["S"][i + ""]) {
                                 rank = "S";
                             } else 
                                 continue;
                             let yOffset = -40 - shipDrops++ * 37;
                             
-                            setTimeout(() => drawItem(i, x - 50, y + yOffset, rank), 250);
-                            drewItem = true;
+                            setTimeout(() => drawItem(i, x - 50, y + yOffset, rank), drewItem * 100 + 200);
+                            drewItem++;
                         }
                         drewAny = drewAny || drewItem;
                         if(!drewItem) continue;
