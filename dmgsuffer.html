@@ -134,10 +134,10 @@
                     if(data.graphmax == 1)
                         data.graphmax = data.armor + 20;
                 } else {
-                    if(data.graphmin == 0)
-                        data.graphmin = Math.max(1, Math.floor(0.7 * data.armor) - 2);
                     if(data.graphmax == 1)
-                        data.graphmax = Math.ceil(1.3 * data.armor + data.currhp) + 2;
+                        data.graphmax = Math.min(Math.ceil(1.3 * data.armor + data.currhp) + 2, 325);
+                    if(data.graphmin == 0)
+                        data.graphmin = Math.min(Math.max(1, Math.floor(0.7 * data.armor) - 2), 250);
                 }
                 // console.debug(graphmin,graphmax)
                 exatk = parseFloat(document.getElementById('exatk').value);
