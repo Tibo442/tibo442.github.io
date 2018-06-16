@@ -478,6 +478,8 @@
                             let val = w[key];
                             if(typeof(val) == typeof(true))
                                 document.getElementById(key).checked = val;
+                            else if(parseInt(val) == val)
+                                document.getElementById(key).value = parseInt(val);
                             else
                                 document.getElementById(key).value = val;
                         }
@@ -485,7 +487,7 @@
                     restore(defaultdata);
 
                     if(window.location.hash.length < 5) return; 
-                    let r =  decodeURIComponent(window.location.hash.substring(1)).replace(/:/g,'":').replace(/,/g,',"');
+                    let r =  decodeURIComponent(window.location.hash.substring(1)).replace(/:/g,'":"').replace(/,/g,'","') + '"';
                     let w = JSON.parse('{"' + r + '}');
                     restore(w);
                     prevdata = null;
@@ -497,7 +499,9 @@
                 for(let key in rawdata)
                     if(rawdata[key] == defaultdata[key])
                         delete rawdata[key];
-                window.location.hash = "#" + JSON.stringify(rawdata).replace('{','').replace('}','').replace(/"/g,'');
+                let changes = JSON.stringify(rawdata).replace('{','').replace('}','').replace(/"/g,'');
+                console.log("Saving " + changes)
+                window.location.hash = "#" + changes;
             }
             window.onresize = function() {
                 let a = document.getElementById("graphstuff");
