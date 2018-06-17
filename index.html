@@ -7,21 +7,33 @@
         <meta name="twitter:card" content="summary">
         <meta name="twitter:title" content="Flat is Justice">
         <meta name="twitter:creator" content="@FlatIsNice">
-        <meta name="twitter:description" content="KC Tools: open servers, damage suffering, exp prog, wedding generator and more">
-        <meta name="description" content="KC Tools: open servers, damage suffering, exp prog, wedding generator and more">
-        <meta name="keywords" content="flat,chest,small,anime,justice,kancolle,tools,calc">
+        <meta name="twitter:description" content="KC Tools: open servers, damage suffering calc, exp prog, wedding generator and more">
+        <meta name="description" content="KanColle Tools: open servers, damage suffering calc, exp prog, wedding generator and more">
+        <meta name="keywords" content="calc,kancolle,tools,flat,chest,small,anime,justice">
         <meta name="author" content="Tibi">
         <meta name="google-site-verification" content="1LKLCucyeDTQcM854X-oWD4yXndozpVgXdFI5q5FyE4" />
         <style>
         @import url(https://fonts.googleapis.com/css?family=Advent+Pro:100);
         @import url(https://fonts.googleapis.com/css?family=Advent+Pro:100&effect=shadow-multiple);
+
+        @media screen and (min-width: 800px) {
+            #maintext {
+                position: fixed;
+                right: 0;
+            }
+            #links {
+                position: fixed;
+                top: 0;
+            }
+            html,body{
+                overflow:hidden;
+            }
+        }
         #maintext {
             font-family: 'Advent Pro', sans-serif;
             font-size: 6em;
             margin: .15em .4em;
             color: #f44;
-            position: fixed;
-            right: 0;
             text-shadow: 3px 3px 10px;
         }
         #contact {
@@ -40,8 +52,6 @@
             font-weight: bolder;
             margin: .15em .4em;
             color: #f44;
-            position: fixed;
-            top: 0;
             text-shadow: 1px 1px 3px #222;
         }
         a {
@@ -55,16 +65,23 @@
             background-size: cover;
             background-position: center center;
         }
+        h2, h1 {
+            display: inline;
+            font-weight: bolder;
+        }
+        h1 {
+            font-size: 1em;
+        }
+
         html,body{
             margin:0;
             height:100%;
-            overflow:hidden;
         }
         </style>
     </head>
     <body>
         <main><div id="links">
-            KanColle Tools: <br>
+            <h2>KanColle Tools:</h2><br>
             Calc: <a href="/dmgsuffer" target="">Damage suffering</a><br>
             Calc: <a href="/xpcalc" target="">Experience progress calc</a><br>
             Fun: <a href="/weddinggen" target="">HD wedding generator</a><br>
@@ -73,11 +90,12 @@
             Tech: <a href="/makebgm" target="">BGM table maker</a><br>
             Tech: <a href="/id_tl" target="">IDs -> name translator</a><br>
             Tech: <a href="https://github.com/Tibo442/api_start2" target="">api_start2 history</a><br>
-            <br>Harder to use tools/outdated:<br>
+            <br>
+            <h2>Harder to use tools/outdated:</h2><br>
             Calc: <a href="/oaswcalc" target="">OASW lvl calc</a><br>
             Tech: <a href="/lbasrangemapmaker" target="">LBAS map range maker</a><br>
         </div></main>
-        <div id="maintext">Flat is Justice</div>
-        <div id="contact">If you have suggestions/bugs/questsions/etc, you can contact me on <a href="https://twitter.com/FlatIsNice">Twitter @FlatIsNice</a>, on Discord @Tibi#2251 or via e-mail <a href="mailto:tibo@flatisjustice.moe" target="">tibo@flatisjustice.moe</a></div>
+        <div id="maintext"><h1>Flat is Justice</h1></div>
+        <div id="contact" itemscope itemtype="http://schema.org/Person">If you have suggestions/bugs/questsions/etc, you can contact me (<span itemprop="name">Tibo</span>) on <a href="https://twitter.com/FlatIsNice">Twitter @FlatIsNice</a>, on Discord @Tibi#2251 or via e-mail <a itemprop="email" href="mailto:tibo@flatisjustice.moe" target="">tibo@flatisjustice.moe</a></div>
     </body>
 </html>
