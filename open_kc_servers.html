@@ -1,34 +1,41 @@
 <!doctype html>
-<html>
+<html lang="en">
     <head>
         <title>Open KC servers</title>
         <meta name="theme-color" content="#082E6B"/>
+        <meta name=viewport content="width=device-width, initial-scale=1">
         <meta name="author" content="Tibi">
         <meta name="twitter:card" content="summary">
         <meta name="twitter:title" content="Flat is Justice - Open KC servers">
-        <meta name="twitter:description" content="Shows servers which are currently open">
+        <meta name="twitter:description" content="Shows which KanColle servers are currently open">
+        <meta name="description" content="Shows which KanColle servers are currently open">
         <style>
-        table {
-            border-collapse: collapse;
-            display:inline;
-        }
+            body{
+                font: 1em "Open Sans", sans-serif;
+            }
+            table {
+                border-collapse: collapse;
+                display:inline;
+            }
 
-        tr {
-            border: 1px solid #f5f5f5;
-        }
-        
-        th {
-            height: 25px;
-        } 
-        
-        td {
-            height: 25px;
-            margin: 5px;
-        }
-        
-        #lastupdate {
-            font-weight: bold;
-        }
+            tr {
+                border: 1px solid #f5f5f5;
+            }
+            
+            th {
+                height: 25px;
+            } 
+            td {
+                height: 25px;
+                margin: 3px;
+                padding:3px;
+            }
+            a {
+                font-weight: bold;
+            }
+            .serverrate, .serverid {
+                text-align: right;
+            }
         </style>
         <script type="text/javascript">
             var en_names=["Yokosuka Naval District", "Kure Naval District", "Sasebo Naval District", "Maizuru Naval District", "Ominato Guard District", "Truk Anchorage", "Lingga Anchorage", "Rabaul Naval Base", "Shortland Anchorage", "Buin Naval Base", "Tawi-Tawi Anchorage", "Palau Anchorage", "Brunei Anchorage", "Hitokappu Bay Anchorage", "Paramushir Anchorage", "Sukumo Bay Anchorage", "Kanoya Airfield", "Iwagawa Airfield", "Saiki Bay Anchorage", "Hashirajima Anchorage"];
@@ -43,7 +50,7 @@
               let tableA = document.createElement("table"), tableB = document.createElement("table");
               var topRow = document.createElement("tr");
               var tlnames = en_names;
-              var lang = window.location.hash.substring(1) || "en";
+              var lang = window.location.hash.substring(1) || ((window.navigator.userLanguage || window.navigator.language) == "zh-cn" ? "cn" : "en") || "en";
               document.getElementById(lang).checked = true;
               if(lang === "cn") {
                   topRow.innerHTML = "<th>ID</th><th>Server name (JP)</th><th>Server name (CN)</th><th>% Full</th>";
@@ -59,7 +66,7 @@
                   console.log(server);
                   var bg = server.api_entry ? "92d177" : "d17b77";
                   var entry = document.createElement("tr");
-                  entry.innerHTML = '<td>' + server.api_id + "</td><td>" + server.api_name +"</td><td>" + tlnames[i] + "</td><td>" + server.api_rate+ "</td>";
+                  entry.innerHTML = '<td class="serverid">' + server.api_id + '</td><td class="servername">' + server.api_name +'</td><td class="servernametl">' + tlnames[i] + '</td><td class="serverrate">' + server.api_rate+ '</td>';
                   entry.setAttribute("style", 'background-color: #' + bg);
                   // entry.setAttribute("onClick", "window.open('" + github_url + "#L" + ((server.api_id * 7) - 3) + "-L" + ((server.api_id * 7) + 3) + "');");
                   if (i % 2 == 0)
@@ -101,8 +108,9 @@
         </script>
     </head>
     <body>
-      <input type="radio" name="lang" value="en" id="en" onchange="changeLang(this);" onclick="changeLang();"><b>EN</b>
-      <input type="radio" name="lang" value="cn" id="cn" onchange="changeLang(this);" onclick="changeLang();"><b>CN</b><br>
-      <div id="table"></div>
+        <a href=".">Home</a>
+        <input type="radio" name="lang" value="en" id="en" onchange="changeLang(this);" onclick="changeLang();"><b>EN</b>
+        <input type="radio" name="lang" value="cn" id="cn" onchange="changeLang(this);" onclick="changeLang();"><b>CN</b><br>
+        <div id="table"></div>
     </body>
 </html>
