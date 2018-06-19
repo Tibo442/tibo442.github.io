@@ -211,8 +211,8 @@
                 ctx.fillRect(prev, 0, calculated.taiha * bar.width, 10);
 
                 prev = bar.width * (1 - calculated.sunk);
-                for(let hp in calculated["hps"]) {
-                    let odds = calculated["hps"][hp];
+                for(let hp in calculated.hps) {
+                    let odds = calculated.hps[hp];
                     if(odds === undefined || hp <= 0)
                         continue;
                     let color = getColor(hp);
@@ -249,8 +249,8 @@
                     prev = 0;
                     if(data.perhp) {
                         prev = height * (1 - stages.sunk);
-                        for(let hp in stages["hps"]) {
-                            let odds = stages["hps"][hp];
+                        for(let hp in stages.hps) {
+                            let odds = stages.hps[hp];
                             if(odds === undefined || odds <= 0 || hp <= 0)
                                 continue;
                             let color = getColor(hp);
@@ -328,10 +328,10 @@
                 };
                 if(data.cap) {
                     let engagements = [[1.2, .15], [1, .45], [.8, .3], [.6, .1]];
-                    if(data.saiun) 
-                        engagements = [[1.2, .15], [1, .45], [.8, .4]];
                     if(!data.engage)
                         engagements = [[1, 1]];
+                    else if(data.saiun) 
+                        engagements = [[1.2, .15], [1, .45], [.8, .4]];
                     let capdmg = (uncapped) => Math.floor(uncapped > data.cap ? data.cap + Math.sqrt(uncapped - data.cap) : uncapped);
                     for(let eng of engagements) {
                         let stage = calculateFromPostCapATK(Math.floor(capdmg(eng[0] * data.precapdmg * data.atk) * data.critical) * data.postcapdmg, data.armor);
@@ -344,12 +344,12 @@
             function merge(stages, stage, weight) {
                 for(let state of ["ok", "shouha", "chuuha", "taiha", "sunk", "scratch", "normal", "overkill"])
                     stages[state] = (stages[state]||0) + (stage[state] * weight);
-                for(let hp in stage["hps"])
-                    stages["hps"][hp] = (stages["hps"][hp]||0) + (stage["hps"][hp] * weight);
-                for(let side of ["min", "max"]) {
-                    stages[side + "hp"] = compare[side](stages[side + "hp"], stage[side + "hp"]);
-                    stages[side + "dmg"] = compare[side](stages[side + "dmg"], stage[side + "dmg"]);
-                }
+                for(let hp in stage.hps)
+                    stages.hps[hp] = (stages.hps[hp]||0) + (stage.hps[hp] * weight);
+                stages.minhp = compare.min(stages.minhp, stage.minhp);
+                stages.mindmg = compare.min(stages.mindmg, stage.mindmg);
+                stages.maxhp = compare.max(stages.maxhp, stage.maxhp);
+                stages.maxdmg = compare.max(stages.maxdmg, stage.maxdmg);
             }
             function calculateFromPostCapATK(atk, armor) {
                 if(data.double) {
@@ -402,7 +402,7 @@
                 for(let posdmg in dmgsDealth) {
                     let ch = dmgsDealth[posdmg], afterhp = currenthp - posdmg;
                     if(ch == 0) continue;
-                    stages["hps"][afterhp] = ch/sum;
+                    stages.hps[afterhp] = ch/sum;
                     if(afterhp <= 0)
                         stages.sunk += ch/sum;
                     else if(afterhp <= .25 * data.maxhp)
@@ -414,10 +414,14 @@
                     else
                         stages.ok += ch/sum;
 
-                    for(let side of ["min", "max"]) {
+                    /*for(let side of ["min", "max"]) {
                         stages[side + "hp"] = compare[side](stages[side + "hp"], afterhp < 0 ? 0 : afterhp);
                         stages[side + "dmg"] = compare[side](stages[side + "dmg"], posdmg);
-                    }
+                    }*/
+                    stages.minhp = compare.min(stages.minhp, afterhp < 0 ? 0 : afterhp);
+                    stages.mindmg = compare.min(stages.mindmg, posdmg);
+                    stages.maxhp = compare.max(stages.maxhp, afterhp < 0 ? 0 : afterhp);
+                    stages.maxdmg = compare.max(stages.maxdmg, posdmg);
                 }
                 stages.overkill += calculatedDamage.overkill / sum;
                 stages.normal += calculatedDamage.normal / sum;
