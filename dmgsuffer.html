@@ -22,17 +22,19 @@
         </style>
     </head>
     <body>
+        <a href="."><b>Flat is Justice - Home</b></a><br>
+
         <main>
             <div id="grapherb" style="float:right"></div>
             <div id="settings">
                 <b>Attack info</b><br>
                 <label>Attack power: <input type="number" id="atk" min="0" max="9999" onchange="update();" onclick="update();"><br></label>
-                <label>Softcap (fill in 0 when atk = postcap) <a target="_blank" href="http://kancolle.wikia.com/wiki/Combat/Damage_Calculation#Attack_Power_Cap" title="Eg: 180 for day/300 for night/150 other">[?]</a>: <input type="number" id="cap" min="0" max="999" onchange="update();" onclick="update();" step=10><br></label>
+                <label>Softcap (fill in 0 when atk = postcap) <a target="_blank" rel="noopener" href="http://kancolle.wikia.com/wiki/Combat/Damage_Calculation#Attack_Power_Cap" title="Eg: 180 for day/300 for night/150 other">[?]</a>: <input type="number" id="cap" min="0" max="999" onchange="update();" onclick="update();" step=10><br></label>
                 <div id="postcapdata">
                     <label>Take random engagement into account: <input type="checkbox" id="engage" onchange="update();"><br></label>
                     <label>^ Saiun (exclude Red-T): <input type="checkbox" id="saiun" onchange="update();"><br></label>
-                    <label>Pre-Cap multiplier <a target="_blank" href="http://kancolle.wikia.com/wiki/Combat/Damage_Calculation#Pre-Cap_Modifiers" title="Eg: Formation, Health, Engagement, Night Cutin modifiers">[?]</a>: <input type="number" id="precapdmg" min="0" max="10" onchange="update();" onclick="update();" step=0.1><br></label>
-                    <label>Post-Cap multiplier <a target="_blank" href="http://kancolle.wikia.com/wiki/Combat/Damage_Calculation#Pre-Cap_Modifiers" title="Eg: Art spot, Contact, AP shell modifiers&#013;NOTE: Critical hit is post flooring, hence why it's in a seperate option">[?]</a>: <input type="number" id="postcapdmg" min="0" max="10" onchange="update();" onclick="update();" step=0.1><br></label>
+                    <label>Pre-Cap multiplier <a target="_blank" rel="noopener" href="http://kancolle.wikia.com/wiki/Combat/Damage_Calculation#Pre-Cap_Modifiers" title="Eg: Formation, Health, Engagement, Night Cutin modifiers">[?]</a>: <input type="number" id="precapdmg" min="0" max="10" onchange="update();" onclick="update();" step=0.1><br></label>
+                    <label>Post-Cap multiplier <a target="_blank" rel="noopener" href="http://kancolle.wikia.com/wiki/Combat/Damage_Calculation#Pre-Cap_Modifiers" title="Eg: Art spot, Contact, AP shell modifiers&#013;NOTE: Critical hit is post flooring, hence why it's in a seperate option">[?]</a>: <input type="number" id="postcapdmg" min="0" max="10" onchange="update();" onclick="update();" step=0.1><br></label>
                     <label>Critical: <input type="checkbox" id="critical" onchange="update();"><br></label>
                 </div>
                 <label>Ammo remaining: <input type="number" id="ammorem" min="0" max="100" step="20" onchange="update();" onclick="update();">%<br></label>
