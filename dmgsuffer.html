@@ -51,10 +51,10 @@
                 <b>Graph</b><br>
                 <canvas id="graph" width="830" height="425" style="border:1px solid black;"></canvas><br>
                 <b>Graph settings</b><br>
-                <label>Change variable: <select id="graphvariable" onchange="update();">
+                <label>Change variable/X-axis: <select id="graphvariable" onchange="update();">
                     <option value="armor">Armor</option>
                     <option value="atk">Attack power</option>
-                    <option value="maxhp">curr = max HP</option>
+                    <option value="maxhp">Max. HP (full health)</option>
                     <option value="currhp">Current HP</option>
                 </select><br></label>
                 <label>Min: <input type="number" id="graphmin" min="0" max="9999" onchange="update();" onclick="update();" step=5><br></label>
