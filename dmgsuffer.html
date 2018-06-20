@@ -60,6 +60,7 @@
                 <label>Min: <input type="number" id="graphmin" min="0" max="9999" onchange="update();" onclick="update();" step=5><br></label>
                 <label>Max: <input type="number" id="graphmax" min="0" max="9999" onchange="update();" onclick="update();" step=5><br></label>
                 <label>Color per HP: <input type="checkbox" id="perhp" onchange="update();"><br></label>
+                <div id="note"></div>
                 <br>
             </div>
             <b>Exact attack bar</b><br>
@@ -70,6 +71,7 @@
             <br>
         </main>
         <div style="clear:both"></div>
+        <hr>
         <i>Formulas used:<br> </i>
         <i>- engagement/precap: </i><code>precapatk = atk * (engagement) * precap</code> where <code>engagement = x1.2 (15%) x1 (45%) x0.8 (30%) x0.6 (10%)</code> with saiun: <code>engagement = x1.2 (15%) x1 (45%) x0.8 (40%)</code><br>
         <i>- cap: </i><code>postcapatk = floor(<span style="color:darkred">floor(</span>(precapatk > cap) ? cap + sqrt(precapatk - cap) : precapatk<span style="color:darkred">)</span> * criticalmodifier) * postcapmultiplier</code><br>
@@ -224,7 +226,7 @@
                 }
 
                 if(onlybar) {
-                    drawArrow(data[data.graphvariable]);
+                    drawArrows(data[data.graphvariable]);
                     console.log("Only bar needs update");
                     return;
                 }
@@ -300,7 +302,7 @@
                 data[data.graphvariable] = defaultVal;
                 if(data.graphvariable == "maxhp")
                     data.currhp = parseFloat(document.getElementById('currhp').value);
-                drawArrow(defaultVal);
+                drawArrows(defaultVal);
                 //console.debug(status);
             }
             function getColor(hp) {
@@ -313,13 +315,41 @@
                 else 
                     return ((hp-.75*data.maxhp) / data.maxhp) * 100 + 190;
             }
-            function drawArrow(val) {
+            function getAfterRingHP(val) {
+                return val + ([4, 4, 4, 5, 6, 7, 7, 8, 8, 9][Math.floor(val/10)] || Number.NEGATIVE_INFINITY);
+            }
+            function drawArrows(val) {
                 canvas.width = canvas.width;
                 context.drawImage(canvas2, 0, 0);
-
+                drawArrow(val);
+                let note = "<b>Arrow notes</b><br>";
+                switch(data.graphvariable) {
+                    case "armor":
+                        drawArrow(val + 9, "#ff00ff");
+                        drawArrow(val + 18, "#ff00ff");
+                        note += '<span style="color:#ff00ff">Purple</span> arrows: 1 or 2 +9 bulge (large) 「増設バルジ(大型艦)」';
+                        break;
+                    case "maxhp":
+                        drawArrow(val + 1, "#0000ff");
+                        drawArrow(val + 2, "#0000ff");
+                        drawArrow(getAfterRingHP(val), "#00ff00");
+                        drawArrow(getAfterRingHP(val) + 1, "#0080ff");
+                        drawArrow(getAfterRingHP(val) + 2, "#0080ff");
+                        note += '<span style="color:#0000ff">Dark blue</span> arrows: 1 or 2 hp mods<br>';
+                        note += '<span style="color:#00ff00">Green</span> arrows: Married, assuming no HP cap<br>';
+                        note += '<span style="color:#0080ff">Blue</span> arrows: Married + 1 or 2 hp mods, assuming no HP cap';
+                        break;
+                    default:
+                        note = "";
+                        break;
+                }
+                document.getElementById("note").innerHTML = note;
+            }
+            function drawArrow(val, color = "#ff0000") {
                 if(val >= data.graphmin && val < data.graphmax) {
-                    context.fillStyle = "#ff0000";
-                    context.fillText("\u2191", (canvas.width - 30) / (data.graphmax - data.graphmin) * (val - data.graphmin) + ((canvas.width - 30) / (data.graphmax - data.graphmin)) / 2 -2, canvas.height - 15);
+                    context.fillStyle = color;
+                    context.font = "bold 17pt Courier";
+                    context.fillText("\u2191", (canvas.width - 30) / (data.graphmax - data.graphmin) * (val - data.graphmin) + ((canvas.width - 30) / (data.graphmax - data.graphmin)) / 2 -6, canvas.height - 12);
                 }
             }
             function calculate() {
