@@ -326,18 +326,21 @@
                 let note = "<b>Arrow notes</b><br>";
                 switch(data.graphvariable) {
                     case "armor":
-                        drawArrow(val + 9, "#ff00ff");
-                        drawArrow(val + 18, "#ff00ff");
-                        note += '<span style="color:#ff00ff">Purple</span> arrows: 1 or 2 +9 bulge (large) 「増設バルジ(大型艦)」';
+                        drawArrow(val + 9, "#800080");
+                        drawArrow(val + 18, "#800080");
+                        note += '<span style="color:#800080">Purple</span> arrows: 1 or 2 +9 bulge (large) 「増設バルジ(大型艦)」<br>';
+                        drawArrow(val + 7, "#0080ff");
+                        drawArrow(val + 14, "#0080ff");
+                        note += '<span style="color:#0080ff">Blue</span> arrows: 1 or 2 +7 bulge (medium) 「増設バルジ(中型艦)」';
                         break;
                     case "maxhp":
                         drawArrow(val + 1, "#0000ff");
                         drawArrow(val + 2, "#0000ff");
+                        note += '<span style="color:#0000ff">Dark blue</span> arrows: 1 or 2 hp mods<br>';
                         drawArrow(getAfterRingHP(val), "#00ff00");
+                        note += '<span style="color:#00ff00">Green</span> arrows: Married, assuming no HP cap<br>';
                         drawArrow(getAfterRingHP(val) + 1, "#0080ff");
                         drawArrow(getAfterRingHP(val) + 2, "#0080ff");
-                        note += '<span style="color:#0000ff">Dark blue</span> arrows: 1 or 2 hp mods<br>';
-                        note += '<span style="color:#00ff00">Green</span> arrows: Married, assuming no HP cap<br>';
                         note += '<span style="color:#0080ff">Blue</span> arrows: Married + 1 or 2 hp mods, assuming no HP cap';
                         break;
                     default:
