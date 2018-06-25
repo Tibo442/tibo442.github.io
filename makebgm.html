@@ -32,7 +32,7 @@
         <br>
         <br>
         Output: <br>
-        <table><tbody id="table"></tbody></table><br>
+        <table id="table"><tbody></tbody></table><br>
         <textarea id="output"></textarea><br>
 
     	<script type="text/javascript">
@@ -220,19 +220,26 @@
 
                 let status = [];
                 for(let map of bgm) {
-                    if(map.api_maparea_id == mapid) {
-                        if(lbas) {
-                            let currlbas = -0xAB;
-                            status[map.api_no] = [map.api_moving_bgm, currlbas, ...map.api_map_bgm, ...map.api_boss_bgm];
-                        } else
-                            status[map.api_no] = [map.api_moving_bgm, ...map.api_map_bgm, ...map.api_boss_bgm];
-                    }
+                    if(!status[map.api_maparea_id])
+                        status[map.api_maparea_id] = [];
+                    if(lbas) {
+                        let currlbas = -0xAB;
+                        status[map.api_maparea_id][map.api_no] = [map.api_moving_bgm, currlbas, ...map.api_map_bgm, ...map.api_boss_bgm];
+                    } else
+                        status[map.api_maparea_id][map.api_no] = [map.api_moving_bgm, ...map.api_map_bgm, ...map.api_boss_bgm];
                 }
-                let mapareaname = mapid;
-                if(input.api_mst_maparea != undefined) 
-                    mapareaname = mapid + " " + ((input.api_mst_maparea.filter((a) => a.api_id == mapid)[0] || {}).api_name || "X"); 
                 console.log(status);
-                let str = `{| class="mw-collapsible mw-collapsed wikitable" style="text-align:center;width:100%"
+
+
+                let str = "", htmlstr = "";
+                for(let worldid in status) {
+                    if(worldid != mapid && mapid != 0)
+                        continue;
+                    console.log(status[worldid]);
+                    let mapareaname = worldid;
+                    if(input.api_mst_maparea != undefined) 
+                        mapareaname = worldid + " " + ((input.api_mst_maparea.filter((a) => a.api_id == worldid)[0] || {}).api_name || "X"); 
+                    str += `{| class="mw-collapsible mw-collapsed wikitable" style="text-align:center;width:100%"
 !colspan="${lbas ? "8" : "7"}"|<h4 style="margin:0;text-align:left">World ${mapareaname}</h4>
 |-
 !Map
@@ -244,7 +251,7 @@
 !Boss Node (Night Battle)
 !Notes
 `
-                let htmlstr = `<tr style="display: table-row;">
+                    htmlstr += `<tbody><tr style="display: table-row;">
 </th><th colspan="${lbas ? "7" : "6"}"><h4 style="margin:0;text-align:left">World ${mapareaname}</h4></tr>
 <tr style="display: table-row;">
 <th>Map
@@ -255,59 +262,42 @@
 </th><th>Boss Node (Day Battle)
 </th><th>Boss Node (Night Battle)
 </th></tr>`
-                for(let mapnum = 1; mapnum < status.length; mapnum++) {
-                    let mapdata = status[mapnum];
-                    str += `|-\n!${mapid > 10 ? "E" : mapid}-${mapnum}\n`
-                    htmlstr += `<tr style="display: table-row;"><th>${mapid > 10 ? "E" : mapid}-${mapnum}</th>`
-                    for(let bgm = 0; bgm < mapdata.length; bgm++) {
-                        let bgmid = mapdata[bgm];
-                        console.log(mapnum, bgm, bgmid, mapdata)
-                        if(bgmid == -1) continue;
+                    for(let mapnum = 1; mapnum < status[worldid].length; mapnum++) {
+                        let mapdata = status[worldid][mapnum];
+                        str += `|-\n!${worldid > 10 ? "E" : worldid}-${mapnum}\n`
+                        htmlstr += `<tr style="display: table-row;"><th>${worldid > 10 ? "E" : worldid}-${mapnum}</th>`
+                        for(let bgm = 0; bgm < mapdata.length; bgm++) {
+                            let bgmid = mapdata[bgm];
+                            console.log(mapnum, bgm, bgmid, mapdata)
+                            if(bgmid == -1) continue;
 
-                        let [rowspan, colspan] = getColls(status, bgm, mapnum, mapdata, bgmid);
-                        console.log(rowspan, colspan)
+                            let [rowspan, colspan] = getColls(status[worldid], bgm, mapnum, mapdata, bgmid);
+                            console.log(rowspan, colspan)
 
-                        for(let j = 0; j < colspan; j++) {
-                            mapdata[bgm + j] = -1;
-                            for(let i = 0; i < rowspan; i++)
-                                status[mapnum + i][bgm + j] = -1;
-                        }   
-                        /*colloop: while(bgm + colspan < mapdata.length) {
-                            for(let i = 0; i < rowspan; i++) {
-                                if(status[mapnum + i][bgm + colspan] != bgmid)
-                                    break colloop;
+                            for(let j = 0; j < colspan; j++) {
+                                mapdata[bgm + j] = -1;
+                                for(let i = 0; i < rowspan; i++)
+                                    status[worldid][mapnum + i][bgm + j] = -1;
                             }
-                            for(let i = 0; i < rowspan; i++)
-                                status[mapnum + i][bgm + colspan] = -1;
-                            mapdata[bgm + colspan] = -1;
-                            colspan++;
+
+                            let spans = "";
+                            if(rowspan > 1)
+                                spans += `rowspan=${rowspan}`;
+                            if(colspan > 1)
+                                spans += " colspan=" + colspan;
+                            if(rowspan + colspan > 2)
+                                spans = spans.trim() + "|"
+
+                            str += `|${spans}${(bgmidmap[bgmid] || `BGM id: ${bgmid}`).replace("<i>", "''").replace("</i>", "''")}\n`
+
+                            htmlstr += `<td ${spans}>${bgmidmap[bgmid] || `BGM id: ${bgmid}`}</td>`
                         }
-                        rowloop: while(mapnum + rowspan < status.length) {
-                            for(let i = 0; i < colspan; i++) {
-                                if(status[mapnum + rowspan][bgm + i] != bgmid)
-                                    break rowloop;
-                            }
-                            for(let i = 0; i < colspan; i++)
-                                status[mapnum + rowspan][bgm + i] = -1;
-                            rowspan++;
-                        }*/
-
-                        let spans = "";
-                        if(rowspan > 1)
-                            spans += `rowspan=${rowspan}`;
-                        if(colspan > 1)
-                            spans += " colspan=" + colspan;
-                        if(rowspan + colspan > 2)
-                            spans = spans.trim() + "|"
-
-                        str += `|${spans}${(bgmidmap[bgmid] || `BGM id: ${bgmid}`).replace("<i>", "''").replace("</i>", "''")}\n`
-
-                        htmlstr += `<td ${spans}>${bgmidmap[bgmid] || `BGM id: ${bgmid}`}</td>`
+                        str += `|\n`;
+                        htmlstr += `</tr>`;
                     }
-                    str += `|\n`;
-                    htmlstr += `</tr>`;
+                    str += `|}`
+                    htmlstr += `</tbody><br>`
                 }
-                str += `|}`
                 document.getElementById("output").value = str;
                 document.getElementById("table").innerHTML = htmlstr;
                 console.log(str)
@@ -359,6 +349,7 @@
                         if (xmlhttp.status == 200) {
                             document.getElementById("mstmapbgm").value = xmlhttp.responseText;
                             let highestmapnum = JSON.parse(xmlhttp.responseText).reduce((a, b) => Math.max(a, b.api_maparea_id), 0);
+                            if(highestmapnum < 10) highestmapnum = 0;
                             document.getElementById("mapid").value = highestmapnum;
                             document.getElementById("lbas").checked = highestmapnum > 10;
                             update();

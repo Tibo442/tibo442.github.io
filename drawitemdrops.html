@@ -98,10 +98,11 @@
                                 continue;
 
                             
-                            setTimeout(() => drawItem(i, x + xOffset, y + 5, rank), drewItem * 100);
+                            setTimeout(() => drawItem(false, i, x + xOffset, y + 5, rank), drewItem * 100);
                             drewItem++;
                         }
                         let shipsTracked = [517, 518, 524, 525, 531, 540, 551, 552, 565];
+                        //for(let i = 0; i < 700; i++) shipsTracked.push(i)
                         let shipDrops = 0;
                         for(let i of shipsTracked) {
                             let rank = "";
@@ -113,7 +114,7 @@
                                 continue;
                             let yOffset = -40 - shipDrops++ * 37;
                             
-                            setTimeout(() => drawItem(i, x - 50, y + yOffset, rank), drewItem * 100 + 200);
+                            setTimeout(() => drawItem(true, i, x - 50, y + yOffset, rank), drewItem * 100 + 200);
                             drewItem++;
                         }
                         drewAny = drewAny || drewItem;
@@ -150,13 +151,13 @@
                 img.src = mapCoords[name].image;
             }
 
-            function drawItem(item, x, y, rank) {
+            function drawItem(ship, item, x, y, rank) {
                 
                 console.log(item, x, y, rank)
                 var context = canvas.getContext("2d");
                 var img = new Image();
                 let size = 45;
-                if(item > 100) size = 40;
+                if(ship) size = 40;
                 img.onload = function() {
                     context.drawImage(img, x, y, size, size);
                     if(rank == "A")
@@ -170,7 +171,7 @@
                     context.lineWidth = 1;
                     context.fillText(rank, x+10, y + size-2);
                 }
-                if(item > 100) {
+                if(ship) {
                     img.src = "https://raw.githubusercontent.com/KC3Kai/KC3Kai/master/src/assets/img/ships/" + item + ".png"
                 } else
                     img.src = ["https://vignette.wikia.nocookie.net/kancolle/images/c/c8/Rice_Card.png/revision/latest/scale-to-width-down/" + size,
