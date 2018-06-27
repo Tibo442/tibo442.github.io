@@ -77,6 +77,21 @@
             margin:0;
             height:100%;
         }
+        #discord {
+            font-family: 'Advent Pro', sans-serif;
+            font-size: 1.5em;
+            font-weight: bolder;
+            padding: 1em;
+            color: #f44;
+            text-shadow: 1px 1px 3px #222;
+            background: rgba(0,0,0,.60);
+            border: 5px solid black;
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
         </style>
     </head>
     <body>
@@ -96,6 +111,30 @@
             Tech: <a href="/lbasrangemapmaker" target="">LBAS map range maker</a><br>
         </div></main>
         <div id="maintext"><h1>Flat is Justice</h1></div>
-        <div id="contact" itemscope itemtype="http://schema.org/Person">If you have suggestions/bugs/questsions/etc, you can contact me (<span itemprop="name">Tibo</span>) on <a href="https://twitter.com/FlatIsNice">Twitter @FlatIsNice</a>, on Discord @Tibi#2251 or via e-mail <a itemprop="email" href="mailto:tibo@flatisjustice.moe" target="">tibo@flatisjustice.moe</a></div>
+        <div id="contact" itemscope itemtype="http://schema.org/Person">If you have suggestions/bugs/questsions/etc, you can contact me (<span itemprop="name">Tibo</span>) on <a href="https://twitter.com/FlatIsNice">Twitter @FlatIsNice</a>, on <a href="#discord">Discord</a> @Tibi#2251 (preffered) or via e-mail <a itemprop="email" href="mailto:tibo@flatisjustice.moe" target="">tibo@flatisjustice.moe</a></div>
+        <div id="discord" style="display:none">
+            You can find me as @Tibi#2251 on any of these discords:<br>
+            - KanColle reddit discord <a href="https://discord.gg/RtSadWM">https://discord.gg/RtSadWM</a><br>
+            - KanColle wikia discord <a href="https://discord.gg/vEnBuqv">https://discord.gg/vEnBuqv</a><br>
+            - KC3改 discord <a href="https://discord.gg/QP6N8QQ">https://discord.gg/QP6N8QQ</a>
+        </div>
+        <script type="text/javascript">
+            var discord = document.getElementById('discord');
+
+            discord.onclick = function() {
+                discord.style = "display:none";
+                window.location.hash = "#";
+            };
+
+            function check() {
+                if(window.location.hash.toLowerCase() == "#discord")
+                    discord.style = "";
+            }
+            window.onhashchange = function() {
+                check();
+            }
+            check();
+
+        </script>
     </body>
 </html>
