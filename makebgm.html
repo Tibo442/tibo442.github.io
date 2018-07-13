@@ -38,6 +38,8 @@
     	<script type="text/javascript">
             var bgmidmap = {
                 "-171": "Summer 2016 Event Main Operation: Normal Node BGM", // LBAS = 70
+                "-2" : "No BGM: No boss node",
+
                 "0"  : "No BGM",
 
                 "1"  : "砲雷撃戦、始め！<br><i>Commence Gun & Torpedo Battle!</i>",
@@ -206,7 +208,10 @@
 
                 // 2018 Spring Mini Event
                 "116" : "Spring 2018 Mini Event: Map Screen BGM",
-                "117" : "Spring 2018 Mini Event: Map Battle BGM"
+                "117" : "Spring 2018 Mini Event: Map Battle BGM",
+
+                // KanColle on ice
+                "118" : "梅雨明けの白露<br><i>The Glistening Dew After The Rainy Season</i>"
             }
     		function update() {
                 let input = JSON.parse(document.getElementById("mstmapbgm").value);
@@ -228,6 +233,8 @@
                     } else
                         status[map.api_maparea_id][map.api_no] = [map.api_moving_bgm, ...map.api_map_bgm, ...map.api_boss_bgm];
                 }
+                status[1][6][3] = -2;
+                status[1][6][4] = -2;
                 console.log(status);
 
 
@@ -240,7 +247,7 @@
                     if(input.api_mst_maparea != undefined) 
                         mapareaname = worldid + " " + ((input.api_mst_maparea.filter((a) => a.api_id == worldid)[0] || {}).api_name || "X"); 
                     str += `{| class="mw-collapsible mw-collapsed wikitable" style="text-align:center;width:100%"
-!colspan="${lbas ? "8" : "7"}"|<h4 style="margin:0;text-align:left">World ${mapareaname}</h4>
+!colspan="${lbas ? "7" : "6"}"|<h4 style="margin:0;text-align:left">World ${mapareaname}</h4>
 |-
 !Map
 !Overworld${lbas ? `
@@ -249,7 +256,6 @@
 !Normal Node (Night Battle)
 !Boss Node (Day Battle)
 !Boss Node (Night Battle)
-!Notes
 `
                     htmlstr += `<tbody><tr style="display: table-row;">
 </th><th colspan="${lbas ? "7" : "6"}"><h4 style="margin:0;text-align:left">World ${mapareaname}</h4></tr>
@@ -292,10 +298,10 @@
 
                             htmlstr += `<td ${spans}>${bgmidmap[bgmid] || `BGM id: ${bgmid}`}</td>`
                         }
-                        str += `|\n`;
+                        //str += `|\n`;
                         htmlstr += `</tr>`;
                     }
-                    str += `|}`
+                    str += `|}\n`
                     htmlstr += `</tbody><br>`
                 }
                 document.getElementById("output").value = str;
