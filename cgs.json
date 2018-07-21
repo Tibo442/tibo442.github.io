@@ -306,6 +306,11 @@
                 "url" : "Kuroshio",
                 "weda" : [143, 51],
                 "wedb" : [155, 130]
+            }, {
+                "name" : "改二",
+                "url" : "Kuroshio_k2",
+                "weda" : [185, -7],
+                "wedb" : [65, 95]
             }
         ]
     }, {
@@ -1331,6 +1336,11 @@
                 "url" : "Ise_k",
                 "weda" : [253, 59],
                 "wedb" : [101, 100]
+            }, {
+                "name" : "改二",
+                "url" : "Ise_k2",
+                "weda" : [373, 2],
+                "wedb" : [78, 102]
             }, {
                 "name" : "Zuiun 改",
                 "url" : "Ise_k_Zuiun",
@@ -3869,6 +3879,11 @@
                 "url" : "Sagiri_Xmas",
                 "weda" : [112, -12],
                 "wedb" : [88, 116]
+            }, {
+                "name" : "Rainy",
+                "url" : "Sagiri_Rainy",
+                "weda" : [76, -12],
+                "wedb" : [81, 116]
             }
         ]
     }, {
@@ -3901,6 +3916,11 @@
                 "url" : "Hamanami",
                 "weda" : [86, 4],
                 "wedb" : [92, 120]
+            }, {
+                "name" : "Rainy",
+                "url" : "Hamanami_Rainy",
+                "weda" : [112, 20],
+                "wedb" : [92, 112]
             }
         ]
     }, {
@@ -3925,6 +3945,11 @@
                 "url" : "Fujinami_EoB",
                 "weda" : [88, 32],
                 "wedb" : [84, 112]
+            }, {
+                "name" : "Rainy",
+                "url" : "Fujinami_Rainy",
+                "weda" : [312, 5],
+                "wedb" : [75, 95]
             }
         ]
     }, {
@@ -4156,6 +4181,11 @@
                 "url" : "Etorofu_Yukata",
                 "weda" : [160, 92],
                 "wedb" : [88, 112]
+            }, {
+                "name" : "Rainy",
+                "url" : "Etorofu_Rainy",
+                "weda" : [192, 72],
+                "wedb" : [81, 104]
             }
         ]
     }, {
@@ -4320,6 +4350,11 @@
                 "url" : "Fukae",
                 "weda" : [216, 82],
                 "wedb" : [82, 136]
+            }, {
+                "name" : "Rainy",
+                "url" : "Fukae_Rainy",
+                "weda" : [108, 42],
+                "wedb" : [83, 121]
             }
         ]
     }
