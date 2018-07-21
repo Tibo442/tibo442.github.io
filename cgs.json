@@ -719,6 +719,11 @@
                 "weda" : [164, 18],
                 "wedb" : [129, 138]
             }, {
+                "name" : "改二",
+                "url" : "Shiratsuyu_k2",
+                "weda" : [171, 20],
+                "wedb" : [92, 106]
+            }, {
                 "name" : "Summer 改",
                 "url" : "Shiratsuyu_k_Summer",
                 "weda" : [84, 16],
@@ -939,6 +944,11 @@
                 "url" : "Tenryuu",
                 "weda" : [90, 150],
                 "wedb" : [134, 141]
+            }, {
+                "name" : "改二",
+                "url" : "Tenryuu_k2",
+                "weda" : [188, 36],
+                "wedb" : [75, 110]
             }, {
                 "name" : "Summer",
                 "url" : "Tenryuu_Summer",
@@ -2262,6 +2272,11 @@
                 "weda" : [271, 47],
                 "wedb" : [125, 145]
             }, {
+                "name" : "改二",
+                "url" : "Yuugumo_k2",
+                "weda" : [94, 29],
+                "wedb" : [84, 120]
+            }, {
                 "name" : "New Year",
                 "url" : "Yuugumo_NewYear",
                 "weda" : [176, 24],
@@ -2344,6 +2359,11 @@
                 "url" : "Naganami_k2_Spring_2018",
                 "weda" : [128, 52],
                 "wedb" : [84, 108]
+            }, {
+                "name" : "Summer Casual 改二",
+                "url" : "Naganami_k2_SummerCasual",
+                "weda" : [208, 52],
+                "wedb" : [64, 108]
             }
         ]
     }, {
@@ -4186,6 +4206,11 @@
                 "url" : "Etorofu_Rainy",
                 "weda" : [192, 72],
                 "wedb" : [81, 104]
+            }, {
+                "name" : "Ice Festival",
+                "url" : "Etorofu_IceFestival",
+                "weda" : [144, 96],
+                "wedb" : [88, 112]
             }
         ]
     }, {
@@ -4200,6 +4225,11 @@
                 "url" : "Matsuwa_Yukata",
                 "weda" : [120, 92],
                 "wedb" : [84, 112]
+            }, {
+                "name" : "Ice Festival",
+                "url" : "Matsuwa_IceFestival",
+                "weda" : [96, 100],
+                "wedb" : [80, 112]
             }
         ]
     }, {
@@ -4295,6 +4325,11 @@
                 "url" : "GambierBay_Spring",
                 "weda" : [180, 4],
                 "wedb" : [68, 112]
+            }, {
+                "name" : "Ice Festival",
+                "url" : "GambierBay_IceFestival",
+                "weda" : [208, -4],
+                "wedb" : [88, 112]
             }
         ]
     }, {
