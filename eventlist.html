@@ -20,6 +20,7 @@
                 max-width: 700px;
             }
         </style>
+        <script src="ShowcaseEventList.js"></script>
     </head>
     <body>
         <a href="."><b>Flat is Justice - Home</b></a><br>
@@ -85,7 +86,8 @@
                 sel.exportList();
     		}
 
-            function get(url, name) {
+
+            /*function get(url, name) {
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function() {
                     if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
@@ -101,7 +103,14 @@
                 xmlhttp.send();
             }
 
-            get("https://raw.githubusercontent.com/KC3Kai/KC3Kai/update-cumulative/src/library/objects/ShowcaseEventList.js", "ShowcaseEventList");
+            get("https://raw.githubusercontent.com/KC3Kai/KC3Kai/update-cumulative/src/library/objects/ShowcaseEventList.js", "ShowcaseEventList");*/
+
+            var t = setInterval(function() {
+                if(window.ShowcaseEventList != undefined) {
+                    update();
+                    clearInterval(t);
+                }
+            }, 100);
     	</script>
     </body>
 </html>
