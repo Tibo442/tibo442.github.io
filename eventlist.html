@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Flat is Justice! - Generate event table from kanmusu list</title>
+        <meta name="theme-color" content="#082E6B"/>
+        <meta name=viewport content="width=device-width, initial-scale=1">
+        <style type="text/css">
+        	div {
+        		display: inline-block;
+        	}
+            textarea {
+                width: 700px;
+                height: 200px;
+            }
+            table > tr > th, table > tr > td, table > * > tr > th, table > * > tr > td {
+                border: 1px #aaa solid;
+                padding: 0.2em
+            }
+            table {
+                max-width: 700px;
+            }
+        </style>
+    </head>
+    <body>
+        <a href="."><b>Flat is Justice - Home</b></a><br>
+        <div>
+            <a href="http://kancolle-calc.net/kanmusu_list.html">kanmusu list</a>: <input id="kanmusulist" onchange="update()" placeholder=".2|1:[...]"></input><br>
+        </div>
+        <br>
+        <br>
+        Output: <br>
+        <canvas id="output"></canvas><br>
+        Makes use of <a href="https://github.com/KC3Kai/KC3Kai">KC3Kai's</a> event list showcase exporter.
+
+    	<script type="text/javascript">
+            window.input = document.getElementById("kanmusulist").value;
+
+            window.KC3ShipManager = {};
+            KC3ShipManager.load = function() {};
+            KC3ShipManager.find = function(searchFunc) {
+                let ships = [];
+                for(let id in KC3Master.all_ships()) {
+                    let matchedShip = window.input.split("|").find((entry) => entry.split(":")[0] == id);
+                    for(let lvl of matchedShip.split(":")[1].split(","))
+                        ships.push({
+                            masterId: parseInt(id),
+                            level: Math.floor(lvl)
+                        })
+                }
+                return ships.filter(searchFunc);
+            }
+
+            window.KC3Master = {};
+            KC3Master.all_ships = function() {
+                let shipids = input.split("|").map((str) => parseInt(str.split(":")[0])).filter((a) => a > 0);
+                let masterShipObj = {};
+                for(let id of shipids)
+                    masterShipObj[id] = 0;
+                return masterShipObj;
+            }
+            KC3Master.ship = function(id) {
+                return {
+                    kc3_bship: parseInt(id),
+                    api_afterlv: 0
+                }
+            }
+
+            function KC3ImageExport(selvas){
+                let canvas = document.getElementById("output");
+                canvas.width = selvas.width;
+                canvas.height = selvas.height;
+                
+                let ctx = canvas.getContext('2d');
+                ctx.drawImage(selvas, 0, 0, canvas.width, canvas.height);
+                ctx.fillText("kanmusu list -> image: https://flatisjustice.moe/eventlist  generator made by @FlatIsNice", 12, canvas.height - 3);
+
+                this.export = () => 0;
+                return this;
+            };
+            window.dateFormat = () => 0;
+
+    		function update() {
+                input = document.getElementById("kanmusulist").value;
+                let sel = new ShowcaseEventList();
+                sel.exportList();
+    		}
+
+            function get(url, name) {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+                        if (xmlhttp.status == 200) {
+                            let js = xmlhttp.responseText;
+                            js = js.replace(/baseImgSrc = \"\//g, "baseImgSrc = \"https://raw.githubusercontent.com/KC3Kai/KC3Kai/update-cumulative/src/");
+                            eval(js);
+                            update();
+                       }
+                    }
+                };
+                xmlhttp.open("GET", url, true);
+                xmlhttp.send();
+            }
+
+            get("https://raw.githubusercontent.com/KC3Kai/KC3Kai/update-cumulative/src/library/objects/ShowcaseEventList.js", "ShowcaseEventList");
+    	</script>
+    </body>
+</html>
