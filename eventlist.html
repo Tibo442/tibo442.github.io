@@ -44,19 +44,12 @@
 
     	<script type="text/javascript">
             window.input = document.getElementById("kanmusulist").value;
+            var ships = [];
 
             window.KC3ShipManager = {};
             KC3ShipManager.load = function() {};
             KC3ShipManager.find = function(searchFunc) {
-                let ships = [];
-                for(let id in KC3Master.all_ships()) {
-                    let matchedShip = window.input.split("|").find((entry) => entry.split(":")[0] == id);
-                    for(let lvl of matchedShip.split(":")[1].split(","))
-                        ships.push({
-                            masterId: parseInt(id),
-                            level: Math.floor(lvl)
-                        })
-                }
+                if(ships.length == 0) generateShipList();
                 return ships.filter(searchFunc);
             }
 
@@ -101,6 +94,7 @@
 
     		function update() {
                 input = document.getElementById("kanmusulist").value;
+                generateShipList();
                 let eventConfigTemplate = document.getElementById('eventConfigTemplate');
                 let selected = eventConfigTemplate.options[eventConfigTemplate.selectedIndex].value;
                 let sel = new ShowcaseEventList();
@@ -115,6 +109,21 @@
                 }
     		}
 
+            function generateShipList() {
+                ships = [];
+                let allShips = window.input.split("|");
+                for(let matchedShip of allShips) {
+                    let shipInfo = matchedShip.split(":");
+                    let id = shipInfo[0];
+                    if(shipInfo.length != 2)
+                        continue;
+                    for(let lvl of shipInfo[1].split(","))
+                        ships.push({
+                            masterId: parseInt(id),
+                            level: Math.floor(lvl)
+                        })
+                }
+            }
 
             /*function get(url, name) {
                 var xmlhttp = new XMLHttpRequest();
