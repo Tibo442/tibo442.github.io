@@ -25,7 +25,15 @@
     <body>
         <a href="."><b>Flat is Justice - Home</b></a><br>
         <div>
-            <a href="http://kancolle-calc.net/kanmusu_list.html">kanmusu list</a>: <input id="kanmusulist" onchange="update()" placeholder=".2|1:[...]"></input><br>
+            <label><a href="http://kancolle-calc.net/kanmusu_list.html">kanmusu list</a>: <input id="kanmusulist" onchange="update()" placeholder=".2|1:[...]"></input></label><br>
+            <label>Template: 
+                <select id="eventConfigTemplate" onchange="update();">
+                    <option value="europeanShips">European ships</option>
+                    <option value="operationKitaTenGo">Operation Kita + Operation Ten-Go</option>
+                    <option value="operationKitaTenGo-JP">&#21271;&#21495;&#20316;&#25126; + &#22346;&#12494;&#23724;&#27798;&#28023;&#25126;</option>
+                </select>
+            </label><br>
+
             Use [Enter] or click outside of the text box to update.
         </div>
         <br>
@@ -74,7 +82,17 @@
                 
                 let ctx = canvas.getContext('2d');
                 ctx.drawImage(selvas, 0, 0, canvas.width, canvas.height);
-                ctx.fillText("kanmusu list -> image: https://flatisjustice.moe/eventlist  generator made by @FlatIsNice", 12, canvas.height - 3);
+                let text = "kanmusu list to image generator made by @FlatIsNice; https://flatisjustice.moe/eventlist";
+
+                ctx.font = `400 10px "Helvetica Neue", Helvetica, Arial, sans-serif`;
+                ctx.fillStyle = "#000";
+                ctx.shadowColor = "#fff";
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = "#fff";
+                ctx.shadowBlur = 2;
+
+                ctx.strokeText(text, (canvas.width - ctx.measureText(text).width) / 2, canvas.height - 2);
+                ctx.fillText(text, (canvas.width - ctx.measureText(text).width) / 2, canvas.height - 2);
 
                 this.export = () => 0;
                 return this;
@@ -83,8 +101,18 @@
 
     		function update() {
                 input = document.getElementById("kanmusulist").value;
+                let eventConfigTemplate = document.getElementById('eventConfigTemplate');
+                let selected = eventConfigTemplate.options[eventConfigTemplate.selectedIndex].value;
                 let sel = new ShowcaseEventList();
-                sel.exportList();
+                sel.exportList(selected.replace("-JP", ""));
+                sel.eventConfig.disclaimerHeightOffset = null;
+                switch(selected) {
+                    case "operationKitaTenGo-JP":
+                        sel.baseImage.src = "/assets/img/ui/operation_kita_ten-go-JP.png";
+                        break;
+                    default:
+                        break;
+                }
     		}
 
 
@@ -108,8 +136,8 @@
 
             var t = setInterval(function() {
                 if(window.ShowcaseEventList != undefined) {
-                    update();
                     clearInterval(t);
+                    update();
                 }
             }, 100);
     	</script>
