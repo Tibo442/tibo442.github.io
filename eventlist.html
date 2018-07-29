@@ -8,16 +8,17 @@
         	div {
         		display: inline-block;
         	}
+            #download {
+                cursor:pointer;
+                color: -webkit-link;
+                text-decoration: underline;
+            }
+            #download:hover {
+                color:blue;
+            }
             textarea {
                 width: 700px;
                 height: 200px;
-            }
-            table > tr > th, table > tr > td, table > * > tr > th, table > * > tr > td {
-                border: 1px #aaa solid;
-                padding: 0.2em
-            }
-            table {
-                max-width: 700px;
             }
         </style>
         <script src="ShowcaseEventList.js"></script>
@@ -38,12 +39,12 @@
         </div>
         <br>
         <br>
-        Output: <br>
+        Output: <a id='download'>Download</a><br>
         <canvas id="output"></canvas><br>
         Makes use of <a href="https://github.com/KC3Kai/KC3Kai">KC3Kai's</a> event list showcase exporter.
 
     	<script type="text/javascript">
-            window.input = document.getElementById("kanmusulist").value;
+            window.input = document.getElementById("kanmusulist").value = localStorage.getItem("ships") || "";
             var ships = [];
 
             window.KC3ShipManager = {};
@@ -94,6 +95,7 @@
 
     		function update() {
                 input = document.getElementById("kanmusulist").value;
+                localStorage.setItem("ships", input);
                 generateShipList();
                 let eventConfigTemplate = document.getElementById('eventConfigTemplate');
                 let selected = eventConfigTemplate.options[eventConfigTemplate.selectedIndex].value;
@@ -124,6 +126,14 @@
                         })
                 }
             }
+
+            document.getElementById("download").addEventListener('click', function() {
+                this.href = document.getElementById("output").toDataURL();
+                let d = new Date();
+                let eventConfigTemplate = document.getElementById('eventConfigTemplate');
+                let selected = eventConfigTemplate.options[eventConfigTemplate.selectedIndex].text;
+                this.download = `${selected} ${d.getFullYear()}-${("0"+(d.getMonth()+1)).slice(-2)}-${("0" + d.getDate()).slice(-2)} ${("0" + d.getHours()).slice(-2)}${("0" + d.getMinutes()).slice(-2)}${("0" + d.getSeconds()).slice(-2)}.png`;
+            }, false);
 
             /*function get(url, name) {
                 var xmlhttp = new XMLHttpRequest();
