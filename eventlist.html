@@ -22,6 +22,7 @@
             }
         </style>
         <script src="ShowcaseEventList.js"></script>
+        <script src="https://unpkg.com/blob-util/dist/blob-util.min.js"></script>
     </head>
     <body>
         <a href="."><b>Flat is Justice - Home</b></a><br>
@@ -29,6 +30,7 @@
             <label><a href="http://kancolle-calc.net/kanmusu_list.html">kanmusu list</a>: <input id="kanmusulist" onchange="update()" placeholder=".2|1:[...]"></input></label><br>
             <label>Template: 
                 <select id="eventConfigTemplate" onchange="update();">
+                    <option value="nicohatealpha">&#19968;&#20843;&#24335;&#12288;&#26217;&#22799;&#12288;&#38480;&#23450;&#28023;&#22495;&#32244;&#24230;&#30906;&#35469;&#34920;</option>
                     <option value="europeanShips">European ships</option>
                     <option value="operationKitaTenGo">Operation Kita + Operation Ten-Go</option>
                     <option value="operationKitaTenGo-JP">&#21271;&#21495;&#20316;&#25126; + &#22346;&#12494;&#23724;&#27798;&#28023;&#25126;</option>
@@ -88,6 +90,9 @@
                 ctx.strokeText(text, (canvas.width - ctx.measureText(text).width) / 2, canvas.height - 2);
                 ctx.fillText(text, (canvas.width - ctx.measureText(text).width) / 2, canvas.height - 2);
 
+                blobUtil.canvasToBlob(canvas, 'image/png').then(function (blob) {
+                    document.getElementById("download").href = blobUtil.createObjectURL(blob);
+                });
                 this.export = () => 0;
                 return this;
             };
@@ -128,7 +133,7 @@
             }
 
             document.getElementById("download").addEventListener('click', function() {
-                this.href = document.getElementById("output").toDataURL();
+                //this.href = document.getElementById("output").toDataURL();
                 let d = new Date();
                 let eventConfigTemplate = document.getElementById('eventConfigTemplate');
                 let selected = eventConfigTemplate.options[eventConfigTemplate.selectedIndex].text;
