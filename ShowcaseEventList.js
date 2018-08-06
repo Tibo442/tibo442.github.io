@@ -153,6 +153,45 @@
                 {"x": 646, "y": 664, "id": 49}   // Kasumi
             ],
         },
+        // Potato ships
+        "potatoShips": {
+            baseImgSrc: "/assets/img/ui/potatoes.png",
+            exportFileName: "Potato Ship List",
+            disclaimerHeightOffset: null,
+            fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+            lvlFontSize: 30,
+            maxBoxWidth: 84,
+            shipPositions: [
+                {"x": 174+191*0, "y": 141+60* 0, "id":  77}, // Ise
+                {"x": 174+191*0, "y": 141+60* 1, "id":  87}, // Hyuuga
+                {"x": 174+191*0, "y": 141+60* 2, "id":  83}, // Akagi
+                {"x": 174+191*0, "y": 141+60* 3, "id":  84}, // Kaga
+                {"x": 174+191*0, "y": 141+60* 4, "id":  91}, // Hiryuu
+                {"x": 174+191*0, "y": 141+60* 5, "id":  90}, // Souryuu
+                {"x": 174+191*0, "y": 141+60* 6, "id": 549}, // Intrepid
+
+                {"x": 174+191*1, "y": 141+60* 0, "id":  89}, // Houshou
+                {"x": 174+191*1, "y": 141+60* 1, "id": 521}, // Kasugamaru
+                {"x": 174+191*1, "y": 141+60* 2, "id":  70}, // Mogami
+                {"x": 174+191*1, "y": 141+60* 3, "id": 120}, // Mikuma
+                {"x": 174+191*1, "y": 141+60* 4, "id":  25}, // Kitakami
+                {"x": 174+191*1, "y": 141+60* 5, "id":  24}, // Ooi
+
+                {"x": 174+191*2, "y": 141+60* 0, "id":   9}, // Fubuki
+                {"x": 174+191*2, "y": 141+60* 1, "id":  10}, // Shirayuki
+                {"x": 174+191*2, "y": 141+60* 2, "id":  11}, // Miyuki
+                {"x": 174+191*2, "y": 141+60* 3, "id":  12}, // Isonami
+                {"x": 174+191*2, "y": 141+60* 4, "id":  32}, // Hatsuyuki
+                {"x": 174+191*2, "y": 141+60* 5, "id": 486}, // Uranami
+
+                {"x": 174+191*3, "y": 141+60* 0, "id":  13}, // Ayanami
+                {"x": 174+191*3, "y": 141+60* 1, "id":  14}, // Shikinami
+                {"x": 174+191*3, "y": 141+60* 2, "id": 551}, // Hiburi
+                {"x": 174+191*3, "y": 141+60* 3, "id": 552}, // Daitou
+                {"x": 174+191*3, "y": 141+60* 4, "id": 493}, // I-400
+                {"x": 174+191*3, "y": 141+60* 5, "id": 155}  // I-401
+            ],
+        },
     };
 
     class ShowcaseEventList {
