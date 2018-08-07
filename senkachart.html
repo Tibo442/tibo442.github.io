@@ -44,11 +44,11 @@
             var longestJP, longestScore;
 
     		function update() {
-
                 // Convert data to another format:
                 // parsed[rank][ts][serverId - 1] = points
                 for(let i = 1; i <= 20; i++) {
                     if(data[i].code == 1) continue;
+
                     for(let cutoff of data[i].data.cutofflist) {
                         let ts = cutoff.timestamp;
                         if(minTime == undefined || ts < minTime) minTime = ts;
@@ -57,18 +57,25 @@
                             if(parsed[rank] == undefined) parsed[rank] = {};
                             if(parsed[rank][ts] == undefined) parsed[rank][ts] = [];
                             parsed[rank][ts][i - 1] = cutoff.cutoff[rank];
-                            if(maxOfRank[rank] == undefined || maxOfRank[rank] < cutoff.cutoff[rank]) maxOfRank[rank] = cutoff.cutoff[rank];
                         }
                     }
                 }
+                // Second cycle
+                parsed[500][1533103200000][2] = 278;
+                parsed[500][1533103200000][8] = 237;
+
+                for(let rank of ranks)
+                    maxOfRank[rank] = Math.max(...Object.values(parsed[rank]).map((a) => Math.max(...a.filter((b) => b))).filter((b) => b))
 
                 console.log(parsed, minTime, maxTime, maxOfRank);
 
                 canvas = document.getElementById("graph");
                 ctx = canvas.getContext("2d");
+                ctx.font = `100 10px sans-serif`
+                longestScore = ctx.measureText(" (88888) ").width;
+                ctx.font = `100 10px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`
                 // Get some widths of longest names;
                 longestJP = [0, 0];
-                longestScore = ctx.measureText(" (88888) ").width;
                 for(let i = 0; i < 20; i++)
                     longestJP[i%2] = Math.max(longestJP[i%2], ctx.measureText(jp_names[i]).width);
 
@@ -142,7 +149,8 @@
                 ctx.lineWidth = 1;
                 ctx.fillRect(0, 0, width - 1, height);
                 ctx.lineWidth = 2;
-                height -= yOffset;
+                height -= yOffset; 
+                ctx.font = `100 10px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`
             }
 
             function drawVerticalLines(rank) {
@@ -222,7 +230,7 @@
                 ctx.strokeStyle = "rgba(0, 0, 0, 90%)";
 
                 if(rank == -1)
-                    ctx.rect(xOffset + 5, yOffset + 5, 45, 77);
+                    ctx.rect(xOffset + 5, yOffset + 5, 48, 77);
                 else
                     ctx.rect(width - descW - 5, height - descH + yOffset - 7, descW, descH + 2);
 
@@ -265,11 +273,14 @@
                             ctx.fillStyle = "#0c0";
                         let score = ` (${currentServer}) `;
                         ctx.textAlign = "center";
+                        ctx.font = `100 10px sans-serif`
                         ctx.fillText(score, x + rectSize + currentOffset - longestScore / 2 , y + rectSize);
                         ctx.fillStyle = "#000";
                     }
                     ctx.textAlign = "left";
+                    ctx.font = `100 10px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`
                     ctx.fillText(jp_names[i], x + rectSize, y + rectSize)
+                    ctx.font = `100 10px sans-serif`
                     ctx.fillText(en_names[i], x + rectSize + currentOffset, y + rectSize)
                 }
             }
@@ -287,7 +298,7 @@
             }
 
             function drawTitle(txt) {
-                ctx.font = `800 16px Helvetica Neue, Helvetica, Arial, sans-serif`;
+                ctx.font = `800 16px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
                 ctx.fillStyle = "#000";
                 ctx.textAlign = "center";
                 ctx.fillText(txt, width / 2, 20);
