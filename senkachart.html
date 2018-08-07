@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Flat is Justice! - Senka Chart</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="theme-color" content="#082E6B"/>
         <meta name=viewport content="width=device-width, initial-scale=1">
         <meta name="twitter:card" content="summary">
@@ -29,7 +30,8 @@
     	<script type="text/javascript">
             var data = {};
             let colors = ["#e6194b", "#3cb44b", "#ffe119", "#0082c8", "#f58231", "#911eb4", "#46f0f0", "#f032e6", "#d2f53c", "#fabebe", "#008080", "#e6beff", "#aa6e28", "#808080", "#800000", "#aaffc3", "#808000", "#ffd8b1", "#000080", "#a873b7"];
-            var en_names=["Yokosuka Naval District", "Kure Naval District", "Sasebo Naval District", "Maizuru Naval District", "Ominato Guard District", "Truk Anchorage", "Lingga Anchorage", "Rabaul Naval Base", "Shortland Anchorage", "Buin Naval Base", "Tawi-Tawi Anchorage", "Palau Anchorage", "Brunei Anchorage", "Hitokappu Bay Anchorage", "Paramushir Anchorage", "Sukumo Bay Anchorage", "Kanoya Airfield", "Iwagawa Airfield", "Saiki Bay Anchorage", "Hashirajima Anchorage"];
+            let jp_names = ["横須賀", "呉", "佐世保", "舞鶴", "大湊", "トラック", "リンガ", "ラバウル", "ショートランド", "ブイン", "タウイタウイ", "パラオ", "ブルネイ", "単冠", "幌筵", "宿毛", "鹿屋", "岩川", "佐伯湾", "柱島"];
+            let en_names = ["Yokosuka", "Kure", "Sasebo", "Maizuru", "Ominato", "Truk", "Lingga", "Rabaul", "Shortland", "Buin", "Tawi-Tawi", "Palau", "Brunei", "Hitokappu", "Paramushir", "Sukumo", "Kanoya", "Iwagawa", "Saiki Bay", "Hashirajima"];
 
     		function update() {
                 let minTime, maxTime;
@@ -114,19 +116,24 @@
                     ctx.beginPath();
                     ctx.fillStyle = "rgba(255, 255, 255, 90%)";
                     ctx.strokeStyle = "rgba(0, 0, 0, 90%)";
-                    let descW = 340, descH = 150;
+                    let descW = 330, descH = 150;
                     ctx.rect(width - descW, height - descH + yOffset - 3, descW, descH + 2);
                     ctx.fill();
                     ctx.stroke();
 
+                    // Get some widths of longest names;
+                    let longestJP = [0, 0], longestScore = ctx.measureText(" (88888) ").width;
+                    for(let i = 0; i < 20; i++)
+                        longestJP[i%2] = Math.max(longestJP[i%2], ctx.measureText(jp_names[i]).width);
+
                     // Draw servers in legend box
                     for(let i = 0; i < 20; i++) {
-                        let x = width - descW + 7 + Math.floor(i%2) * descW / 2;
+                        let x = width - descW + 7 + Math.floor(i%2) * 177;
                         let y = height - descH + yOffset + Math.floor(i/2) * descH / 10;
                         ctx.fillStyle = colors[i];
 
+                        let currentOffset = longestJP[i%2];
                         ctx.fillRect(x - rectSize / 2, y, rectSize, rectSize)
-                        let name = en_names[i];
                         if(data[i + 1].code != 2)
                             ctx.fillStyle = "#f00";
                         else if (parsed[rank][maxTime][i] == undefined)
@@ -140,11 +147,13 @@
                                 ctx.fillStyle = "#c00";
                             else if (currentServer <= top[2])
                                 ctx.fillStyle = "#0c0";
-
-                            ctx.fillText(` (${currentServer})`, x + rectSize + ctx.measureText(name).width, y + rectSize)
+                            let score = ` (${currentServer}) `;
+                            currentOffset += longestScore;
+                            ctx.fillText(score, x + rectSize + currentOffset - longestScore / 2 - ctx.measureText(score).width / 2, y + rectSize);
                             ctx.fillStyle = "#000";
                         }
-                        ctx.fillText(name, x + rectSize, y + rectSize)
+                        ctx.fillText(jp_names[i], x + rectSize, y + rectSize)
+                        ctx.fillText(en_names[i], x + rectSize + currentOffset, y + rectSize)
                     }
 
                     // Draw some other shit
