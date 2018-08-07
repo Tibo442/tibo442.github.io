@@ -112,9 +112,9 @@
 
                     // Draw server list box
                     ctx.beginPath();
-                    ctx.fillStyle = "rgba(255, 255, 255, 75%)";
-                    ctx.strokeStyle = "rgba(0, 0, 0, 75%)";
-                    let descW = 275, descH = 150;
+                    ctx.fillStyle = "rgba(255, 255, 255, 90%)";
+                    ctx.strokeStyle = "rgba(0, 0, 0, 90%)";
+                    let descW = 340, descH = 150;
                     ctx.rect(width - descW, height - descH + yOffset - 3, descW, descH + 2);
                     ctx.fill();
                     ctx.stroke();
@@ -126,17 +126,30 @@
                         ctx.fillStyle = colors[i];
 
                         ctx.fillRect(x - rectSize / 2, y, rectSize, rectSize)
-                        if(data[i + 1].code == 2)
-                            ctx.fillStyle = "#000";
-                         else
+                        let name = en_names[i];
+                        if(data[i + 1].code != 2)
                             ctx.fillStyle = "#f00";
-                        ctx.fillText(en_names[i], x + rectSize, y + rectSize)
+                        else if (parsed[rank][maxTime][i] == undefined)
+                            ctx.fillStyle = "#f88";
+                        else {
+                            ctx.fillStyle = "#000";
+                            name += ` (${parsed[rank][maxTime][i]})`;
+                        }
+                        ctx.fillText(name, x + rectSize, y + rectSize)
                     }
+
+                    // Draw some other shit
+                    ctx.fillStyle = "#888";
+                    let txt = "Data: senka.com.ru "
+                    ctx.fillText(txt, width - ctx.measureText(txt).width, 8);
+                    txt = "Graph generator: @FlatIsNice "
+                    ctx.fillText(txt, width - ctx.measureText(txt).width, 18);
 
                     // Draw title
                     ctx.font = `800 16px Helvetica Neue, Helvetica, Arial, sans-serif`;
-                    let txt = `Server ranking top ${rank}`
-                    ctx.fillText(txt, width / 2 - ctx.measureText(txt).width / 2, 20)
+                    ctx.fillStyle = "#000";
+                    txt = `Server ranking top ${rank}`;
+                    ctx.fillText(txt, width / 2 - ctx.measureText(txt).width / 2, 20);
 
                     blobUtil.canvasToBlob(canvas, 'image/png').then(function (blob) {
                         document.getElementById("download" + rank).href = blobUtil.createObjectURL(blob);
