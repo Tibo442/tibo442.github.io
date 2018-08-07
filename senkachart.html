@@ -132,8 +132,17 @@
                         else if (parsed[rank][maxTime][i] == undefined)
                             ctx.fillStyle = "#f88";
                         else {
+                            let top = parsed[rank][maxTime].filter((a) => a).sort((a,b) => a-b);
+                            let currentServer = parsed[rank][maxTime][i];
+
                             ctx.fillStyle = "#000";
-                            name += ` (${parsed[rank][maxTime][i]})`;
+                            if(currentServer >= top[top.length - 3])
+                                ctx.fillStyle = "#c00";
+                            else if (currentServer <= top[2])
+                                ctx.fillStyle = "#0c0";
+
+                            ctx.fillText(` (${currentServer})`, x + rectSize + ctx.measureText(name).width, y + rectSize)
+                            ctx.fillStyle = "#000";
                         }
                         ctx.fillText(name, x + rectSize, y + rectSize)
                     }
