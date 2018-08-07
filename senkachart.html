@@ -21,22 +21,29 @@
     </head>
     <body> 
         <a href="."><b>Flat is Justice - Home</b></a><br>
-        Output: Download: <a id='download1'>#1</a> <a id='download5'>#5</a> <a id='download20'>#20</a> <a id='download100'>#100</a> <a id='download500'>#500</a><br>
-        <canvas id="graph1" width="960" height="540" style="border:1px solid black;"></canvas><br>
-        <canvas id="graph5" width="960" height="540" style="border:1px solid black;"></canvas><br>
-        <canvas id="graph20" width="960" height="540" style="border:1px solid black;"></canvas><br>
-        <canvas id="graph100" width="960" height="540" style="border:1px solid black;"></canvas><br>
-        <canvas id="graph500" width="960" height="540" style="border:1px solid black;"></canvas><br>
+        Output: Download: <a id='download'>All</a> <a id='download1'>#1</a> <a id='download5'>#5</a> <a id='download20'>#20</a> <a id='download100'>#100</a> <a id='download500'>#500</a><br>
+        <canvas id="graph" width="1930" height="1635"></canvas><br><br>
+        <canvas id="graphMix" width="960" height="540"></canvas><br><br>
+        <canvas id="graph1" width="960" height="540"></canvas><br>
+        <canvas id="graph5" width="960" height="540"></canvas><br>
+        <canvas id="graph20" width="960" height="540"></canvas><br>
+        <canvas id="graph100" width="960" height="540"></canvas><br>
+        <canvas id="graph500" width="960" height="540"></canvas><br>
     	<script type="text/javascript">
             var data = {};
             let colors = ["#e6194b", "#3cb44b", "#ffe119", "#0082c8", "#f58231", "#911eb4", "#46f0f0", "#f032e6", "#d2f53c", "#fabebe", "#008080", "#e6beff", "#aa6e28", "#808080", "#800000", "#aaffc3", "#808000", "#ffd8b1", "#000080", "#a873b7"];
-            let jp_names = ["横須賀", "呉", "佐世保", "舞鶴", "大湊", "トラック", "リンガ", "ラバウル", "ショートランド", "ブイン", "タウイタウイ", "パラオ", "ブルネイ", "単冠", "幌筵", "宿毛", "鹿屋", "岩川", "佐伯湾", "柱島"];
-            let en_names = ["Yokosuka", "Kure", "Sasebo", "Maizuru", "Ominato", "Truk", "Lingga", "Rabaul", "Shortland", "Buin", "Tawi-Tawi", "Palau", "Brunei", "Hitokappu", "Paramushir", "Sukumo", "Kanoya", "Iwagawa", "Saiki Bay", "Hashirajima"];
+            const jp_names = ["横須賀", "呉", "佐世保", "舞鶴", "大湊", "トラック", "リンガ", "ラバウル", "ショートランド", "ブイン", "タウイタウイ", "パラオ", "ブルネイ", "単冠", "幌筵", "宿毛", "鹿屋", "岩川", "佐伯湾", "柱島"];
+            const en_names = ["Yokosuka", "Kure", "Sasebo", "Maizuru", "Ominato", "Truk", "Lingga", "Rabaul", "Shortland", "Buin", "Tawi-Tawi", "Palau", "Brunei", "Hitokappu", "Paramushir", "Sukumo", "Kanoya", "Iwagawa", "Saiki Bay", "Hashirajima"];
+            const ranks = [500, 100, 20, 5, 1];
+
+            var canvas, width, height, ctx;
+            var yOffset = 32, rectSize = 8, xOffset = 34;
+            let descW = 330, descH = 150;
+            var minTime, maxTime;
+            var parsed = {}, maxOfRank = {};
+            var longestJP, longestScore;
 
     		function update() {
-                let minTime, maxTime;
-                let parsed = {};
-                let maxOfRank = {};
 
                 // Convert data to another format:
                 // parsed[rank][ts][serverId - 1] = points
@@ -57,134 +64,28 @@
 
                 console.log(parsed, minTime, maxTime, maxOfRank);
 
-                for(let rank in maxOfRank) {
-                    let canvas = document.getElementById("graph" + rank);
-                    let width = canvas.width, height = canvas.height;
-                    let ctx = canvas.getContext("2d");
+                canvas = document.getElementById("graph");
+                ctx = canvas.getContext("2d");
+                // Get some widths of longest names;
+                longestJP = [0, 0];
+                longestScore = ctx.measureText(" (88888) ").width;
+                for(let i = 0; i < 20; i++)
+                    longestJP[i%2] = Math.max(longestJP[i%2], ctx.measureText(jp_names[i]).width);
 
-                    // Clear screen, setup
-                    ctx.fillStyle = "#fff";
-                    ctx.fillRect(0, 0, width - 1, height);
+                for(let rank of ranks) {
+                    canvas = document.getElementById("graph" + rank);
+                    width = canvas.width;
+                    height = canvas.height;
+                    ctx = canvas.getContext("2d");
 
-                    // Setup some variables
-                    let xOffset = ctx.measureText(" 88888 ").width, yOffset = 32, rectSize = 8;
-                    //ctx.font = `800 8px Helvetica Neue, Helvetica, Arial, sans-serif`;
-                    ctx.lineWidth = 2;
-                    height -= yOffset;
-
-                    // Get some widths of longest names;
-                    let longestJP = [0, 0], longestScore = ctx.measureText(" (88888) ").width;
-                    for(let i = 0; i < 20; i++)
-                        longestJP[i%2] = Math.max(longestJP[i%2], ctx.measureText(jp_names[i]).width);
-
-                    // Draw vertical lines per cycle
-                    ctx.fillStyle = "#000";
-                    ctx.fillRect(0, yOffset, width, 1);
-                    for(let ts in parsed[rank]) {
-                        let xPos = xOffset + (ts - minTime) / (maxTime - minTime) * (width - xOffset);
-                        ctx.fillRect(xPos, yOffset, 1, height);
-
-                        let timestampTime = new Date(parseInt(ts));
-                        let d = new Date(timestampTime.getTime() + timestampTime.getTimezoneOffset() * 60000 + 9 * 3600000);
-                        let str = `${d.getFullYear()}-${("0"+(d.getMonth()+1)).slice(-2)}-${("0" + d.getDate()).slice(-2)} ${("0" + d.getHours()).slice(-2)}:${("0" + d.getMinutes()).slice(-2)}`
-
-                        ctx.save();
-                        ctx.translate(xPos, height + yOffset);
-                        ctx.rotate(Math.PI/2);
-                        ctx.textAlign = "right";
-                        ctx.fillText(str, -1, -3);
-                        ctx.restore();
-                    }
-
-                    // Draw horizontal lines depending on max points
-                    ctx.textAlign = "center"; 
-                    let rankOff = Math.ceil(maxOfRank[rank] / 10 / 50) * 50;
-                    for(let i = rankOff; i < maxOfRank[rank]; i += rankOff) {
-                        let yPos = yOffset + height - (i / maxOfRank[rank] * height);
-                        ctx.fillRect(xOffset, yPos, width, 1);
-                        ctx.fillText(i, xOffset / 2, yPos + 3);
-                    }
-                    ctx.textAlign = "left";
-
-                    // Draw each server's line
-                    for(let i = 0; i < 20; i++) {
-                        ctx.strokeStyle = colors[i];
-                        ctx.fillStyle = colors[i];
-                        let firstOne = true;
-
-                        for(let ts of Object.keys(parsed[rank]).sort()) {
-                            let xPos = xOffset + (ts - minTime) / (maxTime - minTime) * (width - xOffset);
-                            let yPos = yOffset + height - (parsed[rank][ts][i] / maxOfRank[rank] * height);
-                            if(parsed[rank][ts][i] == undefined) continue;
-                            ctx.fillRect(xPos - rectSize / 2, yPos - rectSize / 2, rectSize, rectSize)
-                            
-                            if(firstOne) {
-                                ctx.beginPath();
-                                ctx.moveTo(xPos, yPos);
-                            } else {
-                                ctx.lineTo(xPos, yPos);
-                            }
-                            firstOne = false;
-                        }
-                        if(!firstOne)
-                            ctx.stroke();
-                    }
-
-                    // Draw server list box
-                    ctx.beginPath();
-                    ctx.fillStyle = "rgba(255, 255, 255, 90%)";
-                    ctx.strokeStyle = "rgba(0, 0, 0, 90%)";
-                    let descW = 330, descH = 150;
-                    ctx.rect(width - descW, height - descH + yOffset - 3, descW, descH + 2);
-                    ctx.fill();
-                    ctx.stroke();
-
-                    // Draw servers in legend box
-                    for(let i = 0; i < 20; i++) {
-                        let x = width - descW + 7 + Math.floor(i%2) * 177;
-                        let y = height - descH + yOffset + Math.floor(i/2) * descH / 10;
-                        ctx.fillStyle = colors[i];
-
-                        let currentOffset = longestJP[i%2];
-                        ctx.fillRect(x - rectSize / 2, y, rectSize, rectSize)
-                        if(data[i + 1].code != 2)
-                            ctx.fillStyle = "#f00";
-                        else if (parsed[rank][maxTime][i] == undefined)
-                            ctx.fillStyle = "#f88";
-                        else {
-                            let top = parsed[rank][maxTime].filter((a) => a).sort((a,b) => a-b);
-                            let currentServer = parsed[rank][maxTime][i];
-
-                            ctx.fillStyle = "#000";
-                            if(currentServer >= top[top.length - 3])
-                                ctx.fillStyle = "#c00";
-                            else if (currentServer <= top[2])
-                                ctx.fillStyle = "#0c0";
-                            let score = ` (${currentServer}) `;
-                            currentOffset += longestScore;
-                            ctx.textAlign = "center";
-                            ctx.fillText(score, x + rectSize + currentOffset - longestScore / 2 , y + rectSize);
-                            ctx.fillStyle = "#000";
-                        }
-                        ctx.textAlign = "left";
-                        ctx.fillText(jp_names[i], x + rectSize, y + rectSize)
-                        ctx.fillText(en_names[i], x + rectSize + currentOffset, y + rectSize)
-                    }
-
-                    // Draw some other shit
-                    ctx.fillStyle = "#888";
-                    ctx.textAlign = "right";
-                    let txt = "Data: senka.com.ru ";
-                    ctx.fillText(txt, width, 8);
-                    txt = "Graph generator: @FlatIsNice ";
-                    ctx.fillText(txt, width, 18);
-
-                    // Draw title
-                    ctx.font = `800 16px Helvetica Neue, Helvetica, Arial, sans-serif`;
-                    ctx.fillStyle = "#000";
-                    ctx.textAlign = "center";
-                    txt = `Server ranking top ${rank}`;
-                    ctx.fillText(txt, width / 2, 20);
+                    clearScreen(); // Clear screen, setup
+                    drawVerticalLines(rank); // Draw vertical lines per cycle
+                    drawHorizontalLines(rank); // Draw horizontal lines depending on max points
+                    drawServerLines(rank); // Draw each server's line
+                    drawServerLegend(rank); // Draw servers in legend box
+                    drawMisc(); // Draw some other shit
+                    drawTitle(`All servers - #${rank}`); // Draw title
+                    drawBorder();
 
                     blobUtil.canvasToBlob(canvas, 'image/png').then(function (blob) {
                         document.getElementById("download" + rank).href = blobUtil.createObjectURL(blob);
@@ -194,7 +95,217 @@
                         this.download = `Top${rank} @ ${d.getFullYear()}-${("0"+(d.getMonth()+1)).slice(-2)}-${("0" + d.getDate()).slice(-2)}.png`;
                     }, false);
                 }
+
+                // Draw mix of servers
+                canvas = document.getElementById("graphMix");
+                width = canvas.width;
+                height = canvas.height;
+                ctx = canvas.getContext("2d");
+
+                clearScreen(); // Clear screen, setup
+                drawVerticalLines(1); // Draw vertical lines per cycle
+                drawHorizontalLines(1); // Draw horizontal lines depending on max points
+                for(let rank of ranks)
+                    drawServerLines(rank, 1); // Draw each server's line
+                drawServerLegend(-1); // Draw servers in legend box
+                drawMisc(); // Draw some other shit
+                drawTitle(`All ranks`); // Draw title
+                drawBorder(); // Draw border
+
+                // All graphs combined
+                let totalCanvas = document.getElementById("graph");
+                ctx = totalCanvas.getContext("2d");
+                let coords = [[0, 0], [1, 0], [0, 1], [1, 1], [0, 2], [1, 2]]
+
+                for(let rank of [...ranks, -1]) {
+                    if(rank !== -1) {
+                        let canvas = document.getElementById("graph" + rank);
+                        ctx.drawImage(canvas, 5+coords[ranks.indexOf(rank)][0] * (canvas.width + 5), 5+coords[ranks.indexOf(rank)][1] * (canvas.height + 5))
+                    } else {
+                        let canvas = document.getElementById("graphMix");
+                        ctx.drawImage(canvas, 5+coords[ranks.length][0] * (canvas.width + 5), 5+coords[ranks.length][1] * (canvas.height + 5))
+                    }
+                }
+
+                blobUtil.canvasToBlob(totalCanvas, 'image/png').then(function (blob) {
+                    document.getElementById("download").href = blobUtil.createObjectURL(blob);
+                });
+                document.getElementById("download").addEventListener('click', function() {
+                    let d = new Date();
+                    this.download = `All @ ${d.getFullYear()}-${("0"+(d.getMonth()+1)).slice(-2)}-${("0" + d.getDate()).slice(-2)}.png`;
+                }, false);
        		}
+
+            function clearScreen() {
+                ctx.fillStyle = "#fff";
+                ctx.lineWidth = 1;
+                ctx.fillRect(0, 0, width - 1, height);
+                ctx.lineWidth = 2;
+                height -= yOffset;
+            }
+
+            function drawVerticalLines(rank) {
+                ctx.fillStyle = "#000";
+                ctx.fillRect(0, yOffset, width, 1);
+                for(let ts in parsed[rank]) {
+                    let xPos = xOffset + (ts - minTime) / (maxTime - minTime) * (width - xOffset);
+                    ctx.fillRect(xPos, yOffset, 1, height);
+
+                    let str = timeStr(ts);
+
+                    ctx.save();
+                    ctx.translate(xPos, height + yOffset);
+                    ctx.rotate(Math.PI/2);
+                    ctx.textAlign = "right";
+                    ctx.fillText(str, -1, -3);
+                    ctx.restore();
+                }
+            }
+
+            function drawHorizontalLines(rank) {
+                ctx.textAlign = "center"; 
+                let rankOff = Math.ceil(maxOfRank[rank] / 10 / 50) * 50;
+                for(let i = rankOff; i < maxOfRank[rank]; i += rankOff) {
+                    let yPos = yOffset + height - (i / maxOfRank[rank] * height);
+                    ctx.fillRect(xOffset, yPos, width, 1);
+                    ctx.fillText(i, xOffset / 2, yPos + 3);
+                }
+            }
+
+            function drawServerLines(rank, maxRank) {
+                let isAll = true;
+                if(!maxRank) {
+                    maxRank = rank;
+                    isAll = false;
+                }
+                for(let i = 0; i < 20; i++) {
+                    if(!isAll) {
+                        ctx.strokeStyle = colors[i];
+                        ctx.fillStyle = colors[i];
+                    } else {
+                        ctx.strokeStyle = colors[ranks.indexOf(rank)];
+                        ctx.fillStyle = colors[ranks.indexOf(rank)];
+                    }
+                    let firstOne = true;
+
+                    for(let ts of Object.keys(parsed[rank]).sort()) {
+                        let xPos = xOffset + (ts - minTime) / (maxTime - minTime) * (width - xOffset);
+                        let yPos = yOffset + height - (parsed[rank][ts][i] / maxOfRank[maxRank] * height);
+                        if(parsed[rank][ts][i] == undefined) continue;
+                        ctx.fillRect(xPos - rectSize / 2, yPos - rectSize / 2, rectSize, rectSize)
+                        
+                        if(firstOne) {
+                            ctx.beginPath();
+                            ctx.moveTo(xPos, yPos);
+                        } else {
+                            ctx.lineTo(xPos, yPos);
+                        }
+                        firstOne = false;
+                    }
+                    if(!firstOne)
+                        ctx.stroke();
+                }
+            }
+
+            function drawServerLegend(rank) {
+                drawServerLegendBox(rank);
+                if(rank == -1)
+                    drawRankingLegend();
+                else
+                    drawServerLegendServers(rank);
+            }
+
+            function drawServerLegendBox(rank) {
+                ctx.beginPath();
+                ctx.fillStyle = "rgba(255, 255, 255, 90%)";
+                ctx.strokeStyle = "rgba(0, 0, 0, 90%)";
+
+                if(rank == -1)
+                    ctx.rect(xOffset + 5, yOffset + 5, 45, 77);
+                else
+                    ctx.rect(width - descW - 5, height - descH + yOffset - 7, descW, descH + 2);
+
+                ctx.fill();
+                ctx.stroke();
+            }
+
+            function drawRankingLegend() {
+                ctx.textAlign = "left";
+                for(let i = 0; i < ranks.length; i++) {
+                    let x = xOffset + 15;
+                    let y = yOffset + 10 + i * 15;
+                    ctx.fillStyle = colors[i];
+
+                    ctx.fillRect(x - rectSize / 2, y, rectSize, rectSize)
+                    ctx.fillText("#" + ranks[i], x + rectSize, y + rectSize)
+                }
+            }
+            function drawServerLegendServers(rank){
+                for(let i = 0; i < 20; i++) {
+                    let x = width - descW + 2 + Math.floor(i%2) * 177;
+                    let y = height - descH + yOffset - 3 + Math.floor(i/2) * descH / 10;
+                    ctx.fillStyle = colors[i];
+
+                    let currentOffset = longestJP[i%2] + longestScore;
+                    ctx.fillRect(x - rectSize / 2, y, rectSize, rectSize);
+                    if(data[i + 1].code != 2)
+                        ctx.fillStyle = "#f00";
+                    else if (parsed[rank][maxTime][i] == undefined)
+                        ctx.fillStyle = "#f88";
+                    else {
+                        let top = parsed[rank][maxTime].filter((a) => a).sort((a,b) => a-b);
+                        let currentServer = parsed[rank][maxTime][i];
+
+                        ctx.fillStyle = "#000";
+                        if(currentServer >= top[top.length - 3])
+                            ctx.fillStyle = "#c00";
+                        else if (currentServer <= top[2])
+                            ctx.fillStyle = "#0c0";
+                        let score = ` (${currentServer}) `;
+                        ctx.textAlign = "center";
+                        ctx.fillText(score, x + rectSize + currentOffset - longestScore / 2 , y + rectSize);
+                        ctx.fillStyle = "#000";
+                    }
+                    ctx.textAlign = "left";
+                    ctx.fillText(jp_names[i], x + rectSize, y + rectSize)
+                    ctx.fillText(en_names[i], x + rectSize + currentOffset, y + rectSize)
+                }
+            }
+
+            function drawMisc() {
+                let txt;
+                ctx.fillStyle = "#888";
+                ctx.textAlign = "right";
+                txt = "Data: senka.com.ru ";
+                ctx.fillText(txt, width, 9);
+                txt = "Graph generator: @FlatIsNice ";
+                ctx.fillText(txt, width, 19);
+                txt = `Timeframe: ${timeStr(minTime)} ~ ${timeStr(maxTime)} `;
+                ctx.fillText(txt, width, 29);
+            }
+
+            function drawTitle(txt) {
+                ctx.font = `800 16px Helvetica Neue, Helvetica, Arial, sans-serif`;
+                ctx.fillStyle = "#000";
+                ctx.textAlign = "center";
+                ctx.fillText(txt, width / 2, 20);
+            }
+
+            function drawBorder() {                
+                ctx.lineWidth = 1;
+                ctx.rect(0, 0, canvas.width, canvas.height);
+                ctx.stroke();
+            }
+
+            function convertTime(ts) {
+                let timestampTime = new Date(parseInt(ts));
+                return new Date(timestampTime.getTime() + timestampTime.getTimezoneOffset() * 60000 + 9 * 3600000);
+            }
+
+            function timeStr(ts) {
+                let d = convertTime(ts);
+                return `${d.getFullYear()}-${("0"+(d.getMonth()+1)).slice(-2)}-${("0" + d.getDate()).slice(-2)} ${("0" + d.getHours()).slice(-2)}:${("0" + d.getMinutes()).slice(-2)}`
+            }
 
             function get(url, name) {
                 var xmlhttp = new XMLHttpRequest();
