@@ -105,12 +105,13 @@
                 clearScreen(); // Clear screen, setup
                 drawVerticalLines(1); // Draw vertical lines per cycle
                 drawHorizontalLines(1); // Draw horizontal lines depending on max points
-                for(let rank of ranks)
+                for(let rank of ranks.reverse())
                     drawServerLines(rank, 1); // Draw each server's line
                 drawServerLegend(-1); // Draw servers in legend box
                 drawMisc(); // Draw some other shit
                 drawTitle(`All ranks`); // Draw title
                 drawBorder(); // Draw border
+                ranks.reverse();
 
                 // All graphs combined
                 let totalCanvas = document.getElementById("graph");
@@ -235,11 +236,12 @@
                     let x = xOffset + 15;
                     let y = yOffset + 10 + i * 15;
                     ctx.fillStyle = colors[i];
-
                     ctx.fillRect(x - rectSize / 2, y, rectSize, rectSize)
+                    ctx.fillStyle = "#000";
                     ctx.fillText("#" + ranks[i], x + rectSize, y + rectSize)
                 }
             }
+
             function drawServerLegendServers(rank){
                 for(let i = 0; i < 20; i++) {
                     let x = width - descW + 2 + Math.floor(i%2) * 177;
