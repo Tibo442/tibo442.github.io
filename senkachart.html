@@ -16,26 +16,37 @@
                 width: 700px;
                 height: 200px;
             }
+            table > tr > th, table > tr > td, table > * > tr > th, table > * > tr > td {
+                border: 1px #aaa solid;
+                padding: 0.1em
+            }
         </style>
         <script src="https://unpkg.com/blob-util/dist/blob-util.min.js"></script>
     </head>
     <body> 
         <a href="."><b>Flat is Justice - Home</b></a><br>
 
-        Output: Download: <a id='downloadSumTop'>Summary/Top</a> <a id='download'>All</a> <a id='download1'>#1</a> <a id='download5'>#5</a> <a id='download20'>#20</a> <a id='download100'>#100</a> <a id='download500'>#500</a><br>
-        <canvas id="graphSumTop" width="1446" height="550"></canvas><br><br>
+        Output: Download: <a id='downloadSumTop'>Summary/Top</a> <a id='download'>All</a> <a id='download1'>#1</a> <a id='download5'>#5</a> <a id='download20'>#20</a> <a id='download100'>#100</a> <a id='download500'>#500</a><br><br>
+
+        <label>Finder youselves! Username: <input id="playername" onchange="findUser(this)"></input></label><br>
+        <div id="found"></div>
+
+        <br><b>Graphs:</b><br>
+        Summary and Top players:<br>
+        <canvas id="graphSumTop" width="1446" height="550"></canvas><br>
+        All top XXX graphs<br>
         <canvas id="graphOfGraphs" width="1935" height="1640"></canvas><br><br>
 
         <label>All ranks server (0 = normal): <input type="number" id="server" min="0" max="20" step="1" onchange="update(true);" onclick="update(true);" value="0"><br></label>
         <canvas id="graphMix" width="960" height="540"></canvas><br>
-        <canvas id="graphSummary" width="705" height="540"></canvas><br>
-        <canvas id="graphTopPlayers" width="726" height="540"></canvas><br><br><br>
-
-        <canvas id="graph1" width="960" height="540"></canvas><br>
-        <canvas id="graph5" width="960" height="540"></canvas><br>
-        <canvas id="graph20" width="960" height="540"></canvas><br>
-        <canvas id="graph100" width="960" height="540"></canvas><br>
-        <canvas id="graph500" width="960" height="540"></canvas><br>
+        <br>
+        <canvas style="display:none" id="graphSummary" width="705" height="540"></canvas>
+        <canvas style="display:none" id="graphTopPlayers" width="726" height="540"></canvas>
+        <canvas style="display:none" id="graph1" width="960" height="540"></canvas>
+        <canvas style="display:none" id="graph5" width="960" height="540"></canvas>
+        <canvas style="display:none" id="graph20" width="960" height="540"></canvas>
+        <canvas style="display:none" id="graph100" width="960" height="540"></canvas>
+        <canvas style="display:none" id="graph500" width="960" height="540"></canvas>
         <script type="text/javascript">
             var data = {};
             let colors = ["#e6194b", "#3cb44b", "#ffe119", "#0082c8", "#f58231", "#911eb4", "#46f0f0", "#f032e6", "#d2f53c", "#fabebe", "#008080", "#e6beff", "#aa6e28", "#808080", "#800000", "#aaffc3", "#808000", "#ffd8b1", "#000080", "#a873b7"];
@@ -50,11 +61,13 @@
             var parsed = {}, maxOfRank = {};
             var longestJP, longestScore;
             let allRanksServer = 0;
+            let players = [];
 
             function update(onlyServerRanks) {
                 allRanksServer = parseInt(document.getElementById('server').value);
                 // Convert data to another format:
                 // parsed[rank][ts][serverId - 1] = points
+
                 for(let i = 1; i <= 20; i++) {
                     if(data[i].code == 1) continue;
 
@@ -82,17 +95,27 @@
                             }
                         }
                 }
+
+                players = [];
+                for(let i = 1; i <= 20; i++) {
+                    players.push(...data[i].data.players.map(function(pl) {
+                        pl.server = i;
+                        return pl;
+                    }));
+                }
+                players.sort((a, b) => b.curRanking - a.curRanking || a.rankno - b.rankno || a.name - b.name);
+
                 // Second cycle
                 parsed[500][1533103200000][2] = 278;
                 parsed[500][1533103200000][8] = 237;
 
                 // Not updated
                 /*
-                parsed[500][maxTime][20] = 0;
-                parsed[100][maxTime][20] = 0;
-                parsed[ 20][maxTime][20] = 0;
-                parsed[  5][maxTime][20] = 0;
-                parsed[  1][maxTime][20] = 0;
+                parsed[500][maxTime][20-1] = 0;
+                parsed[100][maxTime][20-1] = 0;
+                parsed[ 20][maxTime][20-1] = 0;
+                parsed[  5][maxTime][20-1] = 0;
+                parsed[  1][maxTime][20-1] = 0;
                 */
 
                 for(let rank of Object.keys(parsed))
@@ -476,15 +499,6 @@
             function drawTopPlayers() {
                 ctx.textAlign = 'left';
 
-                let players = [];
-                for(let i = 1; i <= 20; i++) {
-                    players.push(...data[i].data.players.map(function(pl) {
-                        pl.server = i;
-                        return pl;
-                    }));
-                }
-                players.sort((a, b) => b.curRanking - a.curRanking);
-
                 let longestNames = [0, 0, 0, 0, 0, 0, 0];
                 longestNames[0] = ctx.measureText("#20").width;
 
@@ -496,8 +510,6 @@
                     longestNames[3] = Math.max(longestNames[3], ctx.measureText(players[i].name).width + 10);
                 // longestNames[3] = ctx.measureText("WWWWWWWWWWWW").width
                 longestNames[4] = Math.max(ctx.measureText("Points").width, ctx.measureText(88888).width);
-
-                //console.log(players)
 
                 for (let i = -1; i < 20; i++){
                     let y = yOffset + height / 21 * (i + 1);
@@ -577,6 +589,47 @@
             function timeStr(ts) {
                 let d = convertTime(ts);
                 return `${d.getFullYear()}-${("0"+(d.getMonth()+1)).slice(-2)}-${("0" + d.getDate()).slice(-2)} ${("0" + d.getHours()).slice(-2)}:${("0" + d.getMinutes()).slice(-2)}`
+            }
+
+            function findUser(us) {
+                let username = us.value;
+                let filteredPlayers = players.filter((a) => a.name.toLowerCase().indexOf(username.toLowerCase()) >= 0);
+                if(filteredPlayers.length > 100) return;
+                let maxRank = Math.max(...Object.keys(parsed));
+                let minimumCertain = Math.max(...Object.values(parsed[maxRank]).map((a) => Math.max(...a.filter((b) => b))).filter((b) => b)); // Select highest of max rank
+                console.log(minimumCertain);
+                let html = `Found ${filteredPlayers.length} player(s) containing '<code>${username}</code>'`
+                html += `<table><tbody>
+                    <tr>
+                        <th>Rank (global*)</th>
+                        <th>Username</th>
+                        <th>Comment</th>
+                        <th>Servername (JP)</th>
+                        <th>Servername (EN)</th>
+                        <th>Rank (server)</th>
+                        <th>Current points</th>
+                    </tr>`;
+                for (let player of filteredPlayers) {
+                    console.log(player);
+                    let warn = "";
+                    if(player.curRanking < minimumCertain)
+                        warn = ` style="color:red"`;
+                    html += `
+                    <tr>
+                        <td${warn}>${players.indexOf(player) + 1}</td>
+                        <td>${player.name}</td>
+                        <td>${player.comment}</td>
+                        <td>${jp_names[player.server - 1]}</td>
+                        <td>${en_names[player.server - 1]}</td>
+                        <td>${player.rankno}</td>
+                        <td>${player.curRanking}</td>
+                    </tr>`
+                }
+
+                html += `</tbody></table>
+                Note: ranking is uncertain after ${minimumCertain} ranking points, these are marked red<br>
+                Note2: sorting is ranking points > server rank > name<br>`
+                document.getElementById("found").innerHTML = html;
             }
 
             function get(url, name) {
