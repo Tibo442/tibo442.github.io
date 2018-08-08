@@ -9,9 +9,9 @@
         <meta name="twitter:title" content="Flat is Justice - Senka Chart">
         <meta name="twitter:description" content="Make chart of senka stuff">
         <style type="text/css">
-        	div {
-        		display:inline;
-        	}
+            div {
+                display:inline;
+            }
             textarea {
                 width: 700px;
                 height: 200px;
@@ -21,15 +21,20 @@
     </head>
     <body> 
         <a href="."><b>Flat is Justice - Home</b></a><br>
-        Output: Download: <a id='download'>All</a> <a id='download1'>#1</a> <a id='download5'>#5</a> <a id='download20'>#20</a> <a id='download100'>#100</a> <a id='download500'>#500</a><br>
-        <canvas id="graph" width="1930" height="1635"></canvas><br><br>
-        <canvas id="graphMix" width="960" height="540"></canvas><br><br>
+        Output: Download: <a id='downloadSumTop'>Summary/Top</a> <a id='download'>All</a> <a id='download1'>#1</a> <a id='download5'>#5</a> <a id='download20'>#20</a> <a id='download100'>#100</a> <a id='download500'>#500</a><br>
+        <canvas id="graphSumTop" width="1421" height="550"></canvas><br><br>
+        <canvas id="graphOfGraphs" width="1935" height="1640"></canvas><br><br>
+
+        <canvas id="graphMix" width="960" height="540"></canvas><br>
+        <canvas id="graphSummary" width="680" height="540"></canvas><br>
+        <canvas id="graphTopPlayers" width="726" height="540"></canvas><br><br><br>
+
         <canvas id="graph1" width="960" height="540"></canvas><br>
         <canvas id="graph5" width="960" height="540"></canvas><br>
         <canvas id="graph20" width="960" height="540"></canvas><br>
         <canvas id="graph100" width="960" height="540"></canvas><br>
         <canvas id="graph500" width="960" height="540"></canvas><br>
-    	<script type="text/javascript">
+        <script type="text/javascript">
             var data = {};
             let colors = ["#e6194b", "#3cb44b", "#ffe119", "#0082c8", "#f58231", "#911eb4", "#46f0f0", "#f032e6", "#d2f53c", "#fabebe", "#008080", "#e6beff", "#aa6e28", "#808080", "#800000", "#aaffc3", "#808000", "#ffd8b1", "#000080", "#a873b7"];
             const jp_names = ["横須賀", "呉", "佐世保", "舞鶴", "大湊", "トラック", "リンガ", "ラバウル", "ショートランド", "ブイン", "タウイタウイ", "パラオ", "ブルネイ", "単冠", "幌筵", "宿毛", "鹿屋", "岩川", "佐伯湾", "柱島"];
@@ -43,7 +48,7 @@
             var parsed = {}, maxOfRank = {};
             var longestJP, longestScore;
 
-    		function update() {
+            function update() {
                 // Convert data to another format:
                 // parsed[rank][ts][serverId - 1] = points
                 for(let i = 1; i <= 20; i++) {
@@ -58,18 +63,38 @@
                             if(parsed[rank][ts] == undefined) parsed[rank][ts] = [];
                             parsed[rank][ts][i - 1] = cutoff.cutoff[rank];
                         }
-                    }
+                    }/*
+                    for(let player of data[i].data.players) {
+                        for(let senka of player.senka) {
+                            let ts = senka.timestamp;
+                            let rank = player.rankno;
+                            if(minTime == undefined || ts < minTime) minTime = ts;
+                            if(maxTime == undefined || ts > maxTime) maxTime = ts;
+                            if(parsed[rank] == undefined) parsed[rank] = {};
+                            if(parsed[rank][ts] == undefined) parsed[rank][ts] = [];
+                            parsed[rank][ts][i - 1] = senka.senka;
+                        }
+                    }*/
                 }
                 // Second cycle
                 parsed[500][1533103200000][2] = 278;
                 parsed[500][1533103200000][8] = 237;
 
-                for(let rank of ranks)
+                // Not updated
+                /*
+                parsed[500][maxTime][20] = 0;
+                parsed[100][maxTime][20] = 0;
+                parsed[ 20][maxTime][20] = 0;
+                parsed[  5][maxTime][20] = 0;
+                parsed[  1][maxTime][20] = 0;
+                */
+
+                for(let rank of Object.keys(parsed))
                     maxOfRank[rank] = Math.max(...Object.values(parsed[rank]).map((a) => Math.max(...a.filter((b) => b))).filter((b) => b))
 
                 console.log(parsed, minTime, maxTime, maxOfRank);
 
-                canvas = document.getElementById("graph");
+                canvas = document.getElementById("graph1");
                 ctx = canvas.getContext("2d");
                 ctx.font = `100 10px sans-serif`
                 longestScore = ctx.measureText(" (88888) ").width;
@@ -118,10 +143,33 @@
                 drawMisc(); // Draw some other shit
                 drawTitle(`All ranks`); // Draw title
                 drawBorder(); // Draw border
+
+                // Draw summary graph
+                canvas = document.getElementById("graphSummary");
+                width = canvas.width;
+                height = canvas.height;
+                ctx = canvas.getContext("2d");
+                clearScreen(); // Clear screen, setup
+                drawTitle(`Summary`); // Draw title
+                drawBorder(); // Draw border
+                drawSummary();
+                drawMisc(true);
+
+                // Draw top players
+                canvas = document.getElementById("graphTopPlayers");
+                width = canvas.width;
+                height = canvas.height;
+                ctx = canvas.getContext("2d");
+                clearScreen(); // Clear screen, setup
+                drawTitle(`Top Players`); // Draw title
+                drawBorder(); // Draw border
+                drawTopPlayers();
+                drawMisc(true);
+
                 ranks.reverse();
 
                 // All graphs combined
-                let totalCanvas = document.getElementById("graph");
+                let totalCanvas = document.getElementById("graphOfGraphs");
                 ctx = totalCanvas.getContext("2d");
                 let coords = [[0, 0], [1, 0], [0, 1], [1, 1], [0, 2], [1, 2]]
 
@@ -140,9 +188,25 @@
                 });
                 document.getElementById("download").addEventListener('click', function() {
                     let d = new Date();
-                    this.download = `All @ ${d.getFullYear()}-${("0"+(d.getMonth()+1)).slice(-2)}-${("0" + d.getDate()).slice(-2)}.png`;
+                    this.download = `Graph of graphs @ ${d.getFullYear()}-${("0"+(d.getMonth()+1)).slice(-2)}-${("0" + d.getDate()).slice(-2)}.png`;
                 }, false);
-       		}
+
+                let canvasSumTop = document.getElementById("graphSumTop");
+                ctx = canvasSumTop.getContext("2d");
+
+                canvas = document.getElementById("graphSummary");
+                ctx.drawImage(canvas, 5, 5)
+                canvas = document.getElementById("graphTopPlayers");
+                ctx.drawImage(canvas, 10 + 680, 5)
+
+                blobUtil.canvasToBlob(canvasSumTop, 'image/png').then(function (blob) {
+                    document.getElementById("downloadSumTop").href = blobUtil.createObjectURL(blob);
+                });
+                document.getElementById("downloadSumTop").addEventListener('click', function() {
+                    let d = new Date();
+                    this.download = `Summary and Top @ ${d.getFullYear()}-${("0"+(d.getMonth()+1)).slice(-2)}-${("0" + d.getDate()).slice(-2)}.png`;
+                }, false);
+            }
 
             function clearScreen() {
                 ctx.fillStyle = "#fff";
@@ -192,8 +256,7 @@
                         ctx.strokeStyle = colors[i];
                         ctx.fillStyle = colors[i];
                     } else {
-                        ctx.strokeStyle = colors[ranks.indexOf(rank)];
-                        ctx.fillStyle = colors[ranks.indexOf(rank)];
+                        ctx.strokeStyle = ctx.fillStyle = colors[ranks.indexOf(parseInt(rank))];
                     }
                     let firstOne = true;
 
@@ -263,17 +326,14 @@
                     else if (parsed[rank][maxTime][i] == undefined)
                         ctx.fillStyle = "#f88";
                     else {
-                        let top = parsed[rank][maxTime].filter((a) => a).sort((a,b) => a-b);
                         let currentServer = parsed[rank][maxTime][i];
 
-                        ctx.fillStyle = "#000";
-                        if(currentServer >= top[top.length - 3])
-                            ctx.fillStyle = "#c00";
-                        else if (currentServer <= top[2])
-                            ctx.fillStyle = "#0c0";
                         let score = ` (${currentServer}) `;
                         ctx.textAlign = "center";
-                        ctx.font = `100 10px sans-serif`
+                        if(colorServer(parsed[rank][maxTime], currentServer))
+                            ctx.font = `700 10px sans-serif`
+                        else
+                            ctx.font = `100 10px sans-serif`
                         ctx.fillText(score, x + rectSize + currentOffset - longestScore / 2 , y + rectSize);
                         ctx.fillStyle = "#000";
                     }
@@ -285,15 +345,19 @@
                 }
             }
 
-            function drawMisc() {
+            function drawMisc(onlyEnd) {
                 let txt;
                 ctx.fillStyle = "#888";
                 ctx.textAlign = "right";
+                ctx.font = `100 10px sans-serif`
                 txt = "Data: senka.com.ru ";
                 ctx.fillText(txt, width, 9);
                 txt = "Graph generator: @FlatIsNice ";
                 ctx.fillText(txt, width, 19);
-                txt = `Timeframe: ${timeStr(minTime)} ~ ${timeStr(maxTime)} `;
+                if(onlyEnd)
+                    txt = `Timestamp: ${timeStr(maxTime)} `;
+                else
+                    txt = `Timeframe: ${timeStr(minTime)} ~ ${timeStr(maxTime)} `;
                 ctx.fillText(txt, width, 29);
             }
 
@@ -310,6 +374,175 @@
                 ctx.stroke();
             }
 
+            function drawSummary() {
+                ctx.textAlign = 'left';
+                let longestNames = [0, 0, 0, 0, 0, 0, 0];
+                for(let i = 0; i < 20; i++)
+                    longestNames[0] = Math.max(longestNames[0], ctx.measureText(jp_names[i]).width);
+                for(let i = 0; i < 20; i++)
+                    longestNames[1] = Math.max(longestNames[1], ctx.measureText(en_names[i]).width);
+
+                for(let rankIndex in ranks)
+                    longestNames[parseInt(rankIndex) + 2] = 80;
+                console.log(longestNames)
+
+                for (let i = -1; i <= 20; i++){
+                    let y = yOffset + height / 22 * (i + 1);
+                    let x = 3;
+                    ctx.fillRect(0, y, width, 1);
+                    let liney = y + height / 22 - 4;
+
+                    let serverJP = jp_names[i] || "Average"
+                    if(i == -1)
+                        serverJP = "Server JP";
+
+                    ctx.font = `800 16px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
+                    ctx.fillText(serverJP, x, liney);
+                    x += longestNames[0] + 5;
+                    ctx.fillRect(x, y, 1, height / 22);
+                    x += 5;
+
+                    for (let rankIndex in ranks) {
+                        let rank = ranks[rankIndex = parseInt(rankIndex)];
+                        let score = parsed[rank][maxTime][i] || "-----";
+                        let diff = -999;
+                        ctx.font = `800 16px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
+
+                        if(i == 20)
+                            score = Math.round(parsed[rank][maxTime].reduce((a, b) => a+b) / 20);
+                        else if(i == -1)
+                            score = "Top " + rank;
+                        else {
+                            if (!colorServer(parsed[rank][maxTime], score))
+                                ctx.font = `100 16px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
+                            if (parsed[rank][maxTime - 43200000][i])
+                                diff = score - parsed[rank][maxTime - 43200000][i];
+                        }
+
+                        ctx.textAlign = 'center';
+                        ctx.fillText(score, x  + longestNames[rankIndex + 2] / 2 - ((diff == -999) ? 0 : 10), liney);
+                        x += longestNames[rankIndex + 2] + 5;
+
+                        ctx.fillStyle = "#000";
+                        if(diff != -999) {
+                            ctx.textAlign = 'right';
+                            ctx.font = `100 8px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
+                            ctx.fillText(`(+${diff})`, x - 2, liney);
+                        }
+
+                        ctx.fillRect(x, y, 1, height / 22);
+                        x += 5;
+                    }
+
+                    ctx.textAlign = 'left';
+                    ctx.font = `800 16px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
+                    let serverEN = en_names[i] || "";
+                    if(i == -1)
+                        serverEN = "Server EN";
+
+                    ctx.fillText(serverEN, x, liney);
+                    x += longestNames[1] + 5;
+                    ctx.fillRect(x, y, 1, height / 22);
+                    x += 5;
+                }
+            }
+
+            function drawTopPlayers() {
+                ctx.textAlign = 'left';
+
+                let players = [];
+                for(let i = 1; i <= 20; i++) {
+                    players.push(...data[i].data.players.map(function(pl) {
+                        pl.server = i;
+                        return pl;
+                    }));
+                }
+                players.sort((a, b) => b.curRanking - a.curRanking);
+
+                let longestNames = [0, 0, 0, 0, 0, 0, 0];
+                longestNames[0] = ctx.measureText("#20").width;
+
+                for(let i = 0; i < 20; i++)
+                    longestNames[1] = Math.max(longestNames[1], ctx.measureText(jp_names[i]).width);
+                for(let i = 0; i < 20; i++)
+                    longestNames[2] = Math.max(longestNames[2], ctx.measureText(en_names[i]).width);
+                for(let i = 0; i < 20; i++)
+                    longestNames[3] = Math.max(longestNames[3], ctx.measureText(players[i].name).width + 10);
+                // longestNames[3] = ctx.measureText("WWWWWWWWWWWW").width
+                longestNames[4] = Math.max(ctx.measureText("Points").width, ctx.measureText(88888).width);
+
+                console.log(players)
+
+                for (let i = -1; i < 20; i++){
+                    let y = yOffset + height / 21 * (i + 1);
+                    let x = 3;
+                    ctx.fillRect(0, y, width, 1);
+                    let liney = y + height / 21 - 4;
+
+                    ctx.font = `800 16px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
+
+                    ctx.textAlign = 'center';
+                    let index = (i + 1) || "#"
+                    ctx.fillText(index, x + longestNames[0]/2, liney);
+                    x += longestNames[0] + 5;
+                    ctx.fillRect(x, y, 1, height / 21);
+                    x += 5;
+                    ctx.textAlign = 'left';
+
+                    let player = players[i] || { server: 0, rankno: "#", curRanking: "Points", name: "Name", comment: "Comment"};
+
+                    ctx.fillText(player.name, x, liney);
+                    x += longestNames[3] + 5;
+                    ctx.fillRect(x, y, 1, height / 21);
+                    x += 5;
+
+                    ctx.textAlign = 'center';
+                    ctx.fillText(player.curRanking, x + longestNames[4] / 2, liney);
+                    x += longestNames[4] + 5;
+                    ctx.fillRect(x, y, 1, height / 21);
+                    x += 5;
+
+                    ctx.fillText(player.rankno, x + longestNames[0] / 2, liney);
+                    x += longestNames[0] + 5;
+                    ctx.fillRect(x, y, 1, height / 21);
+                    x += 5;
+                    ctx.textAlign = 'left';
+
+                    let serverJP = jp_names[player.server - 1] || "Server JP";;
+                    ctx.fillText(serverJP, x, liney);
+                    x += longestNames[1] + 5;
+                    ctx.fillRect(x, y, 1, height / 21);
+                    x += 5;
+
+                    let serverEN = en_names[player.server - 1] || "Server EN";
+
+                    ctx.textAlign = 'left';
+                    ctx.fillText(serverEN, x, liney);
+                    x += longestNames[2] + 5;
+                    ctx.fillRect(x, y, 1, height / 21);
+                    x += 5;
+
+                    ctx.fillText(player.comment, x, liney);
+                }
+            }
+
+            function colorServer(ranklist, score) {
+                let top = ranklist.filter((a) => a).sort((a,b) => b-a);
+
+                ctx.fillStyle = "#000";
+                if(score == top[top.length - 1]) {
+                    ctx.fillStyle = "#17e204";
+                    return true;
+                } else if(score <= top[top.length - 3]) {
+                    ctx.fillStyle = "#0fb700";
+                } else if (score == top[0]) {
+                    ctx.fillStyle = "#e20404";
+                    return true;
+                } else if (score >= top[2]) {
+                    ctx.fillStyle = "#b20000";
+                }
+                return false;
+            }
             function convertTime(ts) {
                 let timestampTime = new Date(parseInt(ts));
                 return new Date(timestampTime.getTime() + timestampTime.getTimezoneOffset() * 60000 + 9 * 3600000);
@@ -343,6 +576,6 @@
             for(let i = 1; i <= 20; i++)
                 get(`https://senka.com.ru/server/${i}`, i);
             
-    	</script>
+        </script>
     </body>
 </html>
