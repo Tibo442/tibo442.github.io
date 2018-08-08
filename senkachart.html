@@ -22,11 +22,11 @@
     <body> 
         <a href="."><b>Flat is Justice - Home</b></a><br>
         Output: Download: <a id='downloadSumTop'>Summary/Top</a> <a id='download'>All</a> <a id='download1'>#1</a> <a id='download5'>#5</a> <a id='download20'>#20</a> <a id='download100'>#100</a> <a id='download500'>#500</a><br>
-        <canvas id="graphSumTop" width="1421" height="550"></canvas><br><br>
+        <canvas id="graphSumTop" width="1446" height="550"></canvas><br><br>
         <canvas id="graphOfGraphs" width="1935" height="1640"></canvas><br><br>
 
         <canvas id="graphMix" width="960" height="540"></canvas><br>
-        <canvas id="graphSummary" width="680" height="540"></canvas><br>
+        <canvas id="graphSummary" width="705" height="540"></canvas><br>
         <canvas id="graphTopPlayers" width="726" height="540"></canvas><br><br><br>
 
         <canvas id="graph1" width="960" height="540"></canvas><br>
@@ -197,7 +197,7 @@
                 canvas = document.getElementById("graphSummary");
                 ctx.drawImage(canvas, 5, 5)
                 canvas = document.getElementById("graphTopPlayers");
-                ctx.drawImage(canvas, 10 + 680, 5)
+                ctx.drawImage(canvas, 10 + 705, 5)
 
                 blobUtil.canvasToBlob(canvasSumTop, 'image/png').then(function (blob) {
                     document.getElementById("downloadSumTop").href = blobUtil.createObjectURL(blob);
@@ -383,7 +383,7 @@
                     longestNames[1] = Math.max(longestNames[1], ctx.measureText(en_names[i]).width);
 
                 for(let rankIndex in ranks)
-                    longestNames[parseInt(rankIndex) + 2] = 80;
+                    longestNames[parseInt(rankIndex) + 2] = 85;
                 console.log(longestNames)
 
                 for (let i = -1; i <= 20; i++){
