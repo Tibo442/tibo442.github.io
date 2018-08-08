@@ -21,10 +21,12 @@
     </head>
     <body> 
         <a href="."><b>Flat is Justice - Home</b></a><br>
+
         Output: Download: <a id='downloadSumTop'>Summary/Top</a> <a id='download'>All</a> <a id='download1'>#1</a> <a id='download5'>#5</a> <a id='download20'>#20</a> <a id='download100'>#100</a> <a id='download500'>#500</a><br>
         <canvas id="graphSumTop" width="1446" height="550"></canvas><br><br>
         <canvas id="graphOfGraphs" width="1935" height="1640"></canvas><br><br>
 
+        <label>All ranks server (0 = normal): <input type="number" id="server" min="0" max="20" step="1" onchange="update(true);" onclick="update(true);" value="0"><br></label>
         <canvas id="graphMix" width="960" height="540"></canvas><br>
         <canvas id="graphSummary" width="705" height="540"></canvas><br>
         <canvas id="graphTopPlayers" width="726" height="540"></canvas><br><br><br>
@@ -47,34 +49,38 @@
             var minTime, maxTime;
             var parsed = {}, maxOfRank = {};
             var longestJP, longestScore;
+            let allRanksServer = 0;
 
-            function update() {
+            function update(onlyServerRanks) {
+                allRanksServer = parseInt(document.getElementById('server').value);
                 // Convert data to another format:
                 // parsed[rank][ts][serverId - 1] = points
                 for(let i = 1; i <= 20; i++) {
                     if(data[i].code == 1) continue;
 
-                    for(let cutoff of data[i].data.cutofflist) {
-                        let ts = cutoff.timestamp;
-                        if(minTime == undefined || ts < minTime) minTime = ts;
-                        if(maxTime == undefined || ts > maxTime) maxTime = ts;
-                        for(let rank in cutoff.cutoff) {
-                            if(parsed[rank] == undefined) parsed[rank] = {};
-                            if(parsed[rank][ts] == undefined) parsed[rank][ts] = [];
-                            parsed[rank][ts][i - 1] = cutoff.cutoff[rank];
+                    if(allRanksServer)
+                        for(let player of data[i].data.players) {
+                            for(let senka of player.senka) {
+                                let ts = senka.timestamp;
+                                let rank = player.rankno;
+                                if(minTime == undefined || ts < minTime) minTime = ts;
+                                if(maxTime == undefined || ts > maxTime) maxTime = ts;
+                                if(parsed[rank] == undefined) parsed[rank] = {};
+                                if(parsed[rank][ts] == undefined) parsed[rank][ts] = [];
+                                parsed[rank][ts][i - 1] = senka.senka;
+                            }
                         }
-                    }/*
-                    for(let player of data[i].data.players) {
-                        for(let senka of player.senka) {
-                            let ts = senka.timestamp;
-                            let rank = player.rankno;
+                    else
+                        for(let cutoff of data[i].data.cutofflist) {
+                            let ts = cutoff.timestamp;
                             if(minTime == undefined || ts < minTime) minTime = ts;
                             if(maxTime == undefined || ts > maxTime) maxTime = ts;
-                            if(parsed[rank] == undefined) parsed[rank] = {};
-                            if(parsed[rank][ts] == undefined) parsed[rank][ts] = [];
-                            parsed[rank][ts][i - 1] = senka.senka;
+                            for(let rank in cutoff.cutoff) {
+                                if(parsed[rank] == undefined) parsed[rank] = {};
+                                if(parsed[rank][ts] == undefined) parsed[rank][ts] = [];
+                                parsed[rank][ts][i - 1] = cutoff.cutoff[rank];
+                            }
                         }
-                    }*/
                 }
                 // Second cycle
                 parsed[500][1533103200000][2] = 278;
@@ -92,7 +98,7 @@
                 for(let rank of Object.keys(parsed))
                     maxOfRank[rank] = Math.max(...Object.values(parsed[rank]).map((a) => Math.max(...a.filter((b) => b))).filter((b) => b))
 
-                console.log(parsed, minTime, maxTime, maxOfRank);
+                //console.log(parsed, minTime, maxTime, maxOfRank);
 
                 canvas = document.getElementById("graph1");
                 ctx = canvas.getContext("2d");
@@ -105,6 +111,7 @@
                     longestJP[i%2] = Math.max(longestJP[i%2], ctx.measureText(jp_names[i]).width);
 
                 for(let rank of ranks) {
+                    if(onlyServerRanks) continue;
                     canvas = document.getElementById("graph" + rank);
                     width = canvas.width;
                     height = canvas.height;
@@ -112,7 +119,7 @@
 
                     clearScreen(); // Clear screen, setup
                     drawVerticalLines(rank); // Draw vertical lines per cycle
-                    drawHorizontalLines(rank); // Draw horizontal lines depending on max points
+                    drawHorizontalLines(maxOfRank[rank]); // Draw horizontal lines depending on max points
                     drawServerLines(rank); // Draw each server's line
                     drawServerLegend(rank); // Draw servers in legend box
                     drawMisc(); // Draw some other shit
@@ -134,15 +141,29 @@
                 height = canvas.height;
                 ctx = canvas.getContext("2d");
 
+                let maxPoints = maxOfRank[1];
+                if(allRanksServer)
+                    maxPoints = Math.max(...Object.values(parsed[1]).map((a) => a[allRanksServer - 1]).filter((b) => b));
+                // maxPoints = 5000;
+
+                ranks.reverse();
                 clearScreen(); // Clear screen, setup
-                drawVerticalLines(1); // Draw vertical lines per cycle
-                drawHorizontalLines(1); // Draw horizontal lines depending on max points
-                for(let rank of ranks.reverse())
-                    drawServerLines(rank, 1); // Draw each server's line
-                drawServerLegend(-1); // Draw servers in legend box
+                drawVerticalLines(1); // Draw vertical lines per cycle                
+                drawHorizontalLines(maxPoints); // Draw horizontal lines depending on max points
+                if(allRanksServer) {
+                    rectSize = 5;
+                    ctx.lineWidth = 1;
+                    for(let rank of Object.keys(maxOfRank).sort((a, b) => b-a))
+                        drawServerLines(rank, maxPoints); // Draw each server's line
+                } else {
+                    for(let rank of ranks)
+                        drawServerLines(rank, maxPoints); // Draw each server's line
+                    drawServerLegend(-1); // Draw servers in legend box
+                }
                 drawMisc(); // Draw some other shit
-                drawTitle(`All ranks`); // Draw title
+                drawTitle(`All ranks${allRanksServer ? ` - ${jp_names[allRanksServer-1]} - ${en_names[allRanksServer-1]}`:''}`); // Draw title
                 drawBorder(); // Draw border
+                if(onlyServerRanks) return;
 
                 // Draw summary graph
                 canvas = document.getElementById("graphSummary");
@@ -235,20 +256,20 @@
                 }
             }
 
-            function drawHorizontalLines(rank) {
+            function drawHorizontalLines(maxPoints = 3500) {
                 ctx.textAlign = "center"; 
-                let rankOff = Math.ceil(maxOfRank[rank] / 10 / 50) * 50;
-                for(let i = rankOff; i < maxOfRank[rank]; i += rankOff) {
-                    let yPos = yOffset + height - (i / maxOfRank[rank] * height);
+                let rankOff = Math.ceil(maxPoints / 10 / 50) * 50;
+                for(let i = rankOff; i < maxPoints; i += rankOff) {
+                    let yPos = yOffset + height - (i / maxPoints * height);
                     ctx.fillRect(xOffset, yPos, width, 1);
                     ctx.fillText(i, xOffset / 2, yPos + 3);
                 }
             }
 
-            function drawServerLines(rank, maxRank) {
+            function drawServerLines(rank, maximum) {
                 let isAll = true;
-                if(!maxRank) {
-                    maxRank = rank;
+                if(!maximum) {
+                    maximum = maxOfRank[rank];
                     isAll = false;
                 }
                 for(let i = 0; i < 20; i++) {
@@ -256,13 +277,17 @@
                         ctx.strokeStyle = colors[i];
                         ctx.fillStyle = colors[i];
                     } else {
-                        ctx.strokeStyle = ctx.fillStyle = colors[ranks.indexOf(parseInt(rank))];
+                        if(allRanksServer)
+                            ctx.strokeStyle = ctx.fillStyle = "hsl(" + (rank / 500 * 360) + ", 100%, 50%)";
+                        else
+                            ctx.strokeStyle = ctx.fillStyle = colors[ranks.indexOf(parseInt(rank))];
+                        if(i != (allRanksServer - 1) && allRanksServer) continue;
                     }
                     let firstOne = true;
 
                     for(let ts of Object.keys(parsed[rank]).sort()) {
                         let xPos = xOffset + (ts - minTime) / (maxTime - minTime) * (width - xOffset);
-                        let yPos = yOffset + height - (parsed[rank][ts][i] / maxOfRank[maxRank] * height);
+                        let yPos = yOffset + height - (parsed[rank][ts][i] / maximum * height);
                         if(parsed[rank][ts][i] == undefined) continue;
                         ctx.fillRect(xPos - rectSize / 2, yPos - rectSize / 2, rectSize, rectSize)
                         
@@ -274,8 +299,7 @@
                         }
                         firstOne = false;
                     }
-                    if(!firstOne)
-                        ctx.stroke();
+                    ctx.stroke();
                 }
             }
 
@@ -368,8 +392,10 @@
                 ctx.fillText(txt, width / 2, 20);
             }
 
-            function drawBorder() {                
+            function drawBorder() {              
                 ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.strokeStyle = ctx.fillStyle = "#000";  
                 ctx.rect(0, 0, canvas.width, canvas.height);
                 ctx.stroke();
             }
@@ -471,7 +497,7 @@
                 // longestNames[3] = ctx.measureText("WWWWWWWWWWWW").width
                 longestNames[4] = Math.max(ctx.measureText("Points").width, ctx.measureText(88888).width);
 
-                console.log(players)
+                //console.log(players)
 
                 for (let i = -1; i < 20; i++){
                     let y = yOffset + height / 21 * (i + 1);
