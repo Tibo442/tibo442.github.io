@@ -98,6 +98,7 @@
 
                 players = [];
                 for(let i = 1; i <= 20; i++) {
+                    if(data[i].code == 1) continue;
                     players.push(...data[i].data.players.map(function(pl) {
                         pl.server = i;
                         return pl;
