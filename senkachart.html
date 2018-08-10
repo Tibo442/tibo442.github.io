@@ -605,6 +605,7 @@
                         <th>Rank (global*)</th>
                         <th>Username</th>
                         <th>Comment</th>
+                        <th>FCM</th>
                         <th>Servername (JP)</th>
                         <th>Servername (EN)</th>
                         <th>Rank (server)</th>
@@ -620,6 +621,7 @@
                         <td${warn}>${players.indexOf(player) + 1}</td>
                         <td>${player.name}</td>
                         <td>${player.comment}</td>
+                        <td>${player.curMedal}</td>
                         <td>${jp_names[player.server - 1]}</td>
                         <td>${en_names[player.server - 1]}</td>
                         <td>${player.rankno}</td>
@@ -654,7 +656,7 @@
             }
 
             for(let i = 1; i <= 20; i++)
-                get(`https://senka.com.ru/server/${i}`, i);
+                get(`https://api.senka.com.ru/server/${i}`, i);
             
         </script>
     </body>
