@@ -28,7 +28,7 @@
 
         Output: Download: <a id='downloadSumTop'>Summary/Top</a> <a id='download'>All</a> <a id='download1'>#1</a> <a id='download5'>#5</a> <a id='download20'>#20</a> <a id='download100'>#100</a> <a id='download500'>#500</a><br><br>
 
-        <label>Finder youselves! Username: <input id="playername" onchange="findUser(this)"></input></label><br>
+        <label>Search by username/comment: <input id="playername" onclick="findUser(this)" oninput="findUser(this)"></input></label><br>
         <div id="found"></div>
 
         <br><b>Graphs:</b><br>
@@ -434,7 +434,7 @@
 
                 for(let rankIndex in ranks)
                     longestNames[parseInt(rankIndex) + 2] = 85;
-                console.log(longestNames)
+                //console.log(longestNames)
 
                 for (let i = -1; i <= 20; i++){
                     let y = yOffset + height / 22 * (i + 1);
@@ -594,12 +594,12 @@
 
             function findUser(us) {
                 let username = us.value;
-                let filteredPlayers = players.filter((a) => a.name.toLowerCase().indexOf(username.toLowerCase()) >= 0);
-                if(filteredPlayers.length > 100) return;
+                let filteredPlayers = players.filter((a) => a.name.toLowerCase().includes(username.toLowerCase()) || a.comment.toLowerCase().includes(username.toLowerCase()));
                 let maxRank = Math.max(...Object.keys(parsed));
                 let minimumCertain = Math.max(...Object.values(parsed[maxRank]).map((a) => Math.max(...a.filter((b) => b))).filter((b) => b)); // Select highest of max rank
-                console.log(minimumCertain);
-                let html = `Found ${filteredPlayers.length} player(s) containing '<code>${username}</code>'`
+                //console.log(minimumCertain);
+                let html = `Found ${filteredPlayers.length} player(s) containing '<code>${username}</code>'${filteredPlayers.length>100?` showing top 100`:''}`
+                if(filteredPlayers.length > 100) filteredPlayers = filteredPlayers.slice(0, 100);
                 html += `<table><tbody>
                     <tr>
                         <th>Rank (global*)</th>
@@ -611,7 +611,7 @@
                         <th>Current points</th>
                     </tr>`;
                 for (let player of filteredPlayers) {
-                    console.log(player);
+                    //console.log(player);
                     let warn = "";
                     if(player.curRanking < minimumCertain)
                         warn = ` style="color:red"`;
