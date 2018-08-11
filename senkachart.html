@@ -196,6 +196,8 @@
 
                 // Draw summary graph
                 canvas = document.getElementById("graphSummary");
+                ctx = canvas.getContext("2d");
+                canvas.width = Math.floor(drawSummary());
                 width = canvas.width;
                 height = canvas.height;
                 ctx = canvas.getContext("2d");
@@ -207,6 +209,8 @@
 
                 // Draw top players
                 canvas = document.getElementById("graphTopPlayers");
+                ctx = canvas.getContext("2d");
+                canvas.width = drawTopPlayers();
                 width = canvas.width;
                 height = canvas.height;
                 ctx = canvas.getContext("2d");
@@ -242,12 +246,13 @@
                 }, false);
 
                 let canvasSumTop = document.getElementById("graphSumTop");
-                ctx = canvasSumTop.getContext("2d");
+                let canvasSum = document.getElementById("graphSummary");
+                let canvasTop = document.getElementById("graphTopPlayers");
+                canvasSumTop.width = 5 + canvasSum.width + 5 + canvasTop.width + 5;
 
-                canvas = document.getElementById("graphSummary");
-                ctx.drawImage(canvas, 5, 5)
-                canvas = document.getElementById("graphTopPlayers");
-                ctx.drawImage(canvas, 10 + 705, 5)
+                ctx = canvasSumTop.getContext("2d");
+                ctx.drawImage(canvasSum, 5, 5)
+                ctx.drawImage(canvasTop, 5 + canvasSum.width + 5, 5)
 
                 blobUtil.canvasToBlob(canvasSumTop, 'image/png').then(function (blob) {
                     document.getElementById("downloadSumTop").href = blobUtil.createObjectURL(blob);
@@ -431,16 +436,28 @@
 
             function drawSummary() {
                 ctx.textAlign = 'left';
-                let longestNames = [0, 0, 0, 0, 0, 0, 0];
+                ctx.font = `800 16px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
+
+                let longestNames = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
                 for(let i = 0; i < 20; i++)
                     longestNames[0] = Math.max(longestNames[0], ctx.measureText(jp_names[i]).width);
                 for(let i = 0; i < 20; i++)
                     longestNames[1] = Math.max(longestNames[1], ctx.measureText(en_names[i]).width);
 
                 for(let rankIndex in ranks)
-                    longestNames[parseInt(rankIndex) + 2] = 85;
-                //console.log(longestNames)
+                    for(let i = 0; i < 20; i++) {
+                        ctx.font = `800 16px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
+                        longestNames[parseInt(rankIndex) + 2] = Math.max(longestNames[parseInt(rankIndex) + 2], ctx.measureText(parsed[ranks[rankIndex]][maxTime][i]).width);
+                        if (parsed[ranks[rankIndex]][maxTime-43200000][i]) {
+                            let diff = parsed[ranks[rankIndex]][maxTime][i] - parsed[ranks[rankIndex]][maxTime - 43200000][i];
+                            ctx.font = `100 8px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
+                            longestNames[parseInt(rankIndex) + 7] = Math.max(longestNames[parseInt(rankIndex) + 7], ctx.measureText(` (+${diff})`).width);
+                        }
+                    }
+                longestNames=longestNames.map((a) => Math.ceil(a))
+                console.log(longestNames)
 
+                let maxx = 3;
                 for (let i = -1; i <= 20; i++){
                     let y = yOffset + height / 22 * (i + 1);
                     let x = 3;
@@ -475,8 +492,8 @@
                         }
 
                         ctx.textAlign = 'center';
-                        ctx.fillText(score, x  + longestNames[rankIndex + 2] / 2 - ((diff == -999) ? 0 : 10), liney);
-                        x += longestNames[rankIndex + 2] + 5;
+                        ctx.fillText(score, x  + longestNames[rankIndex + 2] / 2 + ((diff == -999) ? longestNames[rankIndex + 7]/2:0), liney);
+                        x += longestNames[rankIndex + 2] + longestNames[rankIndex + 7] + 5;
 
                         ctx.fillStyle = "#000";
                         if(diff != -999) {
@@ -498,14 +515,19 @@
                     ctx.fillText(serverEN, x, liney);
                     x += longestNames[1] + 5;
                     ctx.fillRect(x, y, 1, height / 22);
-                    x += 5;
+
+                    maxx = Math.max(x, maxx);
+                    console.log(x)
                 }
+                return maxx;
             }
 
             function drawTopPlayers() {
                 ctx.textAlign = 'left';
 
                 let longestNames = [0, 0, 0, 0, 0, 0, 0];
+                ctx.font = `800 16px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
+
                 longestNames[0] = ctx.measureText("#20").width;
 
                 for(let i = 0; i < 20; i++)
@@ -513,10 +535,18 @@
                 for(let i = 0; i < 20; i++)
                     longestNames[2] = Math.max(longestNames[2], ctx.measureText(en_names[i]).width);
                 for(let i = 0; i < 20; i++)
-                    longestNames[3] = Math.max(longestNames[3], ctx.measureText(players[i].name).width + 10);
-                // longestNames[3] = ctx.measureText("WWWWWWWWWWWW").width
-                longestNames[4] = Math.max(ctx.measureText("Points").width, ctx.measureText(88888).width);
+                    longestNames[3] = Math.max(longestNames[3], ctx.measureText(players[i].name).width);
+                longestNames[4] = ctx.measureText("Points").width;
+                for(let i = 0; i < 20; i++)
+                    longestNames[4] = Math.max(longestNames[4], ctx.measureText(players[i].curRanking).width);
+                ctx.font = `100 8px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
 
+                for(let i = 0; i < 20; i++)
+                    if(players[i].senka.length > 1)
+                        longestNames[5] = Math.max(longestNames[5], ctx.measureText(`(+${players[i].curRanking - players[i].senka[1].senka})`).width);
+                longestNames=longestNames.map((a) => Math.ceil(a))
+
+                let maxx = 3;
                 for (let i = -1; i < 20; i++){
                     let y = yOffset + height / 21 * (i + 1);
                     let x = 3;
@@ -525,41 +555,49 @@
 
                     ctx.font = `800 16px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
 
-                    ctx.textAlign = 'center';
                     let index = (i + 1) || "#"
+                    ctx.textAlign = 'center';
                     ctx.fillText(index, x + longestNames[0]/2, liney);
                     x += longestNames[0] + 5;
                     ctx.fillRect(x, y, 1, height / 21);
                     x += 5;
-                    ctx.textAlign = 'left';
 
                     let player = players[i] || { server: 0, rankno: "#", curRanking: "Points", name: "Name", comment: "Comment"};
 
+                    ctx.textAlign = 'left';
                     ctx.fillText(player.name, x, liney);
                     x += longestNames[3] + 5;
                     ctx.fillRect(x, y, 1, height / 21);
                     x += 5;
 
                     ctx.textAlign = 'center';
-                    ctx.fillText(player.curRanking, x + longestNames[4] / 2, liney);
-                    x += longestNames[4] + 5;
+                    ctx.fillText(player.curRanking, x + longestNames[4] / 2 + (i==-1?longestNames[5]/2:0), liney);
+                    x += longestNames[4] + longestNames[5] + 5;
+
+                    ctx.textAlign = 'right';
+                    if(i != -1 && player.senka.length > 1) {
+                        ctx.font = `100 8px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
+                        let diff = player.curRanking - player.senka[1].senka;
+                        ctx.fillText(`(+${diff}) `, x, liney);
+                    }
                     ctx.fillRect(x, y, 1, height / 21);
                     x += 5;
+                    ctx.font = `800 16px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
 
+                    ctx.textAlign = 'center';
                     ctx.fillText(player.rankno, x + longestNames[0] / 2, liney);
                     x += longestNames[0] + 5;
                     ctx.fillRect(x, y, 1, height / 21);
                     x += 5;
-                    ctx.textAlign = 'left';
 
-                    let serverJP = jp_names[player.server - 1] || "Server JP";;
+                    let serverJP = jp_names[player.server - 1] || "Server JP";
+                    ctx.textAlign = 'left';
                     ctx.fillText(serverJP, x, liney);
                     x += longestNames[1] + 5;
                     ctx.fillRect(x, y, 1, height / 21);
                     x += 5;
 
                     let serverEN = en_names[player.server - 1] || "Server EN";
-
                     ctx.textAlign = 'left';
                     ctx.fillText(serverEN, x, liney);
                     x += longestNames[2] + 5;
@@ -567,7 +605,10 @@
                     x += 5;
 
                     ctx.fillText(player.comment, x, liney);
+                    x += ctx.measureText(player.comment).width + 3;
+                    maxx = Math.max(x, maxx);
                 }
+                return maxx;
             }
 
             function colorServer(ranklist, score) {
