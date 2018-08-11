@@ -62,8 +62,10 @@
             var longestJP, longestScore;
             let allRanksServer = 0;
             let players = [];
+            var hostname = "https://senka.com.ru";
 
             function update(onlyServerRanks) {
+                document.getElementById("found").innerHTML = `<br>Updating graphs...`;
                 allRanksServer = parseInt(document.getElementById('server').value);
                 // Convert data to another format:
                 // parsed[rank][ts][serverId - 1] = points
@@ -187,6 +189,7 @@
                 drawMisc(); // Draw some other shit
                 drawTitle(`All ranks${allRanksServer ? ` - ${jp_names[allRanksServer-1]} - ${en_names[allRanksServer-1]}`:''}`); // Draw title
                 drawBorder(); // Draw border
+                document.getElementById("found").innerHTML = ``;
                 if(onlyServerRanks) return;
 
                 // Draw summary graph
@@ -251,6 +254,7 @@
                     let d = new Date();
                     this.download = `Summary and Top @ ${d.getFullYear()}-${("0"+(d.getMonth()+1)).slice(-2)}-${("0" + d.getDate()).slice(-2)}.png`;
                 }, false);
+                document.getElementById("found").innerHTML = ``;
             }
 
             function clearScreen() {
@@ -635,28 +639,104 @@
                 document.getElementById("found").innerHTML = html;
             }
 
-            function get(url, name) {
+            function spawnNotification(body, icon, title) {
+                var options = {
+                    body: body,
+                    icon: icon
+                };
+                return new Notification(title, options);
+            }
+
+            var listening = 0;
+            function watchForNewServers(forced) {
+                if(listening) return alert("Already listening");
+                Notification.requestPermission().then(function(result) {
+                    if(result != "granted") 
+                        return alert("Please enable notifications Nyoron");
+                    document.getElementById("found").innerHTML = `Listening for new data on ${hostname}...`;
+
+                    let currentData = null;
+                    let processData = (data) => {
+                        data = data.data;
+
+                        if(currentData == null) {
+                            currentData = data
+                            if (forced) maxTime = Math.max(...data.map((a) => a.lastmodifided)) + 1;
+                        }
+
+                        let serversleft = data.filter((a) => a.lastmodifided < maxTime).length;
+                        console.log(maxTime, currentData.map((a) => a.lastmodifided), data.map((a) => a.lastmodifided), serversleft);
+
+                        let hasOutdated = false;
+                        let changed = '';
+                        for(let serverid in currentData) {
+                            let newData = data[serverid];
+                            if(currentData[serverid].lastmodifided != newData.lastmodifided) {
+                                changed += `
+Changed server: ${en_names[serverid]} -> ${newData.cutoff[1]}/${newData.cutoff[5]}/${newData.cutoff[20]}/${newData.cutoff[100]}/${newData.cutoff[500]}`;
+                            }
+                            if(newData.lastmodifided < maxTime)
+                                hasOutdated = true;
+                        }
+
+                        if(changed) {
+                            console.log("changed: ", changed);
+                            spawnNotification(`Changed (${serversleft}/20 left): ${changed}`, 'https://flatisjustice.moe/bg.jpg', "Changes detected!")
+                        }
+                        document.getElementById("found").innerHTML = `Listening for new data on ${hostname}... ${serversleft}/20 left`;
+
+                        currentData = data;
+
+                        if(hasOutdated) {
+                            listening = setTimeout(function() {
+                                get(`${hostname}/server/list?date=${new Date().getTime()}`, "", processData)
+                            }, 5000);
+                        } else {
+                            listening = 0;
+                            document.getElementById("found").innerHTML = ``;
+                        }
+                    }
+                    get(`${hostname}/server/list?date=${new Date().getTime()}`, "", processData);
+                });
+            }
+
+            function get(url, name, callback, onError) {
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function() {
-                    if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+                    if (xmlhttp.readyState == XMLHttpRequest.DONE) {
                         if (xmlhttp.status == 200) {
-                            data[name] = xmlhttp.responseText;
-                            
-                            for(let i = 1; i <= 20; i++)
-                                if(data[i] == undefined) return;
-                            for(let i = 1; i <= 20; i++)
-                                data[i] = JSON.parse(data[i]);
+                            if(callback)
+                                callback(JSON.parse(xmlhttp.responseText));
+                            else {
+                                data[name] = JSON.parse(xmlhttp.responseText);
+                                document.getElementById("found").innerHTML = `Downloading from ${hostname}: ${Object.keys(data).length}/20...`;
 
-                            update();
+                                for(let i = 1; i <= 20; i++)
+                                    if(data[i] == undefined) return;
+
+                                update();
+                            }
                        }
                     }
                 };
+                if(onError)
+                    xmlhttp.onerror = onError;
                 xmlhttp.open("GET", url, true);
                 xmlhttp.send();
             }
 
-            for(let i = 1; i <= 20; i++)
-                get(`https://api.senka.com.ru/server/${i}`, i);
+            document.getElementById("found").innerHTML = `Testing ${hostname}...`;
+            get(`${hostname}/server/1?date=${new Date().getTime()}`, 1, function(update) {
+                data[1] = update;
+                document.getElementById("found").innerHTML = `Downloading from ${hostname}: 1/20...`;
+                for(let i = 2; i <= 20; i++)
+                    get(`${hostname}/server/${i}?date=${new Date().getTime()}`, i);
+            }, function() {
+                hostname = "https://api.senka.com.ru";
+                document.getElementById("found").innerHTML = `Testing ${hostname}...`;
+                for(let i = 1; i <= 20; i++)
+                    get(`${hostname}/server/${i}?date=${new Date().getTime()}`, i);
+            });
             
         </script>
     </body>
