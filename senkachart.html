@@ -66,7 +66,6 @@
             var hostname = "https://senka.com.ru";
 
             function update(onlyServerRanks) {
-                document.getElementById("found").innerHTML = `<br>Updating graphs...`;
                 allRanksServer = parseInt(document.getElementById('server').value);
                 // Convert data to another format:
                 // parsed[rank][ts][serverId - 1] = points
@@ -190,7 +189,6 @@
                 drawMisc(); // Draw some other shit
                 drawTitle(`All ranks${allRanksServer ? ` - ${jp_names[allRanksServer-1]} - ${en_names[allRanksServer-1]}`:''}`); // Draw title
                 drawBorder(); // Draw border
-                document.getElementById("found").innerHTML = ``;
                 if(onlyServerRanks) return;
 
                 // Draw summary graph
@@ -255,7 +253,6 @@
                     let d = new Date();
                     this.download = `Summary and Top @ ${d.getFullYear()}-${("0"+(d.getMonth()+1)).slice(-2)}-${("0" + d.getDate()).slice(-2)}.png`;
                 }, false);
-                document.getElementById("found").innerHTML = ``;
             }
 
             function clearScreen() {
@@ -691,6 +688,7 @@ ${parseInt(serverid)+1}: ${en_names[serverid]}: ${newData.cutoff[1]}/${newData.c
     <td>${newData.cutoff[100]}</td>
     <td>${newData.cutoff[500]}</td>
 </tr>`;
+                                get(`${hostname}/server/${serverid}?date=${new Date().getTime()}`, serverid, () => update());
                             }
                             if(newData.lastmodifided < maxTime)
                                 hasOutdated = true;
@@ -714,6 +712,7 @@ ${parseInt(serverid)+1}: ${en_names[serverid]}: ${newData.cutoff[1]}/${newData.c
                         </table>`
 
                         document.getElementById("found").innerHTML = `Listening for new data on ${hostname}... ${serversleft}/20 left<br>${table}`;
+                        document.title = `${serversleft}/20 updates left`;
 
                         currentData = data;
 
@@ -724,6 +723,10 @@ ${parseInt(serverid)+1}: ${en_names[serverid]}: ${newData.cutoff[1]}/${newData.c
                         } else {
                             listening = 0;
                             document.getElementById("found").innerHTML = `<br>${table}`;
+                            document.title = `Done!`
+                            setTimeout(function() {
+                                document.title = "Flat is Justice! - Senka Chart";
+                            }, 10000);
                         }
                     }
                     get(`${hostname}/server/list?date=${new Date().getTime()}`, "", processData);
@@ -739,7 +742,10 @@ ${parseInt(serverid)+1}: ${en_names[serverid]}: ${newData.cutoff[1]}/${newData.c
                                 callback(JSON.parse(xmlhttp.responseText));
                             else {
                                 data[name] = JSON.parse(xmlhttp.responseText);
-                                document.getElementById("found").innerHTML = `Downloading from ${hostname}: ${Object.keys(data).length}/20...`;
+                                if(Object.keys(data).length < 20)
+                                    document.getElementById("found").innerHTML = `Downloading from ${hostname}: ${Object.keys(data).length}/20...`;
+                                else
+                                    document.getElementById("found").innerHTML = '';
 
                                 for(let i = 1; i <= 20; i++)
                                     if(data[i] == undefined) return;
