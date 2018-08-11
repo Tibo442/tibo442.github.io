@@ -130,9 +130,9 @@
 
                 canvas = document.getElementById("graph1");
                 ctx = canvas.getContext("2d");
-                ctx.font = `100 10px sans-serif`
+                ctx.font = `500 10px sans-serif`
                 longestScore = ctx.measureText(" (88888) ").width;
-                ctx.font = `100 10px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`
+                ctx.font = `500 10px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`
                 // Get some widths of longest names;
                 longestJP = [0, 0];
                 for(let i = 0; i < 20; i++)
@@ -269,7 +269,7 @@
                 ctx.fillRect(0, 0, width - 1, height);
                 ctx.lineWidth = 2;
                 height -= yOffset; 
-                ctx.font = `100 10px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`
+                ctx.font = `500 10px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`
             }
 
             function drawVerticalLines(rank) {
@@ -391,14 +391,14 @@
                         if(colorServer(parsed[rank][maxTime], currentServer))
                             ctx.font = `700 10px sans-serif`
                         else
-                            ctx.font = `100 10px sans-serif`
+                            ctx.font = `500 10px sans-serif`
                         ctx.fillText(score, x + rectSize + currentOffset - longestScore / 2 , y + rectSize);
                         ctx.fillStyle = "#000";
                     }
                     ctx.textAlign = "left";
-                    ctx.font = `100 10px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`
+                    ctx.font = `500 10px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`
                     ctx.fillText(jp_names[i], x + rectSize, y + rectSize)
-                    ctx.font = `100 10px sans-serif`
+                    ctx.font = `500 10px sans-serif`
                     ctx.fillText(en_names[i], x + rectSize + currentOffset, y + rectSize)
                 }
             }
@@ -407,7 +407,7 @@
                 let txt;
                 ctx.fillStyle = "#888";
                 ctx.textAlign = "right";
-                ctx.font = `100 10px sans-serif`
+                ctx.font = `500 10px sans-serif`
                 txt = "Data: senka.com.ru ";
                 ctx.fillText(txt, width, 9);
                 txt = "Graph generator: @FlatIsNice ";
@@ -450,7 +450,7 @@
                         longestNames[parseInt(rankIndex) + 2] = Math.max(longestNames[parseInt(rankIndex) + 2], ctx.measureText(parsed[ranks[rankIndex]][maxTime][i]).width);
                         if (parsed[ranks[rankIndex]][maxTime-43200000][i]) {
                             let diff = parsed[ranks[rankIndex]][maxTime][i] - parsed[ranks[rankIndex]][maxTime - 43200000][i];
-                            ctx.font = `100 8px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
+                            ctx.font = `500 8px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
                             longestNames[parseInt(rankIndex) + 7] = Math.max(longestNames[parseInt(rankIndex) + 7], ctx.measureText(` (+${diff})`).width);
                         }
                     }
@@ -486,7 +486,7 @@
                             score = "Top " + rank;
                         else {
                             if (!colorServer(parsed[rank][maxTime], score))
-                                ctx.font = `100 16px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
+                                ctx.font = `500 16px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
                             if (parsed[rank][maxTime - 43200000][i])
                                 diff = score - parsed[rank][maxTime - 43200000][i];
                         }
@@ -498,7 +498,7 @@
                         ctx.fillStyle = "#000";
                         if(diff != -999) {
                             ctx.textAlign = 'right';
-                            ctx.font = `100 8px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
+                            ctx.font = `500 8px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
                             ctx.fillText(`(+${diff})`, x - 2, liney);
                         }
 
@@ -539,7 +539,7 @@
                 longestNames[4] = ctx.measureText("Points").width;
                 for(let i = 0; i < 20; i++)
                     longestNames[4] = Math.max(longestNames[4], ctx.measureText(players[i].curRanking).width);
-                ctx.font = `100 8px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
+                ctx.font = `500 8px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
 
                 for(let i = 0; i < 20; i++)
                     if(players[i].senka.length > 1)
@@ -577,7 +577,7 @@
 
                     ctx.textAlign = 'right';
                     if(i != -1 && player.senka.length > 1) {
-                        ctx.font = `100 8px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
+                        ctx.font = `500 8px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
                         let diff = player.curRanking - player.senka[1].senka;
                         ctx.fillText(`(+${diff}) `, x, liney);
                     }
