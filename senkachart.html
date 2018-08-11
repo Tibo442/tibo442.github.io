@@ -24,8 +24,9 @@
         <script src="https://unpkg.com/blob-util/dist/blob-util.min.js"></script>
     </head>
     <body> 
-        <a href="."><b>Flat is Justice - Home</b></a><br>
-
+        <a href="."><b>Flat is Justice - Home</b></a>
+        <button style='float:right' onclick='watchForNewServers()'>Watch updates</button><br>
+        <br>
         Output: Download: <a id='downloadSumTop'>Summary/Top</a> <a id='download'>All</a> <a id='download1'>#1</a> <a id='download5'>#5</a> <a id='download20'>#20</a> <a id='download100'>#100</a> <a id='download500'>#500</a><br><br>
 
         <label>Search by username/comment: <input id="playername" onclick="findUser(this)" oninput="findUser(this)"></input></label><br>
@@ -648,7 +649,7 @@
             }
 
             var listening = 0;
-            function watchForNewServers(forced) {
+            function watchForNewServers() {
                 if(listening) return alert("Already listening");
                 Notification.requestPermission().then(function(result) {
                     if(result != "granted") 
@@ -660,8 +661,10 @@
                         data = data.data;
 
                         if(currentData == null) {
-                            currentData = data
-                            if (forced) maxTime = Math.max(...data.map((a) => a.lastmodifided)) + 1;
+                            currentData = data;
+
+                            let serversleft = data.filter((a) => a.lastmodifided < maxTime).length;
+                            if (serversleft == 0 && confirm("No servers left, wanna force scan anyway?")) maxTime = Math.max(...data.map((a) => a.lastmodifided)) + 1;
                         }
 
                         let serversleft = data.filter((a) => a.lastmodifided < maxTime).length;
