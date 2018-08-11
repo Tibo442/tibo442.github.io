@@ -56,7 +56,7 @@
             const ranks = [500, 100, 20, 5, 1];
 
             var canvas, width, height, ctx;
-            var yOffset = 32, rectSize = 8, xOffset = 34;
+            var yOffset = 32, rectSize, xOffset = 34;
             let descW = 330, descH = 150;
             var minTime, maxTime;
             var parsed = {}, maxOfRank = {};
@@ -70,6 +70,8 @@
                 // Convert data to another format:
                 // parsed[rank][ts][serverId - 1] = points
 
+                rectSize = 8;
+                parsed = {}; maxOfRank = {};
                 for(let i = 1; i <= 20; i++) {
                     if(data[i].code == 1) continue;
 
@@ -173,6 +175,7 @@
                 // maxPoints = 5000;
 
                 ranks.reverse();
+
                 clearScreen(); // Clear screen, setup
                 drawVerticalLines(1); // Draw vertical lines per cycle                
                 drawHorizontalLines(maxPoints); // Draw horizontal lines depending on max points
@@ -189,7 +192,7 @@
                 drawMisc(); // Draw some other shit
                 drawTitle(`All ranks${allRanksServer ? ` - ${jp_names[allRanksServer-1]} - ${en_names[allRanksServer-1]}`:''}`); // Draw title
                 drawBorder(); // Draw border
-                if(onlyServerRanks) return;
+                if(onlyServerRanks) return ranks.reverse();
 
                 // Draw summary graph
                 canvas = document.getElementById("graphSummary");
