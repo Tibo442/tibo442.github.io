@@ -454,7 +454,7 @@
                             longestNames[parseInt(rankIndex) + 7] = Math.max(longestNames[parseInt(rankIndex) + 7], ctx.measureText(` (+${diff})`).width);
                         }
                     }
-                longestNames=longestNames.map((a) => Math.ceil(a))
+                longestNames = longestNames.map((a) => Math.ceil(a))
                 console.log(longestNames)
 
                 let maxx = 3;
@@ -544,7 +544,8 @@
                 for(let i = 0; i < 20; i++)
                     if(players[i].senka.length > 1)
                         longestNames[5] = Math.max(longestNames[5], ctx.measureText(`(+${players[i].curRanking - players[i].senka[1].senka})`).width);
-                longestNames=longestNames.map((a) => Math.ceil(a))
+
+                longestNames = longestNames.map((a) => Math.ceil(a))
 
                 let maxx = 3;
                 for (let i = -1; i < 20; i++){
@@ -628,6 +629,7 @@
                 }
                 return false;
             }
+
             function convertTime(ts) {
                 let timestampTime = new Date(parseInt(ts));
                 return new Date(timestampTime.getTime() + timestampTime.getTimezoneOffset() * 60000 + 9 * 3600000);
@@ -703,9 +705,11 @@
                     let permachanged = ''
                     let currentData;
                     let processData = (data) => {
+                        let isFirst = false;
                         data = data.data;
 
                         if(currentData == undefined) {
+                            isFirst = true;
                             currentData = data;
 
                             let serversleft = data.filter((a) => a.lastmodifided < maxTime).length;
@@ -721,17 +725,17 @@
                         for(let serverid in currentData) {
                             let newData = data[serverid];
                             if(currentData[serverid].lastmodifided != newData.lastmodifided) {
-                                changed += `
-${parseInt(serverid)+1}: ${en_names[serverid]}: ${newData.cutoff[1]}/${newData.cutoff[5]}/${newData.cutoff[20]}/${newData.cutoff[100]}/${newData.cutoff[500]}`;
+                                changed += `${parseInt(serverid)+1}: ${en_names[serverid]}: ${newData.cutoff[1]}/${newData.cutoff[5]}/${newData.cutoff[20]}/${newData.cutoff[100]}/${newData.cutoff[500]}
+`;
                                 permachanged += `<tr>
-    <td>${parseInt(serverid)+1}</td>
-    <td>${en_names[serverid]}</td>
-    <td>${newData.cutoff[1]}</td>
-    <td>${newData.cutoff[5]}</td>
-    <td>${newData.cutoff[20]}</td>
-    <td>${newData.cutoff[100]}</td>
-    <td>${newData.cutoff[500]}</td>
-</tr>`;
+                                    <td>${parseInt(serverid)+1}</td>
+                                    <td>${en_names[serverid]}</td>
+                                    <td>${newData.cutoff[1]}</td>
+                                    <td>${newData.cutoff[5]}</td>
+                                    <td>${newData.cutoff[20]}</td>
+                                    <td>${newData.cutoff[100]}</td>
+                                    <td>${newData.cutoff[500]}</td>
+                                </tr>`;
                                 get(`${hostname}/server/${serverid}?date=${new Date().getTime()}`, serverid, () => update());
                             }
                             if(newData.lastmodifided < maxTime)
@@ -755,8 +759,10 @@ ${parseInt(serverid)+1}: ${en_names[serverid]}: ${newData.cutoff[1]}/${newData.c
                         ${permachanged}
                         </table>`
 
-                        document.getElementById("found").innerHTML = `Listening for new data on ${hostname}... ${serversleft}/20 left<br>${table}`;
-                        document.title = `${serversleft}/20 updates left`;
+                        if(isFirst || changed) {
+                            document.getElementById("found").innerHTML = `Listening for new data on ${hostname}... ${serversleft}/20 left<br>${table}`;
+                            document.title = `${serversleft}/20 updates left`;
+                        }
 
                         currentData = data;
 
