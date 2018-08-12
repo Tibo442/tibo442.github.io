@@ -277,7 +277,7 @@
                 ctx.fillStyle = "#000";
                 ctx.fillRect(0, yOffset, width, 1);
                 for(let ts in parsed[rank]) {
-                    let xPos = xOffset + (ts - minTime) / (maxTime - minTime) * (width - xOffset);
+                    let xPos = Math.round(xOffset + (ts - minTime) / (maxTime - minTime) * (width - xOffset));
                     ctx.fillRect(xPos, yOffset, 1, height);
 
                     let str = timeStr(ts);
@@ -295,7 +295,7 @@
                 ctx.textAlign = "center"; 
                 let rankOff = Math.ceil(maxPoints / 10 / 50) * 50;
                 for(let i = rankOff; i < maxPoints; i += rankOff) {
-                    let yPos = yOffset + height - (i / maxPoints * height);
+                    let yPos = Math.round(yOffset + height - (i / maxPoints * height));
                     ctx.fillRect(xOffset, yPos, width, 1);
                     ctx.fillText(i, xOffset / 2, yPos + 3);
                 }
@@ -460,7 +460,7 @@
 
                 let maxx = 3;
                 for (let i = -1; i <= 20; i++){
-                    let y = yOffset + height / 22 * (i + 1);
+                    let y = Math.round(yOffset + height / 22 * (i + 1));
                     let x = 3;
                     ctx.fillRect(0, y, width, 1);
                     let liney = y + height / 22 - 4;
@@ -550,7 +550,7 @@
 
                 let maxx = 3;
                 for (let i = -1; i < 20; i++){
-                    let y = yOffset + height / 21 * (i + 1);
+                    let y = Math.round(yOffset + height / 21 * (i + 1));
                     let x = 3;
                     ctx.fillRect(0, y, width, 1);
                     let liney = y + height / 21 - 4;
@@ -564,7 +564,7 @@
                     ctx.fillRect(x, y, 1, height / 21);
                     x += 5;
 
-                    let player = players[i] || { server: 0, rankno: "#", curRanking: "Points", name: "Name", comment: "Comment"};
+                    let player = players[i] || { server: 0, rankno: "#", curMedal: "甲", curRanking: "Points", name: "Name", comment: "Comment"};
 
                     ctx.textAlign = 'left';
                     ctx.fillText(player.name, x, liney);
@@ -598,7 +598,7 @@
                     x += longestNames[1] + 5;
                     ctx.fillRect(x, y, 1, height / 21);
                     x += 5;
-
+                    
                     let serverEN = en_names[player.server - 1] || "Server EN";
                     ctx.textAlign = 'left';
                     ctx.fillText(serverEN, x, liney);
@@ -606,6 +606,13 @@
                     ctx.fillRect(x, y, 1, height / 21);
                     x += 5;
 
+                    ctx.textAlign = 'center';
+                    ctx.fillText(player.curMedal, x + longestNames[0] / 2, liney);
+                    x += longestNames[0] + 5;
+                    ctx.fillRect(x, y, 1, height / 21);
+                    x += 5;
+
+                    ctx.textAlign = 'left';
                     ctx.fillText(player.comment, x, liney);
                     x += ctx.measureText(player.comment).width + 3;
                     maxx = Math.max(x, maxx);
