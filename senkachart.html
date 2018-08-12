@@ -24,6 +24,7 @@
         <script src="https://unpkg.com/blob-util/dist/blob-util.min.js"></script>
     </head>
     <body> 
+        <div id='clipboard'></div>
         <a href="."><b>Flat is Justice - Home</b></a>
         <button style='float:right' onclick='watchForNewServers()'>Watch updates</button><br>
         <br>
@@ -455,7 +456,7 @@
                         }
                     }
                 longestNames = longestNames.map((a) => Math.ceil(a))
-                console.log(longestNames)
+                //console.log(longestNames)
 
                 let maxx = 3;
                 for (let i = -1; i <= 20; i++){
@@ -517,7 +518,7 @@
                     ctx.fillRect(x, y, 1, height / 22);
 
                     maxx = Math.max(x, maxx);
-                    console.log(x)
+                    //console.log(x)
                 }
                 return maxx;
             }
@@ -683,15 +684,39 @@
                 document.getElementById("found").innerHTML = html;
             }
 
-            function spawnNotification(body, icon, title) {
+            function fallbackCopyTextToClipboard(text) {
+                var textArea = document.createElement("textarea");
+                textArea.value = text;
+                document.getElementById("clipboard").appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+
+                try {
+                    var successful = document.execCommand('copy');
+                    var msg = successful ? 'successful' : 'unsuccessful';
+                    console.log('Fallback: Copying text command was ' + msg);
+                } catch (err) {
+                    console.error('Fallback: Oops, unable to copy', err);
+                }
+                document.getElementById("clipboard").removeChild(textArea);
+            }
+
+            function spawnNotification(body, icon, title, onclick, delay = 5000) {
                 let options = {
                     body: body,
                     icon: icon
                 };
                 let noti = new Notification(title, options);
+                noti.onclick = onclick?onclick:function() {
+                    let data = body.split("\n").filter((a) => a).map((a) => a.split(": ")[0] + "\t" + a.split(": ")[2].split("/").join("\t"))
+
+                    console.log(data.join("\n"));
+                    fallbackCopyTextToClipboard(data.join("\n"));
+                }
+
                 setTimeout(function() {
                     noti.close();
-                }, 5000);
+                }, delay);
             }
 
             var listening = 0;
@@ -725,8 +750,7 @@
                         for(let serverid in currentData) {
                             let newData = data[serverid];
                             if(currentData[serverid].lastmodifided != newData.lastmodifided) {
-                                changed += `${parseInt(serverid)+1}: ${en_names[serverid]}: ${newData.cutoff[1]}/${newData.cutoff[5]}/${newData.cutoff[20]}/${newData.cutoff[100]}/${newData.cutoff[500]}
-`;
+                                changed += `${parseInt(serverid)+1}: ${en_names[serverid]}: ${newData.cutoff[1]}/${newData.cutoff[5]}/${newData.cutoff[20]}/${newData.cutoff[100]}/${newData.cutoff[500]}\n`;
                                 permachanged += `<tr>
                                     <td>${parseInt(serverid)+1}</td>
                                     <td>${en_names[serverid]}</td>
@@ -742,10 +766,6 @@
                                 hasOutdated = true;
                         }
 
-                        if(changed) {
-                            console.log("changed: ", changed);
-                            spawnNotification(changed, '', `Changes detected (${oldserversleft}>${serversleft}/20 left)!`)
-                        }
                         let table = `<table>
                         <tr>
                             <td>Serverid</td>
@@ -759,24 +779,33 @@
                         ${permachanged}
                         </table>`
 
-                        if(isFirst || changed) {
-                            document.getElementById("found").innerHTML = `Listening for new data on ${hostname}... ${serversleft}/20 left<br>${table}`;
-                            document.title = `${serversleft}/20 updates left`;
-                        }
-
                         currentData = data;
 
                         if(hasOutdated) {
                             listening = setTimeout(function() {
                                 get(`${hostname}/server/list?date=${new Date().getTime()}`, "", processData)
                             }, 5000);
+
+                            if(changed) {
+                                console.log("changed: ", changed);
+                                spawnNotification(changed, '', `Changes detected (${oldserversleft}>${serversleft}/20 left)!`)
+                            }
+                            if(isFirst || changed) {
+                                document.getElementById("found").innerHTML = `Listening for new data on ${hostname}... ${serversleft}/20 left<br>${table}`;
+                                document.title = `${serversleft}/20 updates left`;
+                            }
                         } else {
                             listening = 0;
                             document.getElementById("found").innerHTML = `<br>${table}`;
-                            document.title = `Done!`
+                            document.title = `Done!`;
                             setTimeout(function() {
                                 document.title = "Flat is Justice! - Senka Chart";
                             }, 10000);
+                            spawnNotification(`Click to copy full board! Last changes:\n${changed}`, '', `All servers are updated! (${oldserversleft}>${serversleft}/20 left)`, function() {
+                                data = data.map((a) => [1,5,20,100,500].map((b) => a.cutoff[b]).join("\t")).join("\n");
+                                console.log(data);
+                                fallbackCopyTextToClipboard(data);
+                            }, 30000)
                         }
                     }
                     get(`${hostname}/server/list?date=${new Date().getTime()}`, "", processData);
