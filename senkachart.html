@@ -726,6 +726,23 @@
                 }, delay);
             }
 
+            function refreshServer(serverid, force = false) {
+                let oldData = data[serverid];
+                console.log("refresh" , serverid)
+                get(`${hostname}/server/${serverid}?date=${new Date().getTime()}`, serverid, function(newData) {
+                    console.log(oldData.data.lastmodifided, newData.data.lastmodifided);
+                    if(oldData.data.lastmodifided == newData.data.lastmodifided) {
+                        console.log("same")
+                        if(force)
+                            setTimeout(() => refreshServer(serverid, true), 1000);
+                    } else {
+                        console.log("new data")
+                        data[serverid] = newData;
+                        update()
+                    }
+                });
+            }
+
             var listening = 0;
             function watchForNewServers() {
                 if(listening) return alert("Already listening");
@@ -736,26 +753,26 @@
 
                     let permachanged = ''
                     let currentData;
-                    let processData = (data) => {
+                    let processData = (wipdata) => {
                         let isFirst = false;
-                        data = data.data;
+                        wipdata = wipdata.data;
 
                         if(currentData == undefined) {
                             isFirst = true;
-                            currentData = data;
+                            currentData = wipdata;
 
-                            let serversleft = data.filter((a) => a.lastmodifided < maxTime).length;
-                            if (serversleft == 0 && confirm("No servers left, wanna force scan anyway?")) maxTime = Math.max(...data.map((a) => a.lastmodifided)) + 1;
+                            let serversleft = wipdata.filter((a) => a.lastmodifided < maxTime).length;
+                            if (serversleft == 0 && confirm("No servers left, wanna force scan anyway?")) maxTime = Math.max(...wipdata.map((a) => a.lastmodifided)) + 1;
                         }
 
-                        let serversleft = data.filter((a) => a.lastmodifided < maxTime).length;
+                        let serversleft = wipdata.filter((a) => a.lastmodifided < maxTime).length;
                         let oldserversleft = currentData.filter((a) => a.lastmodifided < maxTime).length;
-                        console.log(maxTime, currentData.map((a) => a.lastmodifided), data.map((a) => a.lastmodifided), serversleft);
+                        console.log(maxTime, currentData.map((a) => a.lastmodifided), wipdata.map((a) => a.lastmodifided), serversleft);
 
                         let hasOutdated = false;
                         let changed = '';
                         for(let serverid in currentData) {
-                            let newData = data[serverid];
+                            let newData = wipdata[serverid];
                             if(currentData[serverid].lastmodifided != newData.lastmodifided) {
                                 changed += `${parseInt(serverid)+1}: ${en_names[serverid]}: ${newData.cutoff[1]}/${newData.cutoff[5]}/${newData.cutoff[20]}/${newData.cutoff[100]}/${newData.cutoff[500]}\n`;
                                 permachanged += `<tr>
@@ -767,8 +784,9 @@
                                     <td>${newData.cutoff[100]}</td>
                                     <td>${newData.cutoff[500]}</td>
                                 </tr>`;
-                                get(`${hostname}/server/${serverid}?date=${new Date().getTime()}`, serverid, () => update());
                             }
+                            if(data[parseInt(serverid)+1].data.lastmodifided < maxTime && newData.lastmodifided > maxTime)
+                                refreshServer(parseInt(serverid)+1);
                             if(newData.lastmodifided < maxTime)
                                 hasOutdated = true;
                         }
@@ -786,7 +804,7 @@
                         ${permachanged}
                         </table>`
 
-                        currentData = data;
+                        currentData = wipdata;
 
                         if(hasOutdated) {
                             listening = setTimeout(function() {
@@ -808,10 +826,14 @@
                             setTimeout(function() {
                                 document.title = "Flat is Justice! - Senka Chart";
                             }, 10000);
+                            setTimeout(function() {
+                                for(let i = 1; i <= 20; i++)
+                                    refreshServer(i);
+                            }, 1000);
                             spawnNotification(`Click to copy full board! Last changes:\n${changed}`, '', `All servers are updated! (${oldserversleft}>${serversleft}/20 left)`, function() {
-                                data = data.map((a) => [1,5,20,100,500].map((b) => a.cutoff[b]).join("\t")).join("\n");
-                                console.log(data);
-                                fallbackCopyTextToClipboard(data);
+                                wipdata = wipdata.map((a) => [1,5,20,100,500].map((b) => a.cutoff[b]).join("\t")).join("\n");
+                                console.log(wipdata);
+                                fallbackCopyTextToClipboard(wipdata);
                             }, 30000)
                         }
                     }
