@@ -865,10 +865,12 @@
                 };
                 if(onError)
                     xmlhttp.onerror = onError;
-                xmlhttp.open("GET", url, true);
+                xmlhttp.open("GET", url);
+                xmlhttp.setRequestHeader("x-access-token", localStorage.api_token);
                 xmlhttp.send();
             }
-
+            
+            if(!localStorage.api_token) localStorage.api_token = prompt("API key?");
             document.getElementById("found").innerHTML = `Testing ${hostname}...`;
             get(`${hostname}/server/1?date=${new Date().getTime()}`, 1, function(update) {
                 data[1] = update;
