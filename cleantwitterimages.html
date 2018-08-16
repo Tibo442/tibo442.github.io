@@ -135,10 +135,14 @@
                                     transparantNeig++;
                             }
                         let currentcolors = getColorAt(colors, x, y);
-                        if(transparantNeig >= 23)
+                        if(transparantNeig >= 17 && currentcolors[3])
                             currentcolors[3] = 1;
-                        else
-                            currentcolors[3] *= (1-(transparantNeig/23)) ;
+                        else {
+                            currentcolors[0] *= (1-(transparantNeig/23));
+                            currentcolors[1] *= (1-(transparantNeig/23));
+                            currentcolors[2] *= (1-(transparantNeig/23));
+                            currentcolors[3] *= (1-(transparantNeig/23));
+                        }
 
                         setColorAt(colors, x, y, ...currentcolors)
                         //console.log(x,y,transparantNeig);
