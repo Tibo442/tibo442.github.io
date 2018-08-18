@@ -9,6 +9,8 @@
         <meta name="twitter:description" content="Make LBAS range maps">
         <meta name="twitter:image" content="http://flatisjustice.moe/pics/lbasrangemapmaker.png">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.7.1/pixi.min.js"></script>
+        <script src="https://unpkg.com/blob-util/dist/blob-util.min.js"></script>
+
         <style type="text/css">
             input[type="number"] {
                 width:75px;
@@ -35,12 +37,13 @@
         Show LBAS range <input onchange="update()" type="checkbox" id="distance" checked><br>
         <br>
         <button name="Update" onclick="update()">Force update</button><br><br>
+        <a id="download">Download</a><br>
         <b>Edges map</b><br>
         <script type="text/javascript">
-            var show = {}, locData, mapKey, svdata, bypass, wrongmap;
+            var show = {}, locData, mapKey, svdata, bypass, wrongmap, canvas;
 
-            let app = new PIXI.Application({width: 1200, height: 720, transparent: true, forceCanvas: true});
-            document.body.appendChild(app.view);
+            let app = new PIXI.Application({width: 1200, height: 720, transparent: true, forceCanvas: true, preserveDrawingBuffer:true});
+            document.body.appendChild(canvas = app.view);
             function update(map = document.getElementById("mapid").value, callback) {
                 document.getElementById("mapid").value = map;
                 for (var i = app.stage.children.length - 1; i >= 0; i--) {  app.stage.removeChild(app.stage.children[i]);};
@@ -319,6 +322,17 @@
                     drawEnds(kc3Edges);
 
                 console.log(`"World ${document.getElementById("mapid").value}" : {\n${Object.keys(kc3Edges).map((k) => `      "${k}" : ["${kc3Edges[k][0]}", "${kc3Edges[k][1]}"]`).join(",\n")}\n    },`)
+                document.getElementById("download").href = "";
+                setTimeout(() =>
+                    blobUtil.canvasToBlob(canvas, 'image/png').then(function (blob) {
+                        console.log(blob.size)
+                        document.getElementById("download").href = blobUtil.createObjectURL(blob);
+                    }), 100);
+                document.getElementById("download").addEventListener('click', function() {
+                    let d = new Date();
+                    this.download = `Map ${document.getElementById("mapid").value}.png`;
+                }, false);
+
                 if(callback) callback();
             }
 
