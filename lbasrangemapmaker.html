@@ -38,7 +38,8 @@
         Show colors (of api when entered) <input onchange="update()" type="checkbox" id="colors" checked><br>
         Show color of offset tag <input onchange="update()" type="checkbox" id="offsetColored" checked><br>
         Show enemies <input onchange="update()" type="checkbox" id="enemies" checked><br>
-        <!--Show gauge <input type="number" id="gauge" min="-1" max="20" onchange="update();" value="-1">-->
+        Show gauge <input type="number" id="gauge" min="-1" max="20" onchange="update();" value="-1">
+        <div id="gaugeinfo"></div>
         Show hidden routes [UNTESTED] <input type="number" id="hiddenRoutes" min="0" max="20" onchange="update();" value="0">
         <div id="hiddenrouteinfo"></div>
         <br>
@@ -46,13 +47,13 @@
         <a id="download">Download</a><br>
         <b>Edges map</b><br>
         <script type="text/javascript">
-            var show = {}, locData, mapKey, svdata, bypass, wrongmap, canvas, bgLayer, loader, map;
+            var show = {}, locData, mapKey, svdata, bypass, wrongmap, canvas, bgLayer, loader, map, gaugeData;
             let SERVER = "203.104.209.71";
             let GAUGE_ROOT = `http://${SERVER}/kcs2/resources/gauge/`;
 
             let app = new PIXI.Application({width: 1200, height: 720, transparent: true, forceCanvas: true, preserveDrawingBuffer:true});
             document.body.appendChild(canvas = app.view);
-            function update(selectedmap = document.getElementById("mapid").value, callback) {
+            function update(selectedmap = document.getElementById("mapid").value) {
                 document.getElementById("mapid").value = selectedmap;
                 for (var i = app.stage.children.length - 1; i >= 0; i--) {  app.stage.removeChild(app.stage.children[i]);};
 
@@ -67,8 +68,9 @@
                 show.offsetColored = document.getElementById("offsetColored").checked; 
                 show.enemies = document.getElementById("enemies").checked; 
                 show.hiddenRoutes = parseInt(document.getElementById("hiddenRoutes").value); 
-                //show.gauge = parseInt(document.getElementById("gauge").value); 
+                show.gauge = parseInt(document.getElementById("gauge").value);
 
+                gaugeData = undefined;
                 map = selectedmap.split("-").map((a) => parseInt(a));
 
                 if(svdata && !(correctmap = (svdata.api_data.api_maparea_id == map[0] && svdata.api_data.api_mapinfo_no == map[1]))) {
@@ -80,7 +82,8 @@
                 document.getElementById("apiinfo").disabled = !(correctmap || bypass);
                 document.getElementById("distance").disabled = !(correctmap || bypass);
 
-                mapKey = `map${pad(map[0], 3)}${pad(map[1], 2)}_`
+                let mapname = `${pad(map[0], 3)}${pad(map[1], 2)}`;
+                mapKey = `map${mapname}_`
                 //console.log(imageUrl)
 
                 loader = new PIXI.loaders.Loader;
@@ -89,6 +92,23 @@
                 loader.add(getPath('image.json')).add(`http://${SERVER}/kcs2/img/map/map_common.json`).load(function() {
                     getJSON(getPath('info.json'), function (info) {
                         locData = info;
+                        let callback = function() {
+                            if(show.gauge != -1)
+                                getJSON(GAUGE_ROOT + mapname + (show.gauge?("_"+show.gauge):"") + ".json", function (info) {
+                                    gaugeData = info;
+                                    if(gaugeData && gaugeData.vertical && gaugeData.vertical.img) {
+                                        if(!gaugeData.vertical.img_l)
+                                            gaugeData.vertical.img_l = gaugeData.vertical.img + "_light"
+                                        loader.add(gaugeData.vertical.img, GAUGE_ROOT + gaugeData.vertical.img + ".png")
+                                              .add(gaugeData.vertical.img_l, GAUGE_ROOT + gaugeData.vertical.img_l + ".png").load(function() {
+                                            if(locData)
+                                                showMap();
+                                        })
+                                    }
+                                }, function (err) {
+                                    document.getElementById("gaugeinfo").innerHTML = `No gauge with id ${show.gauge} found!`
+                                });
+                        }
                         if(show.hiddenRoutes) {
                             getAddingInfo(0, callback);
                             showMap();
@@ -98,6 +118,7 @@
                 })
 
                 document.getElementById("hiddenrouteinfo").innerHTML = "";
+                document.getElementById("gaugeinfo").innerHTML = "";
                 app.stage.addChild(bgLayer);
             }
             function getPath(url) {
@@ -318,6 +339,30 @@
                     kc3Edges[id] = [fromId, toId];
                 }
 
+                if(show.gauge != -1 && gaugeData) {
+                    if(gaugeData.vertical.bar) {
+                        let colorbox = new PIXI.Graphics;
+                        colorbox.beginFill(gaugeData.vertical.bar.color || 16711680);
+                        let barH = gaugeData.vertical.bar.h || 219
+                        let barW = gaugeData.vertical.bar.w || 14
+
+                        colorbox.drawRect(gaugeData.vertical.x + gaugeData.vertical.bar.x, gaugeData.vertical.y + gaugeData.vertical.bar.y, barW, barH);
+                        colorbox.endFill()
+                        app.stage.addChild(colorbox);
+                    }
+                    let frame = PIXI.Texture.fromFrame(gaugeData.vertical.img)
+                    let sprite = new PIXI.Sprite(frame);
+                    sprite.position.set(gaugeData.vertical.x, gaugeData.vertical.y);
+                    app.stage.addChild(sprite);
+
+
+                    frame = PIXI.Texture.fromFrame(gaugeData.vertical.img_l)
+                    sprite = new PIXI.Sprite(frame);
+                    let lightoffset = gaugeData.vertical.light ? gaugeData.vertical.light : {x:0,y:0}
+                    sprite.position.set(gaugeData.vertical.x + lightoffset.x, gaugeData.vertical.y + lightoffset.y);
+                    app.stage.addChild(sprite);
+                }
+
                 if(show.enemies && locData.enemies) {
                     for(let enemy of locData.enemies) {
                         let frame = PIXI.Texture.fromFrame(mapKey + enemy.img)
@@ -363,13 +408,13 @@
                 if(show.guessLetters)
                     drawEnds(kc3Edges);
 
+                app.render();
                 console.log(`"World ${document.getElementById("mapid").value}" : {\n${Object.keys(kc3Edges).map((k) => `      "${k}" : ["${kc3Edges[k][0]}", "${kc3Edges[k][1]}"]`).join(",\n")}\n    },`)
-                document.getElementById("download").href = "";
-                setTimeout(() =>
-                    blobUtil.canvasToBlob(canvas, 'image/png').then(function (blob) {
-                        console.log(blob.size)
-                        document.getElementById("download").href = blobUtil.createObjectURL(blob);
-                    }), 100);
+                delete document.getElementById("download").href 
+                blobUtil.canvasToBlob(canvas, 'image/png').then(function (blob) {
+                    console.log(blob.size)
+                    document.getElementById("download").href = blobUtil.createObjectURL(blob);
+                })
                 document.getElementById("download").addEventListener('click', function() {
                     let d = new Date();
                     this.download = `Map ${document.getElementById("mapid").value}.png`;
