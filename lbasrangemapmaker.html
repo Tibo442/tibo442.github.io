@@ -257,6 +257,18 @@
               dropShadowAngle: Math.PI / 6,
               dropShadowDistance: 6,
             });
+            let lbasStyle = new PIXI.TextStyle({
+              fontFamily: "Arial",
+              fontSize: 36,
+              fill: "#00ff00",
+              stroke: '#006600',
+              strokeThickness: 3,
+              dropShadow: true,
+              dropShadowColor: "#001100",
+              dropShadowBlur: 4,
+              dropShadowAngle: Math.PI / 6,
+              dropShadowDistance: 4,
+            });
             function drawEdgesOnGraph(callback) {
                 let edges = {};
                 for (let edge of locData.spots)
@@ -400,10 +412,10 @@
                     for (let edge of Object.values(edges)) {
                         let distance = unique(edge.map((e) => svdata.api_data.api_cell_data.find((m) => m.api_no == e.no).api_distance)).join("/");
                         let {x, y} = edge[0];
-                        let text = new PIXI.Text(distance, bigStyle);
+                        let text = new PIXI.Text(distance, lbasStyle);
                         text.anchor.set(.5,.5);
                         app.stage.addChild(text);
-                        text.position.set(x, y)
+                        text.position.set(x - 25, y - 30)
                     }
                 if(show.guessLetters)
                     drawEnds(kc3Edges);
@@ -457,13 +469,6 @@
                     }
                     return accum;
                 }, []);
-            }
-
-            function colorCodes() {
-                document.getElementById("start").value = 'svdata={"api_result":1,"api_result_msg":"成功","api_data":{"api_cell_data":[{"api_no":0,"api_event_id":0,"api_event_kind":0},{"api_no":1,"api_event_id":6,"api_event_kind":2,"api_distance":1},{"api_no":2,"api_event_id":6,"api_event_kind":0,"api_distance":1},{"api_no":3,"api_event_id":2,"api_event_kind":0,"api_distance":2},{"api_no":4,"api_event_id":3,"api_event_kind":0,"api_distance":3},{"api_no":5,"api_event_id":7,"api_event_kind":0,"api_distance":3},{"api_no":6,"api_event_id":8,"api_event_kind":0,"api_distance":2},{"api_no":7,"api_event_id":9,"api_event_kind":0,"api_distance":4},{"api_no":8,"api_event_id":4,"api_event_kind":2,"api_distance":4},{"api_no":9,"api_event_id":4,"api_event_kind":7,"api_distance":3},{"api_no":10,"api_event_id":4,"api_event_kind":4,"api_distance":4},{"api_no":11,"api_event_id":4,"api_event_kind":5,"api_distance":5},{"api_no":12,"api_event_id":4,"api_event_kind":6,"api_distance":5},{"api_no":13,"api_event_id":4,"api_event_kind":1,"api_distance":5},{"api_no":14,"api_event_id":5,"api_event_kind":1,"api_distance":2}]}}';
-                document.getElementById("swf").value = ``
-                document.getElementById("url").value = "https://i.imgur.com/dKIrqI1.png";
-                update();
             }
             update();
         </script>
