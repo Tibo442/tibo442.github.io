@@ -28,7 +28,7 @@
         <a href="."><b>Flat is Justice - Home</b></a>
         <button style='float:right' onclick='watchForNewServers()'>Watch updates</button><br>
         <br>
-        Output: Download: <a id='downloadSumTop'>Summary/Top</a> <a id='download'>All</a> <a id='download1'>#1</a> <a id='download5'>#5</a> <a id='download20'>#20</a> <a id='download100'>#100</a> <a id='download500'>#500</a><br><br>
+        Output: Download: <a id='downloadSumTop'>Summary/Top</a> <a id='download'>All graphs</a> <a id='download10k'>10k+ Players</a> <a id='download1'>#1</a> <a id='download5'>#5</a> <a id='download20'>#20</a> <a id='download100'>#100</a> <a id='download500'>#500</a><br><br>
 
         <label>Search by username/comment: <input id="playername" onclick="findUser(this)" oninput="findUser(this)"></input></label><br>
         <div id="found"></div>
@@ -41,6 +41,7 @@
 
         <label>All ranks server (0 = normal): <input type="number" id="server" min="0" max="20" step="1" onchange="update(true);" onclick="update(true);" value="0"><br></label>
         <canvas id="graphMix" width="960" height="540"></canvas><br>
+        <canvas id="10kPlayers" width="726" height="540"></canvas>
         <br>
         <canvas style="display:none" id="graphSummary" width="705" height="540"></canvas>
         <canvas style="display:none" id="graphTopPlayers" width="726" height="540"></canvas>
@@ -160,7 +161,7 @@
                     });
                     document.getElementById("download" + rank).addEventListener('click', function() {
                         let d = new Date();
-                        this.download = `Top${rank} @ ${d.getFullYear()}-${("0"+(d.getMonth()+1)).slice(-2)}-${("0" + d.getDate()).slice(-2)}.png`;
+                        this.download = `Top${rank} @ ${d.getFullYear()}-${("0"+(d.getMonth()+1)).slice(-2)}-${("0" + d.getDate()).slice(-2)}-${("0" + d.getHours()).slice(-2)}.png`;
                     }, false);
                 }
 
@@ -211,15 +212,35 @@
                 // Draw top players
                 canvas = document.getElementById("graphTopPlayers");
                 ctx = canvas.getContext("2d");
-                canvas.width = drawTopPlayers();
+                canvas.width = drawTopPlayers(20);
                 width = canvas.width;
                 height = canvas.height;
                 ctx = canvas.getContext("2d");
                 clearScreen(); // Clear screen, setup
-                drawTitle(`Top Players`); // Draw title
+                drawTitle(`Global top 20 players`); // Draw title
                 drawBorder(); // Draw border
-                drawTopPlayers();
+                drawTopPlayers(20);
                 drawMisc(true);
+
+                canvas = document.getElementById("10kPlayers");
+                ctx = canvas.getContext("2d");
+                canvas.width = drawTopPlayers(players.filter((p) => p.curRanking >= 9995).length);
+                width = canvas.width;
+                height = canvas.height = (32+25*(players.filter((p) => p.curRanking >= 9995).length + 1));
+                ctx = canvas.getContext("2d");
+                clearScreen(); // Clear screen, setup
+                drawTitle(`10k players`); // Draw title
+                drawBorder(); // Draw border
+                drawTopPlayers(players.filter((p) => p.curRanking >= 9995).length);
+                drawMisc(true);
+
+                blobUtil.canvasToBlob(canvas, 'image/png').then(function (blob) {
+                    document.getElementById("download10k").href = blobUtil.createObjectURL(blob);
+                });
+                document.getElementById("download10k").addEventListener('click', function() {
+                    let d = new Date();
+                    this.download = `10k+ Players @ ${d.getFullYear()}-${("0"+(d.getMonth()+1)).slice(-2)}-${("0" + d.getDate()).slice(-2)}-${("0" + d.getHours()).slice(-2)}-${("0" + d.getHours()).slice(-2)}.png`;
+                }, false);
 
                 ranks.reverse();
 
@@ -243,7 +264,7 @@
                 });
                 document.getElementById("download").addEventListener('click', function() {
                     let d = new Date();
-                    this.download = `Graph of graphs @ ${d.getFullYear()}-${("0"+(d.getMonth()+1)).slice(-2)}-${("0" + d.getDate()).slice(-2)}.png`;
+                    this.download = `Graph of graphs @ ${d.getFullYear()}-${("0"+(d.getMonth()+1)).slice(-2)}-${("0" + d.getDate()).slice(-2)}-${("0" + d.getHours()).slice(-2)}.png`;
                 }, false);
 
                 let canvasSumTop = document.getElementById("graphSumTop");
@@ -260,7 +281,7 @@
                 });
                 document.getElementById("downloadSumTop").addEventListener('click', function() {
                     let d = new Date();
-                    this.download = `Summary and Top @ ${d.getFullYear()}-${("0"+(d.getMonth()+1)).slice(-2)}-${("0" + d.getDate()).slice(-2)}.png`;
+                    this.download = `Summary and Top @ ${d.getFullYear()}-${("0"+(d.getMonth()+1)).slice(-2)}-${("0" + d.getDate()).slice(-2)}-${("0" + d.getHours()).slice(-2)}.png`;
                 }, false);
             }
 
@@ -523,37 +544,37 @@
                 return maxx;
             }
 
-            function drawTopPlayers() {
+            function drawTopPlayers(amount) {
                 ctx.textAlign = 'left';
 
                 let longestNames = [0, 0, 0, 0, 0, 0, 0];
                 ctx.font = `800 16px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
 
-                longestNames[0] = ctx.measureText("#20").width;
+                longestNames[0] = ctx.measureText("#" + amount).width;
 
                 for(let i = 0; i < 20; i++)
                     longestNames[1] = Math.max(longestNames[1], ctx.measureText(jp_names[i]).width);
                 for(let i = 0; i < 20; i++)
                     longestNames[2] = Math.max(longestNames[2], ctx.measureText(en_names[i]).width);
-                for(let i = 0; i < 20; i++)
+                for(let i = 0; i < amount; i++)
                     longestNames[3] = Math.max(longestNames[3], ctx.measureText(players[i].name).width);
                 longestNames[4] = ctx.measureText("Points").width;
-                for(let i = 0; i < 20; i++)
+                for(let i = 0; i < amount; i++)
                     longestNames[4] = Math.max(longestNames[4], ctx.measureText(players[i].curRanking).width);
                 ctx.font = `500 8px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
 
-                for(let i = 0; i < 20; i++)
+                for(let i = 0; i < amount; i++)
                     if(players[i].senka.length > 1)
                         longestNames[5] = Math.max(longestNames[5], ctx.measureText(`(+${players[i].curRanking - players[i].senka[1].senka})`).width);
 
                 longestNames = longestNames.map((a) => Math.ceil(a))
 
                 let maxx = 3;
-                for (let i = -1; i < 20; i++){
-                    let y = Math.round(yOffset + height / 21 * (i + 1));
+                for (let i = -1; i < amount; i++){
+                    let y = Math.round(yOffset + height / (amount + 1) * (i + 1));
                     let x = 3;
                     ctx.fillRect(0, y, width, 1);
-                    let liney = y + height / 21 - 4;
+                    let liney = y + height / (amount + 1) - 4;
 
                     ctx.font = `800 16px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
 
@@ -561,7 +582,7 @@
                     ctx.textAlign = 'center';
                     ctx.fillText(index, x + longestNames[0]/2, liney);
                     x += longestNames[0] + 5;
-                    ctx.fillRect(x, y, 1, height / 21);
+                    ctx.fillRect(x, y, 1, height / (amount + 1));
                     x += 5;
 
                     let player = players[i] || { server: 0, rankno: "#", curMedal: "甲", curRanking: "Points", name: "Name", comment: "Comment"};
@@ -569,7 +590,7 @@
                     ctx.textAlign = 'left';
                     ctx.fillText(player.name, x, liney);
                     x += longestNames[3] + 5;
-                    ctx.fillRect(x, y, 1, height / 21);
+                    ctx.fillRect(x, y, 1, height / (amount + 1));
                     x += 5;
 
                     ctx.textAlign = 'center';
@@ -582,34 +603,34 @@
                         let diff = player.curRanking - player.senka[1].senka;
                         ctx.fillText(`(+${diff}) `, x, liney);
                     }
-                    ctx.fillRect(x, y, 1, height / 21);
+                    ctx.fillRect(x, y, 1, height / (amount + 1));
                     x += 5;
                     ctx.font = `800 16px "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif`;
 
                     ctx.textAlign = 'center';
                     ctx.fillText(player.rankno, x + longestNames[0] / 2, liney);
                     x += longestNames[0] + 5;
-                    ctx.fillRect(x, y, 1, height / 21);
+                    ctx.fillRect(x, y, 1, height / (amount + 1));
                     x += 5;
 
                     let serverJP = jp_names[player.server - 1] || "Server JP";
                     ctx.textAlign = 'left';
                     ctx.fillText(serverJP, x, liney);
                     x += longestNames[1] + 5;
-                    ctx.fillRect(x, y, 1, height / 21);
+                    ctx.fillRect(x, y, 1, height / (amount + 1));
                     x += 5;
                     
                     let serverEN = en_names[player.server - 1] || "Server EN";
                     ctx.textAlign = 'left';
                     ctx.fillText(serverEN, x, liney);
                     x += longestNames[2] + 5;
-                    ctx.fillRect(x, y, 1, height / 21);
+                    ctx.fillRect(x, y, 1, height / (amount + 1));
                     x += 5;
 
                     ctx.textAlign = 'center';
                     ctx.fillText(player.curMedal, x + longestNames[0] / 2, liney);
                     x += longestNames[0] + 5;
-                    ctx.fillRect(x, y, 1, height / 21);
+                    ctx.fillRect(x, y, 1, height / (amount + 1));
                     x += 5;
 
                     ctx.textAlign = 'left';
