@@ -25,7 +25,7 @@
         <br>
         /start API (ingame): <br><textarea id="start">svdata={"api_result":1,"api_result_msg":"\u6210\u529f","api_data":{"api_cell_data":[{"api_id":3012,"api_no":0,"api_color_no":0,"api_passed":0},{"api_id":3013,"api_no":1,"api_color_no":4,"api_passed":0},{"api_id":3014,"api_no":2,"api_color_no":4,"api_passed":0},{"api_id":3015,"api_no":3,"api_color_no":4,"api_passed":0},{"api_id":3016,"api_no":4,"api_color_no":2,"api_passed":0},{"api_id":3017,"api_no":5,"api_color_no":4,"api_passed":0},{"api_id":3018,"api_no":6,"api_color_no":4,"api_passed":0},{"api_id":3019,"api_no":7,"api_color_no":2,"api_passed":0},{"api_id":3020,"api_no":8,"api_color_no":3,"api_passed":0},{"api_id":3021,"api_no":9,"api_color_no":4,"api_passed":0},{"api_id":3022,"api_no":10,"api_color_no":5,"api_passed":0},{"api_id":3023,"api_no":11,"api_color_no":4,"api_passed":0},{"api_id":3024,"api_no":12,"api_color_no":4,"api_passed":0},{"api_id":3025,"api_no":13,"api_color_no":5,"api_passed":0}],"api_rashin_flg":1,"api_rashin_id":4,"api_maparea_id":1,"api_mapinfo_no":3,"api_no":3,"api_color_no":4,"api_event_id":4,"api_event_kind":1,"api_next":1,"api_bosscell_no":10,"api_bosscomp":0,"api_airsearch":{"api_plane_type":0,"api_result":0},"api_from_no":0}}
         </textarea><br>
-        <div id="startinfo"><b>API info for another map!</b><br>
+        <div id="startinfo"><b>API info for <span id='maptitle'>another map</span>!</b><br>
                     Bypass? <input onchange="update()" type="checkbox" id="bypass"><br></div>
         Map: <input type="text" id="mapid" value="5-2" onchange="update()"> 
         <!--<button name="tsunCollect" onclick="tsunDB(document.getElementById('mapid').value)">Get from TsunDB</button>--><br><br>
@@ -75,6 +75,7 @@
 
                 if(svdata && !(correctmap = (svdata.api_data.api_maparea_id == map[0] && svdata.api_data.api_mapinfo_no == map[1]))) {
                     document.getElementById("startinfo").style = "";
+                    document.getElementById("maptitle").innerHTML = svdata.api_data.api_maparea_id + "-" + svdata.api_data.api_mapinfo_no
                     bypass = document.getElementById("bypass").checked;
                 } else 
                     document.getElementById("startinfo").style = "display:none;";
@@ -261,7 +262,7 @@
               fontFamily: "Arial",
               fontSize: 36,
               fill: "#00ff00",
-              stroke: '#006600',
+              stroke: '#003300',
               strokeThickness: 3,
               dropShadow: true,
               dropShadowColor: "#001100",
@@ -415,7 +416,12 @@
                         let text = new PIXI.Text(distance, lbasStyle);
                         text.anchor.set(.5,.5);
                         app.stage.addChild(text);
-                        text.position.set(x - 25, y - 30)
+                        text.position.set(x, y - 30)
+
+                        var circle = new PIXI.Graphics();
+                        circle.beginFill(0x00ff00);
+                        circle.arc(x, y, 5, 0, 2*Math.PI);
+                        app.stage.addChild(circle);
                     }
                 if(show.guessLetters)
                     drawEnds(kc3Edges);
