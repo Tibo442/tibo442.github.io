@@ -34,7 +34,7 @@
             Show routing edges <input onchange="update()" type="checkbox" id="routeedges"><br>
             Show to edge ids <input onchange="update()" type="checkbox" id="toEdges"><br>
             Show cleared path <input onchange="update()" type="checkbox" id="cleared" checked><br>
-            Show debug lines <input onchange="update()" type="checkbox" id="debuglines"><br>
+            Show debug lines <input onchange="update()" type="checkbox" id="debuglines"><input onchange="update()" type="checkbox" id="debuglinessnap"><br>
             Guess letters <input onchange="update()" type="checkbox" id="guessLetters"><br>
             Show API info <input onchange="update()" type="checkbox" id="apiinfo"><br>
             Show LBAS range <input onchange="update()" type="checkbox" id="distance" checked><br>
@@ -67,6 +67,7 @@
                 show.toEdges = document.getElementById("toEdges").checked;
                 show.cleared = document.getElementById("cleared").checked;
                 show.debuglines = document.getElementById("debuglines").checked; 
+                show.debuglinessnap = document.getElementById("debuglinessnap").checked; 
                 show.guessLetters = document.getElementById("guessLetters").checked;
                 show.apiinfo = document.getElementById("apiinfo").checked;
                 show.distance = document.getElementById("distance").checked;
@@ -331,17 +332,49 @@
                     if(nodeInfo.line.y < 0)
                         y += nodeInfo.line.y;
 
+                    let closestFrom = undefined;
+                    for (let node of locData.spots)
+                        if(node.x != nodeInfo.x || node.y != nodeInfo.y)
+                            if (closestFrom == undefined || (node.x-x)**2 + (node.y-y)**2 < (closestFrom.x-x)**2 + (closestFrom.y-y)**2)
+                                closestFrom = node;
+
                     if(show.debuglines) {
                         let line = new PIXI.Graphics();
-                        line.lineStyle(1, 0xff0000, 1);
+                        line.lineStyle(1, 0x00ff00, .75);
+                        line.moveTo(bounds.x, bounds.y);
+                        line.lineTo(bounds.x + bounds.width, bounds.y);
+                        line.lineTo(bounds.x + bounds.width, bounds.y + bounds.height);
+                        line.lineTo(bounds.x, bounds.y + bounds.height);
+                        line.lineTo(bounds.x, bounds.y);
+                        app.stage.addChild(line);
+
+                        line = new PIXI.Graphics();
+                        line.moveTo(nodeInfo.x, nodeInfo.y);
+                        line.lineStyle(1.5, 0xff0000, 1);
+                        let endCoords = {x,y};
+                        if(show.debuglinessnap)
+                            endCoords = closestFrom;
+                        line.lineTo(endCoords.x, endCoords.y);
+                        app.stage.addChild(line);
+
+                        line = new PIXI.Graphics();
+                        let angle = Math.atan2(nodeInfo.y - endCoords.y, nodeInfo.x - endCoords.x);
+                        line.setTransform(nodeInfo.x+(endCoords.x-nodeInfo.x)/2, nodeInfo.y+(endCoords.y-nodeInfo.y)/2, 1, 1, angle);
+                        line.lineStyle(5, 0xff0000, 1);
+                        line.moveTo(0, 0);
+                        line.lineTo(-10, -10);
+                        line.moveTo(0, 0);
+                        line.lineTo(-10, +10);
+                        app.stage.addChild(line);
+
+                        line = new PIXI.Graphics();
+                        line.lineStyle(1, 0x0000ff, 1);
                         line.moveTo(nodeInfo.x, nodeInfo.y);
                         line.lineTo(nodeInfo.x+5, nodeInfo.y+5);
                         line.lineTo(nodeInfo.x-5, nodeInfo.y-5);
                         line.moveTo(nodeInfo.x, nodeInfo.y);
                         line.lineTo(nodeInfo.x-5, nodeInfo.y+5);
                         line.lineTo(nodeInfo.x+5, nodeInfo.y-5);
-                        line.lineTo(nodeInfo.x, nodeInfo.y);
-                        line.lineTo(x, y);
                         app.stage.addChild(line);
                     }
 
@@ -351,11 +384,6 @@
                         app.stage.addChild(text);
                         text.position.set(middlex, middley);
                     }
-
-                    let closestFrom = nodeInfo;
-                    for (let node of locData.spots)
-                        if ((node.x-x)**2 + (node.y-y)**2 < (closestFrom.x-x)**2 + (closestFrom.y-y)**2)
-                            closestFrom = node;
 
                     let fromId = "Node" + edges[closestFrom.x + ";" + closestFrom.y].map((e) => e.no).join("_");
                     let toId = "Node" + edges[nodeInfo.x + ";" + nodeInfo.y].map((e) => e.no).join("_");
