@@ -54,14 +54,16 @@
             var show = {}, locData, mapKey, svdata, bypass, wrongmap, canvas, bgLayer, loader, map, gaugeData;
             let SERVER = "203.104.209.71";
             let GAUGE_ROOT = `http://${SERVER}/kcs2/resources/gauge/`;
-
+ 
+            window.PIXI.utils.skipHello();
             let app = new PIXI.Application({width: 1200, height: 720, transparent: true, forceCanvas: true, preserveDrawingBuffer:true});
             document.body.appendChild(canvas = app.view);
             function update(selectedmap = document.getElementById("mapid").value) {
                 document.getElementById("mapid").value = selectedmap;
-                for (var i = app.stage.children.length - 1; i >= 0; i--) {  app.stage.removeChild(app.stage.children[i]);};
+                for (var i = app.stage.children.length - 1; i >= 0; i--) {  app.stage.removeChild(app.stage.children[i]); };
 
-                eval((document.getElementById("start").value || "") == "" ? "svdata={}" : document.getElementById("start").value);
+                let nonl = document.getElementById("start").value.replace(/\n/g,'').replace(/\r/g,'');
+                eval((nonl || "") == "" ? "svdata={}" : nonl);
                 show.background = document.getElementById("background").checked; 
                 show.routeedges = document.getElementById("routeedges").checked;
                 show.toEdges = document.getElementById("toEdges").checked;
@@ -207,7 +209,7 @@
                     case 12:
                         return 'map_common_134';
                     case -2:
-                        return 'map_common_127'
+                        return 'map_common_127';
                     }
             }
             function drawEnds(edgeData) {
@@ -278,6 +280,11 @@
               dropShadowAngle: Math.PI / 6,
               dropShadowDistance: 4,
             });
+            let secretstyle = new PIXI.TextStyle({
+              fontFamily: "Arial",
+              fontSize: 20,
+              fill: "#080",
+            });
             function drawEdgesOnGraph(callback) {
                 let edges = {};
                 for (let edge of locData.spots)
@@ -289,8 +296,14 @@
                 if(show.colors)
                     for (let edge of Object.values(edges)) {
                         let nodeInfo = edge[0];
-                        if(correctmap || bypass)
-                            nodeInfo.color = svdata.api_data.api_cell_data[nodeInfo.no].api_color_no;
+                        let nodecell = svdata.api_data.api_cell_data[nodeInfo.no];
+                        for(let i = 0; i < edge.length; i++) {
+                            if(nodecell && nodecell.tsundb_color != undefined) break;
+                            nodeInfo = edge[i];
+                            nodecell = svdata.api_data.api_cell_data[nodeInfo.no];
+                        }
+                        if((correctmap || bypass) && nodecell)
+                            nodeInfo.color = nodecell.tsundb_color == undefined ? nodecell.api_color_no : nodecell.tsundb_color;
                         if(nodeInfo.color) {
                             if(show.offsetColored && nodeInfo.offsets)
                                 nodeInfo.color = parseInt(Object.keys(nodeInfo.offsets)[0]);
@@ -446,8 +459,9 @@
                 if(show.apiinfo && (correctmap || bypass))
                     for (let edge of Object.values(edges)) {
                         let info = edge.map(function (e) {
-                            let d = svdata.api_data.api_cell_data.find((m) => m.api_no == e.no);
-                            return `${e.no}: c: ${d.api_color_no} r:${d.api_distance}`
+                            let d = svdata.api_data.api_cell_data.find((m) => m && m.api_no == e.no);
+                            if(d)
+                            return `${e.no}:${d.api_color_no==undefined?'':' c: '+d.api_color_no}${d.tsundb_color==undefined?'':' t: '+d.tsundb_color} ${d.api_distance==undefined?'':' r: '+d.api_distance}`
                         }).join(", ");
 
                         let {x, y} = edge[0]
@@ -459,20 +473,36 @@
 
                 if(show.distance && svdata && svdata.api_data && svdata.api_data.api_cell_data && (correctmap || bypass))
                     for (let edge of Object.values(edges)) {
-                        let distance = unique(edge.map((e) => svdata.api_data.api_cell_data.find((m) => m.api_no == e.no).api_distance)).join("/");
+                        let distance = unique(edge.map((e) => {
+                            let n = svdata.api_data.api_cell_data.find((m) => m && m.api_no == e.no);
+                            return n?n.api_distance:-99
+                        }).filter((d) => d>=0)).join("/");
                         let {x, y} = edge[0];
-                        let text = new PIXI.Text(distance, lbasStyle);
-                        text.anchor.set(.5,.5);
-                        app.stage.addChild(text);
-                        text.position.set(x, y - 30)
+                        if(distance.length > 0) {
+                            let text = new PIXI.Text(distance, lbasStyle);
+                            text.anchor.set(.5,.5);
+                            app.stage.addChild(text);
+                            text.position.set(x, y - 30)
 
-                        var circle = new PIXI.Graphics();
-                        circle.beginFill(0x00ff00);
-                        circle.arc(x, y, 5, 0, 2*Math.PI);
-                        app.stage.addChild(circle);
+                            var circle = new PIXI.Graphics();
+                            circle.beginFill(0x00ff00);
+                            circle.arc(x, y, 5, 0, 2*Math.PI);
+                            app.stage.addChild(circle);
+                        }
                     }
                 if(show.guessLetters)
                     drawEnds(kc3Edges);
+
+                for(let dir of [[1,0,.5,0], [0,-1,1,.5]]) {
+                    let text = new PIXI.Text("@FlatIsNice", secretstyle);
+                    text.setTransform(app.stage.width*dir[2], app.stage.height*dir[3], 1, 1, Math.atan2(-dir[1], dir[0]));
+                    text.anchor.set(.5,0);
+                    if((show.apiinfo || show.distance) && (correctmap || bypass))
+                        text.alpha = 1/128;
+                    else
+                        text.alpha = 1/255;
+                    app.stage.addChild(text);
+                }
 
                 app.render();
                 console.log(`"World ${document.getElementById("mapid").value}" : {\n${Object.keys(kc3Edges).map((k) => `      "${k}" : ["${kc3Edges[k][0]}", "${kc3Edges[k][1]}"]`).join(",\n")}\n    },`)
@@ -517,6 +547,7 @@
             }
 
             function unique(arr) {
+                if(!arr) return [];
                 return arr.reduce(function(accum, current) {
                     if (accum.indexOf(current) < 0) {
                         accum.push(current);
