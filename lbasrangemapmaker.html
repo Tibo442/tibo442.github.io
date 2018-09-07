@@ -41,11 +41,12 @@
             Show colors (of api when entered) <input onchange="update()" type="checkbox" id="colors" checked><br>
             Show color of offset tag <input onchange="update()" type="checkbox" id="offsetColored" checked><br>
             Show enemies <input onchange="update()" type="checkbox" id="enemies" checked><br>
-            Show gauge <input type="number" id="gauge" min="-1" max="20" onchange="update();" value="-1">
-            <div id="gaugeinfo"></div>
-            Show hidden routes [UNTESTED] <input type="number" id="hiddenRoutes" min="0" max="20" onchange="update();" value="0">
-            <div id="hiddenrouteinfo"></div>
+            Show routes? <input onchange="update()" type="checkbox" id="routes" checked><br>
         </div>
+        Show gauge <input type="number" id="gauge" min="-1" max="20" onchange="update();" value="-1">
+        <div id="gaugeinfo"></div>
+        Show hidden routes [UNTESTED] <input type="number" id="hiddenRoutes" min="0" max="20" onchange="update();" value="0">
+        <div id="hiddenrouteinfo"></div>
         <br>
         <button name="Update" onclick="update()">Force update</button><br><br>
         <a id="download">Download</a><br>
@@ -78,6 +79,7 @@
                 show.enemies = document.getElementById("enemies").checked; 
                 show.hiddenRoutes = parseInt(document.getElementById("hiddenRoutes").value); 
                 show.gauge = parseInt(document.getElementById("gauge").value);
+                show.routes = document.getElementById("routes").checked; 
 
                 gaugeData = undefined;
                 map = selectedmap.split("-").map((a) => parseInt(a));
@@ -141,20 +143,20 @@
                     document.getElementById("hiddenrouteinfo").innerHTML = `Found ${depth} hidden node unlocks, loading spritesheet...`;
                     loader.add(getPath(`image${locData.spots.length}.json`)).load(function() {
                         document.getElementById("hiddenrouteinfo").innerHTML = `Found ${depth} hidden node unlocks, rendering`;
-                        if(locData.bg)
+                        if(locData.bg && info.bg)
                             for(let background of info.bg)
                                 locData.bg.push(background);
-                        else locData.bg = spots.bg;
+                        else if(spots.bg) locData.bg = spots.bg;
 
-                        if(locData.spots) 
+                        if(locData.spots && info.spots) 
                             for(let spot of info.spots)
                                 info.spots.push(spot);
-                        else locData.spots = info.spots;
+                        else if(info.spots) locData.spots = info.spots;
 
                         if(locData.enemies) 
                             for(let enemy of info.enemies)
                                 locData.enemies.push(enemy);
-                        else locData.enemies = info.enemies;
+                        else if(info.enemies) locData.enemies = info.enemies;
 
                         showMap();
                         depth++;
@@ -173,6 +175,14 @@
                 for (let bg of locData.bg) {
                     let frame = PIXI.Texture.fromFrame(mapKey + bg);
                     let sprite = new PIXI.Sprite(frame);
+                    bgLayer.addChild(sprite);
+                }
+
+                if(locData.airbase) {
+                    let frame = PIXI.Texture.fromFrame("map_common_81");
+                    let sprite = new PIXI.Sprite(frame);
+                    sprite.anchor.set(.5,.5);
+                    sprite.position.set(locData.airbase.x, locData.airbase.y);
                     bgLayer.addChild(sprite);
                 }
                 drawEdgesOnGraph(callback);
@@ -210,6 +220,10 @@
                         return 'map_common_134';
                     case -2:
                         return 'map_common_127';
+
+
+                    case -99:
+                        return 'map_common_126';
                     }
             }
             function drawEnds(edgeData) {
@@ -307,9 +321,7 @@
                         if(nodeInfo.color) {
                             if(show.offsetColored && nodeInfo.offsets)
                                 nodeInfo.color = parseInt(Object.keys(nodeInfo.offsets)[0]);
-                            console.log(nodeInfo.color)
-                            let frame = PIXI.Texture.fromFrame(colorToTexture(nodeInfo.color));
-                            let sprite = new PIXI.Sprite(frame);
+                            console.log(nodeInfo.color);
                             let offsetX = 0, offsetY = 0;
                             if(nodeInfo.color == 5)
                                 offsetY = -5;
@@ -317,6 +329,17 @@
                                 offsetX = nodeInfo.offsets[nodeInfo.color].x;
                                 offsetY = nodeInfo.offsets[nodeInfo.color].y;
                             }
+
+                            if(nodeInfo.color == -99) {
+                                let frame = PIXI.Texture.fromFrame(colorToTexture(nodeInfo.color));
+                                let sprite = new PIXI.Sprite(frame);
+                                sprite.anchor.set(.5,.5)
+                                sprite.position.set(nodeInfo.x + offsetX, nodeInfo.y + offsetY);
+                                app.stage.addChild(sprite);
+                                nodeInfo.color = 1;
+                            }
+                            let frame = PIXI.Texture.fromFrame(colorToTexture(nodeInfo.color));
+                            let sprite = new PIXI.Sprite(frame);
                             sprite.anchor.set(.5,.5)
                             sprite.position.set(nodeInfo.x + offsetX, nodeInfo.y + offsetY);
                             app.stage.addChild(sprite);
@@ -326,10 +349,18 @@
                 for(let nodeInfo of locData.spots) {
                     let id = nodeInfo.no;
 
+                    if(nodeInfo.route && show.routes) {
+                        let frame = PIXI.Texture.fromFrame(mapKey + nodeInfo.route.img);
+                        let sprite = new PIXI.Sprite(frame);
+                        sprite.rotation = (nodeInfo.route.r||0) / 180 * Math.PI
+                        sprite.anchor.set(.5, .5);
+                        sprite.position.set(nodeInfo.x + nodeInfo.route.x, nodeInfo.y + nodeInfo.route.y);
+                    }
                     if(!nodeInfo.line) continue;
 
                     let frame = PIXI.Texture.fromFrame(mapKey + (nodeInfo.line.img || ("route_" + id)))
                     let sprite = new PIXI.Sprite(frame);
+                    sprite.rotation = (nodeInfo.line.r||0) / 180 * Math.PI
                     sprite.position.set(nodeInfo.x + nodeInfo.line.x, nodeInfo.y + nodeInfo.line.y);
                     if(show.cleared)
                         app.stage.addChild(sprite);
