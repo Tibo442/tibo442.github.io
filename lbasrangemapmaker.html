@@ -42,10 +42,14 @@
             Show color of offset tag <input onchange="update()" type="checkbox" id="offsetColored" checked><br>
             Show enemies <input onchange="update()" type="checkbox" id="enemies" checked><br>
             Show routes? <input onchange="update()" type="checkbox" id="routes" checked><br>
+            Mark special <input onchange="update()" type="checkbox" id="markSpecial"><br>
+            Show airraids <input onchange="update()" type="checkbox" id="airraids" checked><br>
+            Show variation map <input onchange="update()" type="checkbox" id="variation" checked><br>
         </div>
-        Show gauge <input type="number" id="gauge" min="-1" max="20" onchange="update();" value="-1">
+        Forced color <input type="number" id="forcedcolor" min="-1" max="999" onchange="update();" value="-1"><br>
+        Show gauge <input type="number" id="gauge" min="0" max="20" onchange="update();" value="0">
         <div id="gaugeinfo"></div>
-        Show hidden routes [UNTESTED] <input type="number" id="hiddenRoutes" min="0" max="20" onchange="update();" value="0">
+        Show hidden routes <input type="number" id="hiddenRoutes" min="0" max="20" onchange="update();" value="0">
         <div id="hiddenrouteinfo"></div>
         <br>
         <button name="Update" onclick="update()">Force update</button><br><br>
@@ -61,7 +65,6 @@
             document.body.appendChild(canvas = app.view);
             function update(selectedmap = document.getElementById("mapid").value) {
                 document.getElementById("mapid").value = selectedmap;
-                for (var i = app.stage.children.length - 1; i >= 0; i--) {  app.stage.removeChild(app.stage.children[i]); };
 
                 let nonl = document.getElementById("start").value.replace(/\n/g,'').replace(/\r/g,'');
                 eval((nonl || "") == "" ? "svdata={}" : nonl);
@@ -78,8 +81,12 @@
                 show.offsetColored = document.getElementById("offsetColored").checked; 
                 show.enemies = document.getElementById("enemies").checked; 
                 show.hiddenRoutes = parseInt(document.getElementById("hiddenRoutes").value); 
+                show.forcedcolor = parseInt(document.getElementById("forcedcolor").value); 
                 show.gauge = parseInt(document.getElementById("gauge").value);
                 show.routes = document.getElementById("routes").checked; 
+                show.markSpecial = document.getElementById("markSpecial").checked;
+                show.airraids = document.getElementById("airraids").checked;
+                show.variation = document.getElementById("variation").checked;
 
                 gaugeData = undefined;
                 map = selectedmap.split("-").map((a) => parseInt(a));
@@ -99,14 +106,13 @@
                 //console.log(imageUrl)
 
                 loader = new PIXI.loaders.Loader;
-                bgLayer = new PIXI.Container;
 
                 loader.add(getPath('image.json')).add(`http://${SERVER}/kcs2/img/map/map_common.json`).load(function() {
                     getJSON(getPath('info.json'), function (info) {
                         locData = info;
                         let callback = function() {
-                            if(show.gauge != -1)
-                                getJSON(GAUGE_ROOT + mapname + (show.gauge?("_"+show.gauge):"") + ".json", function (info) {
+                            if(show.gauge != 0)
+                                getJSON(GAUGE_ROOT + mapname + (show.gauge!=1?("_"+show.gauge):"") + ".json", function (info) {
                                     gaugeData = info;
                                     if(gaugeData && gaugeData.vertical && gaugeData.vertical.img) {
                                         if(!gaugeData.vertical.img_l)
@@ -122,7 +128,7 @@
                                 });
                         }
                         if(show.hiddenRoutes) {
-                            getAddingInfo(0, callback);
+                            getAddingInfo(1, callback);
                             showMap();
                         } else 
                             showMap(callback);
@@ -131,52 +137,74 @@
 
                 document.getElementById("hiddenrouteinfo").innerHTML = "";
                 document.getElementById("gaugeinfo").innerHTML = "";
-                if(show.background)
-                    app.stage.addChild(bgLayer);
             }
             function getPath(url) {
                 return `http://${SERVER}/kcs2/resources/map/${pad(map[0], 3)}/${pad(map[1], 2)}_${url}`
             }
             function getAddingInfo(depth, callback) {
-                document.getElementById("hiddenrouteinfo").innerHTML = `Searching ${depth+1} deep...`;
+                document.getElementById("hiddenrouteinfo").innerHTML = `Searching ${depth} deep...`;
                 getJSON(getPath(`info${locData.spots.length}.json`), function (info) {
-                    document.getElementById("hiddenrouteinfo").innerHTML = `Found ${depth} hidden node unlocks, loading spritesheet...`;
+                    document.getElementById("hiddenrouteinfo").innerHTML = `Found ${depth-1} hidden node unlocks, loading spritesheet...`;
                     loader.add(getPath(`image${locData.spots.length}.json`)).load(function() {
-                        document.getElementById("hiddenrouteinfo").innerHTML = `Found ${depth} hidden node unlocks, rendering`;
+                        document.getElementById("hiddenrouteinfo").innerHTML = `Found ${depth-1} hidden node unlocks, rendering`;
+                        console.log("Merging")
                         if(locData.bg && info.bg)
                             for(let background of info.bg)
                                 locData.bg.push(background);
-                        else if(spots.bg) locData.bg = spots.bg;
+                        else if(info.bg) locData.bg = info.bg;
 
                         if(locData.spots && info.spots) 
                             for(let spot of info.spots)
-                                info.spots.push(spot);
+                                locData.spots.push(spot);
                         else if(info.spots) locData.spots = info.spots;
 
-                        if(locData.enemies) 
+                        if(locData.enemies && info.enemies) 
                             for(let enemy of info.enemies)
                                 locData.enemies.push(enemy);
                         else if(info.enemies) locData.enemies = info.enemies;
 
+                        if(locData.labels && info.labels) 
+                            for(let label of info.labels)
+                                locData.labels.push(label);
+                        else if(info.labels) locData.labels = info.labels;
+
+                        if(locData.airraids && info.airraids) 
+                            for(let airraid of info.airraids)
+                                locData.airraids.push(airraid);
+                        else if(info.airraids) locData.airraids = info.airraids;
+
+                        if(info.airbase)
+                            locData.airbase = info.airbase;
+
+                        console.log("Merged, rendering")
                         showMap();
                         depth++;
-                        if(depth < show.hiddenRoutes) {
-                            document.getElementById("hiddenrouteinfo").innerHTML = `Found ${depth} hidden node unlocks, reached max depth ${show.hiddenRoutes}`;
+                        if(depth > show.hiddenRoutes) {
+                            document.getElementById("hiddenrouteinfo").innerHTML = `Found ${depth-1} hidden node unlocks, reached max depth ${show.hiddenRoutes}`;
                             if(callback) callback();
                         } else
                             getAddingInfo(depth, callback);
                     })
                 }, function (err) {
                     console.log("No more hidden routes");
-                    document.getElementById("hiddenrouteinfo").innerHTML = `Found ${depth} hidden node unlocks, no more on servers`;
+                    document.getElementById("hiddenrouteinfo").innerHTML = `Found ${depth-1} hidden node unlocks, no more on servers`;
                 })
             }
             function showMap(callback) {
-                for (let bg of locData.bg) {
-                    let frame = PIXI.Texture.fromFrame(mapKey + bg);
+                for (var i = app.stage.children.length - 1; i >= 0; i--) {  app.stage.removeChild(app.stage.children[i]); };
+                bgLayer = new PIXI.Container;
+                for (let bg in locData.bg) {
+                    console.log(locData.bg[bg], typeof locData.bg[bg])
+                    let frame;
+                    if(locData.bg[bg] == undefined || typeof locData.bg[bg] == 'string')
+                        frame = PIXI.Texture.fromFrame(mapKey + locData.bg[bg]);
+                    else if (show.variation)
+                        frame = PIXI.Texture.fromFrame(mapKey+locData.bg[bg].img);
                     let sprite = new PIXI.Sprite(frame);
                     bgLayer.addChild(sprite);
                 }
+                if(show.background)
+                    app.stage.addChild(bgLayer);
 
                 if(locData.airbase) {
                     let frame = PIXI.Texture.fromFrame("map_common_81");
@@ -192,18 +220,20 @@
             }
             function colorToTexture(colorid) {
                 // .prototype._getTexture
+                if(show.forcedcolor > 0)
+                    return 'map_common_' + show.forcedcolor;
                 switch(colorid) {
                     case -1:
-                        return 'map_common_132';
+                        return 'map_common_133';
                     case 1:
-                        return 'map_common_125';
+                        return 'map_common_126';
                     case 2:
                     case 6:
-                        return 'map_common_128';
+                        return 'map_common_129';
                     case 3:
-                        return 'map_common_130';
-                    case 4:
                         return 'map_common_131';
+                    case 4:
+                        return 'map_common_132';
                     case 5:
                         return 'map_common_120';
                     case 7:
@@ -211,20 +241,23 @@
                     case 8:
                         return 'map_common_119';
                     case 9:
-                        return 'map_common_129';
+                        return 'map_common_130';
                     case 10:
                         return 'map_common_95';
                     case 11:
-                        return 'map_common_133';
-                    case 12:
                         return 'map_common_134';
+                    case 12:
+                        return 'map_common_135';
                     case -2:
-                        return 'map_common_127';
-
+                        return 'map_common_128';
+                    case -3:
+                        return 'map_common_125';
 
                     case -99:
-                        return 'map_common_126';
-                    }
+                        return 'map_common_17';
+                    default:
+                        return colorToTexture(-1);
+                }
             }
             function drawEnds(edgeData) {
                 let highestEdge = Math.max(...locData.spots.map((n) => n.no));
@@ -274,7 +307,7 @@
               fontFamily: "Arial",
               fontSize: 36,
               fill: "white",
-              stroke: '#ff3300',
+              stroke: '#003300',
               strokeThickness: 4,
               dropShadow: true,
               dropShadowColor: "#000000",
@@ -285,7 +318,7 @@
             let lbasStyle = new PIXI.TextStyle({
               fontFamily: "Arial",
               fontSize: 36,
-              fill: "#00ff00",
+              fill: "#6f3",
               stroke: '#003300',
               strokeThickness: 3,
               dropShadow: true,
@@ -310,18 +343,25 @@
                 if(show.colors)
                     for (let edge of Object.values(edges)) {
                         let nodeInfo = edge[0];
-                        let nodecell = svdata.api_data.api_cell_data[nodeInfo.no];
-                        for(let i = 0; i < edge.length; i++) {
-                            if(nodecell && nodecell.tsundb_color != undefined) break;
-                            nodeInfo = edge[i];
-                            nodecell = svdata.api_data.api_cell_data[nodeInfo.no];
+                        if(correctmap||bypass) {
+                            let nodecell = svdata.api_data.api_cell_data[nodeInfo.no];
+                            for(let i = 0; i < edge.length; i++) {
+                                if(nodecell && nodecell.tsundb_color != undefined) break;
+                                nodeInfo = edge[i];
+                                nodecell = svdata.api_data.api_cell_data[nodeInfo.no];
+                            }
+                            if((correctmap || bypass) && nodecell && nodecell.api_color_no != 0)
+                                nodeInfo.color = nodecell.tsundb_color == undefined ? nodecell.api_color_no : nodecell.tsundb_color;
                         }
-                        if((correctmap || bypass) && nodecell)
-                            nodeInfo.color = nodecell.tsundb_color == undefined ? nodecell.api_color_no : nodecell.tsundb_color;
+                        if(show.airraids && locData.airraids) {
+                            for(let i = 0; i < edge.length; i++)
+                                if(locData.airraids.find((ar) => ar.no == edge[i].no))
+                                    nodeInfo.color = 10;
+                        }
                         if(nodeInfo.color) {
                             if(show.offsetColored && nodeInfo.offsets)
                                 nodeInfo.color = parseInt(Object.keys(nodeInfo.offsets)[0]);
-                            console.log(nodeInfo.color);
+                            console.log(nodeInfo, nodeInfo.no, nodeInfo.color);
                             let offsetX = 0, offsetY = 0;
                             if(nodeInfo.color == 5)
                                 offsetY = -5;
@@ -330,14 +370,15 @@
                                 offsetY = nodeInfo.offsets[nodeInfo.color].y;
                             }
 
-                            if(nodeInfo.color == -99) {
-                                let frame = PIXI.Texture.fromFrame(colorToTexture(nodeInfo.color));
+                            if(nodeInfo.color == -99||(nodeInfo.color == -1&&show.markSpecial)) {
+                                let frame = PIXI.Texture.fromFrame(colorToTexture(-99));
                                 let sprite = new PIXI.Sprite(frame);
                                 sprite.anchor.set(.5,.5)
                                 sprite.position.set(nodeInfo.x + offsetX, nodeInfo.y + offsetY);
                                 app.stage.addChild(sprite);
-                                nodeInfo.color = 1;
+                                nodeInfo.color = nodeInfo.color==-99?1:-1;
                             }
+                            console.log(nodeInfo.color, colorToTexture(nodeInfo.color))
                             let frame = PIXI.Texture.fromFrame(colorToTexture(nodeInfo.color));
                             let sprite = new PIXI.Sprite(frame);
                             sprite.anchor.set(.5,.5)
@@ -346,15 +387,25 @@
                         }
                     }
 
+                if(locData.labels) {
+                    for(let label of locData.labels) {
+                        let frame = PIXI.Texture.fromFrame(mapKey + label.img);
+                            let sprite = new PIXI.Sprite(frame);
+                        sprite.position.set(label.x, label.y);
+                        app.stage.addChild(sprite);
+                    }
+                }
+                let lastNode = 0;
                 for(let nodeInfo of locData.spots) {
                     let id = nodeInfo.no;
 
                     if(nodeInfo.route && show.routes) {
+                        console.log(nodeInfo.route)
                         let frame = PIXI.Texture.fromFrame(mapKey + nodeInfo.route.img);
                         let sprite = new PIXI.Sprite(frame);
                         sprite.rotation = (nodeInfo.route.r||0) / 180 * Math.PI
-                        sprite.anchor.set(.5, .5);
-                        sprite.position.set(nodeInfo.x + nodeInfo.route.x, nodeInfo.y + nodeInfo.route.y);
+                        sprite.position.set(nodeInfo.x + (nodeInfo.line.x||0), nodeInfo.y + (nodeInfo.line.y||0));
+                        app.stage.addChild(sprite);
                     }
                     if(!nodeInfo.line) continue;
 
@@ -401,6 +452,7 @@
                         line.lineTo(endCoords.x, endCoords.y);
                         app.stage.addChild(line);
 
+
                         line = new PIXI.Graphics();
                         let angle = Math.atan2(nodeInfo.y - endCoords.y, nodeInfo.x - endCoords.x);
                         line.setTransform(nodeInfo.x+(endCoords.x-nodeInfo.x)/2, nodeInfo.y+(endCoords.y-nodeInfo.y)/2, 1, 1, angle);
@@ -411,6 +463,11 @@
                         line.lineTo(-10, +10);
                         app.stage.addChild(line);
 
+                        let circle = new PIXI.Graphics();
+                        circle.beginFill(0x0000ff);
+                        circle.arc(nodeInfo.x, nodeInfo.y, 5, 0, 2*Math.PI);
+                        app.stage.addChild(circle);
+                        /*
                         line = new PIXI.Graphics();
                         line.lineStyle(1, 0x0000ff, 1);
                         line.moveTo(nodeInfo.x, nodeInfo.y);
@@ -419,7 +476,7 @@
                         line.moveTo(nodeInfo.x, nodeInfo.y);
                         line.lineTo(nodeInfo.x-5, nodeInfo.y+5);
                         line.lineTo(nodeInfo.x+5, nodeInfo.y-5);
-                        app.stage.addChild(line);
+                        app.stage.addChild(line);*/
                     }
 
                     if(show.routeedges) {
@@ -436,21 +493,21 @@
                         if(edges[closestFrom.x + ";" + closestFrom.y][0].no == 0)
                             fromId = "Start";
                         else
-                            fromId = "?ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"[edges[closestFrom.x + ";" + closestFrom.y][0].no]
+                            fromId = "?ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz"[edges[closestFrom.x + ";" + closestFrom.y][0].no]
                         if(edges[nodeInfo.x + ";" + nodeInfo.y][0].no == 0)
                             toId = "Start";
                         else
-                            toId = "?ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"[edges[nodeInfo.x + ";" + nodeInfo.y][0].no]
+                            toId = "?ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz"[edges[nodeInfo.x + ";" + nodeInfo.y][0].no]
                     }
                     kc3Edges[id] = [fromId, toId];
                 }
 
-                if(show.gauge != -1 && gaugeData) {
+                if(show.gauge != 0 && gaugeData) {
                     if(gaugeData.vertical.bar) {
                         let colorbox = new PIXI.Graphics;
                         colorbox.beginFill(gaugeData.vertical.bar.color || 16711680);
-                        let barH = gaugeData.vertical.bar.h || 253
-                        let barW = gaugeData.vertical.bar.w || 18
+                        let barH = gaugeData.vertical.bar.h || 253;
+                        let barW = gaugeData.vertical.bar.w || 18;
 
                         colorbox.drawRect(gaugeData.vertical.x + gaugeData.vertical.bar.x, gaugeData.vertical.y + gaugeData.vertical.bar.y, barW, barH);
                         colorbox.endFill()
@@ -514,11 +571,6 @@
                             text.anchor.set(.5,.5);
                             app.stage.addChild(text);
                             text.position.set(x, y - 30)
-
-                            var circle = new PIXI.Graphics();
-                            circle.beginFill(0x00ff00);
-                            circle.arc(x, y, 5, 0, 2*Math.PI);
-                            app.stage.addChild(circle);
                         }
                     }
                 if(show.guessLetters)
