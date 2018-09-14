@@ -263,7 +263,7 @@
                 let highestEdge = Math.max(...locData.spots.map((n) => n.no));
 
                 //console.log(highestEdge);
-                let wikiaCoordinates = ``, doneWikiaLetters = [];
+                let wikiaCoordinates = ``, doneWikiaLetters = {};
                 for(let id in locData.spots) {
                     let nodeInfo = getNodeInfo(id);
                     let {x,y} = nodeInfo;
@@ -276,10 +276,11 @@
                     text.anchor.set(.5,.5)
                     app.stage.addChild(text);
                     text.position.set(x + 30,y - 30);
-                    if(doneWikiaLetters.indexOf(msg) >= 0) continue;
-                    doneWikiaLetters.push(msg);
+                    if(doneWikiaLetters[msg]) continue;
+                    doneWikiaLetters[msg] = {x, y};
                     wikiaCoordinates += `{{Map/ImageNode|${msg}|x=${Math.round(x*700/1200)}|y=${Math.round(y*700/1200)}}}\n`
                 }
+                console.log(JSON.stringify(doneWikiaLetters))
                 console.log(wikiaCoordinates)
             }
             kc3Edges = {};
