@@ -198,12 +198,12 @@
                 loader.add([
                         getPath('sally_strategymap.json'),
                         getPath('sally_strategymap_s.json'),
-                       'https://i.imgur.com/wU3MZmG.png',
-                       'https://i.imgur.com/QXkeLzo.png',
-                       'https://i.imgur.com/WxF5fiw.png',
-                       'https://i.imgur.com/ESZl1ar.png',
-                       'https://i.imgur.com/eUMcFQV.png',
-                       'https://i.imgur.com/s2hHrKl.png'
+                       'https://i.imgur.com/wU3MZmG.png', // Unkown ship lock
+                       'https://i.imgur.com/QXkeLzo.png', // !
+                       'https://i.imgur.com/WxF5fiw.png', // flag
+                       'https://i.imgur.com/ESZl1ar.png', // empty
+                       'https://i.imgur.com/eUMcFQV.png', // map
+                       'https://i.imgur.com/s2hHrKl.png'  // title
                     ]).load(function() {
                     for(let i = 1; _getBGTexture(map*10+i) != PIXI.Texture.EMPTY; i++)
                         showMap(map*10+i);
