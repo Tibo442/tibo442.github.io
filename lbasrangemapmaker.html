@@ -34,7 +34,7 @@
             Show routing edges <input onchange="update()" type="checkbox" id="routeedges"><br>
             Show to edge ids <input onchange="update()" type="checkbox" id="toEdges"><br>
             Show cleared path <input onchange="update()" type="checkbox" id="cleared" checked><br>
-            Show debug lines <input onchange="update()" type="checkbox" id="debuglines"><input onchange="update()" type="checkbox" id="debuglinessnap"><br>
+            Show debug lines <input onchange="update()" type="checkbox" id="debuglines"><input onchange="update()" type="checkbox" id="debuglinessnap"><input onchange="update()" type="checkbox" id="airraidlines"><br>
             Guess letters <input onchange="update()" type="checkbox" id="guessLetters"><br>
             Show API info <input onchange="update()" type="checkbox" id="apiinfo"><br>
             Show LBAS range <input onchange="update()" type="checkbox" id="distance" checked><br>
@@ -72,7 +72,8 @@
                 show.routeedges = document.getElementById("routeedges").checked;
                 show.toEdges = document.getElementById("toEdges").checked;
                 show.cleared = document.getElementById("cleared").checked;
-                show.debuglines = document.getElementById("debuglines").checked; 
+                show.debuglines = document.getElementById("debuglines").checked;
+                show.airraidlines = document.getElementById("airraidlines").checked;  
                 show.debuglinessnap = document.getElementById("debuglinessnap").checked; 
                 show.guessLetters = document.getElementById("guessLetters").checked;
                 show.apiinfo = document.getElementById("apiinfo").checked;
@@ -193,7 +194,9 @@
             function showMap(callback) {
                 for (var i = app.stage.children.length - 1; i >= 0; i--) {  app.stage.removeChild(app.stage.children[i]); };
                 bgLayer = new PIXI.Container;
+                let ind = 0;
                 for (let bg in locData.bg) {
+                    //if(ind++ > 1) continue;
                     console.log(locData.bg[bg], typeof locData.bg[bg])
                     let frame;
                     if(locData.bg[bg] == undefined || typeof locData.bg[bg] == 'string')
@@ -355,9 +358,19 @@
                                 nodeInfo.color = nodecell.tsundb_color == undefined ? nodecell.api_color_no : nodecell.tsundb_color;
                         }
                         if(show.airraids && locData.airraids) {
+                            let airraid;
                             for(let i = 0; i < edge.length; i++)
-                                if(locData.airraids.find((ar) => ar.no == edge[i].no))
+                                if(airraid = locData.airraids.find((ar) => ar.no == edge[i].no)) {
                                     nodeInfo.color = 10;
+
+                                    if(show.airraidlines) {
+                                        let line = new PIXI.Graphics();
+                                        line.lineStyle(1.5, 0xffff00, .75);
+                                        line.moveTo(airraid.from.x, airraid.from.y);
+                                        line.lineTo(airraid.to.x, airraid.to.y);
+                                        app.stage.addChild(line);
+                                    }
+                                }
                         }
                         if(nodeInfo.color) {
                             if(show.offsetColored && nodeInfo.offsets)
@@ -530,8 +543,20 @@
                     for(let enemy of locData.enemies) {
                         let frame = PIXI.Texture.fromFrame(mapKey + enemy.img)
                         let sprite = new PIXI.Sprite(frame);
+                        sprite.alpha = .8;
                         sprite.position.set(enemy.x, enemy.y);
                         app.stage.addChild(sprite);
+
+                        if(show.airraidlines) {
+                            let nodeInfo = locData.spots.find((n) => n.no == enemy.no);
+                            if(nodeInfo) {
+                                let line = new PIXI.Graphics();
+                                line.lineStyle(2, 0xff00ff, 1);
+                                line.moveTo(enemy.x + sprite.getBounds().width / 2, enemy.y + sprite.getBounds().height / 2);
+                                line.lineTo(nodeInfo.x, nodeInfo.y);
+                                app.stage.addChild(line);
+                            }
+                        }
                     }
                 }
 
