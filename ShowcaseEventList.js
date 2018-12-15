@@ -2,6 +2,99 @@
     "use strict";
 
     const eventConfigDefs = {
+        // End of Year 2018 map
+        "2018winter2-nishi": {
+            baseImgSrc: "/assets/img/ui/winter18-nishisonic.png",
+            exportFileName: "endofyear18-nishisonic",
+            disclaimerHeightOffset: null,
+            fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+            lvlFontSize: 55,
+            maxBoxWidth: 330,
+            shipPositions: [
+                // Battle of Villa-Stanmore
+                {"x": 241+332*0, "y": 249+179* 0, "id":  44}, // Murasame
+
+                // Battle of Kula Gulf
+                {"x": 241+332*0, "y": 500+179* 0, "id":  28}, // Satsuki
+                {"x": 241+332*1, "y": 500+179* 0, "id":   6}, // Nagatsuki
+                {"x": 241+332*2, "y": 500+179* 0, "id":   7}, // Mikazuki
+                {"x": 241+332*3, "y": 500+179* 0, "id":  31}, // Mochizuki
+                {"x": 241+332*4, "y": 500+179* 0, "id":  32}, // Hatsuyuki
+
+                {"x": 241+332*0, "y": 500+179* 1, "id": 479}, // Amagiri
+                {"x": 241+332*1, "y": 500+179* 1, "id":  47}, // Suzukaze
+                {"x": 241+332*2, "y": 500+179* 1, "id": 170}, // Hamakaze
+                {"x": 241+332*3, "y": 500+179* 1, "id": 169}, // Tanikaze
+
+                // Battle of Kolombangara
+                {"x": 241+332*0, "y": 927+179* 0, "id":  55}, // Jintsuu
+                {"x": 241+332*1, "y": 927+179* 0, "id": 474}, // Matsukaze
+                {"x": 241+332*2, "y": 927+179* 0, "id":  28}, // Satsuki
+                {"x": 241+332*3, "y": 927+179* 0, "id": 481}, // Minazuki
+                {"x": 241+332*4, "y": 927+179* 0, "id":   7}, // Mikazuki
+                
+                {"x": 241+332*0, "y": 927+179* 1, "id":  20}, // Yukikaze
+                {"x": 241+332*1, "y": 927+179* 1, "id": 170}, // Hamakaze
+
+                // Sinking of Nisshin: 3rd Fleet
+                {"x": 241+332*0, "y":1384+179* 0, "id": 110}, // Shoukaku
+                {"x": 241+332*1, "y":1384+179* 0, "id": 111}, // Zuikaku
+                {"x": 241+332*2, "y":1384+179* 0, "id": 116}, // Zuihou
+                {"x": 241+332*3, "y":1384+179* 0, "id":  70}, // Mogami
+                {"x": 241+332*4, "y":1384+179* 0, "id":  71}, // Tone
+                
+                {"x": 241+332*0, "y":1384+179* 1, "id":  72}, // Chikuma
+                {"x": 241+332*1, "y":1384+179* 1, "id": 137}, // Agano
+                {"x": 241+332*2, "y":1384+179* 1, "id": 183}, // Ooyodo
+                {"x": 241+332*3, "y":1384+179* 1, "id": 532}, // Suzutsuki
+                {"x": 241+332*4, "y":1384+179* 1, "id": 423}, // Hatsuzuki
+
+                // Sinking of Nisshin: B unit
+                {"x": 241+332*0, "y":1960+179* 0, "id": 454}, // Arashi
+                {"x": 241+332*1, "y":1960+179* 0, "id": 455}, // Hagikaze
+                {"x": 241+332*2, "y":1960+179* 0, "id": 167}, // Isokaze
+                
+                // Battle of Vella Gulf
+                {"x": 241+332*0, "y":2202+179* 0, "id":  54}, // Sendai
+                {"x": 241+332*1, "y":2202+179* 0, "id":  43}, // Shigure
+                {"x": 241+332*2, "y":2202+179* 0, "id": 459}, // Kawakaze
+                {"x": 241+332*3, "y":2202+179* 0, "id": 454}, // Arashi
+                {"x": 241+332*4, "y":2202+179* 0, "id": 455}, // Hagikaze
+
+                // First Battle of Vella Lavella
+                {"x": 241+332*0, "y":2444+179* 0, "id":  94}, // Sazanami
+                {"x": 241+332*1, "y":2444+179* 0, "id":  43}, // Shigure
+                {"x": 241+332*2, "y":2444+179* 0, "id": 167}, // Isokaze
+                {"x": 241+332*3, "y":2444+179* 0, "id": 170}, // Hamakaze
+
+                // Second Battle of Vella Lavella
+                {"x": 241+332*0, "y":2694+179* 0, "id": 474}, // Matsukaze
+                {"x": 241+332*1, "y":2694+179* 0, "id":  29}, // Fumizuki
+                {"x": 241+332*2, "y":2694+179* 0, "id":  46}, // Samidare
+                {"x": 241+332*3, "y":2694+179* 0, "id":  43}, // Shigure
+                {"x": 241+332*4, "y":2694+179* 0, "id": 167}, // Isokaze
+                
+                {"x": 241+332*0, "y":2694+179* 1, "id": 132}, // Akigumo
+                {"x": 241+332*1, "y":2694+179* 1, "id": 133}, // Yuugumo
+                {"x": 241+332*2, "y":2694+179* 1, "id": 453}, // Kazagumo
+
+                // Battle of Bougainville Island
+                {"x": 241+332*0, "y":3123+179* 0, "id":  62}, // Myoukou
+                {"x": 241+332*1, "y":3123+179* 0, "id":  65}, // Haguro
+                {"x": 241+332*2, "y":3123+179* 0, "id":  54}, // Sendai
+                {"x": 241+332*3, "y":3123+179* 0, "id": 137}, // Agano
+                {"x": 241+332*4, "y":3123+179* 0, "id": 165}, // Uzuki
+                
+                {"x": 241+332*0, "y":3123+179* 1, "id":  29}, // Fumizuki
+                {"x": 241+332*1, "y":3123+179* 1, "id": 479}, // Amagiri
+                {"x": 241+332*2, "y":3123+179* 1, "id":  42}, // Shiratsuyu
+                {"x": 241+332*3, "y":3123+179* 1, "id":  43}, // Shigure
+                {"x": 241+332*4, "y":3123+179* 1, "id":  46}, // Samidare
+                
+                {"x": 241+332*0, "y":3123+179* 2, "id": 190}, // Hatsukaze
+                {"x": 241+332*1, "y":3123+179* 2, "id": 135}, // Naganami
+            ],
+        },
         // Summer 18 event map
         "nicohatealpha": {
             baseImgSrc: "/assets/img/ui/summer18-nicohatealpha.png",
