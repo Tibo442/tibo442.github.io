@@ -94,10 +94,17 @@
                 ctx.shadowColor = "#fff";
                 ctx.strokeStyle = "#fff";
                 ctx.shadowBlur = 2;
+                let heightOff = 3;
                 switch(selected) {
+                    case '2018winter2-nishi': 
+                        ctx.font = `600 20px "Helvetica Neue", Helvetica, Arial, sans-serif`;
+                        ctx.lineWidth = 2;
+                        heightOff = 5;
+                        break;
                     case 'nicohatealpha': 
                         ctx.font = `400 20px "Helvetica Neue", Helvetica, Arial, sans-serif`;
                         ctx.lineWidth = 2;
+                        heightOff = 4;
                         break;
                     default:
                         ctx.font = `400 10px "Helvetica Neue", Helvetica, Arial, sans-serif`;
@@ -105,8 +112,8 @@
                         break;
                 }
 
-                ctx.strokeText(text, (canvas.width - ctx.measureText(text).width) / 2, canvas.height - 3);
-                ctx.fillText(text, (canvas.width - ctx.measureText(text).width) / 2, canvas.height - 3);
+                ctx.strokeText(text, (canvas.width - ctx.measureText(text).width) / 2, canvas.height - heightOff);
+                ctx.fillText(text, (canvas.width - ctx.measureText(text).width) / 2, canvas.height - heightOff);
 
                 blobUtil.canvasToBlob(canvas, 'image/png').then(function (blob) {
                     document.getElementById("download").href = blobUtil.createObjectURL(blob);
