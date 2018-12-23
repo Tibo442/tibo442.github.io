@@ -3,6 +3,69 @@
 
     const eventConfigDefs = {
         // End of Year 2018 map
+        "2018winter2-nicohatealpha": {
+            baseImgSrc: "/assets/img/ui/winter18-nicohatealpha.png",
+            exportFileName: "endofyear18-nicohatealpha",
+            disclaimerHeightOffset: null,
+            fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+            lvlFontSize: 35,
+            maxBoxWidth: 200,
+            shipPositions: [
+                {"x": 118+283*0, "y": 444+97* 0, "id": 137}, // Agano
+                {"x": 118+283*1, "y": 444+97* 0, "id": 132}, // Akigumo
+                {"x": 118+283*2, "y": 444+97* 0, "id": 413}, // Asagumo
+                {"x": 118+283*3, "y": 444+97* 0, "id":  95}, // Asashio
+
+                {"x": 118+283*0, "y": 444+97* 1, "id": 479}, // Amagiri
+                {"x": 118+283*1, "y": 444+97* 1, "id": 454}, // Arashi
+                {"x": 118+283*2, "y": 444+97* 1, "id":  98}, // Arashio
+                {"x": 118+283*3, "y": 444+97* 1, "id": 167}, // Isokaze
+
+                {"x": 118+283*0, "y": 444+97* 2, "id": 165}, // Uzuki
+                {"x": 118+283*1, "y": 444+97* 2, "id": 453}, // Kazagumo
+                {"x": 118+283*2, "y": 444+97* 2, "id": 459}, // Kawakaze
+                {"x": 118+283*3, "y": 444+97* 2, "id":  94}, // Sazanami
+                
+                {"x": 118+283*0, "y": 444+97* 3, "id":  28}, // Satsuki
+                {"x": 118+283*1, "y": 444+97* 3, "id":  46}, // Samidare
+                {"x": 118+283*2, "y": 444+97* 3, "id":  14}, // Shikinami
+                {"x": 118+283*3, "y": 444+97* 3, "id":  43}, // Shigure
+                
+                {"x": 118+283*0, "y": 444+97* 4, "id":  92}, // Junyou
+                {"x": 118+283*1, "y": 444+97* 4, "id":  42}, // Shiratsuyu
+                {"x": 118+283*2, "y": 444+97* 4, "id":  10}, // Shirayuki
+                {"x": 118+283*3, "y": 444+97* 4, "id": 111}, // Zuikaku
+
+                {"x": 118+283*0, "y": 444+97* 5, "id": 116}, // Zuihou
+                {"x": 118+283*1, "y": 444+97* 5, "id":  54}, // Sendai
+                {"x": 118+283*2, "y": 444+97* 5, "id": 186}, // Tokitsukaze
+                {"x": 118+283*3, "y": 444+97* 5, "id":   6}, // Nagatsuki
+
+                {"x": 118+283*0, "y": 444+97* 6, "id": 135}, // Naganami
+                {"x": 118+283*1, "y": 444+97* 6, "id":  21}, // Nagara
+                {"x": 118+283*2, "y": 444+97* 6, "id": 455}, // Hagikaze
+                {"x": 118+283*3, "y": 444+97* 6, "id":  65}, // Haguro
+
+                {"x": 118+283*0, "y": 444+97* 7, "id": 190}, // Hatsukaze
+                {"x": 118+283*1, "y": 444+97* 7, "id":  32}, // Hatsuyuki
+                {"x": 118+283*2, "y": 444+97* 7, "id": 170}, // Hamakaze
+                {"x": 118+283*3, "y": 444+97* 7, "id":  75}, // Hiyou
+
+                {"x": 118+283*0, "y": 444+97* 8, "id":  29}, // Fumizuki
+                {"x": 118+283*1, "y": 444+97* 8, "id": 474}, // Matsukaze
+                {"x": 118+283*2, "y": 444+97* 8, "id":   7}, // Mikazuki
+                {"x": 118+283*3, "y": 444+97* 8, "id": 481}, // Minazuki
+
+                {"x": 118+283*0, "y": 444+97* 9, "id":  62}, // Myoukou
+                {"x": 118+283*1, "y": 444+97* 9, "id":  44}, // Murasame
+                {"x": 118+283*2, "y": 444+97* 9, "id":  31}, // Mochizuki
+                {"x": 118+283*3, "y": 444+97* 9, "id": 133}, // Yuugumo
+
+                {"x": 118+283*0, "y": 444+97*10, "id":  20}, // Yukikaze
+
+            ],
+        },
+        // End of Year 2018 map
         "2018winter2-nishi": {
             baseImgSrc: "/assets/img/ui/winter18-nishisonic.png",
             exportFileName: "endofyear18-nishisonic",

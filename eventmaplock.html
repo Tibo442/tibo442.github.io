@@ -78,6 +78,10 @@
                         };
                         421 == t ? i(o.SALLY_STRATEGYMAP.getTexture(19), 111, 95) : 422 == t ? i(o.SALLY_STRATEGYMAP.getTexture(20), 147, 132) : 423 == t ? i(o.SALLY_STRATEGYMAP.getTexture(21), 207, 47) : 424 == t ? i(r.SALLY_STRATEGYMAP_S.getTexture(16), 179, 166) : 425 == t && (i(r.SALLY_STRATEGYMAP_S.getTexture(17), 109, 196), i(r.SALLY_STRATEGYMAP_S.getTexture(18), 169, 32))
                     },
+                    e.prototype._createMiniTextAnimation = function(t) {
+                        this._cleanMiniText(),
+                        423 != t && 424 != t && 425 != t || this._createLabel(192, 281, o.SALLY_STRATEGYMAP.getTexture(35), o.SALLY_STRATEGYMAP.getTexture(36))
+                    },
 
 </textarea><br>
         Map: <input type="text" id="mapid" value="42" onchange="update()"> <br>
@@ -90,7 +94,7 @@
             let SERVER = "203.104.209.71";
  
             window.PIXI.utils.skipHello();
-            let app = new PIXI.Application({width: 280, height: 300, transparent: true, forceCanvas: true, preserveDrawingBuffer:true});
+            let app = new PIXI.Application({width: 280, height: 338, transparent: true, forceCanvas: true, preserveDrawingBuffer:true});
             document.body.appendChild(canvas = app.view);
             
             let xOff = 0, yOff = 0, drawPhase = "";
@@ -109,6 +113,8 @@
                     case 'arrow':
                     case 'label':
                         return 'https://i.imgur.com/ESZl1ar.png';
+                    case 'minitext':
+                        return 'https://i.imgur.com/GJrSTKS.png'
                     case 'map':
                         return 'https://i.imgur.com/eUMcFQV.png';
                     default:
@@ -119,6 +125,7 @@
                 let frame = PIXI.Texture.fromFrame(id);
                 let sprite = new PIXI.Sprite(frame);
                 sprite.position.set(x+xOff, y+yOff);
+                sprite.alpha = 63/64
                 bgLayer.addChild(sprite);
             };
             let _cleanArrow = () => 0;
@@ -148,6 +155,7 @@
                 sprite.position.set(x+xOff, y+yOff);
                 labelLayer.addChild(sprite);
             };
+            let _cleanMiniText = () => 0;
             let i = (id, x,y) => {
                 let frame = PIXI.Texture.fromFrame(id);
                 let sprite = new PIXI.Sprite(frame);
@@ -179,7 +187,7 @@
                         currentCode = '\n';
                     } else if(line.indexOf('prototype') > 0) {
                         console.log("pt", line);
-                        for(let posType of ['_getBGTexture', '_getTitleTexture', '_createAreaAnimation', '_createArrowAnimation', '_createLabelAnimation', '_createPlate'])
+                        for(let posType of ['_getBGTexture', '_getTitleTexture', '_createAreaAnimation', '_createArrowAnimation', '_createLabelAnimation', '_createPlate', '_createMiniTextAnimation'])
                             if(line.indexOf(posType) > 0)
                                 type = posType;
 
@@ -203,7 +211,8 @@
                        'https://i.imgur.com/WxF5fiw.png', // flag
                        'https://i.imgur.com/ESZl1ar.png', // empty
                        'https://i.imgur.com/eUMcFQV.png', // map
-                       'https://i.imgur.com/s2hHrKl.png'  // title
+                       'https://i.imgur.com/s2hHrKl.png', // title
+                       'https://i.imgur.com/GJrSTKS.png'  // minitext
                     ]).load(function() {
                     for(let i = 1; _getBGTexture(map*10+i) != PIXI.Texture.EMPTY; i++)
                         showMap(map*10+i);
@@ -215,8 +224,9 @@
             function showMap(map) {            
                 console.log("Show map")
                 console.log(map, _getBGTexture(map))
-                xOff = 8+(map%10-1)*295;
-                app.view.width = (map%10)*295;
+                xOff = 8+(map%10-1)*300;
+                yOff = 8;
+                app.view.width = (map%10)*300;
                 drawPhase = 'map';
                 _createBG(0,0,_getBGTexture(map));
                 drawPhase = 'arrow';
@@ -225,25 +235,33 @@
                 _createAreaAnimation(map);
                 drawPhase = 'label';
                 _createLabelAnimation(map);
-                drawPhase = 'title';
-                _createTitle(0,280,_getTitleTexture(map));
+                drawPhase = 'miniText';
+                _createMiniTextAnimation(map);
                 drawPhase = 'plate';
                 _createPlate(map);
+                drawPhase = 'title';
+                _createTitle(0,305,_getTitleTexture(map));
 
-                for(let dir of [[1,0,.5,0], [0,-1,1,.5]]) {
+                for(let dir of [[1,0,.5,0], [0,-1,1,.5], [1,0,1,.5], [0,1,.5,0]]) {
                     let text = new PIXI.Text("@FlatIsNice", secretstyle);
-                    text.setTransform(app.stage.width*dir[2], app.stage.height*dir[3], 1, 1, Math.atan2(-dir[1], dir[0]));
+                    text.setTransform(xOff + app.stage.width*dir[2], app.stage.height*dir[3], 1, 1, Math.atan2(-dir[1], dir[0]));
                     text.anchor.set(.5,0);
-                    text.alpha = 1/128;
+                    text.alpha = 1/64;
                     app.stage.addChild(text);
                 }
+                
+                let text = new PIXI.Text("@FlatIsNice", secretstyle);
+                text.x = xOff + 30;
+                text.y = 290;
+                text.alpha = 1/32;
+                app.stage.addChild(text);
 
                 app.render();
             }
             let secretstyle = new PIXI.TextStyle({
               fontFamily: "Arial",
               fontSize: 20,
-              fill: "#080",
+              fill: "#393",
             });
 
             update();
