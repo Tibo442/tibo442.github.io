@@ -210,7 +210,7 @@
                     app.stage.addChild(bgLayer);
 
                 if(locData.airbase) {
-                    let frame = PIXI.Texture.fromFrame("map_common_81");
+                    let frame = PIXI.Texture.fromFrame("map_common_82");
                     let sprite = new PIXI.Sprite(frame);
                     sprite.anchor.set(.5,.5);
                     sprite.position.set(locData.airbase.x, locData.airbase.y);
@@ -228,34 +228,36 @@
                     return 'map_common_' + show.forcedcolor;
                 switch(colorid) {
                     case -1:
-                        return 'map_common_145';
+                        return 'map_common_149';
                     case 1:
-                        return 'map_common_138';
+                        return 'map_common_142';
                     case 2:
                     case 6:
-                        return 'map_common_141';
+                        return 'map_common_145';
                     case 3:
-                        return 'map_common_143';
-                    case 4:
-                        return 'map_common_144';
-                    case 5:
-                        return 'map_common_132';
-                    case 7:
-                        return 'map_common_100';
-                    case 8:
-                        return 'map_common_131';
-                    case 9:
-                        return 'map_common_142';
-                    case 10:
-                        return 'map_common_95';
-                    case 11:
-                        return 'map_common_146';
-                    case 12:
                         return 'map_common_147';
+                    case 4:
+                        return 'map_common_148';
+                    case 5:
+                        return 'map_common_136';
+                    case 7:
+                        return 'map_common_101';
+                    case 8:
+                        return 'map_common_135';
+                    case 9:
+                        return 'map_common_146';
+                    case 10:
+                        return 'map_common_96';
+                    case 11:
+                        return 'map_common_150';
+                    case 12:
+                        return 'map_common_151';
+                    case 13:
+                        return 'map_common_81';
                     case -2:
-                        return 'map_common_140';
+                        return 'map_common_144';
                     case -3:
-                        return 'map_common_137';
+                        return 'map_common_141';
 
                     case -99:
                         return 'map_common_17';
@@ -272,14 +274,15 @@
                     let nodeInfo = getNodeInfo(id);
                     let {x,y} = nodeInfo;
 
-                    let msg = "Start";
-                    if(edgeData[id])
-                        msg = edgeData[id][1];
+                    if (!edgeData[id]) continue;
+
+                    let msg = edgeData[id][1];
                     console.log(id, x, y,msg)
                     let text = new PIXI.Text(msg, bigStyle)
                     text.anchor.set(.5,.5)
                     app.stage.addChild(text);
-                    text.position.set(x + 30,y - 30);
+                    text.position.set(x + 30, y - 30);
+                    
                     if(doneWikiaLetters[msg]) continue;
                     doneWikiaLetters[msg] = {x, y};
                     wikiaCoordinates += `{{Map/ImageNode|${msg}|x=${Math.round(x*700/1200)}|y=${Math.round(y*700/1200)}}}\n`
@@ -410,7 +413,7 @@
                         app.stage.addChild(sprite);
                     }
                 }
-                let lastNode = 0;
+
                 for(let nodeInfo of locData.spots) {
                     let id = nodeInfo.no;
 
@@ -504,16 +507,6 @@
                     let fromId = "Node" + edges[closestFrom.x + ";" + closestFrom.y].map((e) => e.no).join("_");
                     let toId = "Node" + edges[nodeInfo.x + ";" + nodeInfo.y].map((e) => e.no).join("_");
 
-                    if(show.guessLetters) {
-                        if(edges[closestFrom.x + ";" + closestFrom.y][0].no == 0)
-                            fromId = "Start";
-                        else
-                            fromId = "?ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz"[edges[closestFrom.x + ";" + closestFrom.y][0].no]
-                        if(edges[nodeInfo.x + ";" + nodeInfo.y][0].no == 0)
-                            toId = "Start";
-                        else
-                            toId = "?ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz"[edges[nodeInfo.x + ";" + nodeInfo.y][0].no]
-                    }
                     kc3Edges[id] = [fromId, toId];
                 }
 
@@ -600,8 +593,53 @@
                             text.position.set(x, y - 30)
                         }
                     }
-                if(show.guessLetters)
+
+                if(show.guessLetters) {
+                    let nodeCount = 0;
+                    let startCount = 0;
+                    let nodeNames = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+                    let replaceLetter = (toReplace, nodeLetter) => {
+                        for(let edge of Object.values(kc3Edges)) {
+                            if (edge[0] == toReplace)
+                                edge[0] = nodeLetter;
+                            if (edge[1] == toReplace)
+                                edge[1] = nodeLetter;
+                        }
+                    }
+
+                    for(let nodeInfo of locData.spots) {
+                        let id = nodeInfo.no;
+                        if(!nodeInfo.line) {
+                            // Replace starting points
+                            replaceLetter(`Node${id}`, (startCount++) ? `Start ${startCount}` : "Start");
+                            continue;
+                        }
+
+                        if(kc3Edges[id][1].indexOf("Node") == 0 && nodeCount < nodeNames.length) {
+                            let toReplace = kc3Edges[id][1];
+
+                            // Guess from ordering
+                            let nodeLetter = nodeNames[nodeCount++];
+
+                            // Extract from labels
+                            if(locData.labels) {
+                                let closest = 35 * 35;
+                                for(let label of locData.labels) {
+                                    let dist = (label.x - nodeInfo.x) ** 2 + (label.y - 20 - nodeInfo.y) ** 2;
+                                    if (label.img.indexOf("text_") > 0 && dist < closest) {
+                                        nodeLetter = label.img.split("text_")[1];
+                                        // console.log(dist, nodeLetter, label.y - nodeInfo.y, label.x - nodeInfo.x)
+                                        closest = dist;
+                                    }
+                                }
+                            }
+
+                            // Replace the shit
+                            replaceLetter(toReplace, nodeLetter);
+                        }
+                    }
                     drawEnds(kc3Edges);
+                }
 
                 for(let dir of [[1,0,.5,0], [0,-1,1,.5]]) {
                     let text = new PIXI.Text("@FlatIsNice", secretstyle);
