@@ -27,24 +27,23 @@
         </textarea><br>
         <div id="startinfo"><b>API info for <span id='maptitle'>another map</span>!</b><br>
                     Bypass? <input onchange="update()" type="checkbox" id="bypass"><br></div>
-        Map: <input type="text" id="mapid" value="5-2" onchange="update()"> 
+        Map: <input type="text" id="mapid" value="5-2" onchange="update()">
         <!--<button name="tsunCollect" onclick="tsunDB(document.getElementById('mapid').value)">Get from TsunDB</button>--><br><br>
         <div id='options' style='column-width:300px'>
             Show background <input onchange="update()" type="checkbox" id="background" checked><br>
             Show routing edges <input onchange="update()" type="checkbox" id="routeedges"><br>
             Show to edge ids <input onchange="update()" type="checkbox" id="toEdges"><br>
             Show cleared path <input onchange="update()" type="checkbox" id="cleared" checked><br>
-            Show debug lines <input onchange="update()" type="checkbox" id="debuglines"><input onchange="update()" type="checkbox" id="debuglinessnap"><input onchange="update()" type="checkbox" id="airraidlines"><br>
+            Show debug <input onchange="update()" type="checkbox" id="debuglines"><input onchange="update()" type="checkbox" id="debuglinessnap"><input onchange="update()" type="checkbox" id="airraidlines"><input onchange="update()" type="checkbox" id="apiinfo"><br>
             Guess letters <input onchange="update()" type="checkbox" id="guessLetters"><br>
-            Show API info <input onchange="update()" type="checkbox" id="apiinfo"><br>
             Show LBAS range <input onchange="update()" type="checkbox" id="distance" checked><br>
             Show colors (of api when entered) <input onchange="update()" type="checkbox" id="colors" checked><br>
             Show color of offset tag <input onchange="update()" type="checkbox" id="offsetColored" checked><br>
             Show enemies <input onchange="update()" type="checkbox" id="enemies" checked><br>
             Show routes? <input onchange="update()" type="checkbox" id="routes" checked><br>
-            Mark special <input onchange="update()" type="checkbox" id="markSpecial"><br>
             Show airraids <input onchange="update()" type="checkbox" id="airraids" checked><br>
             Show variation map <input onchange="update()" type="checkbox" id="variation" checked><br>
+            Minimalistic mode <input onchange="update()" type="checkbox" id="minimalistic"><br>
         </div>
         Forced color <input type="number" id="forcedcolor" min="-1" max="999" onchange="update();" value="-1"><br>
         Show gauge <input type="number" id="gauge" min="0" max="20" onchange="update();" value="0">
@@ -59,7 +58,7 @@
             var show = {}, locData, mapKey, svdata, bypass, wrongmap, canvas, bgLayer, loader, map, gaugeData;
             let SERVER = "203.104.209.71";
             let GAUGE_ROOT = `http://${SERVER}/kcs2/resources/gauge/`;
- 
+
             window.PIXI.utils.skipHello();
             let app = new PIXI.Application({width: 1200, height: 720, transparent: true, forceCanvas: true, preserveDrawingBuffer:true});
             document.body.appendChild(canvas = app.view);
@@ -68,26 +67,37 @@
 
                 let nonl = document.getElementById("start").value.replace(/\n/g,'').replace(/\r/g,'');
                 eval((nonl || "") == "" ? "svdata={}" : nonl);
-                show.background = document.getElementById("background").checked; 
+                show.background = document.getElementById("background").checked;
                 show.routeedges = document.getElementById("routeedges").checked;
                 show.toEdges = document.getElementById("toEdges").checked;
                 show.cleared = document.getElementById("cleared").checked;
                 show.debuglines = document.getElementById("debuglines").checked;
-                show.airraidlines = document.getElementById("airraidlines").checked;  
-                show.debuglinessnap = document.getElementById("debuglinessnap").checked; 
-                show.guessLetters = document.getElementById("guessLetters").checked;
+                show.debuglinessnap = document.getElementById("debuglinessnap").checked;
+                show.airraidlines = document.getElementById("airraidlines").checked;
                 show.apiinfo = document.getElementById("apiinfo").checked;
+                show.guessLetters = document.getElementById("guessLetters").checked;
                 show.distance = document.getElementById("distance").checked;
                 show.colors = document.getElementById("colors").checked;
-                show.offsetColored = document.getElementById("offsetColored").checked; 
-                show.enemies = document.getElementById("enemies").checked; 
-                show.hiddenRoutes = parseInt(document.getElementById("hiddenRoutes").value); 
-                show.forcedcolor = parseInt(document.getElementById("forcedcolor").value); 
-                show.gauge = parseInt(document.getElementById("gauge").value);
-                show.routes = document.getElementById("routes").checked; 
-                show.markSpecial = document.getElementById("markSpecial").checked;
+                show.offsetColored = document.getElementById("offsetColored").checked;
+                show.enemies = document.getElementById("enemies").checked;
+                show.routes = document.getElementById("routes").checked;
                 show.airraids = document.getElementById("airraids").checked;
                 show.variation = document.getElementById("variation").checked;
+                show.minimalistic = document.getElementById("minimalistic").checked;
+
+                show.forcedcolor = parseInt(document.getElementById("forcedcolor").value);
+                show.gauge = parseInt(document.getElementById("gauge").value);
+                show.hiddenRoutes = parseInt(document.getElementById("hiddenRoutes").value);
+                show.labels = true;
+
+                if(show.minimalistic) {
+                    show.background = false;
+                    show.enemies = false;
+                    show.routes = false;
+                    show.cleared = false;
+                    show.colors = false;
+                    show.labels = false;
+                }
 
                 gaugeData = undefined;
                 map = selectedmap.split("-").map((a) => parseInt(a));
@@ -96,7 +106,7 @@
                     document.getElementById("startinfo").style = "";
                     document.getElementById("maptitle").innerHTML = svdata.api_data.api_maparea_id + "-" + svdata.api_data.api_mapinfo_no
                     bypass = document.getElementById("bypass").checked;
-                } else 
+                } else
                     document.getElementById("startinfo").style = "display:none;";
 
                 document.getElementById("apiinfo").disabled = !(correctmap || bypass);
@@ -131,7 +141,7 @@
                         if(show.hiddenRoutes) {
                             getAddingInfo(1, callback);
                             showMap();
-                        } else 
+                        } else
                             showMap(callback);
                     });
                 })
@@ -154,22 +164,22 @@
                                 locData.bg.push(background);
                         else if(info.bg) locData.bg = info.bg;
 
-                        if(locData.spots && info.spots) 
+                        if(locData.spots && info.spots)
                             for(let spot of info.spots)
                                 locData.spots.push(spot);
                         else if(info.spots) locData.spots = info.spots;
 
-                        if(locData.enemies && info.enemies) 
+                        if(locData.enemies && info.enemies)
                             for(let enemy of info.enemies)
                                 locData.enemies.push(enemy);
                         else if(info.enemies) locData.enemies = info.enemies;
 
-                        if(locData.labels && info.labels) 
+                        if(locData.labels && info.labels)
                             for(let label of info.labels)
                                 locData.labels.push(label);
                         else if(info.labels) locData.labels = info.labels;
 
-                        if(locData.airraids && info.airraids) 
+                        if(locData.airraids && info.airraids)
                             for(let airraid of info.airraids)
                                 locData.airraids.push(airraid);
                         else if(info.airraids) locData.airraids = info.airraids;
@@ -282,7 +292,7 @@
                     text.anchor.set(.5,.5)
                     app.stage.addChild(text);
                     text.position.set(x + 30, y - 30);
-                    
+
                     if(doneWikiaLetters[msg]) continue;
                     doneWikiaLetters[msg] = {x, y};
                     wikiaCoordinates += `{{Map/ImageNode|${msg}|x=${Math.round(x*700/1200)}|y=${Math.round(y*700/1200)}}}\n`
@@ -388,7 +398,7 @@
                                 offsetY = nodeInfo.offsets[nodeInfo.color].y;
                             }
 
-                            if(nodeInfo.color == -99||(nodeInfo.color == -1&&show.markSpecial)) {
+                            if(nodeInfo.color == -99) {
                                 let frame = PIXI.Texture.fromFrame(colorToTexture(-99));
                                 let sprite = new PIXI.Sprite(frame);
                                 sprite.anchor.set(.5,.5)
@@ -405,13 +415,20 @@
                         }
                     }
 
-                if(locData.labels) {
+                if(locData.labels && show.labels) {
                     for(let label of locData.labels) {
                         let frame = PIXI.Texture.fromFrame(mapKey + label.img);
-                            let sprite = new PIXI.Sprite(frame);
+                        let sprite = new PIXI.Sprite(frame);
                         sprite.position.set(label.x, label.y);
                         app.stage.addChild(sprite);
                     }
+                }
+
+                if (show.minimalistic) {
+                    let circle = new PIXI.Graphics();
+                    circle.beginFill(0x222222, .9);
+                    circle.arc(0, 0, 9999, 0, 2*Math.PI);
+                    app.stage.addChild(circle);
                 }
 
                 for(let nodeInfo of locData.spots) {
@@ -441,7 +458,7 @@
                     let x = bounds.x + bounds.width;
                     let y = bounds.y + bounds.height;
                     if(nodeInfo.line.x < 0)
-                        x += nodeInfo.line.x; 
+                        x += nodeInfo.line.x;
                     if(nodeInfo.line.y < 0)
                         y += nodeInfo.line.y;
 
@@ -495,6 +512,21 @@
                         line.lineTo(nodeInfo.x-5, nodeInfo.y+5);
                         line.lineTo(nodeInfo.x+5, nodeInfo.y-5);
                         app.stage.addChild(line);*/
+                    }
+
+
+                    if(show.minimalistic) {
+                        let line = new PIXI.Graphics();
+                        line.moveTo(nodeInfo.x, nodeInfo.y);
+                        line.lineStyle(10, 0xcccccc, .6);
+                        let endCoords = closestFrom;
+                        line.lineTo(endCoords.x, endCoords.y);
+                        app.stage.addChild(line);
+
+                        let circle = new PIXI.Graphics();
+                        circle.beginFill(0xcccccc);
+                        circle.arc(nodeInfo.x, nodeInfo.y, 5, 0, 2*Math.PI);
+                        app.stage.addChild(circle);
                     }
 
                     if(show.routeedges) {
@@ -654,7 +686,7 @@
 
                 app.render();
                 console.log(`"World ${document.getElementById("mapid").value}" : {\n${Object.keys(kc3Edges).map((k) => `      "${k}" : ["${kc3Edges[k][0]}", "${kc3Edges[k][1]}"]`).join(",\n")}\n    },`)
-                delete document.getElementById("download").href 
+                delete document.getElementById("download").href
                 blobUtil.canvasToBlob(canvas, 'image/png').then(function (blob) {
                     console.log(blob.size)
                     document.getElementById("download").href = blobUtil.createObjectURL(blob);
@@ -682,7 +714,7 @@
                     } else {
                         if(!errorcallback)
                             alert("Error with request " + url + ": " + status);
-                        else 
+                        else
                             errorcallback(status)
                     }
                 };
